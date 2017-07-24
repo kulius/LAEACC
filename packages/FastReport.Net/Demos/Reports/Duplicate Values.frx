@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates the &quot;Duplicates&quot; feature. To use it:&#13;&#10;&#13;&#10;- select a Text object that prints duplicate values;&#13;&#10;&#13;&#10;- set its &quot;Duplicates&quot; property to the desired value: &#13;&#10;&#13;&#10;  - &quot;Show&quot; will show duplicates;&#13;&#10;  - &quot;Hide&quot; will hide the object;&#13;&#10;  - &quot;Clear&quot; will clear the object's text but show the object;&#13;&#10;  - &quot;Merge&quot; will merge objects with the same values." ReportInfo.Created="01/17/2008 04:31:41" ReportInfo.Modified="06/12/2008 17:47:01" ReportInfo.CreatorVersion="1.0.0.0">
+  <Styles>
+    <Style Name="EvenRows" Fill.Color="AliceBlue"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="ALPHABETICAL PRODUCT LIST" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.8" Width="718.2" Height="18.9" DataSource="Products" EvenStyle="EvenRows">
+      <TextObject Name="Text2" Left="75.6" Width="264.6" Height="18.9" Text="[Products.ProductName]" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text7" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="White" Fill.Color="LightSkyBlue" Text="[[Products.ProductName].Substring(0,1)]" Padding="5, 0, 0, 0" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 10pt, style=Bold" Duplicates="Merge"/>
+      <Sort>
+        <Sort Expression="[Products.ProductName]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="64.7" Width="718.2" Height="18.9">
+      <TextObject Name="Text9" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

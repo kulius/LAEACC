@@ -1,0 +1,2296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>LAEACC</RootNamespace>
+    <AssemblyName>LAEACC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>WebForms_Basic.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>WebForms_Basic.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AjaxControlToolkit.16.1.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport, Version=1.4.42.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FastReport.Net\FastReport.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.0.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.10.2\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.Routing" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="active\EasyUI\easyloader.js" />
+    <Content Include="active\EasyUI\jquery.easyui.min.js" />
+    <Content Include="active\EasyUI\jquery.easyui.mobile.js" />
+    <Content Include="active\EasyUI\jquery.min.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-af.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-am.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-ar.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-bg.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-ca.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-cs.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-cz.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-da.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-de.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-el.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-en.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-es.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-fr.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-it.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-jp.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-ko.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-nl.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-pl.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-pt_BR.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-ru.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-sv_SE.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-tr.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-zh_CN.js" />
+    <Content Include="active\EasyUI\locale\easyui-lang-zh_TW.js" />
+    <Content Include="active\EasyUI\plugins\jquery.accordion.js" />
+    <Content Include="active\EasyUI\plugins\jquery.calendar.js" />
+    <Content Include="active\EasyUI\plugins\jquery.combo.js" />
+    <Content Include="active\EasyUI\plugins\jquery.combobox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.combogrid.js" />
+    <Content Include="active\EasyUI\plugins\jquery.combotree.js" />
+    <Content Include="active\EasyUI\plugins\jquery.datagrid.js" />
+    <Content Include="active\EasyUI\plugins\jquery.datalist.js" />
+    <Content Include="active\EasyUI\plugins\jquery.datebox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.datetimebox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.datetimespinner.js" />
+    <Content Include="active\EasyUI\plugins\jquery.dialog.js" />
+    <Content Include="active\EasyUI\plugins\jquery.draggable.js" />
+    <Content Include="active\EasyUI\plugins\jquery.droppable.js" />
+    <Content Include="active\EasyUI\plugins\jquery.filebox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.form.js" />
+    <Content Include="active\EasyUI\plugins\jquery.layout.js" />
+    <Content Include="active\EasyUI\plugins\jquery.linkbutton.js" />
+    <Content Include="active\EasyUI\plugins\jquery.menu.js" />
+    <Content Include="active\EasyUI\plugins\jquery.menubutton.js" />
+    <Content Include="active\EasyUI\plugins\jquery.messager.js" />
+    <Content Include="active\EasyUI\plugins\jquery.mobile.js" />
+    <Content Include="active\EasyUI\plugins\jquery.numberbox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.numberspinner.js" />
+    <Content Include="active\EasyUI\plugins\jquery.pagination.js" />
+    <Content Include="active\EasyUI\plugins\jquery.panel.js" />
+    <Content Include="active\EasyUI\plugins\jquery.parser.js" />
+    <Content Include="active\EasyUI\plugins\jquery.progressbar.js" />
+    <Content Include="active\EasyUI\plugins\jquery.propertygrid.js" />
+    <Content Include="active\EasyUI\plugins\jquery.resizable.js" />
+    <Content Include="active\EasyUI\plugins\jquery.searchbox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.slider.js" />
+    <Content Include="active\EasyUI\plugins\jquery.spinner.js" />
+    <Content Include="active\EasyUI\plugins\jquery.splitbutton.js" />
+    <Content Include="active\EasyUI\plugins\jquery.switchbutton.js" />
+    <Content Include="active\EasyUI\plugins\jquery.tabs.js" />
+    <Content Include="active\EasyUI\plugins\jquery.textbox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.timespinner.js" />
+    <Content Include="active\EasyUI\plugins\jquery.tooltip.js" />
+    <Content Include="active\EasyUI\plugins\jquery.tree.js" />
+    <Content Include="active\EasyUI\plugins\jquery.treegrid.js" />
+    <Content Include="active\EasyUI\plugins\jquery.validatebox.js" />
+    <Content Include="active\EasyUI\plugins\jquery.window.js" />
+    <Content Include="active\EasyUI\src\easyloader.js" />
+    <Content Include="active\EasyUI\src\jquery.accordion.js" />
+    <Content Include="active\EasyUI\src\jquery.calendar.js" />
+    <Content Include="active\EasyUI\src\jquery.combobox.js" />
+    <Content Include="active\EasyUI\src\jquery.datebox.js" />
+    <Content Include="active\EasyUI\src\jquery.draggable.js" />
+    <Content Include="active\EasyUI\src\jquery.droppable.js" />
+    <Content Include="active\EasyUI\src\jquery.form.js" />
+    <Content Include="active\EasyUI\src\jquery.linkbutton.js" />
+    <Content Include="active\EasyUI\src\jquery.menu.js" />
+    <Content Include="active\EasyUI\src\jquery.parser.js" />
+    <Content Include="active\EasyUI\src\jquery.progressbar.js" />
+    <Content Include="active\EasyUI\src\jquery.propertygrid.js" />
+    <Content Include="active\EasyUI\src\jquery.resizable.js" />
+    <Content Include="active\EasyUI\src\jquery.slider.js" />
+    <Content Include="active\EasyUI\src\jquery.tabs.js" />
+    <Content Include="active\EasyUI\src\jquery.window.js" />
+    <Content Include="active\EasyUI\themes\black\accordion.css" />
+    <Content Include="active\EasyUI\themes\black\calendar.css" />
+    <Content Include="active\EasyUI\themes\black\combo.css" />
+    <Content Include="active\EasyUI\themes\black\combobox.css" />
+    <Content Include="active\EasyUI\themes\black\datagrid.css" />
+    <Content Include="active\EasyUI\themes\black\datalist.css" />
+    <Content Include="active\EasyUI\themes\black\datebox.css" />
+    <Content Include="active\EasyUI\themes\black\dialog.css" />
+    <Content Include="active\EasyUI\themes\black\easyui.css" />
+    <Content Include="active\EasyUI\themes\black\filebox.css" />
+    <Content Include="active\EasyUI\themes\black\images\accordion_arrows.png" />
+    <Content Include="active\EasyUI\themes\black\images\blank.gif" />
+    <Content Include="active\EasyUI\themes\black\images\calendar_arrows.png" />
+    <Content Include="active\EasyUI\themes\black\images\combo_arrow.png" />
+    <Content Include="active\EasyUI\themes\black\images\datagrid_icons.png" />
+    <Content Include="active\EasyUI\themes\black\images\datebox_arrow.png" />
+    <Content Include="active\EasyUI\themes\black\images\layout_arrows.png" />
+    <Content Include="active\EasyUI\themes\black\images\linkbutton_bg.png" />
+    <Content Include="active\EasyUI\themes\black\images\loading.gif" />
+    <Content Include="active\EasyUI\themes\black\images\menu_arrows.png" />
+    <Content Include="active\EasyUI\themes\black\images\messager_icons.png" />
+    <Content Include="active\EasyUI\themes\black\images\pagination_icons.png" />
+    <Content Include="active\EasyUI\themes\black\images\panel_tools.png" />
+    <Content Include="active\EasyUI\themes\black\images\searchbox_button.png" />
+    <Content Include="active\EasyUI\themes\black\images\slider_handle.png" />
+    <Content Include="active\EasyUI\themes\black\images\spinner_arrows.png" />
+    <Content Include="active\EasyUI\themes\black\images\tabs_icons.png" />
+    <Content Include="active\EasyUI\themes\black\images\tree_icons.png" />
+    <Content Include="active\EasyUI\themes\black\images\validatebox_warning.png" />
+    <Content Include="active\EasyUI\themes\black\layout.css" />
+    <Content Include="active\EasyUI\themes\black\linkbutton.css" />
+    <Content Include="active\EasyUI\themes\black\menu.css" />
+    <Content Include="active\EasyUI\themes\black\menubutton.css" />
+    <Content Include="active\EasyUI\themes\black\messager.css" />
+    <Content Include="active\EasyUI\themes\black\numberbox.css" />
+    <Content Include="active\EasyUI\themes\black\pagination.css" />
+    <Content Include="active\EasyUI\themes\black\panel.css" />
+    <Content Include="active\EasyUI\themes\black\progressbar.css" />
+    <Content Include="active\EasyUI\themes\black\propertygrid.css" />
+    <Content Include="active\EasyUI\themes\black\searchbox.css" />
+    <Content Include="active\EasyUI\themes\black\slider.css" />
+    <Content Include="active\EasyUI\themes\black\spinner.css" />
+    <Content Include="active\EasyUI\themes\black\splitbutton.css" />
+    <Content Include="active\EasyUI\themes\black\switchbutton.css" />
+    <Content Include="active\EasyUI\themes\black\tabs.css" />
+    <Content Include="active\EasyUI\themes\black\textbox.css" />
+    <Content Include="active\EasyUI\themes\black\tooltip.css" />
+    <Content Include="active\EasyUI\themes\black\tree.css" />
+    <Content Include="active\EasyUI\themes\black\validatebox.css" />
+    <Content Include="active\EasyUI\themes\black\window.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\accordion.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\calendar.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\combo.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\combobox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\datagrid.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\datalist.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\datebox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\dialog.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\easyui.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\filebox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\accordion_arrows.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\blank.gif" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\calendar_arrows.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\combo_arrow.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\datagrid_icons.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\datebox_arrow.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\layout_arrows.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\linkbutton_bg.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\loading.gif" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\menu_arrows.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\messager_icons.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\pagination_icons.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\panel_tools.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\searchbox_button.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\slider_handle.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\spinner_arrows.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\tabs_icons.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\tree_icons.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\images\validatebox_warning.png" />
+    <Content Include="active\EasyUI\themes\bootstrap\layout.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\linkbutton.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\menu.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\menubutton.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\messager.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\numberbox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\pagination.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\panel.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\progressbar.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\propertygrid.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\searchbox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\slider.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\spinner.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\splitbutton.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\switchbutton.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\tabs.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\textbox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\tooltip.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\tree.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\validatebox.css" />
+    <Content Include="active\EasyUI\themes\bootstrap\window.css" />
+    <Content Include="active\EasyUI\themes\color.css" />
+    <Content Include="active\EasyUI\themes\default\accordion.css" />
+    <Content Include="active\EasyUI\themes\default\calendar.css" />
+    <Content Include="active\EasyUI\themes\default\combo.css" />
+    <Content Include="active\EasyUI\themes\default\combobox.css" />
+    <Content Include="active\EasyUI\themes\default\datagrid.css" />
+    <Content Include="active\EasyUI\themes\default\datalist.css" />
+    <Content Include="active\EasyUI\themes\default\datebox.css" />
+    <Content Include="active\EasyUI\themes\default\dialog.css" />
+    <Content Include="active\EasyUI\themes\default\easyui.css" />
+    <Content Include="active\EasyUI\themes\default\filebox.css" />
+    <Content Include="active\EasyUI\themes\default\images\accordion_arrows.png" />
+    <Content Include="active\EasyUI\themes\default\images\blank.gif" />
+    <Content Include="active\EasyUI\themes\default\images\calendar_arrows.png" />
+    <Content Include="active\EasyUI\themes\default\images\combo_arrow.png" />
+    <Content Include="active\EasyUI\themes\default\images\datagrid_icons.png" />
+    <Content Include="active\EasyUI\themes\default\images\datebox_arrow.png" />
+    <Content Include="active\EasyUI\themes\default\images\layout_arrows.png" />
+    <Content Include="active\EasyUI\themes\default\images\linkbutton_bg.png" />
+    <Content Include="active\EasyUI\themes\default\images\loading.gif" />
+    <Content Include="active\EasyUI\themes\default\images\menu_arrows.png" />
+    <Content Include="active\EasyUI\themes\default\images\messager_icons.png" />
+    <Content Include="active\EasyUI\themes\default\images\pagination_icons.png" />
+    <Content Include="active\EasyUI\themes\default\images\panel_tools.png" />
+    <Content Include="active\EasyUI\themes\default\images\searchbox_button.png" />
+    <Content Include="active\EasyUI\themes\default\images\slider_handle.png" />
+    <Content Include="active\EasyUI\themes\default\images\spinner_arrows.png" />
+    <Content Include="active\EasyUI\themes\default\images\tabs_icons.png" />
+    <Content Include="active\EasyUI\themes\default\images\tree_icons.png" />
+    <Content Include="active\EasyUI\themes\default\images\validatebox_warning.png" />
+    <Content Include="active\EasyUI\themes\default\layout.css" />
+    <Content Include="active\EasyUI\themes\default\linkbutton.css" />
+    <Content Include="active\EasyUI\themes\default\menu.css" />
+    <Content Include="active\EasyUI\themes\default\menubutton.css" />
+    <Content Include="active\EasyUI\themes\default\messager.css" />
+    <Content Include="active\EasyUI\themes\default\numberbox.css" />
+    <Content Include="active\EasyUI\themes\default\pagination.css" />
+    <Content Include="active\EasyUI\themes\default\panel.css" />
+    <Content Include="active\EasyUI\themes\default\progressbar.css" />
+    <Content Include="active\EasyUI\themes\default\propertygrid.css" />
+    <Content Include="active\EasyUI\themes\default\searchbox.css" />
+    <Content Include="active\EasyUI\themes\default\slider.css" />
+    <Content Include="active\EasyUI\themes\default\spinner.css" />
+    <Content Include="active\EasyUI\themes\default\splitbutton.css" />
+    <Content Include="active\EasyUI\themes\default\switchbutton.css" />
+    <Content Include="active\EasyUI\themes\default\tabs.css" />
+    <Content Include="active\EasyUI\themes\default\textbox.css" />
+    <Content Include="active\EasyUI\themes\default\tooltip.css" />
+    <Content Include="active\EasyUI\themes\default\tree.css" />
+    <Content Include="active\EasyUI\themes\default\validatebox.css" />
+    <Content Include="active\EasyUI\themes\default\window.css" />
+    <Content Include="active\EasyUI\themes\gray\accordion.css" />
+    <Content Include="active\EasyUI\themes\gray\calendar.css" />
+    <Content Include="active\EasyUI\themes\gray\combo.css" />
+    <Content Include="active\EasyUI\themes\gray\combobox.css" />
+    <Content Include="active\EasyUI\themes\gray\datagrid.css" />
+    <Content Include="active\EasyUI\themes\gray\datalist.css" />
+    <Content Include="active\EasyUI\themes\gray\datebox.css" />
+    <Content Include="active\EasyUI\themes\gray\dialog.css" />
+    <Content Include="active\EasyUI\themes\gray\easyui.css" />
+    <Content Include="active\EasyUI\themes\gray\filebox.css" />
+    <Content Include="active\EasyUI\themes\gray\images\accordion_arrows.png" />
+    <Content Include="active\EasyUI\themes\gray\images\blank.gif" />
+    <Content Include="active\EasyUI\themes\gray\images\calendar_arrows.png" />
+    <Content Include="active\EasyUI\themes\gray\images\combo_arrow.png" />
+    <Content Include="active\EasyUI\themes\gray\images\datagrid_icons.png" />
+    <Content Include="active\EasyUI\themes\gray\images\datebox_arrow.png" />
+    <Content Include="active\EasyUI\themes\gray\images\layout_arrows.png" />
+    <Content Include="active\EasyUI\themes\gray\images\linkbutton_bg.png" />
+    <Content Include="active\EasyUI\themes\gray\images\loading.gif" />
+    <Content Include="active\EasyUI\themes\gray\images\menu_arrows.png" />
+    <Content Include="active\EasyUI\themes\gray\images\messager_icons.png" />
+    <Content Include="active\EasyUI\themes\gray\images\pagination_icons.png" />
+    <Content Include="active\EasyUI\themes\gray\images\panel_tools.png" />
+    <Content Include="active\EasyUI\themes\gray\images\searchbox_button.png" />
+    <Content Include="active\EasyUI\themes\gray\images\slider_handle.png" />
+    <Content Include="active\EasyUI\themes\gray\images\spinner_arrows.png" />
+    <Content Include="active\EasyUI\themes\gray\images\tabs_icons.png" />
+    <Content Include="active\EasyUI\themes\gray\images\tree_icons.png" />
+    <Content Include="active\EasyUI\themes\gray\images\validatebox_warning.png" />
+    <Content Include="active\EasyUI\themes\gray\layout.css" />
+    <Content Include="active\EasyUI\themes\gray\linkbutton.css" />
+    <Content Include="active\EasyUI\themes\gray\menu.css" />
+    <Content Include="active\EasyUI\themes\gray\menubutton.css" />
+    <Content Include="active\EasyUI\themes\gray\messager.css" />
+    <Content Include="active\EasyUI\themes\gray\numberbox.css" />
+    <Content Include="active\EasyUI\themes\gray\pagination.css" />
+    <Content Include="active\EasyUI\themes\gray\panel.css" />
+    <Content Include="active\EasyUI\themes\gray\progressbar.css" />
+    <Content Include="active\EasyUI\themes\gray\propertygrid.css" />
+    <Content Include="active\EasyUI\themes\gray\searchbox.css" />
+    <Content Include="active\EasyUI\themes\gray\slider.css" />
+    <Content Include="active\EasyUI\themes\gray\spinner.css" />
+    <Content Include="active\EasyUI\themes\gray\splitbutton.css" />
+    <Content Include="active\EasyUI\themes\gray\switchbutton.css" />
+    <Content Include="active\EasyUI\themes\gray\tabs.css" />
+    <Content Include="active\EasyUI\themes\gray\textbox.css" />
+    <Content Include="active\EasyUI\themes\gray\tooltip.css" />
+    <Content Include="active\EasyUI\themes\gray\tree.css" />
+    <Content Include="active\EasyUI\themes\gray\validatebox.css" />
+    <Content Include="active\EasyUI\themes\gray\window.css" />
+    <Content Include="active\EasyUI\themes\icon.css" />
+    <Content Include="active\EasyUI\themes\icons\back.png" />
+    <Content Include="active\EasyUI\themes\icons\blank.gif" />
+    <Content Include="active\EasyUI\themes\icons\calendar.png" />
+    <Content Include="active\EasyUI\themes\icons\cancel.png" />
+    <Content Include="active\EasyUI\themes\icons\clear.png" />
+    <Content Include="active\EasyUI\themes\icons\cut.png" />
+    <Content Include="active\EasyUI\themes\icons\database.png" />
+    <Content Include="active\EasyUI\themes\icons\edit_add.png" />
+    <Content Include="active\EasyUI\themes\icons\edit_remove.png" />
+    <Content Include="active\EasyUI\themes\icons\end_next.png" />
+    <Content Include="active\EasyUI\themes\icons\filesave.png" />
+    <Content Include="active\EasyUI\themes\icons\filter.png" />
+    <Content Include="active\EasyUI\themes\icons\help.png" />
+    <Content Include="active\EasyUI\themes\icons\large_chart.png" />
+    <Content Include="active\EasyUI\themes\icons\large_clipart.png" />
+    <Content Include="active\EasyUI\themes\icons\large_picture.png" />
+    <Content Include="active\EasyUI\themes\icons\large_shapes.png" />
+    <Content Include="active\EasyUI\themes\icons\large_smartart.png" />
+    <Content Include="active\EasyUI\themes\icons\lock.png" />
+    <Content Include="active\EasyUI\themes\icons\lock_lock.png" />
+    <Content Include="active\EasyUI\themes\icons\lock_open.png" />
+    <Content Include="active\EasyUI\themes\icons\man.png" />
+    <Content Include="active\EasyUI\themes\icons\mini_add.png" />
+    <Content Include="active\EasyUI\themes\icons\mini_edit.png" />
+    <Content Include="active\EasyUI\themes\icons\mini_refresh.png" />
+    <Content Include="active\EasyUI\themes\icons\more.png" />
+    <Content Include="active\EasyUI\themes\icons\next.png" />
+    <Content Include="active\EasyUI\themes\icons\no.png" />
+    <Content Include="active\EasyUI\themes\icons\ok.png" />
+    <Content Include="active\EasyUI\themes\icons\page_white_office.png" />
+    <Content Include="active\EasyUI\themes\icons\pencil.png" />
+    <Content Include="active\EasyUI\themes\icons\prev.png" />
+    <Content Include="active\EasyUI\themes\icons\print.png" />
+    <Content Include="active\EasyUI\themes\icons\redo.png" />
+    <Content Include="active\EasyUI\themes\icons\reload.png" />
+    <Content Include="active\EasyUI\themes\icons\search.png" />
+    <Content Include="active\EasyUI\themes\icons\start_prev.png" />
+    <Content Include="active\EasyUI\themes\icons\sum.png" />
+    <Content Include="active\EasyUI\themes\icons\tip.png" />
+    <Content Include="active\EasyUI\themes\icons\undo.png" />
+    <Content Include="active\EasyUI\themes\material\accordion.css" />
+    <Content Include="active\EasyUI\themes\material\calendar.css" />
+    <Content Include="active\EasyUI\themes\material\combo.css" />
+    <Content Include="active\EasyUI\themes\material\combobox.css" />
+    <Content Include="active\EasyUI\themes\material\datagrid.css" />
+    <Content Include="active\EasyUI\themes\material\datalist.css" />
+    <Content Include="active\EasyUI\themes\material\datebox.css" />
+    <Content Include="active\EasyUI\themes\material\dialog.css" />
+    <Content Include="active\EasyUI\themes\material\easyui.css" />
+    <Content Include="active\EasyUI\themes\material\filebox.css" />
+    <Content Include="active\EasyUI\themes\material\images\accordion_arrows.png" />
+    <Content Include="active\EasyUI\themes\material\images\blank.gif" />
+    <Content Include="active\EasyUI\themes\material\images\calendar_arrows.png" />
+    <Content Include="active\EasyUI\themes\material\images\combo_arrow.png" />
+    <Content Include="active\EasyUI\themes\material\images\datagrid_icons.png" />
+    <Content Include="active\EasyUI\themes\material\images\datebox_arrow.png" />
+    <Content Include="active\EasyUI\themes\material\images\layout_arrows.png" />
+    <Content Include="active\EasyUI\themes\material\images\linkbutton_bg.png" />
+    <Content Include="active\EasyUI\themes\material\images\loading.gif" />
+    <Content Include="active\EasyUI\themes\material\images\menu_arrows.png" />
+    <Content Include="active\EasyUI\themes\material\images\messager_icons.png" />
+    <Content Include="active\EasyUI\themes\material\images\pagination_icons.png" />
+    <Content Include="active\EasyUI\themes\material\images\panel_tools.png" />
+    <Content Include="active\EasyUI\themes\material\images\searchbox_button.png" />
+    <Content Include="active\EasyUI\themes\material\images\slider_handle.png" />
+    <Content Include="active\EasyUI\themes\material\images\spinner_arrows.png" />
+    <Content Include="active\EasyUI\themes\material\images\tabs_icons.png" />
+    <Content Include="active\EasyUI\themes\material\images\tree_icons.png" />
+    <Content Include="active\EasyUI\themes\material\images\validatebox_warning.png" />
+    <Content Include="active\EasyUI\themes\material\layout.css" />
+    <Content Include="active\EasyUI\themes\material\linkbutton.css" />
+    <Content Include="active\EasyUI\themes\material\menu.css" />
+    <Content Include="active\EasyUI\themes\material\menubutton.css" />
+    <Content Include="active\EasyUI\themes\material\messager.css" />
+    <Content Include="active\EasyUI\themes\material\numberbox.css" />
+    <Content Include="active\EasyUI\themes\material\pagination.css" />
+    <Content Include="active\EasyUI\themes\material\panel.css" />
+    <Content Include="active\EasyUI\themes\material\progressbar.css" />
+    <Content Include="active\EasyUI\themes\material\propertygrid.css" />
+    <Content Include="active\EasyUI\themes\material\searchbox.css" />
+    <Content Include="active\EasyUI\themes\material\slider.css" />
+    <Content Include="active\EasyUI\themes\material\spinner.css" />
+    <Content Include="active\EasyUI\themes\material\splitbutton.css" />
+    <Content Include="active\EasyUI\themes\material\switchbutton.css" />
+    <Content Include="active\EasyUI\themes\material\tabs.css" />
+    <Content Include="active\EasyUI\themes\material\textbox.css" />
+    <Content Include="active\EasyUI\themes\material\tooltip.css" />
+    <Content Include="active\EasyUI\themes\material\tree.css" />
+    <Content Include="active\EasyUI\themes\material\validatebox.css" />
+    <Content Include="active\EasyUI\themes\material\window.css" />
+    <Content Include="active\EasyUI\themes\metro\accordion.css" />
+    <Content Include="active\EasyUI\themes\metro\calendar.css" />
+    <Content Include="active\EasyUI\themes\metro\combo.css" />
+    <Content Include="active\EasyUI\themes\metro\combobox.css" />
+    <Content Include="active\EasyUI\themes\metro\datagrid.css" />
+    <Content Include="active\EasyUI\themes\metro\datalist.css" />
+    <Content Include="active\EasyUI\themes\metro\datebox.css" />
+    <Content Include="active\EasyUI\themes\metro\dialog.css" />
+    <Content Include="active\EasyUI\themes\metro\easyui.css" />
+    <Content Include="active\EasyUI\themes\metro\filebox.css" />
+    <Content Include="active\EasyUI\themes\metro\images\accordion_arrows.png" />
+    <Content Include="active\EasyUI\themes\metro\images\blank.gif" />
+    <Content Include="active\EasyUI\themes\metro\images\calendar_arrows.png" />
+    <Content Include="active\EasyUI\themes\metro\images\combo_arrow.png" />
+    <Content Include="active\EasyUI\themes\metro\images\datagrid_icons.png" />
+    <Content Include="active\EasyUI\themes\metro\images\datebox_arrow.png" />
+    <Content Include="active\EasyUI\themes\metro\images\layout_arrows.png" />
+    <Content Include="active\EasyUI\themes\metro\images\linkbutton_bg.png" />
+    <Content Include="active\EasyUI\themes\metro\images\loading.gif" />
+    <Content Include="active\EasyUI\themes\metro\images\menu_arrows.png" />
+    <Content Include="active\EasyUI\themes\metro\images\messager_icons.png" />
+    <Content Include="active\EasyUI\themes\metro\images\pagination_icons.png" />
+    <Content Include="active\EasyUI\themes\metro\images\panel_tools.png" />
+    <Content Include="active\EasyUI\themes\metro\images\searchbox_button.png" />
+    <Content Include="active\EasyUI\themes\metro\images\slider_handle.png" />
+    <Content Include="active\EasyUI\themes\metro\images\spinner_arrows.png" />
+    <Content Include="active\EasyUI\themes\metro\images\tabs_icons.png" />
+    <Content Include="active\EasyUI\themes\metro\images\tree_icons.png" />
+    <Content Include="active\EasyUI\themes\metro\images\validatebox_warning.png" />
+    <Content Include="active\EasyUI\themes\metro\layout.css" />
+    <Content Include="active\EasyUI\themes\metro\linkbutton.css" />
+    <Content Include="active\EasyUI\themes\metro\menu.css" />
+    <Content Include="active\EasyUI\themes\metro\menubutton.css" />
+    <Content Include="active\EasyUI\themes\metro\messager.css" />
+    <Content Include="active\EasyUI\themes\metro\numberbox.css" />
+    <Content Include="active\EasyUI\themes\metro\pagination.css" />
+    <Content Include="active\EasyUI\themes\metro\panel.css" />
+    <Content Include="active\EasyUI\themes\metro\progressbar.css" />
+    <Content Include="active\EasyUI\themes\metro\propertygrid.css" />
+    <Content Include="active\EasyUI\themes\metro\searchbox.css" />
+    <Content Include="active\EasyUI\themes\metro\slider.css" />
+    <Content Include="active\EasyUI\themes\metro\spinner.css" />
+    <Content Include="active\EasyUI\themes\metro\splitbutton.css" />
+    <Content Include="active\EasyUI\themes\metro\switchbutton.css" />
+    <Content Include="active\EasyUI\themes\metro\tabs.css" />
+    <Content Include="active\EasyUI\themes\metro\textbox.css" />
+    <Content Include="active\EasyUI\themes\metro\tooltip.css" />
+    <Content Include="active\EasyUI\themes\metro\tree.css" />
+    <Content Include="active\EasyUI\themes\metro\validatebox.css" />
+    <Content Include="active\EasyUI\themes\metro\window.css" />
+    <Content Include="active\EasyUI\themes\mobile.css" />
+    <Content Include="active\images\connecting.gif" />
+    <Content Include="active\images\icon\ACC.gif" />
+    <Content Include="active\images\icon\ACY.gif" />
+    <Content Include="active\images\icon\BAI.gif" />
+    <Content Include="active\images\icon\BUD.gif" />
+    <Content Include="active\images\icon\CHR.gif" />
+    <Content Include="active\images\icon\icon_monitor_pc.gif" />
+    <Content Include="active\images\icon\INC.gif" />
+    <Content Include="active\images\icon\items\delete.png" />
+    <Content Include="active\images\icon\items\edit.png" />
+    <Content Include="active\images\icon\items\zoom.png" />
+    <Content Include="active\images\icon\PAY.gif" />
+    <Content Include="active\images\icon\PGM.gif" />
+    <Content Include="active\images\icon\REC.gif" />
+    <Content Include="active\images\icon\SYS.gif" />
+    <Content Include="active\images\loading.gif" />
+    <Content Include="active\images\login.png" />
+    <Content Include="active\images\main-1.png" />
+    <Content Include="active\images\tab_active.gif" />
+    <Content Include="active\images\tab_hover.gif" />
+    <Content Include="active\images\tab_Inactive.gif" />
+    <Content Include="active\images\tab_left_active.gif" />
+    <Content Include="active\images\tab_left_hover.gif" />
+    <Content Include="active\images\tab_left_inactive.gif" />
+    <Content Include="active\images\tab_right_active.gif" />
+    <Content Include="active\images\tab_right_hover.gif" />
+    <Content Include="active\images\tab_right_inactive.gif" />
+    <Content Include="active\jQuery\blockUI\jquery.blockUI.js" />
+    <Content Include="active\jQuery\colorbox-master\colorbox.css" />
+    <Content Include="active\jQuery\colorbox-master\images\border1.png" />
+    <Content Include="active\jQuery\colorbox-master\images\border2.png" />
+    <Content Include="active\jQuery\colorbox-master\images\loading.gif" />
+    <Content Include="active\jQuery\colorbox-master\jquery.colorbox-min.js" />
+    <Content Include="active\jQuery\colorbox-master\jquery.colorbox.js" />
+    <Content Include="active\jQuery\latest\css\latest.css" />
+    <Content Include="active\jQuery\latest\js\jquery-latest.js" />
+    <Content Include="active\jQuery\latest\js\jquery-latest.min.js" />
+    <Content Include="active\jQuery\latest\marquee_next_btn.jpg" />
+    <Content Include="active\jQuery\latest\marquee_prev_btn.jpg" />
+    <Content Include="active\js\app.config.js" />
+    <Content Include="active\js\app.min.js" />
+    <Content Include="active\js\bootstrap\bootstrap.min.js" />
+    <Content Include="active\js\demo.min.js" />
+    <Content Include="active\js\libs\jquery-2.1.1.min.js" />
+    <Content Include="active\js\libs\jquery-ui-1.10.3.min.js" />
+    <Content Include="active\js\MaskedEditFix.js" />
+    <Content Include="active\js\My97DatePicker\calendar.js" />
+    <Content Include="active\js\My97DatePicker\config.js" />
+    <Content Include="active\js\My97DatePicker\lang\en.js" />
+    <Content Include="active\js\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="active\js\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="active\js\My97DatePicker\My97DatePicker.htm" />
+    <Content Include="active\js\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="active\js\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="active\js\My97DatePicker\skin\default\img.gif" />
+    <Content Include="active\js\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="active\js\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="active\js\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="active\js\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="active\js\My97DatePicker\WdatePicker.js" />
+    <Content Include="active\js\notification\SmartNotification.min.js" />
+    <Content Include="active\js\plugin\bootstrap-duallistbox\jquery.bootstrap-duallistbox.min.js" />
+    <Content Include="active\js\plugin\bootstrap-progressbar\bootstrap-progressbar.min.js" />
+    <Content Include="active\js\plugin\bootstrap-slider\bootstrap-slider.min.js" />
+    <Content Include="active\js\plugin\bootstrap-tags\bootstrap-tagsinput-angular.min.js" />
+    <Content Include="active\js\plugin\bootstrap-tags\bootstrap-tagsinput.min.js" />
+    <Content Include="active\js\plugin\bootstrap-timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="active\js\plugin\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <Content Include="active\js\plugin\bootstraptree\bootstrap-tree.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\bootstrapValidator.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\ar_MA.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\be_NL.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\bg_BG.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\cs_CZ.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\da_DK.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\de_DE.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\en_US.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\es_CL.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\es_ES.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\fr_FR.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\gr_EL.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\hu_HU.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\it_IT.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\nl_NL.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\pl_PL.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\pt_BR.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\tr_TR.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\vi_VN.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\zh_CN.min.js" />
+    <Content Include="active\js\plugin\bootstrapvalidator\language\zh_TW.min.js" />
+    <Content Include="active\js\plugin\chartjs\chart.min.js" />
+    <Content Include="active\js\plugin\ckeditor\adapters\jquery.js" />
+    <Content Include="active\js\plugin\ckeditor\build-config.js" />
+    <Content Include="active\js\plugin\ckeditor\ckeditor.js" />
+    <Content Include="active\js\plugin\ckeditor\config.js" />
+    <Content Include="active\js\plugin\ckeditor\contents.css" />
+    <Content Include="active\js\plugin\ckeditor\lang\af.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ar.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\bg.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\bn.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\bs.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ca.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\cs.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\cy.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\da.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\de.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\el.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\en-au.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\en-ca.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\en-gb.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\en.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\eo.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\es.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\et.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\eu.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\fa.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\fi.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\fo.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\fr-ca.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\fr.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\gl.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\gu.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\he.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\hi.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\hr.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\hu.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\id.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\is.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\it.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ja.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ka.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\km.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ko.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ku.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\lt.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\lv.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\mk.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\mn.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ms.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\nb.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\nl.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\no.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\pl.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\pt-br.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\pt.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ro.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ru.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\si.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\sk.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\sl.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\sq.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\sr-latn.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\sr.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\sv.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\th.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\tr.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\ug.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\uk.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\vi.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\zh-cn.js" />
+    <Content Include="active\js\plugin\ckeditor\lang\zh.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="active\js\plugin\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\icons.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\preview\preview.html" />
+    <Content Include="active\js\plugin\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="active\js\plugin\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="active\js\plugin\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="active\js\plugin\ckeditor\samples\ajax.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\api.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\appendto.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\assets\inlineall\logo.png" />
+    <Content Include="active\js\plugin\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="active\js\plugin\ckeditor\samples\assets\sample.css" />
+    <Content Include="active\js\plugin\ckeditor\samples\assets\sample.jpg" />
+    <Content Include="active\js\plugin\ckeditor\samples\assets\uilanguages\languages.js" />
+    <Content Include="active\js\plugin\ckeditor\samples\datafiltering.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\divreplace.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\index.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\inlineall.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\inlinebycode.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\inlinetextarea.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\jquery.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\dialog\dialog.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\magicline\magicline.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\readonly.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\replacebyclass.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\replacebycode.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\sample.css" />
+    <Content Include="active\js\plugin\ckeditor\samples\sample.js" />
+    <Content Include="active\js\plugin\ckeditor\samples\tabindex.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\uicolor.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\uilanguages.html" />
+    <Content Include="active\js\plugin\ckeditor\samples\xhtmlstyle.html" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\dialog.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\editor.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\icons.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\close.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="active\js\plugin\ckeditor\styles.js" />
+    <Content Include="active\js\plugin\clockpicker\clockpicker.min.js" />
+    <Content Include="active\js\plugin\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="active\js\plugin\cssemotions\jquery.cssemoticons.min.js" />
+    <Content Include="active\js\plugin\datatable-responsive\datatables.responsive.min.js" />
+    <Content Include="active\js\plugin\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="active\js\plugin\datatables\dataTables.colReorder.min.js" />
+    <Content Include="active\js\plugin\datatables\dataTables.colVis.min.js" />
+    <Content Include="active\js\plugin\datatables\dataTables.tableTools.min.js" />
+    <Content Include="active\js\plugin\datatables\jquery.dataTables.min.js" />
+    <Content Include="active\js\plugin\datatables\swf\copy_csv_xls.swf" />
+    <Content Include="active\js\plugin\datatables\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="active\js\plugin\delete-table-row\delete-table-row.min.js" />
+    <Content Include="active\js\plugin\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="active\js\plugin\dropzone\dropzone.min.js" />
+    <Content Include="active\js\plugin\dygraphs\demo-data.min.js" />
+    <Content Include="active\js\plugin\dygraphs\dygraph-combined.min.js" />
+    <Content Include="active\js\plugin\easy-pie-chart\jquery.easy-pie-chart.min.js" />
+    <Content Include="active\js\plugin\fastclick\fastclick.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.colorhelpers.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.canvas.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.categories.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.cust.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.errorbars.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.image.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.navigate.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.orderBar.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.pie.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.resize.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.selection.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.stack.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.symbol.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.threshold.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.time.min.js" />
+    <Content Include="active\js\plugin\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="active\js\plugin\fuelux\wizard\wizard.min.js" />
+    <Content Include="active\js\plugin\fullcalendar\-jquery.fullcalendar.min.js" />
+    <Content Include="active\js\plugin\fullcalendar\jquery.fullcalendar.min.js" />
+    <Content Include="active\js\plugin\gmap3\gmap3.min.js" />
+    <Content Include="active\js\plugin\ie-placeholder_\jquery.placeholder.min.js" />
+    <Content Include="active\js\plugin\ion-slider\ion.rangeSlider-backup.min.js" />
+    <Content Include="active\js\plugin\ion-slider\ion.rangeSlider.min.js" />
+    <Content Include="active\js\plugin\jcrop\jquery.color.min.js" />
+    <Content Include="active\js\plugin\jcrop\jquery.Jcrop.min.js" />
+    <Content Include="active\js\plugin\jqgrid\grid.locale-en.min.js" />
+    <Content Include="active\js\plugin\jqgrid\jquery.jqGrid.min.js" />
+    <Content Include="active\js\plugin\jquery-form\jquery-form.min.js" />
+    <Content Include="active\js\plugin\jquery-nestable\jquery.nestable.min.js" />
+    <Content Include="active\js\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
+    <Content Include="active\js\plugin\jquery-validate\jquery.validate.min.js" />
+    <Content Include="active\js\plugin\js-migrate\jquery-migrate-1.2.1.min.js" />
+    <Content Include="active\js\plugin\knob\jquery.knob.min.js" />
+    <Content Include="active\js\plugin\markdown\bootstrap-markdown.min.js" />
+    <Content Include="active\js\plugin\markdown\markdown.min.js" />
+    <Content Include="active\js\plugin\markdown\to-markdown.min.js" />
+    <Content Include="active\js\plugin\masked-input\jquery.maskedinput.min.js" />
+    <Content Include="active\js\plugin\maxlength\bootstrap-maxlength.min.js" />
+    <Content Include="active\js\plugin\moment\moment.min.js" />
+    <Content Include="active\js\plugin\morris\morris-chart-settings.min.js" />
+    <Content Include="active\js\plugin\morris\morris.min.js" />
+    <Content Include="active\js\plugin\morris\raphael.min.js" />
+    <Content Include="active\js\plugin\msie-fix\jquery.mb.browser.min.js" />
+    <Content Include="active\js\plugin\multiselect\bootstrap-multiselect.min.js" />
+    <Content Include="active\js\plugin\noUiSlider\jquery.nouislider.css" />
+    <Content Include="active\js\plugin\noUiSlider\jquery.nouislider.min.js" />
+    <Content Include="active\js\plugin\pace\pace.min.js" />
+    <Content Include="active\js\plugin\select2\readme.txt" />
+    <Content Include="active\js\plugin\select2\select2.min.js" />
+    <Content Include="active\js\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
+    <Content Include="active\js\plugin\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="active\js\plugin\sparkline\jquery.sparkline.min.js" />
+    <Content Include="active\js\plugin\summernote\summernote.min.js" />
+    <Content Include="active\js\plugin\superbox\superbox.min.js" />
+    <Content Include="active\js\plugin\throttle-denounce\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="active\js\plugin\typeahead\typeahead.min.js" />
+    <Content Include="active\js\plugin\typeahead\typeaheadjs.min.js" />
+    <Content Include="active\js\plugin\vectormap\jquery-jvectormap-1.1.1.css" />
+    <Content Include="active\js\plugin\vectormap\jquery-jvectormap-1.1.1.min.js" />
+    <Content Include="active\js\plugin\vectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="active\js\plugin\vectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="active\js\plugin\vectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="active\js\plugin\x-editable\jquery.mockjax.min.js" />
+    <Content Include="active\js\plugin\x-editable\moment.min.js" />
+    <Content Include="active\js\plugin\x-editable\x-editable.min.js" />
+    <Content Include="active\js\smart-chat-ui\smart.chat.manager.min.js" />
+    <Content Include="active\js\smart-chat-ui\smart.chat.ui.min.js" />
+    <Content Include="active\js\smartwidgets\jarvis.widget.min.js" />
+    <Content Include="active\js\speech\voicecommand.min.js" />
+    <Content Include="active\WebService.asmx" />
+    <Content Include="App_Data\AC030轉帳傳票.frx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Z02SYSTable.txt" />
+    <Content Include="App_Data\Z01ACCTable.txt" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\demo.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\invoice.min.css" />
+    <Content Include="Content\lockscreen.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\smartadmin-production-plugins.min.css" />
+    <Content Include="Content\smartadmin-production.min.css" />
+    <Content Include="Content\smartadmin-rtl.min.css" />
+    <Content Include="Content\smartadmin-skins.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome4.2\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome4.2\readme.txt" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="index.aspx" />
+    <Content Include="Basic\frmPass.aspx" />
+    <Content Include="LAE10406\ACC\00\ACC00110.aspx" />
+    <Content Include="LAE10406\ACC\01\ACC01120.aspx" />
+    <Content Include="LAE10406\ACC\01\ACC01110.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC040.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC030.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC010.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC100.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC080.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC050.aspx" />
+    <Content Include="LAE10406\ACC\S0\AC150.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM100.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM090.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM080.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM070.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM060.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM050.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM040.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM030.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM020.aspx" />
+    <Content Include="LAE10406\ACC\S1\ACM010.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF010D.aspx" />
+    <Content Include="LAE10406\ACC\S2\AC220.aspx" />
+    <Content Include="LAE10406\ACC\S2\AC210.aspx" />
+    <Content Include="LAE10406\ACC\S2\AC050R.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACCNAME.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF100.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF070.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF060.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF050.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF020.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACF010.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACFNO.aspx" />
+    <Content Include="LAE10406\ACC\S2\ACCBG.aspx" />
+    <Content Include="LAE10406\ACC\S2\PSNAME.aspx" />
+    <Content Include="LAE10406\BUD\00\BUD00140.aspx" />
+    <Content Include="LAE10406\BUD\00\BUD00120.aspx" />
+    <Content Include="LAE10406\BUD\00\BUD00110.aspx" />
+    <Content Include="LAE10406\BUD\03\BUD03120.aspx" />
+    <Content Include="LAE10406\BUD\03\BUD03220.aspx" />
+    <Content Include="LAE10406\BUD\S0\BG010.aspx" />
+    <Content Include="LAE10406\BUD\04\BUD04100.aspx" />
+    <Content Include="LAE10406\BUD\04\BUD04101.aspx" />
+    <Content Include="LAE10406\BUD\04\BUD04102.aspx" />
+    <Content Include="LAE10406\BUD\04\BUD04103.aspx" />
+    <Content Include="LAE10406\BUD\04\BUD04200.aspx" />
+    <Content Include="LAE10406\BUD\05\BUD05100.aspx" />
+    <Content Include="LAE10406\BUD\05\BUD05101.aspx" />
+    <Content Include="LAE10406\BUD\05\BUD05102.aspx" />
+    <Content Include="LAE10406\BUD\05\BUD05200.aspx" />
+    <Content Include="LAE10406\BUD\S0\BG040.aspx" />
+    <Content Include="LAE10406\BUD\S0\BG030.aspx" />
+    <Content Include="LAE10406\BUD\S0\BG010BATCH.aspx" />
+    <Content Include="LAE10406\BUD\S2\BG888.aspx" />
+    <Content Include="LAE10406\BUD\S2\BG999.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP060.aspx" />
+    <Content Include="LAE10406\BUD\S4\BGQ100.aspx" />
+    <Content Include="LAE10406\BUD\S4\BGQ100_bak.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGQ030.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP050.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP888.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP040.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP030.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP010.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGQ010.aspx" />
+    <Content Include="LAE10406\BUD\S1\BG070.aspx" />
+    <Content Include="LAE10406\BUD\S1\UNITTABLE.aspx" />
+    <Content Include="LAE10406\BUD\S1\BGUSER.aspx" />
+    <Content Include="LAE10406\BUD\S1\BGQ020.aspx" />
+    <Content Include="LAE10406\BUD\S1\BGF050.aspx" />
+    <Content Include="LAE10406\BUD\S1\BG020.aspx" />
+    <Content Include="LAE10406\BUD\S1\BG050.aspx" />
+    <Content Include="LAE10406\BUD\S1\BUD_ACCNAME.aspx" />
+    <Content Include="LAE10406\BUD\S1\BG060.aspx" />
+    <Content Include="LAE10406\BUD\S1\BGF010UPD.aspx" />
+    <Content Include="LAE10406\BUD\S1\BUD_AC150.aspx" />
+    <Content Include="LAE10406\BUD\S2\BGF010.aspx" />
+    <Content Include="LAE10406\BUD\S3\BGP020.aspx" />
+    <Content Include="LAE10406\BUD\S3\BUD_PSNAME.aspx" />
+    <Content Include="LAE10406\FRPrintExcel.aspx" />
+    <Content Include="LAE10406\FRPrint1.aspx" />
+    <Content Include="LAE10406\FRPrint.aspx" />
+    <Content Include="LAE10406\INC\00\INC00110.aspx" />
+    <Content Include="LAE10406\PAY\S0\PAY010.aspx" />
+    <Content Include="LAE10406\PAY\S1\PAY024.aspx" />
+    <Content Include="LAE10406\PAY\S1\PAY023.aspx" />
+    <Content Include="LAE10406\PAY\S1\PAY025.aspx" />
+    <Content Include="LAE10406\PAY\S1\PAY021.aspx" />
+    <Content Include="LAE10406\PAY\S1\PAY022.aspx" />
+    <Content Include="LAE10406\PAY\S2\PAY030.aspx" />
+    <Content Include="LAE10406\PAY\S3\PAY901.aspx" />
+    <Content Include="LAE10406\PAY\S3\PAY120.aspx" />
+    <Content Include="LAE10406\PAY\S3\PAY080.aspx" />
+    <Content Include="LAE10406\PAY\S3\PAY070.aspx" />
+    <Content Include="LAE10406\PAY\S3\PAY091.aspx" />
+    <Content Include="LAE10406\PAY\S3\PAY090.aspx" />
+    <Content Include="LAE10406\PAY\S4\PAY_ACF020.aspx" />
+    <Content Include="LAE10406\PAY\S4\PAY_ACF010.aspx" />
+    <Content Include="LAE10406\PAY\S4\CHF030.aspx" />
+    <Content Include="LAE10406\PAY\S4\CHF020.aspx" />
+    <Content Include="LAE10406\PAY\S4\CHF010.aspx" />
+    <Content Include="LAE10406\PAY\S4\PAY_PSNAME.aspx" />
+    <Content Include="LAE10406\PAY\S5\CHF040.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSGROUPMENU.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSGROUPUNIT.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSGROUPUSER.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSGROUP.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSMENU.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSUNIT.aspx" />
+    <Content Include="LAE10406\SYS\01\SYSUSER.aspx" />
+    <Content Include="LAE10406\UserControl\AccText.ascx" />
+    <Content Include="LAE10406\UserControl\UCBase.ascx" />
+    <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome4.2\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome4.2\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome4.2\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome4.2\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="active\js\libs\jquery-2.1.1.min.map" />
+    <Content Include="active\js\plugin\bootstrap-tags\dist\bootstrap-tagsinput.min.js.map" />
+    <Content Include="active\js\plugin\ckeditor\CHANGES.md" />
+    <Content Include="active\js\plugin\ckeditor\LICENSE.md" />
+    <Content Include="active\js\plugin\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="active\js\plugin\ckeditor\plugins\scayt\README.md" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="active\js\plugin\ckeditor\plugins\wsc\README.md" />
+    <Content Include="active\js\plugin\ckeditor\README.md" />
+    <Content Include="active\js\plugin\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="active\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="active\js\plugin\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="active\js\plugin\ckeditor\skins\moono\readme.md" />
+    <Content Include="App_Data\test.frx" />
+    <Content Include="App_Data\BGP020預算分配表.frx" />
+    <Content Include="App_Data\BGP030預算執行統計表.frx" />
+    <Content Include="App_Data\BGP030預算執行統計表-bak.frx" />
+    <Content Include="App_Data\report.frx" />
+    <Content Include="App_Data\BGP040每日請購推算登記簿.frx" />
+    <Content Include="App_Data\BGP888年度預算保留申請統計表.frx" />
+    <Content Include="App_Data\BGP050推算簿列印%28分發包及變更%29.frx" />
+    <Content Include="App_Data\BGP060預算執行報告表.frx" />
+    <Content Include="App_Data\BGQ010推算簿列印.frx" />
+    <Content Include="App_Data\AC010收入傳票.frx" />
+    <Content Include="App_Data\AC010支出傳票.frx" />
+    <Content Include="App_Data\AC080日計表.frx" />
+    <Content Include="App_Data\AC100傳票交付簿.frx" />
+    <Content Include="App_Data\ACM010總分類帳彙總表.frx" />
+    <Content Include="App_Data\ACM030支出明細表.frx" />
+    <Content Include="App_Data\ACM020收入明細表.frx" />
+    <Content Include="App_Data\ACM040應收款項明細表.frx" />
+    <Content Include="App_Data\ACM050催收款項明細表.frx" />
+    <Content Include="App_Data\ACM060應付款項明細表.frx" />
+    <Content Include="App_Data\ACM070材料增減表.frx" />
+    <Content Include="App_Data\ACM080固定資產增減表.frx" />
+    <Content Include="App_Data\ACM100月報封面.frx" />
+    <Content Include="active\EasyUI\themes\material\images\Thumbs.db" />
+    <Content Include="App_Data\PAY021支票套印.frx" />
+    <Content Include="App_Data\ACF050會計科目餘額明細.frx" />
+    <Content Include="App_Data\PYA_CHF040收據套印.frx" />
+    <Content Include="App_Data\PAY090日計表.frx" />
+    <Content Include="App_Data\PAY091重印日計表.frx" />
+    <Content Include="App_Data\PAY070現金出納登記簿.frx" />
+    <Content Include="App_Data\PAY120沖收付數.frx" />
+    <Content Include="App_Data\PAY080存款明細分戶帳.frx" />
+    <Content Include="App_Data\BGP020預算分配表加封面.frx" />
+    <Content Include="App_Data\PAY021支票套印-彰化.frx" />
+    <Content Include="App_Data\ACM010總分類帳彙總表Excel.frx" />
+    <Content Include="App_Data\ACM020收入明細表Excel.frx" />
+    <Content Include="App_Data\ACM030支出明細表Excel.frx" />
+    <Content Include="App_Data\ACM040應收款項明細表Excel.frx" />
+    <Content Include="App_Data\ACM050催收款項明細表Excel.frx" />
+    <Content Include="App_Data\ACM060應付款項明細表Excel.frx" />
+    <Content Include="App_Data\chia\PAY021支票套印.frx" />
+    <Content Include="App_Data\ACF060應收付餘額檔.frx" />
+    <Content Include="App_Data\AC010收入支出連續列印.frx" />
+    <Content Include="App_Data\chia\AC010支出傳票.frx" />
+    <Content Include="App_Data\chia\AC010收入支出連續列印.frx" />
+    <Content Include="App_Data\chia\AC010收入傳票.frx" />
+    <Content Include="App_Data\chia\AC030轉帳傳票.frx" />
+    <None Include="My Project\PublishProfiles\Web版主計行政整合作業系統.pubxml" />
+    <Content Include="Schild.Master" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.date.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.phone.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.regex.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="LAE10406\main.aspx" />
+    <Content Include="active\images\favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="upload\logo_default_big.png" />
+    <Content Include="upload\logo_default_small.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Bundle.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\ADO.vb" />
+    <Compile Include="App_Code\ACC.vb" />
+    <Compile Include="App_Code\Controller.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\Models.vb" />
+    <Compile Include="App_Start\BundleConfig.vb" />
+    <Compile Include="App_Start\IdentityConfig.vb" />
+    <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="App_Start\Startup.Auth.vb" />
+    <Compile Include="index.aspx.designer.vb">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.vb">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Basic\frmPass.aspx.designer.vb">
+      <DependentUpon>frmPass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\frmPass.aspx.vb">
+      <DependentUpon>frmPass.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\00\ACC00110.aspx.designer.vb">
+      <DependentUpon>ACC00110.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\00\ACC00110.aspx.vb">
+      <DependentUpon>ACC00110.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\01\ACC01120.aspx.designer.vb">
+      <DependentUpon>ACC01120.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\01\ACC01120.aspx.vb">
+      <DependentUpon>ACC01120.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\01\ACC01110.aspx.designer.vb">
+      <DependentUpon>ACC01110.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\01\ACC01110.aspx.vb">
+      <DependentUpon>ACC01110.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC040.aspx.designer.vb">
+      <DependentUpon>AC040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC040.aspx.vb">
+      <DependentUpon>AC040.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC030.aspx.designer.vb">
+      <DependentUpon>AC030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC030.aspx.vb">
+      <DependentUpon>AC030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC010.aspx.designer.vb">
+      <DependentUpon>AC010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC010.aspx.vb">
+      <DependentUpon>AC010.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC100.aspx.designer.vb">
+      <DependentUpon>AC100.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC100.aspx.vb">
+      <DependentUpon>AC100.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC080.aspx.designer.vb">
+      <DependentUpon>AC080.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC080.aspx.vb">
+      <DependentUpon>AC080.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC050.aspx.designer.vb">
+      <DependentUpon>AC050.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC050.aspx.vb">
+      <DependentUpon>AC050.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC150.aspx.designer.vb">
+      <DependentUpon>AC150.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S0\AC150.aspx.vb">
+      <DependentUpon>AC150.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM100.aspx.designer.vb">
+      <DependentUpon>ACM100.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM100.aspx.vb">
+      <DependentUpon>ACM100.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM090.aspx.designer.vb">
+      <DependentUpon>ACM090.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM090.aspx.vb">
+      <DependentUpon>ACM090.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM080.aspx.designer.vb">
+      <DependentUpon>ACM080.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM080.aspx.vb">
+      <DependentUpon>ACM080.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM070.aspx.designer.vb">
+      <DependentUpon>ACM070.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM070.aspx.vb">
+      <DependentUpon>ACM070.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM060.aspx.designer.vb">
+      <DependentUpon>ACM060.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM060.aspx.vb">
+      <DependentUpon>ACM060.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM050.aspx.designer.vb">
+      <DependentUpon>ACM050.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM050.aspx.vb">
+      <DependentUpon>ACM050.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM040.aspx.designer.vb">
+      <DependentUpon>ACM040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM040.aspx.vb">
+      <DependentUpon>ACM040.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM030.aspx.designer.vb">
+      <DependentUpon>ACM030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM030.aspx.vb">
+      <DependentUpon>ACM030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM020.aspx.designer.vb">
+      <DependentUpon>ACM020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM020.aspx.vb">
+      <DependentUpon>ACM020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM010.aspx.designer.vb">
+      <DependentUpon>ACM010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S1\ACM010.aspx.vb">
+      <DependentUpon>ACM010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF010D.aspx.designer.vb">
+      <DependentUpon>ACF010D.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF010D.aspx.vb">
+      <DependentUpon>ACF010D.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\AC220.aspx.designer.vb">
+      <DependentUpon>AC220.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\AC220.aspx.vb">
+      <DependentUpon>AC220.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\AC210.aspx.designer.vb">
+      <DependentUpon>AC210.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\AC210.aspx.vb">
+      <DependentUpon>AC210.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\AC050R.aspx.designer.vb">
+      <DependentUpon>AC050R.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\AC050R.aspx.vb">
+      <DependentUpon>AC050R.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACCNAME.aspx.designer.vb">
+      <DependentUpon>ACCNAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACCNAME.aspx.vb">
+      <DependentUpon>ACCNAME.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF100.aspx.designer.vb">
+      <DependentUpon>ACF100.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF100.aspx.vb">
+      <DependentUpon>ACF100.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF070.aspx.designer.vb">
+      <DependentUpon>ACF070.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF070.aspx.vb">
+      <DependentUpon>ACF070.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF060.aspx.designer.vb">
+      <DependentUpon>ACF060.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF060.aspx.vb">
+      <DependentUpon>ACF060.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF050.aspx.designer.vb">
+      <DependentUpon>ACF050.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF050.aspx.vb">
+      <DependentUpon>ACF050.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF020.aspx.designer.vb">
+      <DependentUpon>ACF020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF020.aspx.vb">
+      <DependentUpon>ACF020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF010.aspx.designer.vb">
+      <DependentUpon>ACF010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACF010.aspx.vb">
+      <DependentUpon>ACF010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACFNO.aspx.designer.vb">
+      <DependentUpon>ACFNO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACFNO.aspx.vb">
+      <DependentUpon>ACFNO.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACCBG.aspx.designer.vb">
+      <DependentUpon>ACCBG.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\ACCBG.aspx.vb">
+      <DependentUpon>ACCBG.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\PSNAME.aspx.designer.vb">
+      <DependentUpon>PSNAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\ACC\S2\PSNAME.aspx.vb">
+      <DependentUpon>PSNAME.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\00\BUD00140.aspx.designer.vb">
+      <DependentUpon>BUD00140.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\00\BUD00140.aspx.vb">
+      <DependentUpon>BUD00140.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\00\BUD00120.aspx.designer.vb">
+      <DependentUpon>BUD00120.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\00\BUD00120.aspx.vb">
+      <DependentUpon>BUD00120.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\00\BUD00110.aspx.designer.vb">
+      <DependentUpon>BUD00110.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\00\BUD00110.aspx.vb">
+      <DependentUpon>BUD00110.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\03\BUD03120.aspx.designer.vb">
+      <DependentUpon>BUD03120.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\03\BUD03120.aspx.vb">
+      <DependentUpon>BUD03120.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\03\BUD03220.aspx.designer.vb">
+      <DependentUpon>BUD03220.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\03\BUD03220.aspx.vb">
+      <DependentUpon>BUD03220.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG010.aspx.designer.vb">
+      <DependentUpon>BG010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG010.aspx.vb">
+      <DependentUpon>BG010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04100.aspx.designer.vb">
+      <DependentUpon>BUD04100.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04100.aspx.vb">
+      <DependentUpon>BUD04100.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04101.aspx.designer.vb">
+      <DependentUpon>BUD04101.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04101.aspx.vb">
+      <DependentUpon>BUD04101.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04102.aspx.designer.vb">
+      <DependentUpon>BUD04102.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04102.aspx.vb">
+      <DependentUpon>BUD04102.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04103.aspx.designer.vb">
+      <DependentUpon>BUD04103.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04103.aspx.vb">
+      <DependentUpon>BUD04103.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04200.aspx.designer.vb">
+      <DependentUpon>BUD04200.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\04\BUD04200.aspx.vb">
+      <DependentUpon>BUD04200.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05100.aspx.designer.vb">
+      <DependentUpon>BUD05100.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05100.aspx.vb">
+      <DependentUpon>BUD05100.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05101.aspx.designer.vb">
+      <DependentUpon>BUD05101.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05101.aspx.vb">
+      <DependentUpon>BUD05101.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05102.aspx.designer.vb">
+      <DependentUpon>BUD05102.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05102.aspx.vb">
+      <DependentUpon>BUD05102.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05200.aspx.designer.vb">
+      <DependentUpon>BUD05200.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\05\BUD05200.aspx.vb">
+      <DependentUpon>BUD05200.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG040.aspx.designer.vb">
+      <DependentUpon>BG040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG040.aspx.vb">
+      <DependentUpon>BG040.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG030.aspx.designer.vb">
+      <DependentUpon>BG030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG030.aspx.vb">
+      <DependentUpon>BG030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG010BATCH.aspx.designer.vb">
+      <DependentUpon>BG010BATCH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S0\BG010BATCH.aspx.vb">
+      <DependentUpon>BG010BATCH.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S2\BG888.aspx.designer.vb">
+      <DependentUpon>BG888.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S2\BG888.aspx.vb">
+      <DependentUpon>BG888.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S2\BG999.aspx.designer.vb">
+      <DependentUpon>BG999.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S2\BG999.aspx.vb">
+      <DependentUpon>BG999.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP060.aspx.designer.vb">
+      <DependentUpon>BGP060.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP060.aspx.vb">
+      <DependentUpon>BGP060.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S4\BGQ100.aspx.designer.vb">
+      <DependentUpon>BGQ100.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S4\BGQ100.aspx.vb">
+      <DependentUpon>BGQ100.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S4\BGQ100_bak.aspx.designer.vb">
+      <DependentUpon>BGQ100_bak.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S4\BGQ100_bak.aspx.vb">
+      <DependentUpon>BGQ100_bak.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGQ030.aspx.designer.vb">
+      <DependentUpon>BGQ030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGQ030.aspx.vb">
+      <DependentUpon>BGQ030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP050.aspx.designer.vb">
+      <DependentUpon>BGP050.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP050.aspx.vb">
+      <DependentUpon>BGP050.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP888.aspx.designer.vb">
+      <DependentUpon>BGP888.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP888.aspx.vb">
+      <DependentUpon>BGP888.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP040.aspx.designer.vb">
+      <DependentUpon>BGP040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP040.aspx.vb">
+      <DependentUpon>BGP040.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP030.aspx.designer.vb">
+      <DependentUpon>BGP030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP030.aspx.vb">
+      <DependentUpon>BGP030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP010.aspx.designer.vb">
+      <DependentUpon>BGP010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP010.aspx.vb">
+      <DependentUpon>BGP010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGQ010.aspx.designer.vb">
+      <DependentUpon>BGQ010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGQ010.aspx.vb">
+      <DependentUpon>BGQ010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG070.aspx.designer.vb">
+      <DependentUpon>BG070.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG070.aspx.vb">
+      <DependentUpon>BG070.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\UNITTABLE.aspx.designer.vb">
+      <DependentUpon>UNITTABLE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\UNITTABLE.aspx.vb">
+      <DependentUpon>UNITTABLE.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGUSER.aspx.designer.vb">
+      <DependentUpon>BGUSER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGUSER.aspx.vb">
+      <DependentUpon>BGUSER.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGQ020.aspx.designer.vb">
+      <DependentUpon>BGQ020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGQ020.aspx.vb">
+      <DependentUpon>BGQ020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGF050.aspx.designer.vb">
+      <DependentUpon>BGF050.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGF050.aspx.vb">
+      <DependentUpon>BGF050.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG020.aspx.designer.vb">
+      <DependentUpon>BG020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG020.aspx.vb">
+      <DependentUpon>BG020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG050.aspx.designer.vb">
+      <DependentUpon>BG050.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG050.aspx.vb">
+      <DependentUpon>BG050.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BUD_ACCNAME.aspx.designer.vb">
+      <DependentUpon>BUD_ACCNAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BUD_ACCNAME.aspx.vb">
+      <DependentUpon>BUD_ACCNAME.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG060.aspx.designer.vb">
+      <DependentUpon>BG060.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BG060.aspx.vb">
+      <DependentUpon>BG060.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGF010UPD.aspx.designer.vb">
+      <DependentUpon>BGF010UPD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BGF010UPD.aspx.vb">
+      <DependentUpon>BGF010UPD.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BUD_AC150.aspx.designer.vb">
+      <DependentUpon>BUD_AC150.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S1\BUD_AC150.aspx.vb">
+      <DependentUpon>BUD_AC150.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S2\BGF010.aspx.designer.vb">
+      <DependentUpon>BGF010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S2\BGF010.aspx.vb">
+      <DependentUpon>BGF010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP020.aspx.designer.vb">
+      <DependentUpon>BGP020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BGP020.aspx.vb">
+      <DependentUpon>BGP020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BUD_PSNAME.aspx.designer.vb">
+      <DependentUpon>BUD_PSNAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\BUD\S3\BUD_PSNAME.aspx.vb">
+      <DependentUpon>BUD_PSNAME.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\FRPrintExcel.aspx.designer.vb">
+      <DependentUpon>FRPrintExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\FRPrintExcel.aspx.vb">
+      <DependentUpon>FRPrintExcel.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\FRPrint1.aspx.designer.vb">
+      <DependentUpon>FRPrint1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\FRPrint1.aspx.vb">
+      <DependentUpon>FRPrint1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\FRPrint.aspx.designer.vb">
+      <DependentUpon>FRPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\FRPrint.aspx.vb">
+      <DependentUpon>FRPrint.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\INC\00\INC00110.aspx.designer.vb">
+      <DependentUpon>INC00110.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\INC\00\INC00110.aspx.vb">
+      <DependentUpon>INC00110.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\main.aspx.vb">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\main.aspx.designer.vb">
+      <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S0\PAY010.aspx.designer.vb">
+      <DependentUpon>PAY010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S0\PAY010.aspx.vb">
+      <DependentUpon>PAY010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY024.aspx.designer.vb">
+      <DependentUpon>PAY024.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY024.aspx.vb">
+      <DependentUpon>PAY024.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY023.aspx.designer.vb">
+      <DependentUpon>PAY023.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY023.aspx.vb">
+      <DependentUpon>PAY023.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY025.aspx.designer.vb">
+      <DependentUpon>PAY025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY025.aspx.vb">
+      <DependentUpon>PAY025.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY021.aspx.designer.vb">
+      <DependentUpon>PAY021.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY021.aspx.vb">
+      <DependentUpon>PAY021.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY022.aspx.designer.vb">
+      <DependentUpon>PAY022.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S1\PAY022.aspx.vb">
+      <DependentUpon>PAY022.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S2\PAY030.aspx.designer.vb">
+      <DependentUpon>PAY030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S2\PAY030.aspx.vb">
+      <DependentUpon>PAY030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY901.aspx.designer.vb">
+      <DependentUpon>PAY901.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY901.aspx.vb">
+      <DependentUpon>PAY901.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY120.aspx.designer.vb">
+      <DependentUpon>PAY120.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY120.aspx.vb">
+      <DependentUpon>PAY120.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY080.aspx.designer.vb">
+      <DependentUpon>PAY080.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY080.aspx.vb">
+      <DependentUpon>PAY080.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY070.aspx.designer.vb">
+      <DependentUpon>PAY070.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY070.aspx.vb">
+      <DependentUpon>PAY070.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY091.aspx.designer.vb">
+      <DependentUpon>PAY091.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY091.aspx.vb">
+      <DependentUpon>PAY091.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY090.aspx.designer.vb">
+      <DependentUpon>PAY090.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S3\PAY090.aspx.vb">
+      <DependentUpon>PAY090.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\PAY_ACF020.aspx.designer.vb">
+      <DependentUpon>PAY_ACF020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\PAY_ACF020.aspx.vb">
+      <DependentUpon>PAY_ACF020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\PAY_ACF010.aspx.designer.vb">
+      <DependentUpon>PAY_ACF010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\PAY_ACF010.aspx.vb">
+      <DependentUpon>PAY_ACF010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\CHF030.aspx.designer.vb">
+      <DependentUpon>CHF030.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\CHF030.aspx.vb">
+      <DependentUpon>CHF030.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\CHF020.aspx.designer.vb">
+      <DependentUpon>CHF020.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\CHF020.aspx.vb">
+      <DependentUpon>CHF020.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\CHF010.aspx.designer.vb">
+      <DependentUpon>CHF010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\CHF010.aspx.vb">
+      <DependentUpon>CHF010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\PAY_PSNAME.aspx.designer.vb">
+      <DependentUpon>PAY_PSNAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S4\PAY_PSNAME.aspx.vb">
+      <DependentUpon>PAY_PSNAME.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S5\CHF040.aspx.designer.vb">
+      <DependentUpon>CHF040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PAY\S5\CHF040.aspx.vb">
+      <DependentUpon>CHF040.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUPMENU.aspx.designer.vb">
+      <DependentUpon>SYSGROUPMENU.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUPMENU.aspx.vb">
+      <DependentUpon>SYSGROUPMENU.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUPUNIT.aspx.designer.vb">
+      <DependentUpon>SYSGROUPUNIT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUPUNIT.aspx.vb">
+      <DependentUpon>SYSGROUPUNIT.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUPUSER.aspx.designer.vb">
+      <DependentUpon>SYSGROUPUSER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUPUSER.aspx.vb">
+      <DependentUpon>SYSGROUPUSER.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUP.aspx.designer.vb">
+      <DependentUpon>SYSGROUP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSGROUP.aspx.vb">
+      <DependentUpon>SYSGROUP.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSMENU.aspx.designer.vb">
+      <DependentUpon>SYSMENU.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSMENU.aspx.vb">
+      <DependentUpon>SYSMENU.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSUNIT.aspx.designer.vb">
+      <DependentUpon>SYSUNIT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSUNIT.aspx.vb">
+      <DependentUpon>SYSUNIT.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSUSER.aspx.designer.vb">
+      <DependentUpon>SYSUSER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\SYS\01\SYSUSER.aspx.vb">
+      <DependentUpon>SYSUSER.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\UserControl\AccText.ascx.designer.vb">
+      <DependentUpon>AccText.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\UserControl\AccText.ascx.vb">
+      <DependentUpon>AccText.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\UserControl\UCBase.ascx.designer.vb">
+      <DependentUpon>UCBase.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\UserControl\UCBase.ascx.vb">
+      <DependentUpon>UCBase.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Models\IdentityModels.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Schild.Master.designer.vb">
+      <DependentUpon>Schild.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Schild.Master.vb">
+      <DependentUpon>Schild.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Startup.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\tcia\" />
+    <Folder Include="ExcelUploads\" />
+    <Folder Include="LAE10406\ACY\" />
+    <Folder Include="LAE10406\BAI\" />
+    <Folder Include="LAE10406\CHR\" />
+    <Folder Include="LAE10406\INC\01\" />
+    <Folder Include="LAE10406\PGM\" />
+    <Folder Include="LAE10406\REC\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>9395</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1481/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

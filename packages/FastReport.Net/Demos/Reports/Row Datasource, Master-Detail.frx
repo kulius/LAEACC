@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptText="using System;&#13;&#10;using System.Collections;&#13;&#10;using System.Collections.Generic;&#13;&#10;using System.ComponentModel;&#13;&#10;using System.Windows.Forms;&#13;&#10;using System.Drawing;&#13;&#10;using System.Data;&#13;&#10;using FastReport;&#13;&#10;using FastReport.Data;&#13;&#10;using FastReport.Dialog;&#13;&#10;using FastReport.Barcode;&#13;&#10;using FastReport.Table;&#13;&#10;using FastReport.Utils;&#13;&#10;&#13;&#10;namespace FastReport&#13;&#10;{&#13;&#10;  public class ReportScript&#13;&#10;  {&#13;&#10;&#13;&#10;    private void Table1_ManualBuild(object sender, EventArgs e)&#13;&#10;    {&#13;&#10;      // get the master data source&#13;&#10;      DataSourceBase masterData = Report.GetDataSource(&quot;Categories&quot;);&#13;&#10;      // get the detail data source&#13;&#10;      DataSourceBase detailData = Report.GetDataSource(&quot;Products&quot;);&#13;&#10;      &#13;&#10;      // init the master data source&#13;&#10;      masterData.Init();&#13;&#10;      &#13;&#10;      while (masterData.HasMoreRows)&#13;&#10;      {&#13;&#10;        // print first 3 rows that contains data from master data source&#13;&#10;        Table1.PrintRow(0);&#13;&#10;        Table1.PrintColumns();&#13;&#10;        Table1.PrintRow(1);&#13;&#10;        Table1.PrintColumns();&#13;&#10;        Table1.PrintRow(2);&#13;&#10;        Table1.PrintColumns();&#13;&#10;&#13;&#10;        // init the detail data source. Pass masterData to allow master-detail relation&#13;&#10;        detailData.Init(masterData);&#13;&#10;&#13;&#10;        // print detail header&#13;&#10;        Table1.PrintRow(3);&#13;&#10;        Table1.PrintColumns();&#13;&#10;        &#13;&#10;        // print detail rows&#13;&#10;        while (detailData.HasMoreRows)&#13;&#10;        {&#13;&#10;          // print the detail row&#13;&#10;          Table1.PrintRow(4);&#13;&#10;          Table1.PrintColumns();&#13;&#10;        &#13;&#10;          // go next data source row&#13;&#10;          detailData.Next();&#13;&#10;        }&#13;&#10;&#13;&#10;        // print the detail footer row&#13;&#10;        Table1.PrintRow(5);&#13;&#10;        Table1.PrintColumns();&#13;&#10;        Table1.PrintRow(6);&#13;&#10;        Table1.PrintColumns();&#13;&#10;        &#13;&#10;        // go next data source row&#13;&#10;        masterData.Next();&#13;&#10;      }&#13;&#10;    }&#13;&#10;  }&#13;&#10;}&#13;&#10;" TextQuality="Regular" ReportInfo.Description="Demonstrates how to print Master-detail report using the Table object. In this example the Table object is used to print both master and detail rows. It does not differ much from the &quot;Row Datasource&quot; example.&#13;&#10;&#13;&#10;See the &quot;ManualBuild&quot; event handler for more details." ReportInfo.Created="01/17/2008 20:40:24" ReportInfo.Modified="09/23/2008 20:59:23" ReportInfo.CreatorVersion="1.0.0.0">
+  <Dictionary>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Categories" ReferenceName="NorthWind.Categories">
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="CategoryName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Picture" DataType="System.Byte[]" BindableControl="Picture"/>
+    </TableDataSource>
+    <Relation Name="CategoriesProducts" ReferenceName="NorthWind.CategoriesProducts" ParentDataSource="Categories" ChildDataSource="Products" ParentColumns="CategoryID" ChildColumns="CategoryID"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="217.35">
+      <TextObject Name="Text2" Width="718.2" Height="28.35" Text="PRODUCTS BY CATEGORIES" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+      <TableObject Name="Table1" Left="9.45" Top="56.7" Width="472.5" Height="151.2" ManualBuildEvent="Table1_ManualBuild">
+        <TableColumn Name="Column1" Width="245.7"/>
+        <TableColumn Name="Column2" Width="113.4"/>
+        <TableColumn Name="Column3" Width="113.4"/>
+        <TableRow Name="Row5" Height="47.25">
+          <TableCell Name="Cell17" Fill.Color="Gray" Text="[Categories.CategoryName]" VertAlign="Center" Font="Tahoma, 16pt" TextFill.Color="White" ColSpan="3"/>
+          <TableCell Name="Cell18" Fill.Color="Gray" TextFill.Color="White"/>
+          <TableCell Name="Cell19" Fill.Color="Gray" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell14" Fill.Color="Gray" Text="[Categories.Description]" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White" ColSpan="3"/>
+          <TableCell Name="Cell15" Fill.Color="Gray" TextFill.Color="White"/>
+          <TableCell Name="Cell16" Fill.Color="Gray" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="9.45">
+          <TableCell Name="Cell20"/>
+          <TableCell Name="Cell21"/>
+          <TableCell Name="Cell22"/>
+        </TableRow>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="LightGray" Fill="Glass" Fill.Color="LightGray" Fill.Blend="0.47" Fill.Hatch="false" Text="Product name" Padding="5, 0, 0, 0" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="LightGray" Fill="Glass" Fill.Color="LightGray" Fill.Blend="0.47" Fill.Hatch="false" Text="Unit price" Padding="0, 0, 5, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" Border.Color="LightGray" Fill="Glass" Fill.Color="LightGray" Fill.Blend="0.47" Fill.Hatch="false" Text="Units in stock" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="LightGray" Text="[Products.ProductName]" Padding="5, 0, 0, 0" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Border.Color="LightGray" Text="[Products.UnitPrice]" Padding="0, 0, 5, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true"/>
+          <TableCell Name="Cell8" Border.Lines="All" Border.Color="LightGray" Text="[Products.UnitsInStock]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+        </TableRow>
+        <TableRow Name="Row3">
+          <TableCell Name="Cell11" Border.Lines="All" Border.Color="LightGray" Fill.Color="LightGray" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Border.Color="LightGray" Fill.Color="LightGray" Text="Total:" Padding="0, 0, 5, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" Border.Color="LightGray" Fill.Color="LightGray" Text="[Sum(Cell8)]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+        </TableRow>
+        <TableRow Name="Row7">
+          <TableCell Name="Cell23"/>
+          <TableCell Name="Cell24"/>
+          <TableCell Name="Cell25"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+    <PageFooterBand Name="PageFooter1" Top="221.35" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

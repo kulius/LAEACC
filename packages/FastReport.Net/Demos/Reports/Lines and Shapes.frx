@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report SmoothGraphics="true" ReportInfo.Description="This report demonstrates the LineObject and ShapeObject features." ReportInfo.Created="06/02/2009 00:44:01" ReportInfo.Modified="06/03/2009 03:57:30" ReportInfo.CreatorVersion="1.0.0.0">
+  <Dictionary/>
+  <ReportPage Name="Page1">
+    <DataBand Name="Data1" Width="718.2" Height="822.15">
+      <TextObject Name="Text12" Left="9.45" Top="9.45" Width="652.05" Height="37.8" Fill.Color="Orange" Text="HORIZONTAL, VERTICAL, DIAGONAL LINES" VertAlign="Center" Font="Tahoma, 16pt"/>
+      <TextObject Name="Text20" Left="9.45" Top="387.45" Width="652.05" Height="37.8" Fill.Color="Orange" Text="SHAPES" VertAlign="Center" Font="Tahoma, 16pt"/>
+      <LineObject Name="Line1" Left="103.95" Top="113.4" Width="94.5" Border.Width="2"/>
+      <LineObject Name="Line2" Left="264.6" Top="66.15" Height="94.5" Border.Width="2"/>
+      <LineObject Name="Line3" Left="330.75" Top="66.15" Width="94.5" Height="94.5" Border.Width="2" Diagonal="true"/>
+      <LineObject Name="Line4" Left="453.6" Top="160.65" Width="94.5" Height="-94.5" Border.Width="2" Diagonal="true"/>
+      <ShapeObject Name="Shape1" Left="56.7" Top="444.15" Width="94.5" Height="94.5" Border.Width="2"/>
+      <ShapeObject Name="Shape2" Left="170.1" Top="444.15" Width="94.5" Height="94.5" Border.Width="2" Shape="RoundRectangle"/>
+      <ShapeObject Name="Shape3" Left="283.5" Top="444.15" Width="94.5" Height="94.5" Border.Width="2" Shape="Ellipse"/>
+      <ShapeObject Name="Shape4" Left="396.9" Top="444.15" Width="94.5" Height="94.5" Border.Width="2" Shape="Triangle"/>
+      <ShapeObject Name="Shape5" Left="510.3" Top="444.15" Width="94.5" Height="94.5" Border.Width="2" Shape="Diamond"/>
+      <TextObject Name="Text21" Left="9.45" Top="198.45" Width="652.05" Height="37.8" Fill.Color="Orange" Text="LINE CAPS" VertAlign="Center" Font="Tahoma, 16pt"/>
+      <LineObject Name="Line5" Left="103.95" Top="255.15" Width="94.5" Height="94.5" Border.Width="2" Diagonal="true" StartCap.Style="Arrow"/>
+      <LineObject Name="Line6" Left="217.35" Top="349.65" Width="94.5" Height="-94.5" Border.Width="2" Diagonal="true" EndCap.Style="Circle"/>
+      <LineObject Name="Line7" Left="425.25" Top="349.65" Width="-94.5" Height="-94.5" Border.Width="2" Diagonal="true" StartCap.Style="Square"/>
+      <LineObject Name="Line8" Left="453.6" Top="349.65" Width="85.05" Height="-85.05" Border.Width="2" Diagonal="true" EndCap.Height="16" EndCap.Style="Diamond"/>
+    </DataBand>
+  </ReportPage>
+</Report>

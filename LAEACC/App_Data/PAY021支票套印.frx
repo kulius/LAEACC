@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="12/28/2016 14:05:34" ReportInfo.CreatorVersion="1.4.42.0">
+  <ScriptText>Imports System
+Imports System.Collections
+Imports System.Collections.Generic
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Imports FastReport
+Imports FastReport.Data
+Imports FastReport.Dialog
+Imports FastReport.Table
+Imports FastReport.Barcode
+Imports FastReport.Utils
+Imports System.Data
+Imports System.Data.SqlClient
+
+Namespace FastReport
+  Public Class ReportScript
+    
+    public sqlstr As String
+    public UserId,UserDate,sSeason,nudYear As String
+    public vxtStartNo,vxtEndNo As String
+    public rdoSumYes As String
+    public SYear,SMonth,SDay As string
+    public taccno,bankname,sfoot1,sfoot2 As string
+    public decAmt As integer
+    public D1accno,D1qty As string
+    public chinamt,sdate1,samt as string
+    public amt1,amt2 as Decimal
+    public cm1 as Decimal
+   
+    Private Sub Page1_StartPage(ByVal sender As Object, ByVal e As EventArgs)
+      UserId= CType(Report.GetParameterValue(&quot;UserId&quot;), String)
+      UserDate= CType(Report.GetParameterValue(&quot;UserDate&quot;), String)
+      sSeason= CType(Report.GetParameterValue(&quot;sSeason&quot;), String)
+      nudYear= CType(Report.GetParameterValue(&quot;nudYear&quot;), String)
+      vxtStartNo= CType(Report.GetParameterValue(&quot;vxtStartNo&quot;), String)
+      vxtEndNo= CType(Report.GetParameterValue(&quot;vxtEndNo&quot;), String)
+      rdoSumYes= CType(Report.GetParameterValue(&quot;rdoSumYes&quot;), String)    
+      
+      chinamt=NumberToCn(CType(Report.GetParameterValue(&quot;Amt&quot;), Decimal))
+      amt1= CType(Report.GetParameterValue(&quot;Amt&quot;), Decimal)
+      amt2= CType(Report.GetParameterValue(&quot;BankBalance&quot;), Decimal)
+      sdate1=CType(Report.GetParameterValue(&quot;sDate&quot;), String)
+      sdate1=substring(sdate1,0,3)+&quot;　&quot;+substring(sdate1,4,2)+&quot;　&quot;+substring(sdate1,7,2)
+      
+      Select Case CType(Report.GetColumnValue(&quot;M.右側金額格子精確度&quot;), Decimal)
+        Case 0
+           samt=FormatNumber(CType(Report.GetParameterValue(&quot;Amt&quot;), Decimal) ,0)
+        Case 1
+           samt=FormatNumber(CType(Report.GetParameterValue(&quot;Amt&quot;), Decimal) ,1)
+        Case 2
+           samt=FormatNumber(CType(Report.GetParameterValue(&quot;Amt&quot;), Decimal) ,2)
+      End Select
+      
+      cm1= 37.7953
+      左側日期.Top=CType(Report.GetColumnValue(&quot;M.左側日期X&quot;), Decimal)* cm1
+      左側日期.left=CType(Report.GetColumnValue(&quot;M.左側日期Y&quot;), Decimal)* cm1
+      左側日期.width=CType(Report.GetColumnValue(&quot;M.左側日期W&quot;), Decimal)* cm1
+      左側日期.height=CType(Report.GetColumnValue(&quot;M.左側日期H&quot;), Decimal)* cm1
+      左側日期.Font=new Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.左側日期字體大小&quot;), Decimal))
+      左側日期.visible=CType(Report.GetColumnValue(&quot;M.左側日期要列印&quot;), Decimal)
+      
+      左側受款人.Top=CType(Report.GetColumnValue(&quot;M.左側受款人X&quot;), Decimal)* cm1
+      左側受款人.left=CType(Report.GetColumnValue(&quot;M.左側受款人Y&quot;), Decimal)* cm1
+      左側受款人.width=CType(Report.GetColumnValue(&quot;M.左側受款人W&quot;), Decimal)* cm1
+      左側受款人.height=CType(Report.GetColumnValue(&quot;M.左側受款人H&quot;), Decimal)* cm1
+      左側受款人.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.左側受款人字體大小&quot;), Decimal))
+      左側受款人.visible=CType(Report.GetColumnValue(&quot;M.左側受款人要列印&quot;), Decimal)
+      
+      左側金額.Top=CType(Report.GetColumnValue(&quot;M.左側金額X&quot;), Decimal)* cm1
+      左側金額.left=CType(Report.GetColumnValue(&quot;M.左側金額Y&quot;), Decimal)* cm1
+      左側金額.width=CType(Report.GetColumnValue(&quot;M.左側金額W&quot;), Decimal)* cm1
+      左側金額.height=CType(Report.GetColumnValue(&quot;M.左側金額H&quot;), Decimal)* cm1
+      左側金額.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.左側金額字體大小&quot;), Decimal))
+      左側金額.visible=CType(Report.GetColumnValue(&quot;M.左側金額要列印&quot;), Decimal)
+      
+      左側用途.Top=CType(Report.GetColumnValue(&quot;M.左側用途X&quot;), Decimal)* cm1
+      左側用途.left=CType(Report.GetColumnValue(&quot;M.左側用途Y&quot;), Decimal)* cm1
+      左側用途.width=CType(Report.GetColumnValue(&quot;M.左側用途W&quot;), Decimal)* cm1
+      左側用途.height=CType(Report.GetColumnValue(&quot;M.左側用途H&quot;), Decimal)* cm1
+      左側用途.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.左側用途字體大小&quot;), Decimal))
+      左側用途.visible=CType(Report.GetColumnValue(&quot;M.左側用途要列印&quot;), Decimal)
+      
+      左側餘額.Top=CType(Report.GetColumnValue(&quot;M.左側餘額X&quot;), Decimal)* cm1
+      左側餘額.left=CType(Report.GetColumnValue(&quot;M.左側餘額Y&quot;), Decimal)* cm1
+      左側餘額.width=CType(Report.GetColumnValue(&quot;M.左側餘額W&quot;), Decimal)* cm1
+      左側餘額.height=CType(Report.GetColumnValue(&quot;M.左側餘額H&quot;), Decimal)* cm1
+      左側餘額.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.左側餘額字體大小&quot;), Decimal))
+      左側餘額.visible=CType(Report.GetColumnValue(&quot;M.左側餘額要列印&quot;), Decimal)
+      
+      右側受款人.Top=CType(Report.GetColumnValue(&quot;M.右側受款人X&quot;), Decimal)* cm1
+      右側受款人.left=CType(Report.GetColumnValue(&quot;M.右側受款人Y&quot;), Decimal)* cm1
+      右側受款人.width=CType(Report.GetColumnValue(&quot;M.右側受款人W&quot;), Decimal)* cm1
+      右側受款人.height=CType(Report.GetColumnValue(&quot;M.右側受款人H&quot;), Decimal)* cm1
+      右側受款人.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.右側受款人字體大小&quot;), Decimal))
+      右側受款人.visible=CType(Report.GetColumnValue(&quot;M.右側受款人要列印&quot;), Decimal)
+      
+      右側中文金額.Top=CType(Report.GetColumnValue(&quot;M.右側中文金額X&quot;), Decimal)* cm1
+      右側中文金額.left=CType(Report.GetColumnValue(&quot;M.右側中文金額Y&quot;), Decimal)* cm1
+      右側中文金額.width=CType(Report.GetColumnValue(&quot;M.右側中文金額W&quot;), Decimal)* cm1
+      右側中文金額.height=CType(Report.GetColumnValue(&quot;M.右側中文金額H&quot;), Decimal)* cm1
+      右側中文金額.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.右側中文金額字體大小&quot;), Decimal))
+      右側中文金額.visible=CType(Report.GetColumnValue(&quot;M.右側中文金額要列印&quot;), Decimal)
+      
+      右側金額.Top=CType(Report.GetColumnValue(&quot;M.右側金額X&quot;), Decimal)* cm1
+      右側金額.left=CType(Report.GetColumnValue(&quot;M.右側金額Y&quot;), Decimal)* cm1
+      右側金額.width=CType(Report.GetColumnValue(&quot;M.右側金額W&quot;), Decimal)* cm1
+      右側金額.height=CType(Report.GetColumnValue(&quot;M.右側金額H&quot;), Decimal)* cm1
+      右側金額.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.右側金額字體大小&quot;), Decimal))
+      右側金額.visible=CType(Report.GetColumnValue(&quot;M.右側金額要列印&quot;), Decimal)
+      
+      公司全銜.Top=CType(Report.GetColumnValue(&quot;M.公司全銜X&quot;), Decimal)* cm1
+      公司全銜.left=CType(Report.GetColumnValue(&quot;M.公司全銜Y&quot;), Decimal)* cm1
+      公司全銜.width=CType(Report.GetColumnValue(&quot;M.公司全銜W&quot;), Decimal)* cm1
+      公司全銜.height=CType(Report.GetColumnValue(&quot;M.公司全銜H&quot;), Decimal)* cm1
+      公司全銜.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.公司全銜字體大小&quot;), Decimal))
+      公司全銜.visible=CType(Report.GetColumnValue(&quot;M.公司全銜要列印&quot;), Decimal)
+      
+      右側日期.Top=CType(Report.GetColumnValue(&quot;M.右側日期X&quot;), Decimal)* cm1
+      右側日期.left=CType(Report.GetColumnValue(&quot;M.右側日期Y&quot;), Decimal)* cm1
+      右側日期.width=CType(Report.GetColumnValue(&quot;M.右側日期W&quot;), Decimal)* cm1
+      右側日期.height=CType(Report.GetColumnValue(&quot;M.右側日期H&quot;), Decimal)* cm1
+      右側日期.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.右側日期字體大小&quot;), Decimal))
+      右側日期.visible=CType(Report.GetColumnValue(&quot;M.右側日期要列印&quot;), Decimal)
+      
+      雙斜線.Top=CType(Report.GetColumnValue(&quot;M.雙斜線X&quot;), Decimal)* cm1
+      雙斜線.left=CType(Report.GetColumnValue(&quot;M.雙斜線Y&quot;), Decimal)* cm1
+      雙斜線.width=CType(Report.GetColumnValue(&quot;M.雙斜線W&quot;), Decimal)* cm1
+      雙斜線.height=CType(Report.GetColumnValue(&quot;M.雙斜線H&quot;), Decimal)* cm1
+      雙斜線.visible=CType(Report.GetColumnValue(&quot;M.雙斜線要列印&quot;), Decimal)
+      
+
+      
+
+      
+
+      Select Case CType(Report.GetColumnValue(&quot;M.禁止背書轉讓樣式&quot;), Decimal)
+        Case 0
+          禁止背書轉讓.visible=true
+          禁止背書轉讓.Top=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓X&quot;), Decimal)* cm1
+          禁止背書轉讓.left=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓Y&quot;), Decimal)* cm1
+          禁止背書轉讓.width=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓W&quot;), Decimal)* cm1
+          禁止背書轉讓.height=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓H&quot;), Decimal)* cm1
+          禁止背書轉讓.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.禁止背書轉讓字體大小&quot;), Decimal))
+          禁止背書轉讓.visible=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓要列印&quot;), Decimal)
+        Case 1
+          Text86.Visible = true
+          禁止背書轉讓T.visible=true
+          禁止背書轉讓T.Top=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓X&quot;), Decimal)* cm1
+          禁止背書轉讓T.left=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓Y&quot;), Decimal)* cm1
+          禁止背書轉讓T.visible=CType(Report.GetColumnValue(&quot;M.禁止背書轉讓要列印&quot;), Decimal)
+      End Select
+      
+      if Length(CType(Report.GetParameterValue(&quot;Chkname&quot;), String))&gt; CType(Report.GetColumnValue(&quot;M.右側受款人字數臨界點&quot;), Decimal) then
+         右側受款人.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String), CType(Report.GetColumnValue(&quot;M.右側受款人字體大小臨界點&quot;), Decimal))
+      end if
+      
+      If Length(CType(Report.GetParameterValue(&quot;Amt&quot;), string)) &gt; CType(Report.GetColumnValue(&quot;M.右側金額字數臨界點&quot;), Decimal)  Then
+        右側金額.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String),CType(Report.GetColumnValue(&quot;M.右側金額字體大小臨界點&quot;), Decimal) )
+      end if
+      
+      If Length(chinamt) &gt; CType(Report.GetColumnValue(&quot;M.右側中文金額字數臨界點&quot;), Decimal)  Then
+        右側中文金額.Font=New Font(CType(Report.GetColumnValue(&quot;M.中文字型名稱&quot;), String),CType(Report.GetColumnValue(&quot;M.右側中文金額字體大小臨界點&quot;), Decimal) )
+      end if
+      
+      if CType(Report.GetParameterValue(&quot;ckprint1&quot;), String) = &quot;1&quot; then
+        雙斜線.visible=true
+      end if
+      
+      if CType(Report.GetParameterValue(&quot;ckprint2&quot;), String) = &quot;1&quot; then
+        禁止背書轉讓.visible=true
+      end if
+      
+      if CType(Report.GetParameterValue(&quot;ckprint3&quot;), String) = &quot;1&quot; then
+        右側日期.visible=true
+      end if
+      
+      
+    End Sub
+    
+    Private Function NumberToCn(numPric As Decimal) As String
+      '中文小寫字母陣列值
+      Dim c_digit_min() As String = { &quot;零&quot; , &quot;十&quot; , &quot;百&quot;, &quot;千&quot; , &quot;萬&quot; , &quot;億&quot;, &quot;兆&quot; }
+      Dim c_num_min() As String = { &quot;零&quot; , &quot;一&quot; , &quot;二&quot;, &quot;三&quot; , &quot;四&quot; , &quot;五&quot;, &quot;六&quot; , &quot;七&quot; , &quot;八&quot;, &quot;九&quot; , &quot;十&quot; }
+      '中文大寫字母陣列值
+      Dim cDigit() As String = { &quot;零&quot; , &quot;拾&quot; , &quot;佰&quot;, &quot;仟&quot; , &quot;萬&quot; , &quot;億&quot;, &quot;兆&quot; }
+      Dim cNum() As String = { &quot;零&quot; , &quot;壹&quot; , &quot;貳&quot;, &quot;參&quot; , &quot;肆&quot; , &quot;伍&quot;, &quot;陸&quot; , &quot;柒&quot; , &quot;捌&quot;, &quot;玖&quot; , &quot;拾&quot; }
+ 
+      '負數值(用不著,欠人家錢就不用開負數支票給人家了)
+      If numPric &lt; 0 Then Return &quot;負&quot; + NumberToCn(-numPric)
+      '個位數大寫金額
+      If numPric &lt; 10 Then Return cNum(numPric)
+      '十位數========
+      If numPric = 10 Then Return cNum(1) + cDigit(1)
+      '十一至二十以下輸出為(&quot;壹拾X&quot;)
+      If numPric &lt; 20 Then Return cNum(1) + cDigit(1) + cNum(numPric - 10)
+      '二十以上的十雙位數
+      If numPric &lt; 100 Then
+        If numPric Mod 10 Then
+          Return cNum(Fix(numPric / 10)) + cDigit(1) + cNum(numPric Mod 10)
+        Else
+          Return cNum(Fix(numPric / 10)) + cDigit(1)
+        End If
+      End If
+ 
+      '三位數=======百字輩
+      If numPric &lt; 1000 Then
+        If (numPric Mod 100) = 0 Then
+          Return cNum(Fix(numPric / 100)) + cDigit(2)
+        ElseIf (numPric Mod 100) &lt; 10 Then
+          Return cNum(Fix(numPric / 100)) + cDigit(2) + cNum(0) + NumberToCn(numPric Mod 100)
+        Else
+          Return cNum(Fix(numPric / 100)) + cDigit(2) + NumberToCn(numPric Mod 100)
+        End If
+      End If
+ 
+      '四位數======千字輩
+      If numPric &lt; 10000 Then
+        If (numPric Mod 1000) = 0 Then  '千整數倍時
+          Return cNum(Fix(numPric / 1000)) + cDigit(3)
+        ElseIf (numPric Mod 1000) &lt; 100 Then    '餘額小於一百則千位加零加後面數字
+          Return cNum(Fix(numPric / 1000)) + cDigit(3) + cNum(0) + NumberToCn(numPric Mod 1000)
+        Else     '千位再加後面的百拾個位
+          Return cNum(Fix(numPric / 1000)) + cDigit(3) + NumberToCn(numPric Mod 1000)
+        End If
+      End If
+ 
+      '五位數至八位數=========萬字輩
+      If numPric &lt; 100000000 Then
+        If (numPric Mod 10000) = 0 Then
+          Return NumberToCn(Fix(numPric / 10000)) + cDigit(4)
+        ElseIf (numPric Mod 10000) &lt; 1000 Then
+          Return NumberToCn(Fix(numPric / 10000)) + cDigit(4) + cNum(0) + NumberToCn(numPric Mod 10000)
+        Else
+          Return NumberToCn(Fix(numPric / 10000)) + cDigit(4) + NumberToCn(numPric Mod 10000)
+        End If
+      End If
+ 
+      '九位數至十二位數========億字輩
+      If numPric &lt; 1000000000000 Then
+        If (numPric Mod 100000000) = 0 Then '億整數倍時
+          Return NumberToCn(Fix(numPric / 100000000)) + cDigit(5)
+        ElseIf (numPric Mod 100000000) &lt; 10000000 Then  '餘額小於一千萬則加零加億之後的數字
+          Return NumberToCn(Fix(numPric / 100000000)) + cDigit(5) + cNum(0) + NumberToCn(numPric Mod 100000000)
+        Else     '計算億之前的數字及億之後的數字
+          Return NumberToCn(Fix(numPric / 100000000)) + cDigit(5) + NumberToCn(numPric Mod 100000000)
+        End If
+      End If
+
+   end Function
+
+  End Class
+End Namespace
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHQl9GE82eBKqVVhi7i9zhqw==" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select * from CHFPRINT&#13;&#10;where BANK = @Bank">
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="公司全銜" DataType="System.String"/>
+        <Column Name="紙張W" DataType="System.Decimal"/>
+        <Column Name="紙張H" DataType="System.Decimal"/>
+        <Column Name="左側日期X" DataType="System.Decimal"/>
+        <Column Name="左側日期Y" DataType="System.Decimal"/>
+        <Column Name="左側日期W" DataType="System.Decimal"/>
+        <Column Name="左側日期H" DataType="System.Decimal"/>
+        <Column Name="左側日期字體大小" DataType="System.Decimal"/>
+        <Column Name="左側日期要列印" DataType="System.Decimal"/>
+        <Column Name="左側用途X" DataType="System.Decimal"/>
+        <Column Name="左側用途Y" DataType="System.Decimal"/>
+        <Column Name="左側用途W" DataType="System.Decimal"/>
+        <Column Name="左側用途H" DataType="System.Decimal"/>
+        <Column Name="左側用途字體大小" DataType="System.Decimal"/>
+        <Column Name="左側用途要列印" DataType="System.Decimal"/>
+        <Column Name="左側餘額X" DataType="System.Decimal"/>
+        <Column Name="左側餘額Y" DataType="System.Decimal"/>
+        <Column Name="左側餘額W" DataType="System.Decimal"/>
+        <Column Name="左側餘額H" DataType="System.Decimal"/>
+        <Column Name="左側餘額字體大小" DataType="System.Decimal"/>
+        <Column Name="左側餘額要列印" DataType="System.Decimal"/>
+        <Column Name="右側受款人X" DataType="System.Decimal"/>
+        <Column Name="右側受款人Y" DataType="System.Decimal"/>
+        <Column Name="右側受款人W" DataType="System.Decimal"/>
+        <Column Name="右側受款人H" DataType="System.Decimal"/>
+        <Column Name="右側受款人字體大小" DataType="System.Decimal"/>
+        <Column Name="右側受款人要列印" DataType="System.Decimal"/>
+        <Column Name="右側受款人字數臨界點" DataType="System.Decimal"/>
+        <Column Name="右側受款人字體大小臨界點" DataType="System.Decimal"/>
+        <Column Name="右側金額X" DataType="System.Decimal"/>
+        <Column Name="右側金額Y" DataType="System.Decimal"/>
+        <Column Name="右側金額W" DataType="System.Decimal"/>
+        <Column Name="右側金額H" DataType="System.Decimal"/>
+        <Column Name="右側金額字體大小" DataType="System.Decimal"/>
+        <Column Name="右側金額要列印" DataType="System.Decimal"/>
+        <Column Name="右側金額要印在格子內" DataType="System.Decimal"/>
+        <Column Name="右側金額格子總數" DataType="System.Decimal"/>
+        <Column Name="右側中文金額X" DataType="System.Decimal"/>
+        <Column Name="右側中文金額Y" DataType="System.Decimal"/>
+        <Column Name="右側中文金額W" DataType="System.Decimal"/>
+        <Column Name="右側中文金額H" DataType="System.Decimal"/>
+        <Column Name="右側中文金額字體大小" DataType="System.Decimal"/>
+        <Column Name="右側中文金額要列印" DataType="System.Decimal"/>
+        <Column Name="右側中文金額字數臨界點" DataType="System.Decimal"/>
+        <Column Name="右側中文金額字體大小臨界點" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓X" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓Y" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓W" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓H" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓字體大小" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓要列印" DataType="System.Decimal"/>
+        <Column Name="禁止背書轉讓樣式" DataType="System.Decimal"/>
+        <Column Name="雙斜線X" DataType="System.Decimal"/>
+        <Column Name="雙斜線Y" DataType="System.Decimal"/>
+        <Column Name="雙斜線W" DataType="System.Decimal"/>
+        <Column Name="雙斜線H" DataType="System.Decimal"/>
+        <Column Name="雙斜線字體大小" DataType="System.Decimal"/>
+        <Column Name="雙斜線要列印" DataType="System.Decimal"/>
+        <Column Name="公司全銜X" DataType="System.Decimal"/>
+        <Column Name="公司全銜Y" DataType="System.Decimal"/>
+        <Column Name="公司全銜W" DataType="System.Decimal"/>
+        <Column Name="公司全銜H" DataType="System.Decimal"/>
+        <Column Name="公司全銜字體大小" DataType="System.Decimal"/>
+        <Column Name="公司全銜要列印" DataType="System.Decimal"/>
+        <Column Name="右側金額格子精確度" DataType="System.Decimal"/>
+        <Column Name="右側金額字數臨界點" DataType="System.Decimal"/>
+        <Column Name="右側金額字體大小臨界點" DataType="System.Decimal"/>
+        <Column Name="右側日期X" DataType="System.Decimal"/>
+        <Column Name="右側日期Y" DataType="System.Decimal"/>
+        <Column Name="右側日期W" DataType="System.Decimal"/>
+        <Column Name="右側日期H" DataType="System.Decimal"/>
+        <Column Name="右側日期字體大小" DataType="System.Decimal"/>
+        <Column Name="右側日期要列印" DataType="System.Decimal"/>
+        <Column Name="右側日期樣式" DataType="System.Decimal"/>
+        <Column Name="右側受款人垂直對齊方式" DataType="System.Decimal"/>
+        <Column Name="右側金額要列印橫線在空的小格子上" DataType="System.Decimal"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <Column Name="中文字型名稱" DataType="System.String"/>
+        <Column Name="左側受款人X" DataType="System.Decimal"/>
+        <Column Name="左側受款人Y" DataType="System.Decimal"/>
+        <Column Name="左側受款人W" DataType="System.Decimal"/>
+        <Column Name="左側受款人H" DataType="System.Decimal"/>
+        <Column Name="左側受款人字體大小" DataType="System.Int32"/>
+        <Column Name="左側受款人要列印" DataType="System.String"/>
+        <Column Name="左側金額X" DataType="System.Decimal"/>
+        <Column Name="左側金額Y" DataType="System.Decimal"/>
+        <Column Name="左側金額W" DataType="System.Decimal"/>
+        <Column Name="左側金額H" DataType="System.Decimal"/>
+        <Column Name="左側金額字體大小" DataType="System.Int32"/>
+        <Column Name="左側金額要列印" DataType="System.String"/>
+        <CommandParameter Name="BANK" DataType="22" Expression="[Bank]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="sqlstr" DataType="System.String"/>
+    <Parameter Name="ConnStr" DataType="System.String" Expression="&quot;Data Source=KULIUSNB\SQL2012;AttachDbFilename=;Initial Catalog=accdb_db;Integrated Security=False;Persist Security Info=True;User ID=acc;Password=acc&quot;"/>
+    <Parameter Name="UserId" DataType="System.String" Expression="&quot;0390&quot;"/>
+    <Parameter Name="nudYear" DataType="System.String" Expression="&quot;105&quot;"/>
+    <Parameter Name="vxtStartNo" DataType="System.String" Expression="&quot;1&quot;"/>
+    <Parameter Name="vxtEndNo" DataType="System.String" Expression="&quot;59&quot;"/>
+    <Parameter Name="UnitTitle" DataType="System.String" Expression="&quot;臺灣彰化農田水利會&quot;"/>
+    <Parameter Name="UserUnit" DataType="System.String" Expression="&quot;0501&quot;"/>
+    <Parameter Name="rdoSumYes" DataType="System.String"/>
+    <Parameter Name="sSeason" DataType="System.String" Expression="&quot;2&quot;"/>
+    <Parameter Name="UserDate" DataType="System.String" Expression="&quot;105-05-01&quot;"/>
+    <Parameter Name="Bank" DataType="System.String" Expression="&quot;00&quot;"/>
+    <Parameter Name="Bankname" DataType="System.String"/>
+    <Parameter Name="sDate" DataType="System.String" Expression="&quot;105-01-12&quot;"/>
+    <Parameter Name="Chkname" DataType="System.String" Expression="&quot;先傑電腦股份有限公司&quot;"/>
+    <Parameter Name="Amt" DataType="System.Decimal" Expression="123456789"/>
+    <Parameter Name="Remark" DataType="System.String"/>
+    <Parameter Name="BankBalance" DataType="System.Decimal" Expression="40000"/>
+    <Parameter Name="ckprint1" DataType="System.String" Expression="&quot;0&quot;"/>
+    <Parameter Name="ckprint2" DataType="System.String" Expression="&quot;0&quot;"/>
+    <Parameter Name="ckprint3" DataType="System.String" Expression="&quot;0&quot;"/>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15" StartPageEvent="Page1_StartPage">
+    <ReportTitleBand Name="ReportTitle1" Width="793.8" Height="292.95" CanShrink="true">
+      <TextObject Name="Text85" Left="-9450" Top="-9450" Width="189" Height="28.35" Text="[SYear][SMonth][SDay]" HorzAlign="Center" VertAlign="Center" Font="標楷體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="左側日期" Left="9.45" Top="103.95" Width="94.5" Height="18.9" Text="[sDate]" Font="新細明體, 10pt, style=Bold"/>
+      <TextObject Name="左側受款人" Left="9.45" Top="132.3" Width="94.5" Height="28.35" Text="[Chkname]" Font="新細明體, 10pt"/>
+      <TextObject Name="左側用途" Left="9.45" Top="198.45" Width="94.5" Height="28.35" Text="[Remark]" Font="新細明體, 8pt"/>
+      <TextObject Name="左側金額" Left="9.45" Top="170.1" Width="94.5" Height="18.9" Text="[Amt1]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" Font="新細明體, 10pt, style=Bold"/>
+      <TextObject Name="左側餘額" Left="9.45" Top="236.25" Width="94.5" Height="18.9" Text="[amt2]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" Font="新細明體, 10pt, style=Bold"/>
+      <TextObject Name="右側受款人" Left="292.95" Top="85.05" Width="396.9" Height="18.9" Text="[Chkname]" Font="標楷體, 14pt"/>
+      <TextObject Name="右側金額" Left="274.05" Top="151.2" Width="415.8" Height="18.9" Text="[samt]" Font="標楷體, 14pt"/>
+      <TextObject Name="右側中文金額" Left="283.5" Top="113.4" Width="406.35" Height="18.9" Text="[chinamt]元整" Font="標楷體, 14pt"/>
+      <TextObject Name="禁止背書轉讓" Left="481.95" Top="170.1" Width="28.35" Height="94.5" Visible="false" Text="禁&#13;&#10;止&#13;&#10;背&#13;&#10;書&#13;&#10;轉&#13;&#10;讓" Font="標楷體, 10pt"/>
+      <TextObject Name="右側日期" Left="642.6" Top="47.25" Width="94.5" Height="18.9" Text="[sdate1]" Font="標楷體, 10pt"/>
+      <TableObject Name="禁止背書轉讓T" Left="519.75" Top="160.65" Width="226.8" Height="103.95" Visible="false" Border.Lines="All" Border.Style="Double" Border.Width="0.25">
+        <TableColumn Name="Column1" Width="28.35"/>
+        <TableColumn Name="Column2"/>
+        <TableColumn Name="Column3"/>
+        <TableColumn Name="Column4"/>
+        <TableRow Name="Row1" Height="28.35">
+          <TableCell Name="Cell1" Border.Lines="All" Text="禁&#13;&#10;止&#13;&#10;背&#13;&#10;書&#13;&#10;轉&#13;&#10;讓" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="會長" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="主計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="出納" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="75.6">
+          <TableCell Name="Cell6" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="公司全銜" Left="226.8" Top="9.45" Width="396.9" Height="18.9" Text="[M.公司全銜]" Font="標楷體, 14pt"/>
+      <PictureObject Name="雙斜線" Left="103.95" Top="9.45" Width="113.4" Height="85.05" CanGrow="true" Image="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"/>
+      <TextObject Name="Text86" Left="9.45" Top="274.05" Width="94.5" Height="18.9" Visible="false" Text="禁止背書轉讓" Font="新細明體, 9.75pt"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

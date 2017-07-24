@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ScriptText="using System;&#13;&#10;using System.Collections;&#13;&#10;using System.Collections.Generic;&#13;&#10;using System.ComponentModel;&#13;&#10;using System.Windows.Forms;&#13;&#10;using System.Drawing;&#13;&#10;using System.Data;&#13;&#10;using FastReport;&#13;&#10;using FastReport.Data;&#13;&#10;using FastReport.Dialog;&#13;&#10;using FastReport.Barcode;&#13;&#10;using FastReport.Table;&#13;&#10;using FastReport.Utils;&#13;&#10;&#13;&#10;namespace FastReport&#13;&#10;{&#13;&#10;  public class ReportScript&#13;&#10;  {&#13;&#10;&#13;&#10;    private void Cell4_BeforePrint(object sender, EventArgs e)&#13;&#10;    {&#13;&#10;      // cast the cell's value to decimal because [MatrixDemo.Revenue] &#13;&#10;      // data column is of System.Decimal type&#13;&#10;      decimal value = Cell4.Value == null ? 0 : (decimal)Cell4.Value;&#13;&#10;      &#13;&#10;      // set shapes visibility: one shape if value &lt; 100; two if &lt; 3000; three if &gt;= 3000&#13;&#10;      Shape1.Visible = true;&#13;&#10;      Shape2.Visible = value &gt;= 100;&#13;&#10;      Shape3.Visible = value &gt;= 3000;&#13;&#10;      &#13;&#10;      // Highlight: red &lt; 100; yellow &lt; 3000; green &gt;= 3000&#13;&#10;      Color color = Color.Red;&#13;&#10;      if (value &gt;= 100)&#13;&#10;        color = Color.Yellow;&#13;&#10;      if (value &gt;= 3000)&#13;&#10;        color = Color.GreenYellow;&#13;&#10;        &#13;&#10;      Shape1.Fill = new SolidFill(color);  &#13;&#10;      Shape2.Fill = new SolidFill(color);  &#13;&#10;      Shape3.Fill = new SolidFill(color);  &#13;&#10;    }&#13;&#10;  }&#13;&#10;}&#13;&#10;" ReportInfo.Description="Demonstrates how to print other objects inside the matrix. In this example each data cell has an indicator which is red if value &lt; 100; yellow if value &lt; 3000; and green if value &gt;= 3000. To do this:&#13;&#10;&#13;&#10;- create a matrix;&#13;&#10;&#13;&#10;- put three Shape objects inside the data cell;&#13;&#10;&#13;&#10;- increase the cell's width to contain both text and indicator. To do this, select the cell, go Properties window and set the Padding.Left property to 50;&#13;&#10;&#13;&#10;- in the same window, click &quot;Events&quot; button and create &quot;BeforePrint&quot; event handler;&#13;&#10;&#13;&#10;- in the handler, set the shapes visibility and color based on the cell's Value. See the handler code for more details." ReportInfo.Created="05/16/2008 01:44:40" ReportInfo.Modified="05/22/2008 02:13:23">
+  <Dictionary>
+    <TableDataSource Name="MatrixDemo" ReferenceName="NorthWind.MatrixDemo">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Year" DataType="System.Int32"/>
+      <Column Name="Month" DataType="System.Int32"/>
+      <Column Name="ItemsSold" DataType="System.Int32"/>
+      <Column Name="Revenue" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="134.28">
+      <MatrixObject Name="Matrix1" Left="9.45" Top="66.15" Width="195.28" Height="51.63" HeaderHeight="1" HeaderWidth="1" DataSource="MatrixDemo" Style="BlueWhite">
+        <MatrixColumns>
+          <Header Expression="[MatrixDemo.Year]"/>
+        </MatrixColumns>
+        <MatrixRows>
+          <Header Expression="[MatrixDemo.Name]"/>
+        </MatrixRows>
+        <MatrixCells>
+          <Cell Expression="[MatrixDemo.Revenue]"/>
+        </MatrixCells>
+        <TableColumn Name="Column1" Width="55.53" AutoSize="true"/>
+        <TableColumn Name="Column2" Width="106.86" AutoSize="true"/>
+        <TableColumn Name="Column3" Width="32.89" AutoSize="true"/>
+        <TableRow Name="Row1" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="151, 189, 253" Text="Employee" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="151, 189, 253" Text="[Year]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="151, 189, 253" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell3" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="151, 189, 253" Text="[Name]" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell4" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="White" BeforePrintEvent="Cell4_BeforePrint" Text="[Revenue]" Padding="50, 1, 2, 1" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true">
+            <ShapeObject Name="Shape1" Left="4" Top="3.73" Width="9.45" Height="9.45" Border.Color="White" Fill.Color="GreenYellow"/>
+            <ShapeObject Name="Shape2" Left="13.45" Top="3.73" Width="9.45" Height="9.45" Border.Color="White" Fill.Color="GreenYellow"/>
+            <ShapeObject Name="Shape3" Left="22.9" Top="3.73" Width="9.45" Height="9.45" Border.Color="White" Fill.Color="GreenYellow"/>
+          </TableCell>
+          <TableCell Name="Cell8" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="White" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell5" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="151, 189, 253" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="White" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true"/>
+          <TableCell Name="Cell9" Border.Lines="All" Border.Color="Gainsboro" Fill.Color="White" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+      </MatrixObject>
+      <TextObject Name="Text1" Left="9.45" Top="9.45" Width="406.35" Height="37.8" Text="Revenue by Employee&#13;&#10;Highlight: red &lt; 100; yellow &lt; 3000; green &gt;= 3000" Font="Tahoma, 10pt, style=Bold"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

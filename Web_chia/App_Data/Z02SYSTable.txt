@@ -1,0 +1,148 @@
+﻿
+CREATE TABLE unit_groups(
+	unit_id nvarchar(4) not NULL,
+	group_id int not NULL,
+	update_id nvarchar(10) NULL,
+	update_date nvarchar(7) NULL
+	)
+GO
+alter table unit_groups add constraint PK_unit_groups primary key (unit_id,group_id);
+go
+
+insert into a_sys_nunit_item values('SYSUNIT','SYS','01','單位設定','6',NULL,NULL)
+GO
+insert into a_sys_nunit_item values('SYSGROUPUNIT','SYS','01','單位所屬群組設定','7',NULL,NULL)
+GO
+
+update a_sys_nunit_item set sort = 1 where s_unitem_id='PAY070'
+update a_sys_nunit_item set sort = 2 where s_unitem_id='PAY080'
+update a_sys_nunit_item set sort = 3 where s_unitem_id=' PAY091'
+update a_sys_nunit_item set sort = 4 where s_unitem_id='PAY120'
+GO
+update a_sys_nunit_item set sort = 0 where s_unitem_id='ACCNAME'
+update a_sys_nunit_item set sort = 0 where s_unitem_id='ACM010'
+GO
+
+
+alter table a_lae_unit add s_unit_sname nvarchar(32)
+GO
+update a_lae_unit set s_unit_sname = '彰化水利會' where s_unit_id='chia'
+update a_lae_unit set s_unit_sname = '宜蘭水利會' where s_unit_id='ilia'
+update a_lae_unit set s_unit_sname = '北基水利會' where s_unit_id='pia'
+update a_lae_unit set s_unit_sname = '桃園水利會' where s_unit_id='tia'
+update a_lae_unit set s_unit_sname = '石門水利會' where s_unit_id='smia'
+update a_lae_unit set s_unit_sname = '新竹水利會' where s_unit_id='thcia'
+update a_lae_unit set s_unit_sname = '苗栗水利會' where s_unit_id='mlia'
+update a_lae_unit set s_unit_sname = '臺中水利會' where s_unit_id='tcia'
+update a_lae_unit set s_unit_sname = '南投水利會' where s_unit_id='ntfia'
+update a_lae_unit set s_unit_sname = '雲林水利會' where s_unit_id='ylia'
+update a_lae_unit set s_unit_sname = '嘉南水利會' where s_unit_id='chian'
+update a_lae_unit set s_unit_sname = '高雄水利會' where s_unit_id='kfia'
+update a_lae_unit set s_unit_sname = '屏東水利會' where s_unit_id='ptia'
+update a_lae_unit set s_unit_sname = '台東水利會' where s_unit_id='ttia'
+update a_lae_unit set s_unit_sname = '花蓮水利會' where s_unit_id='hia'
+update a_lae_unit set s_unit_sname = '七星水利會' where s_unit_id='chisen'
+update a_lae_unit set s_unit_sname = '瑠公水利會' where s_unit_id='liugon'
+GO
+
+
+DELETE a_sys_nunit where s_system_id='ACY'
+GO
+INSERT INTO a_sys_nunit VALUES ('S0','ACY','帳簿列印',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S1','ACY','決算作業',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S2','ACY','資產類附屬表',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S3','ACY','負債類附屬表',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S4','ACY','其他報表',NULL,NULL)
+
+GO
+DELETE a_sys_nunit_item where s_system_id='ACY'
+GO
+INSERT INTO a_sys_nunit_item VALUES ('ACBK010','ACY','S0','總分類帳','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK020','ACY','S0','應收應付催收明細分類帳','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK030','ACY','S0','材料明細分類帳','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK040','ACY','S0','其他資產負債明細分類帳','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK050','ACY','S0','收入明細分類帳','5',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK060','ACY','S0','支出明細分類帳','6',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK070','ACY','S0','有價證券明細分類帳','7',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK080','ACY','S0','固定資產明細分類帳','8',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK090','ACY','S0','依大級數列印資產負債明細分類帳','9',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK110','ACY','S0','補助計畫明細帳(資產類)(未完工程)','10',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK120','ACY','S0','補助計畫明細帳(負債類)(代收款)','11',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACBK130','ACY','S0','補助計畫明細帳(費用類)','12',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('ACY010','ACY','S1','資產負債表','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY020','ACY','S1','餘絀計算表','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY030','ACY','S1','餘絀撥補決算表','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY040','ACY','S1','現金流量決算表','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY170','ACY','S1','收入類明細表','5',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY180','ACY','S1','支出類明細表','6',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY3','ACY','S1','淨值增減表','31',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY13A','ACY','S1','固定資產建設改良','32',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY4','ACY','S1','固定資產變賣表  (會有地管理系統)','32',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY13D','ACY','S1','固定資產報廢表','33',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY13E','ACY','S1','固定資產累計折舊提列明細表','34',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY31102','ACY','S1','受贈公積預決算比較表','35',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY050','ACY','S1','收支分析表','36',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY130','ACY','S1','開帳及結帳分錄','37',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY140','ACY','S1','年終檔案結轉下年度','38',null,null)
+GO
+
+INSERT INTO a_sys_nunit_item VALUES ('ACY111','ACY','S2','現金明細表','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY112','ACY','S2','有價證券明細表','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY113','ACY','S2','應收款項增減餘額明細表','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY114','ACY','S2','材料明細表','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY116','ACY','S2','短期墊款明細表','5',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY117','ACY','S2','預付款項明細表','6',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY121','ACY','S2','基金明細表','7',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY122','ACY','S2','長期投資明細表','8',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY13','ACY','S2','固定資產明細表','9',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY137','ACY','S2','未完工程明細表','10',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY151','ACY','S2','催收款項增減明細表','11',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY152','ACY','S2','無形資產增減餘額明細表','12',null,null) 
+INSERT INTO a_sys_nunit_item VALUES ('ACY153','ACY','S2','雜項資產增減餘額明細表(保證金系統)','13',null,null) 
+GO
+INSERT INTO a_sys_nunit_item VALUES ('ACY212','ACY','S3','應付款項增減餘額明細表','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY213','ACY','S3','預收代收款明細表','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY214','ACY','S3','暫收款明細表','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY221','ACY','S3','長期借款舉借償還餘額明細表','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY222','ACY','S3','雜項負債增減餘額表(保證金系統)','5',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('ACY24','ACY','S3','事業及負債準備增減餘額明細表','6',null,null) 
+GO
+INSERT INTO a_sys_nunit_item VALUES ('ACP010','ACY','S4','平衡表','1',null,null)
+GO
+
+
+
+DELETE a_sys_nunit where s_system_id='BAI'
+GO
+INSERT INTO a_sys_nunit VALUES ('S0','BAI','保證金作業',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S1','BAI','保管品作業',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S2','BAI','查詢及列表',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S3','BAI','檔案維護',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S4','BAI','出納保管品',NULL,NULL)
+
+GO
+DELETE a_sys_nunit_item where s_system_id='BAI'
+GO
+INSERT INTO a_sys_nunit_item VALUES ('BAIL010','BAI','S0','保證金收入作業','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL020','BAI','S0','保證金退還作業','2',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('BAIL030','BAI','S1','保管品收入作業','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL040','BAI','S1','保管品退還作業','2',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('BAIL050','BAI','S2','查詢保固期限已過，尚未退還者','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL060','BAI','S2','查詢未退之保證金及保管品','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL070','BAI','S2','查詢已發包未繳履約金者','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL080','BAI','S2','查詢保證品期限已過者','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL100','BAI','S2','列印雜項負債增減餘額表','5',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL120','BAI','S2','刪除保證金保證品已全退還者','6',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL130','BAI','S2','列印雜項資產增減餘額表','7',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL101','BAI','S2','列印雜項負債增減餘額表(商號分列) ','8',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAIL131','BAI','S2','列印雜項資產增減餘額表 (商號分列)','9',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('BAILF010','BAI','S3','保證金檔維護','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAILF020','BAI','S3','保管品檔維護','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('BAILF030','BAI','S3','工程登記檔維護','3',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('BAILF040','BAI','S4','保管品查詢','1',null,null)
+GO

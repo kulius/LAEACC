@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="This report demonstrates how to complete data band upto specified number of rows. If data band has less number of rows, the empty row will be printed. To do this:&#13;&#10;&#13;&#10;- add the Child band to a Data Band;&#13;&#10;&#13;&#10;- set its &quot;CompleteToNRows&quot; property to 15. You can do this in the context menu." ReportInfo.Created="10/17/2008 18:02:27" ReportInfo.Modified="10/20/2008 15:22:31" ReportInfo.CreatorVersion="1.0.0.0">
+  <Dictionary>
+    <TableDataSource Name="Categories" ReferenceName="NorthWind.Categories">
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="CategoryName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Picture" DataType="System.Byte[]" BindableControl="Picture"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="CATEGORIES" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.8" Width="718.2" Height="18.9" DataSource="Categories">
+      <TextObject Name="Text2" Left="66.15" Width="283.5" Height="18.9" Border.Lines="All" Text="[Categories.CategoryName]" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text3" Width="66.15" Height="18.9" Border.Lines="All" Text="[Row#]" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <ChildBand Name="Child1" Top="64.7" Width="718.2" Height="18.9" CompleteToNRows="15">
+        <TextObject Name="Text4" Width="66.15" Height="18.9" Border.Lines="All" Text="[Row#]" VertAlign="Center" Font="Tahoma, 8pt"/>
+        <TextObject Name="Text5" Left="66.15" Width="283.5" Height="18.9" Border.Lines="All" VertAlign="Center" Font="Tahoma, 8pt"/>
+      </ChildBand>
+    </DataBand>
+  </ReportPage>
+</Report>

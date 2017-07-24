@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="11/29/2016 13:59:16" ReportInfo.CreatorVersion="1.4.42.0">
+  <ScriptText>Imports System
+Imports System.Collections
+Imports System.Collections.Generic
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Imports FastReport
+Imports FastReport.Data
+Imports FastReport.Dialog
+Imports FastReport.Table
+Imports FastReport.Barcode
+Imports FastReport.Utils
+
+Namespace FastReport
+  Public Class ReportScript
+    
+    public UserId,sqlstr,nudGrade As String
+    public A1 As integer
+   
+    Private Sub Page1_StartPage(ByVal sender As Object, ByVal e As EventArgs)
+      UserId= CType(Report.GetParameterValue(&quot;UserId&quot;), String)
+      nudGrade=CType(Report.GetParameterValue(&quot;nudGrade&quot;), String)
+      
+      sqlstr = &quot;SELECT a.*,b.accname from bgp020 a inner join accname b ON a.accno = b.ACCNO &quot;
+      If UserId = &quot;全部&quot; Then
+        sqlstr = sqlstr &amp; &quot; where a.userid='全部'&quot;  ' and len(a.accno)&lt;=9 order by a.accno&quot;
+        Text14.Visible=false
+      Else
+        sqlstr = sqlstr &amp; &quot; where a.userid='&quot; &amp; UserId &amp; &quot;'&quot;
+        Text14.Visible=true
+      End If
+      Dim intLen As Integer = 17
+      Select Case cint(nudGrade)
+        Case 4
+          intLen = 5
+        Case 5
+          intLen = 7
+        Case 6
+          intLen = 9
+        Case 7
+          intLen = 16
+        Case 8
+          intLen = 17
+      End Select
+      sqlstr = sqlstr &amp; &quot; and len(a.accno)&lt;=&quot; &amp; FormatNumber(intLen, 0) &amp; &quot; order by a.accno&quot;
+
+      report.SetParameterValue(&quot;sqlstr&quot;, sqlstr)
+          
+      Dim table As TableDataSource = TryCast(Report.GetDataSource(&quot;BGP020&quot;), TableDataSource)
+      table.SelectCommand = sqlstr
+
+    End Sub
+
+    Private Sub Data1_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+        dim intGrade as Integer = Grade(CType(Report.GetColumnValue(&quot;BGP020.accno&quot;), String))
+        'report.SetParameterValue(&quot;Space&quot;, Space(intGrade * 2)+FormatAccno(CType(Report.GetColumnValue(&quot;BGP020.accno&quot;), String))+CType(Report.GetColumnValue(&quot;BGP020.accname&quot;), String))
+        report.SetParameterValue(&quot;Space&quot;, FormatAccno(CType(Report.GetColumnValue(&quot;BGP020.accno&quot;), String)))
+    End Sub
+    
+    Function Grade(ByVal accno As String)  '回復會計科目級數
+      Select Case Len(Trim(accno))
+        Case Is = 1
+          Return 1
+        Case Is = 2
+          Return 2
+        Case Is = 3
+          Return 3
+        Case Is = 5
+          Return 4
+        Case Is &lt;= 7
+          Return 5
+        Case Is &lt;= 9
+          Return 6
+        Case Is &lt;= 16
+          Return 7
+        Case Is = 17
+          Return 8
+      End Select
+    End Function
+    
+    Function FormatAccno(ByVal accno As String)
+      Dim i As Integer
+      If Grade(accno) = 8 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 17, 1)
+      If Grade(accno) = 7 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7)
+      If Grade(accno) = 6 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2)
+      If Grade(accno) = 5 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2)
+      If Grade(accno) = 1 Then
+        Return Strings.Mid(accno, 1, 1)
+      Else
+        Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4)
+      End If
+    End Function
+
+    Private Sub Text96_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      A1=0
+      dim b1 as Decimal= CType(Report.GetColumnValue(&quot;BGP020.bg1&quot;), Decimal)
+      dim b2 as Decimal= CType(Report.GetColumnValue(&quot;BGP020.bg2&quot;), Decimal)
+      dim b3 as Decimal= CType(Report.GetColumnValue(&quot;BGP020.bg3&quot;), Decimal)
+      dim b4 as Decimal= CType(Report.GetColumnValue(&quot;BGP020.bg4&quot;), Decimal)
+      dim b5 as Decimal= CType(Report.GetColumnValue(&quot;BGP020.bg5&quot;), Decimal)
+      
+      if b1+b2+b3+b4+b5=0 then
+        A1=0
+      else
+        A1=((b1+b2+b3+b4)/(b1+b2+b3+b4+b5))*100
+      end if
+
+    End Sub
+  End Class
+End Namespace
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBH8gkDMRo7dj5ISqhh+8WpDw==" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="Table" Alias="BGP020" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*,b.accname from bgp020 a inner join accname b ON a.accno = b.ACCNO">
+        <Column Name="accno" DataType="System.String"/>
+        <Column Name="bg1" DataType="System.Decimal"/>
+        <Column Name="bg2" DataType="System.Decimal"/>
+        <Column Name="bg3" DataType="System.Decimal"/>
+        <Column Name="bg4" DataType="System.Decimal"/>
+        <Column Name="bg5" DataType="System.Decimal"/>
+        <Column Name="userid" DataType="System.String"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <Column Name="accname" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="UNITTABLE" DataType="System.Int32" Enabled="true" SelectCommand="select * from UNITTABLE where unit=@unit">
+        <Column Name="識別碼" DataType="System.Int32"/>
+        <Column Name="UNIT" DataType="System.String"/>
+        <Column Name="UNITNAME" DataType="System.String"/>
+        <Column Name="shortname" DataType="System.String"/>
+        <Column Name="leader" DataType="System.String"/>
+        <Column Name="cashier" DataType="System.String"/>
+        <CommandParameter Name="unit" DataType="22" Expression="[UserUnit]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="sqlstr" DataType="System.String"/>
+    <Parameter Name="ConnStr" DataType="System.String" Expression="&quot;Data Source=KULIUSNB\SQL2012;AttachDbFilename=;Initial Catalog=accdb_db;Integrated Security=False;Persist Security Info=True;User ID=acc;Password=acc&quot;"/>
+    <Parameter Name="UserId" DataType="System.String" Expression="&quot;全部&quot;"/>
+    <Parameter Name="nudYear" DataType="System.String" Expression="105"/>
+    <Parameter Name="vxtStartNo" DataType="System.String" Expression="4"/>
+    <Parameter Name="vxtEndNo" DataType="System.String" Expression="59"/>
+    <Parameter Name="nudGrade" DataType="System.String" Expression="6"/>
+    <Parameter Name="UnitTitle" DataType="System.String"/>
+    <Parameter Name="UserUnit" DataType="System.String"/>
+    <Parameter Name="Space" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" StartPageEvent="Page1_StartPage">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="56.7">
+      <TextObject Name="Text13" Left="225.86" Top="4.73" Width="595.35" Height="28.35" Text="[UnitTitle][nudYear]年度分配預算表" HorzAlign="Center" VertAlign="Center" Font="標楷體, 14pt"/>
+      <TextObject Name="Text14" Left="9.45" Top="37.8" Width="217.35" Height="18.9" Text="預算單位:[UNITTABLE.UNITNAME]" VertAlign="Center" Font="標楷體, 12pt"/>
+      <TextObject Name="Text15" Left="841.05" Top="37.8" Width="198.45" Height="18.9" Text="第[Page#]頁" HorzAlign="Right" VertAlign="Center" Font="標楷體, 12pt"/>
+      <TextObject Name="Text93" Left="226.8" Top="37.8" Width="595.35" Height="18.9" Text="民國[nudYear]年1月1日起至[nudYear]年12月31日止" HorzAlign="Center" VertAlign="Center" Font="標楷體, 12pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="60.96" Width="1047.06" Height="56.7">
+      <TextObject Name="Text9" Left="359.1" Width="680.4" Height="18.9" Border.Lines="All" Text="分配預算數" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text16" Left="359.1" Top="18.9" Width="113.4" Height="37.8" Border.Lines="All" Text="第 1 期&#13;&#10;(自1月至3月)" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text17" Left="472.5" Top="18.9" Width="113.4" Height="37.8" Border.Lines="All" Text="第 2 期&#13;&#10;(自4月至6月)" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text18" Left="585.9" Top="18.9" Width="113.4" Height="37.8" Border.Lines="All" Text="第 3 期&#13;&#10;(自7月至9月)" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text19" Left="699.3" Top="18.9" Width="113.4" Height="37.8" Border.Lines="All" Text="第 4 期&#13;&#10;(自10月至12月)" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text20" Left="812.7" Top="37.8" Width="113.4" Height="18.9" Border.Lines="All" Text="金額" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text21" Left="9.45" Width="236.25" Height="56.7" Border.Lines="All" Text="會計及符號" VertAlign="Center" Font="標楷體, 12pt"/>
+      <TextObject Name="Text94" Left="245.7" Width="113.4" Height="56.7" Border.Lines="All" Text="核定預算數" HorzAlign="Center" VertAlign="Center" Font="標楷體, 12pt"/>
+      <TextObject Name="Text95" Left="926.1" Top="37.8" Width="113.4" Height="18.9" Border.Lines="All" Text="百分比" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+      <TextObject Name="Text98" Left="812.7" Top="18.9" Width="226.8" Height="18.9" Border.Lines="All" Text="合計" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+    </PageHeaderBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="121.91" Width="1047.06" Height="18.9" CanShrink="true" Condition="[BGP020.userid]">
+      <DataBand Name="Data1" Top="145.07" Width="1047.06" Height="37.8" BeforePrintEvent="Data1_BeforePrint" DataSource="Table">
+        <TextObject Name="Text22" Left="245.7" Width="113.4" Height="37.8" Border.Lines="All" Text="[[BGP020.bg1]+[BGP020.bg2]+[BGP020.bg3]+[BGP020.bg4]+[BGP020.bg5]]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text23" Left="359.1" Width="113.4" Height="37.8" Border.Lines="All" Text="[BGP020.bg1]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text25" Left="585.9" Width="113.4" Height="37.8" Border.Lines="All" Text="[BGP020.bg3]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text26" Left="699.3" Width="113.4" Height="37.8" Border.Lines="All" Text="[BGP020.bg4]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text28" Left="9.45" Width="236.25" Height="37.8" Border.Lines="All" Text="[Space]&#13;&#10;[BGP020.accname]" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text24" Left="472.5" Width="113.4" Height="37.8" Border.Lines="All" Text="[BGP020.bg2]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text27" Left="812.7" Width="113.4" Height="37.8" Border.Lines="All" Text="[[BGP020.bg1]+[BGP020.bg2]+[BGP020.bg3]+[BGP020.bg4]]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <TextObject Name="Text96" Left="926.1" Width="113.4" Height="37.8" Border.Lines="All" BeforePrintEvent="Text96_BeforePrint" Text="[A1]%" HorzAlign="Right" VertAlign="Center" Font="標楷體, 10pt"/>
+        <Sort>
+          <Sort Expression="[BGP020.accno]"/>
+        </Sort>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="229.18" Width="1047.06" Height="18.9" CanShrink="true">
+        <ChildBand Name="Child1" Top="187.12" Width="1047.06" Height="37.8" FillUnusedSpace="true">
+          <TextObject Name="Text30" Left="245.7" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text33" Left="585.9" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text34" Left="699.3" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text35" Left="812.7" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text36" Left="9.45" Width="236.25" Height="37.8" Border.Lines="All" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text31" Left="359.1" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text32" Left="472.5" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+          <TextObject Name="Text97" Left="926.1" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="標楷體, 10pt"/>
+        </ChildBand>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="252.33" Width="1047.06" Height="28.35">
+      <TextObject Name="Text29" Left="9.45" Width="1030.05" Height="28.35" Text="製表                        覆核                        主計室主任                        會長" VertAlign="Center" Font="標楷體, 12pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15">
+    <ReportTitleBand Name="ReportTitle2" Width="1047.06" Height="623.7">
+      <TextObject Name="Text88" Left="0.94" Top="378" Width="1039.5" Height="94.5" Text="事　業　預　算　分　配　表" HorzAlign="Center" VertAlign="Center" Font="標楷體, 48pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text89" Top="567" Width="1020.6" Height="56.7" Text="主計室主任                會  長" HorzAlign="Center" VertAlign="Bottom" Font="標楷體, 26pt"/>
+      <TextObject Name="Text90" Left="0.94" Top="56.7" Width="1039.5" Height="75.6" Text="[UnitTitle]&#13;&#10;" HorzAlign="Center" VertAlign="Bottom" Font="標楷體, 36pt"/>
+      <TextObject Name="Text91" Left="0.94" Top="160.65" Width="1039.5" Height="47.25" Text="中華民國[nudYear]年度" HorzAlign="Center" VertAlign="Bottom" Font="標楷體, 26pt"/>
+      <TextObject Name="Text92" Left="0.94" Top="236.25" Width="1039.5" Height="47.25" Text="(民國[nudYear]年1月1日起至[nudYear]年12月31日止)" HorzAlign="Center" VertAlign="Center" Font="標楷體, 16pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

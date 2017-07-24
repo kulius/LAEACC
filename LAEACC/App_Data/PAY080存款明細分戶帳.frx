@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="01/17/2017 14:52:42" ReportInfo.CreatorVersion="1.4.42.0">
+  <ScriptText>Imports System
+Imports System.Collections
+Imports System.Collections.Generic
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Imports FastReport
+Imports FastReport.Data
+Imports FastReport.Dialog
+Imports FastReport.Table
+Imports FastReport.Barcode
+Imports FastReport.Utils
+Imports System.Data
+Imports System.Data.SqlClient
+
+Namespace FastReport
+  Public Class ReportScript
+    
+    public sqlstr As String
+    public UserId,UserDate,sSeason,nudYear As String
+    public vxtStartNo,vxtEndNo As String
+    public rdoSumYes As String
+    public MDate As String
+    public txtNo,tempMonth as integer
+    public accname as String
+    Public s1,s2,s3,s4,s5,s6,s7,s8,s9 as string
+    public AcuIncome,dayIncome,AcuPay,dayPay,monIncome,monPay,Upbalance as Decimal
+    public SC1,SC2,SC3,SD1,SD2,SD3 as Decimal
+    public SSC1,SSC2,SSC3,SSD1,SSD2,SSD3 as Decimal
+    public amt1,amt2,amt3 as Decimal
+   
+    Private Sub Page1_StartPage(ByVal sender As Object, ByVal e As EventArgs)
+      UserId= CType(Report.GetParameterValue(&quot;UserId&quot;), String)
+      UserDate= CType(Report.GetParameterValue(&quot;UserDate&quot;), String)
+      sSeason= CType(Report.GetParameterValue(&quot;sSeason&quot;), String)
+      nudYear= CType(Report.GetParameterValue(&quot;nudYear&quot;), String)
+      vxtStartNo= CType(Report.GetParameterValue(&quot;vxtStartNo&quot;), String)
+      vxtEndNo= CType(Report.GetParameterValue(&quot;vxtEndNo&quot;), String)
+      rdoSumYes= CType(Report.GetParameterValue(&quot;rdoSumYes&quot;), String)
+      txtNo=CType(Report.GetParameterValue(&quot;txtNo&quot;), String) - 1
+
+    End Sub 
+    
+    Private Sub Data1_BeforePrint(ByVal sender As Object, ByVal e As EventArgs)
+      AcuIncome = 0
+      AcuPay = 0
+      dayIncome = 0 : dayPay = 0
+      monIncome = 0
+      monPay = 0
+      
+      AcuIncome = CType(Report.GetColumnValue(&quot;M.ACU.day_income&quot;), Decimal)
+      AcuPay = CType(Report.GetColumnValue(&quot;M.ACU.day_pay&quot;), Decimal)
+      monIncome =CType(Report.GetColumnValue(&quot;M.MON.day_income&quot;), Decimal)
+      monPay =CType(Report.GetColumnValue(&quot;M.MON.day_pay&quot;), Decimal)
+      Upbalance= CType(Report.GetColumnValue(&quot;M.UP.balance&quot;), Decimal)
+        
+      AcuIncome += Upbalance 
+      
+      Dim dt As string = CType(Report.GetParameterValue(&quot;dtpDateS&quot;), String)      
+      tempMonth = dt.Substring(5,2)
+     
+    End Sub
+    
+
+    Private Sub PageHeader1_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      Dim dt As string = CType(Report.GetParameterValue(&quot;dtpDateS&quot;), String)
+      MDate=&quot;中華民國&quot;+Convert.ToString(Convert.ToInt32(dt.Substring(0,4)) - 1911) + &quot;年度&quot;
+      txtNo=txtNo + 1
+	  
+	  Text15.text = &quot;第&quot; &amp; txtNo &amp; &quot;頁&quot;    
+    End Sub
+
+
+    Function FormatAccno(ByVal accno As String)
+      Dim i As Integer
+      If Grade(accno) = 8 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 17, 1)
+      If Grade(accno) = 7 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7)
+      If Grade(accno) = 6 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2)
+      If Grade(accno) = 5 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2)
+      If Grade(accno) = 1 Then
+        If Strings.Mid(accno, 1, 1) = &quot;9&quot; Then   '合計
+          Return &quot; &quot;
+        Else
+          Return Strings.Mid(accno, 1, 1)
+        End If
+      Else
+        Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4)
+      End If
+    End Function
+    
+    Function Grade(ByVal accno As String)  '回復會計科目級數
+      Select Case Len(Trim(accno))
+        Case Is = 1
+          Return 1
+        Case Is = 2
+          Return 2
+        Case Is = 3
+          Return 3
+        Case Is = 5
+          Return 4
+        Case Is &lt;= 7
+          Return 5
+        Case Is &lt;= 9
+          Return 6
+        Case Is &lt;= 16
+          Return 7
+        Case Is = 17
+          Return 8
+      End Select
+    End Function
+
+  
+
+
+
+    Private Sub Data5_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      s7=&quot;&quot;
+      s8=&quot;&quot;
+      s9=&quot;&quot;
+      
+      Dim dt As DateTime = CType(Report.GetColumnValue(&quot;D.DATE_2&quot;), DateTime)
+      s1= Convert.ToString(Convert.ToInt32(dt.Year) - 1911) + &quot;/&quot; + dt.ToString(&quot;MM&quot;) + &quot;/&quot; + dt.ToString(&quot;dd&quot;)
+      s2= IIf( CType(Report.GetColumnValue(&quot;D.KIND&quot;), String)= &quot;1&quot;, &quot;收&quot;, &quot;支&quot;)
+      
+      if CType(Report.GetColumnValue(&quot;D.START_NO&quot;), Int32) &lt;&gt; CType(Report.GetColumnValue(&quot;D.END_NO&quot;), Int32) then
+        s3= Format(CType(Report.GetColumnValue(&quot;D.START_NO&quot;), Int32),0) &amp; &quot;-&quot; &amp; Format(CType(Report.GetColumnValue(&quot;D.END_NO&quot;), Int32),0)
+      else
+        s3=Format(CType(Report.GetColumnValue(&quot;D.START_NO&quot;), Int32),0)
+      end if
+                                                    
+      if Length(CType(Report.GetColumnValue(&quot;D.REMARK&quot;), String)) &gt;28 then
+        s4 =Substring(CType(Report.GetColumnValue(&quot;D.REMARK&quot;), String),0,28) '摘要印28字
+      else
+        s4=CType(Report.GetColumnValue(&quot;D.REMARK&quot;),String)
+      end if
+      
+      s5 = CType(Report.GetColumnValue(&quot;D.CHKNO&quot;), String)
+     
+      if Length(CType(Report.GetColumnValue(&quot;D.chkname&quot;), String)) &gt;10 then
+        s6 =Substring(CType(Report.GetColumnValue(&quot;D.chkname&quot;), String),0,10) '受款人只印7字
+      else
+        s6=CType(Report.GetColumnValue(&quot;D.chkname&quot;), String)
+      end if
+      
+      If CType(Report.GetColumnValue(&quot;D.KIND&quot;), String) = &quot;1&quot; Then
+        s7 =IIf(CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal) &lt;&gt; 0, FormatNumber(CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal), 2), &quot;&quot;)  
+        AcuIncome += CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal)
+        monIncome += CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal)
+        dayIncome += CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal)
+      Else
+        s8 =IIf(CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal) &lt;&gt; 0, FormatNumber(CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal), 2), &quot;&quot;)  
+        AcuPay += CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal)
+        monPay += CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal)
+        dayPay += CType(Report.GetColumnValue(&quot;D.AMT&quot;), Decimal)
+      End If
+      s9 =IIf(AcuIncome - AcuPay&lt;&gt;0 , FormatNumber(AcuIncome - AcuPay, 2)   ,&quot;&quot;)
+      
+      
+    End Sub
+
+    Private Sub GroupHeader1_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      dayPay=0
+      dayIncome=0
+      
+      if  tempMonth &lt;&gt; Month(CType(Report.GetColumnValue(&quot;D.DATE_2&quot;), DateTime)) then
+        monIncome = 0
+        monPay = 0
+        tempMonth = Month(CType(Report.GetColumnValue(&quot;D.DATE_2&quot;), DateTime))
+      end if 
+      
+    End Sub
+  End Class
+End Namespace
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHwzv0vfYr1zxK7bieAHWgfQ==" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select * from chf020 where bank&gt;= @txtSbank&#13;&#10;and bank&lt;= @txtEbank &#13;&#10;and bank in (SELECT bank FROM chf010 where date_2&gt;= @dtpDateS&#13;&#10;and date_2&lt;= @dtpDateE group by bank)&#13;&#10;order by bank">
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="DATE_2" DataType="System.DateTime"/>
+        <Column Name="ACCNO" DataType="System.String"/>
+        <Column Name="REMARK" DataType="System.String"/>
+        <Column Name="CHKNO" DataType="System.String"/>
+        <Column Name="ACCOUNT" DataType="System.String"/>
+        <Column Name="BANKNAME" DataType="System.String"/>
+        <Column Name="BALANCE" DataType="System.Decimal"/>
+        <Column Name="DAY_INCOME" DataType="System.Decimal"/>
+        <Column Name="DAY_PAY" DataType="System.Decimal"/>
+        <Column Name="PRT_CODE" DataType="System.String"/>
+        <Column Name="UNPAY" DataType="System.Decimal"/>
+        <Column Name="CREDIT" DataType="System.Int32"/>
+        <Column Name="CHKFORM" DataType="System.Byte"/>
+        <CommandParameter Name="txtSbank" DataType="22" Expression="[txtSbank]"/>
+        <CommandParameter Name="txtEbank" DataType="22" Expression="[txtEbank]"/>
+        <CommandParameter Name="dtpDateS" DataType="22" Expression="[dtpDateS]"/>
+        <CommandParameter Name="dtpDateE" DataType="22" Expression="[dtpDateE]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="UP" DataType="System.Int32" Enabled="true" SelectCommand="SELECT b.* FROM (SELECT BANK, MAX(DATE_2) AS DATE_2 &#13;&#10;FROM CHF030 WHERE DATE_2 &lt; @dtpDate and bank= @bank group by bank) a&#13;&#10; INNER JOIN CHF030 b ON a.BANK = b.BANK AND a.DATE_2 = b.DATE_2">
+        <Column Name="balance" DataType="System.Decimal"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="DATE_2" DataType="System.DateTime"/>
+        <Column Name="DAY_INCOME" DataType="System.Decimal"/>
+        <Column Name="DAY_PAY" DataType="System.Decimal"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <CommandParameter Name="dtpDate" DataType="22" Expression="[dtpDate]"/>
+        <CommandParameter Name="bank" DataType="22" Expression="[M.BANK]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table2" Alias="ACU" DataType="System.Int32" Enabled="true" SelectCommand="SELECT BANK,sum(day_income) as day_income, sum(day_pay) as day_pay from chf030 &#13;&#10;WHERE DATE_2 &lt;  @dtpDateS and date_2&gt;= @dtpDate and BANK= @BANK&#13;&#10;group by bank">
+        <Column Name="day_income" DataType="System.Decimal"/>
+        <Column Name="day_pay" DataType="System.Decimal"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <CommandParameter Name="dtpDate" DataType="22" Expression="[dtpDate]"/>
+        <CommandParameter Name="dtpDateS" DataType="22" Expression="[dtpDateS]"/>
+        <CommandParameter Name="BANK" DataType="22" Expression="[M.BANK]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table3" Alias="MON" DataType="System.Int32" Enabled="true" SelectCommand="SELECT BANK, sum(day_income) as day_income, sum(day_pay) as day_pay from chf030 &#13;&#10;WHERE DATE_2 &lt; @dtpDateS and date_2&gt;= @begMonth and bank= @bank&#13;&#10;group by bank">
+        <Column Name="day_income" DataType="System.Decimal"/>
+        <Column Name="day_pay" DataType="System.Decimal"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <CommandParameter Name="dtpDateS" DataType="22" Expression="[dtpDateS]"/>
+        <CommandParameter Name="begMonth" DataType="22" Expression="[begMonth]"/>
+        <CommandParameter Name="bank" DataType="22" Expression="[M.BANK]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table4" Alias="D" DataType="System.Int32" Enabled="true" SelectCommand="SELECT * FROM chf010 where date_2&gt;= @dtpDateS&#13;&#10;and date_2&lt;= @dtpDateE and bank= @bank&#13;&#10;order by bank, date_2, kind, chkno">
+        <Column Name="ACCYEAR" DataType="System.Int16"/>
+        <Column Name="KIND" DataType="System.String"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="CHKNO" DataType="System.String"/>
+        <Column Name="DATE_1" DataType="System.DateTime"/>
+        <Column Name="DATE_2" DataType="System.DateTime"/>
+        <Column Name="CHKNAME" DataType="System.String"/>
+        <Column Name="AMT" DataType="System.Decimal"/>
+        <Column Name="REMARK" DataType="System.String"/>
+        <Column Name="START_NO" DataType="System.Int32"/>
+        <Column Name="END_NO" DataType="System.Int32"/>
+        <Column Name="NO_1_NO" DataType="System.String"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <CommandParameter Name="dtpDateS" DataType="22" Expression="[dtpDateS]"/>
+        <CommandParameter Name="dtpDateE" DataType="22" Expression="[dtpDateE]"/>
+        <CommandParameter Name="bank" DataType="22" Expression="[M.BANK]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Relation Name="Table2_Table" ParentDataSource="Table2" ChildDataSource="Table" ParentColumns="BANK" ChildColumns="BANK" Enabled="true"/>
+    <Relation Name="Table3_Table" ParentDataSource="Table3" ChildDataSource="Table" ParentColumns="BANK" ChildColumns="BANK" Enabled="true"/>
+    <Relation Name="Table1_Table" ParentDataSource="Table1" ChildDataSource="Table" ParentColumns="BANK" ChildColumns="BANK" Enabled="true"/>
+    <Parameter Name="sqlstr" DataType="System.String"/>
+    <Parameter Name="ConnStr" DataType="System.String" Expression="&quot;Data Source=KULIUSNB\SQL2012;AttachDbFilename=;Initial Catalog=accdb_db;Integrated Security=False;Persist Security Info=True;User ID=acc;Password=acc&quot;"/>
+    <Parameter Name="UserId" DataType="System.String" Expression="&quot;0390&quot;"/>
+    <Parameter Name="nudYear" DataType="System.String" Expression="&quot;105&quot;"/>
+    <Parameter Name="vxtStartNo" DataType="System.String" Expression="&quot;1&quot;"/>
+    <Parameter Name="vxtEndNo" DataType="System.String" Expression="&quot;59&quot;"/>
+    <Parameter Name="UnitTitle" DataType="System.String" Expression="&quot;臺灣彰化農田水利會&quot;"/>
+    <Parameter Name="UserUnit" DataType="System.String" Expression="&quot;0501&quot;"/>
+    <Parameter Name="rdoSumYes" DataType="System.String"/>
+    <Parameter Name="sSeason" DataType="System.String" Expression="&quot;2&quot;"/>
+    <Parameter Name="UserDate" DataType="System.String" Expression="&quot;105-05-01&quot;"/>
+    <Parameter Name="dtpDateS" DataType="System.String" Expression="&quot;2016-11-11&quot;"/>
+    <Parameter Name="txtNo" DataType="System.String" Expression="6"/>
+    <Parameter Name="dtpDateE" DataType="System.String" Expression="&quot;2016-11-11&quot;"/>
+    <Parameter Name="dtpDate" DataType="System.String" Expression="&quot;2016-01-01&quot;"/>
+    <Parameter Name="txtSbank" DataType="System.String" Expression="&quot;01&quot;"/>
+    <Parameter Name="txtEbank" DataType="System.String" Expression="&quot;99&quot;"/>
+    <Parameter Name="begMonth" DataType="System.String" Expression="&quot;2016-11-01&quot;"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="364" PaperHeight="257" RawPaperSize="12" FirstPageSource="15" OtherPagesSource="15" StartPageEvent="Page1_StartPage">
+    <ReportTitleBand Name="ReportTitle1" Width="1300.32" Height="28.35" CanShrink="true"/>
+    <PageHeaderBand Name="PageHeader1" Top="32.35" Width="1300.32" Height="122.85" CanShrink="true" BeforePrintEvent="PageHeader1_BeforePrint">
+      <TextObject Name="Text21" Left="9.45" Top="94.5" Width="81.27" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="日　期" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text15" Left="1011.15" Top="47.25" Width="274.05" Height="18.9" Text="第[txtNo]頁" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text13" Left="352.48" Width="595.35" Height="47.25" Text="[UnitTitle]&#13;&#10;存款明細分戶帳" HorzAlign="Center" VertAlign="Center" Font="新細明體, 14pt"/>
+      <TextObject Name="Text53" Left="352.48" Top="47.25" Width="595.35" Height="18.9" Text="[MDate]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text54" Left="90.72" Top="94.5" Width="45.36" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="種類" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text55" Left="136.08" Top="94.5" Width="77.49" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="起迄號數" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text50" Left="213.57" Top="66.15" Width="440.37" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="摘　　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text57" Left="653.94" Top="66.15" Width="75.6" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="支票號碼" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text58" Left="892.08" Top="66.15" Width="115.29" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="存　　　入" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text61" Left="9.45" Top="66.15" Width="204.12" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="傳　票" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text64" Left="1007.37" Top="66.15" Width="115.29" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="支　　　出" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text65" Left="1122.66" Top="66.15" Width="105.84" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="餘　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text105" Left="729.54" Top="66.15" Width="162.54" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="受款人" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text110" Left="1228.5" Top="66.15" Width="56.7" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="銀行付款日期" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text111" Left="9.45" Top="47.25" Width="321.3" Height="18.9" Text="帳戶名稱：[M.BANKNAME]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text112" Left="9.45" Top="28.35" Width="321.3" Height="18.9" Text="帳　　號：[M.ACCOUNT]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text113" Left="9.45" Top="9.45" Width="321.3" Height="18.9" Text="銀行代號：[M.BANK]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </PageHeaderBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="159.2" Width="1300.32" Height="18.9" CanShrink="true" PrintOn="FirstPage"/>
+    <DataBand Name="Data1" Top="182.1" Width="1300.32" Height="26.46" CanGrow="true" BeforePrintEvent="Data1_BeforePrint" StartNewPage="true" DataSource="Table">
+      <TextObject Name="Text115" Left="9.45" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text116" Left="90.72" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text117" Left="136.08" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text118" Left="653.94" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text119" Left="729.54" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text120" Left="892.08" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text121" Left="213.57" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="上日結存" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text123" Left="1122.66" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text124" Left="1228.5" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text122" Left="1007.37" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+      <DataBand Name="Data2" Top="212.56" Width="1300.32" Height="37.8" CanShrink="true" DataSource="Table1"/>
+      <DataBand Name="Data3" Top="254.36" Width="1300.32" Height="37.8" CanShrink="true" DataSource="Table2"/>
+      <DataBand Name="Data4" Top="296.16" Width="1300.32" Height="37.8" CanShrink="true" DataSource="Table3"/>
+      <GroupHeaderBand Name="GroupHeader1" Top="337.96" Width="1300.32" Height="37.8" CanShrink="true" BeforePrintEvent="GroupHeader1_BeforePrint" Condition="[D.DATE_2]">
+        <DataBand Name="Data5" Top="379.76" Width="1300.32" Height="26.46" BeforePrintEvent="Data5_BeforePrint" DataSource="Table4">
+          <TextObject Name="Text66" Left="9.45" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s1]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text67" Left="90.72" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s2]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text68" Left="136.08" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s3]" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text69" Left="653.94" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s5]" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text70" Left="729.54" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s6]" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text71" Left="892.08" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s7]" HideZeros="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text72" Left="213.57" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s4]" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text74" Left="1122.66" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s9]" HideZeros="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text114" Left="1228.5" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text73" Left="1007.37" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s8]" HideZeros="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
+          <Sort>
+            <Sort Expression="[D.DATE_2]"/>
+            <Sort Expression="[D.KIND]"/>
+            <Sort Expression="[D.CHKNO]"/>
+          </Sort>
+        </DataBand>
+        <GroupFooterBand Name="GroupFooter1" Top="410.22" Width="1300.32" Height="79.38">
+          <TextObject Name="Text125" Left="9.45" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text126" Left="90.72" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text127" Left="136.08" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text128" Left="653.94" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text129" Left="729.54" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text130" Left="892.08" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[dayIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text131" Left="213.57" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本日合計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text133" Left="1122.66" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text134" Left="1228.5" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text135" Left="9.45" Top="26.46" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text136" Left="90.72" Top="26.46" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text137" Left="136.08" Top="26.46" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text138" Left="653.94" Top="26.46" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text139" Left="729.54" Top="26.46" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text140" Left="892.08" Top="26.46" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[monIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text141" Left="213.57" Top="26.46" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本月合計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text142" Left="1007.37" Top="26.46" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[monPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text143" Left="1122.66" Top="26.46" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text144" Left="1228.5" Top="26.46" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text145" Left="9.45" Top="52.92" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text146" Left="90.72" Top="52.92" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text147" Left="136.08" Top="52.92" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text148" Left="653.94" Top="52.92" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text149" Left="729.54" Top="52.92" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text150" Left="892.08" Top="52.92" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text151" Left="213.57" Top="52.92" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本月累計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text152" Left="1007.37" Top="52.92" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text153" Left="1122.66" Top="52.92" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text154" Left="1228.5" Top="52.92" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text132" Left="1007.37" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[dayPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+        </GroupFooterBand>
+      </GroupHeaderBand>
+    </DataBand>
+  </ReportPage>
+</Report>

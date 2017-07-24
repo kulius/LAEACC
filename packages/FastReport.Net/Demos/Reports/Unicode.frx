@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Description="This report demonstrates Unicode samples." ReportInfo.Created="12/12/2008 01:29:01" ReportInfo.Modified="04/07/2010 20:59:28" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Data1_BeforePrint(object sender, EventArgs e)
+    {
+      Text4.RightToLeft = ((Boolean)Report.GetColumnValue(&quot;Unicode.Rtl&quot;)) == true;
+      Text6.RightToLeft = Text4.RightToLeft;
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="Unicode" ReferenceName="NorthWind.Unicode" DataType="System.Int32" Enabled="true" SelectCommand="select * from unicode order by UnicodeName">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="UnicodeName" DataType="System.String"/>
+      <Column Name="Text" DataType="System.String"/>
+      <Column Name="Rtl" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Active" DataType="System.Boolean" BindableControl="CheckBox"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="94.5">
+      <TextObject Name="Text1" Top="9.45" Width="718.2" Height="37.8" Fill="Glass" Fill.Color="DarkGray" Fill.Blend="0.2" Fill.Hatch="false" Text="UNICODE" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+      <TextObject Name="Text9" Left="94.5" Top="56.7" Width="623.7" Height="31.22" Border.Lines="All" Border.Color="Gainsboro" Text="You need &quot;Arial Unicode MS&quot; TrueType font installed to properly view all Unicode content in this report sample." HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <PictureObject Name="Picture1" Top="56.7" Width="88" Height="31" Border.Lines="All" Border.Color="Gainsboro" Hyperlink.Value="http://www.unicode.org/" SizeMode="AutoSize" Image="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"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="98.5" Width="718.2" Height="28.35">
+      <TextObject Name="Text3" Width="94.5" Height="28.35" Border.Lines="All" Border.Color="White" Fill.Color="LightGray" Text="Name" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text5" Left="94.5" Width="94.5" Height="28.35" Border.Lines="All" Border.Color="White" Fill.Color="LightGray" Text="Self name" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text7" Left="189" Width="529.2" Height="28.35" Border.Lines="All" Border.Color="White" Fill.Color="LightGray" Text="Text" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="130.85" Width="718.2" Height="37.8" CanGrow="true" BeforePrintEvent="Data1_BeforePrint" DataSource="Unicode">
+      <TextObject Name="Text2" Top="9.45" Width="94.5" Height="28.35" Border.Lines="Left, Right, Bottom" Border.Color="White" Fill.Color="Gainsboro" Text="[Unicode.Name]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 10pt"/>
+      <TextObject Name="Text4" Left="94.5" Top="9.45" Width="94.5" Height="28.35" Border.Lines="Left, Right, Bottom" Border.Color="White" Fill.Color="Gainsboro" Text="[Unicode.UnicodeName]" HorzAlign="Center" VertAlign="Center" Font="Arial Unicode MS, 10pt"/>
+      <TextObject Name="Text6" Left="189" Top="9.45" Width="529.2" Height="28.35" CanGrow="true" Text="[Unicode.Text]" Font="Arial Unicode MS, 10pt"/>
+      <Sort>
+        <Sort Expression="[Unicode.UnicodeName]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="172.65" Width="718.2" Height="18.9">
+      <TextObject Name="Text8" Left="585.9" Width="132.3" Height="18.9" Text="[PageN]" HorzAlign="Right" Font="Tahoma, 9pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

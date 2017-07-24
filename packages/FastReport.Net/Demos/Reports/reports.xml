@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Reports>
+  <Folder Name="General">
+    <Report File="Simple List.frx"/>
+    <Report File="Groups.frx"/>
+    <Report File="Master-Detail.frx"/>
+    <Report File="Labels.frx"/>
+    <Report File="Subreport.frx"/>
+    <Report File="Side-by-Side Subreports.frx"/>
+    <Report File="Mail Merge.frx" WebDemo="false"/>
+    <Report File="Complex (Master-detail + Group).frx"/>
+    <Report File="Report With Cover Page.frx"/>
+    <Report File="Hierarchic List.frx"/>
+    <Report File="Watermark.frx" WebDemo="false"/>
+    <Report File="Inherited Report.frx"/>
+  </Folder>
+  <Folder Name="Report Objects" WebDemo="false">
+    <Report File="Text.frx"/>
+    <Report File="Image.frx"/>
+    <Report File="Lines and Shapes.frx"/>
+    <Report File="Barcode.frx"/>
+    <Report File="RichText.frx"/>
+    <Report File="Table.frx"/>
+    <Report File="Matrix.frx"/>
+    <Report File="Chart.frx"/>
+    <Report File="CellularText.frx"/>
+    <Report File="CheckBox.frx"/>
+    <Report File="ZipCode.frx"/>
+  </Folder>
+  <Folder Name="Interactive Reports" WebDemo="false">
+    <Report File="Interactive Report.frx"/>
+    <Report File="Interactive Report, 2-in-1.frx"/>
+    <Report File="Interactive Matrix.frx"/>
+    <Report File="Interactive Matrix With Chart.frx"/>
+    <Report File="Hyperlinks, Bookmarks.frx"/>
+    <Report File="Outline.frx"/>
+    <Report File="Drill-Down Groups.frx"/>
+    <Report File="Complex (Hyperlinks, Outline, TOC).frx"/>
+    <Report File="Handle Preview Clicks.frx"/>
+  </Folder>
+  <Folder Name="Table">
+    <Report File="Labels.frx"/>
+    <Report File="Row Datasource.frx"/>
+    <Report File="Column Datasource.frx"/>
+    <Report File="Column Datasource, Wrapped.frx"/>
+    <Report File="Handle Page Breaks.frx"/>
+    <Report File="Multiplication Table.frx"/>
+    <Report File="Complex Column Headers.frx"/>
+    <Report File="Print DataTable.frx"/>
+    <Report File="Row Datasource, Detail Rows.frx"/>
+    <Report File="Row Datasource, Master-Detail.frx"/>
+    <Report File="Fit Dynamic Table To Page.frx"/>
+  </Folder>
+  <Folder Name="Matrix">
+    <Report File="Simple Matrix.frx"/>
+    <Report File="Matrix With Rows Only.frx"/>
+    <Report File="Matrix With Columns Only.frx"/>
+    <Report File="Two Column Dimensions.frx"/>
+    <Report File="Two Row Dimensions.frx"/>
+    <Report File="Two Cell Dimensions.frx"/>
+    <Report File="Two Cell Dimensions, Side-by-Side.frx"/>
+    <Report File="Highlight.frx"/>
+    <Report File="Highlight Based on Row-Column.frx"/>
+    <Report File="Alternate Color Each Row.frx"/>
+    <Report File="Using Expressions.frx"/>
+    <Report File="Print Month Names.frx"/>
+    <Report File="Objects Inside The Matrix.frx"  WebDemo="false"/>
+    <Report File="Pictures Inside The Matrix.frx"/>
+    <Report File="Two Matrices.frx"/>
+    <Report File="Stress-Test (1000x1000).frx" WebDemo="false"/>
+  </Folder>
+  <Folder Name="Dialogs" WebDemo="false">
+    <Report File="Hello, FastReport!.frx"/>
+    <Report File="Print Entered Value.frx"/>
+    <Report File="Filtering with CheckedListBox.frx"/>
+    <Report File="Filtering with DataSelector.frx"/>
+    <Report File="Filtering with Ranges.frx"/>
+    <Report File="Filtering with Date Ranges.frx"/>
+    <Report File="Cascaded Data Filtering.frx"/>
+    <Report File="Labels With Dialog.frx"/>
+  </Folder>
+  <Folder Name="Script" WebDemo="false">
+    <Report File="Print Total in The Group Header.frx"/>
+    <Report File="Sort Group By Total.frx"/>
+    <Report File="Shift Object Position.frx"/>
+    <Report File="Dialog Events.frx"/>
+    <Report File="Handle Dialog Forms.frx"/>
+  </Folder>
+  <Folder Name="Charts">
+    <Report File="About Microsoft Chart.frx" WebDemo="false"/>
+    <Report File="Microsoft Chart Sample.frx" WebDemo="false"/>
+    <Report File="Interactive Chart.frx" WebDemo="false"/>
+  </Folder>
+  <Folder Name="Features">
+    <Report File="Double Pass, Total Pages.frx" WebDemo="false"/>
+    <Report File="Odd-Even Rows.frx"/>
+    <Report File="Odd-Even Pages, Mirror Margins.frx"/>
+    <Report File="Repeat Headers.frx"/>
+    <Report File="Start New Page, Reset Page Numbers.frx"/>
+    <Report File="Databand Columns, Row Numbers.frx"/>
+    <Report File="Duplicate Values.frx"/>
+    <Report File="Keep Together.frx"/>
+    <Report File="Highlight.frx"/>
+    <Report File="Print on Previous Page.frx"/>
+    <Report File="Guidelines.frx" WebDemo="false"/>
+    <Report File="Business Objects.frx"/>
+    <Report File="Complete upto N Rows.frx"/>
+    <Report File="Print Copy Names.frx"/>
+    <Report File="Unicode.frx"/>
+  </Folder>
+</Reports>

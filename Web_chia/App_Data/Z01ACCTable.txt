@@ -1,0 +1,152 @@
+﻿IF EXISTS( SELECT * FROM sys.tables WHERE name = 'BGP030' )
+DROP TABLE [BGP030]
+GO
+
+CREATE TABLE BGP030(
+	accno nvarchar(17) NULL,
+	accname nvarchar(40) NULL,
+	accyear smallint  NULL,
+	unit nvarchar(5) NULL,
+	bgamt decimal(15, 2) NULL DEFAULT (0),
+	totper decimal(15, 2) NULL DEFAULT (0),
+	totUSE decimal(15, 2) NULL DEFAULT (0),
+	ctrl char(1) NULL,
+	sumcode char(1) NULL,
+	subbgamt decimal(15, 2) NULL DEFAULT (0),
+	userid char(4) NOT NULL,
+	autono int IDENTITY(1,1) NOT NULL
+	)
+
+GO
+
+IF EXISTS( SELECT * FROM sys.tables WHERE name = 'ACF010PRINT' )
+DROP TABLE [ACF010PRINT]
+GO
+
+CREATE TABLE ACF010PRINT(
+	NO_1_NO int NULL,
+	KIND char(1) NULL,
+	autono int IDENTITY(1,1) NOT NULL
+	)
+
+GO
+
+CREATE TABLE CHFPRINT(
+	BANK char(2) not NULL,
+	公司全銜 nvarchar(50) null,
+	中文字型名稱 nvarchar(50) null,
+	紙張W decimal(15, 2) null,
+	紙張H decimal(15, 2) null,
+	左側日期X decimal(15, 2) null,
+	左側日期Y decimal(15, 2) null,
+	左側日期W decimal(15, 2) null,
+	左側日期H decimal(15, 2) null,
+	左側日期字體大小 int null,
+	左側日期要列印 char(1) null,
+	左側受款人X decimal(15, 2) null,
+	左側受款人Y decimal(15, 2) null,
+	左側受款人W decimal(15, 2) null,
+	左側受款人H decimal(15, 2) null,
+	左側受款人字體大小 int null,
+	左側受款人要列印 char(1) null,
+	左側金額X decimal(15, 2) null,
+	左側金額Y decimal(15, 2) null,
+	左側金額W decimal(15, 2) null,
+	左側金額H decimal(15, 2) null,
+	左側金額字體大小 int null,
+	左側金額要列印 char(1) null,
+	左側用途X decimal(15, 2) null,
+	左側用途Y decimal(15, 2) null,
+	左側用途W decimal(15, 2) null,
+	左側用途H decimal(15, 2) null,
+	左側用途字體大小 int null,
+	左側用途要列印 char(1) null,
+	左側餘額X decimal(15, 2) null,
+	左側餘額Y decimal(15, 2) null,
+	左側餘額W decimal(15, 2) null,
+	左側餘額H decimal(15, 2) null,
+	左側餘額字體大小 int null,
+	左側餘額要列印 char(1) null,
+	右側受款人X decimal(15, 2) null,
+	右側受款人Y decimal(15, 2) null,
+	右側受款人W decimal(15, 2) null,
+	右側受款人H decimal(15, 2) null,
+	右側受款人字體大小 int null,
+	右側受款人要列印 char(1) null,
+	右側受款人字數臨界點 int null,
+	右側受款人字體大小臨界點 int null,
+	右側金額X decimal(15, 2) null,
+	右側金額Y decimal(15, 2) null,
+	右側金額W decimal(15, 2) null,
+	右側金額H decimal(15, 2) null,
+	右側金額字體大小 int null,
+	右側金額要列印 char(1) null,
+	右側金額要印在格子內 decimal(15, 2) null,
+	右側金額格子總數 decimal(15, 2) null,
+	右側中文金額X decimal(15, 2) null,
+	右側中文金額Y decimal(15, 2) null,
+	右側中文金額W decimal(15, 2) null,
+	右側中文金額H decimal(15, 2) null,
+	右側中文金額字體大小 int null,
+	右側中文金額要列印 char(1) null,
+	右側中文金額字數臨界點 int null,
+	右側中文金額字體大小臨界點 int null,
+	禁止背書轉讓X decimal(15, 2) null,
+	禁止背書轉讓Y decimal(15, 2) null,
+	禁止背書轉讓W decimal(15, 2) null,
+	禁止背書轉讓H decimal(15, 2) null,
+	禁止背書轉讓字體大小 int null,
+	禁止背書轉讓要列印 char(1) null,
+	禁止背書轉讓樣式 char(2) null,
+	雙斜線X decimal(15, 2) null,
+	雙斜線Y decimal(15, 2) null,
+	雙斜線W decimal(15, 2) null,
+	雙斜線H decimal(15, 2) null,
+	雙斜線字體大小 int null,
+	雙斜線要列印 char(1) null,
+	公司全銜X decimal(15, 2) null,
+	公司全銜Y decimal(15, 2) null,
+	公司全銜W decimal(15, 2) null,
+	公司全銜H decimal(15, 2) null,
+	公司全銜字體大小 int null,
+	公司全銜要列印 char(1) null,
+	右側金額格子精確度 int null,
+	右側金額字數臨界點 int null,
+	右側金額字體大小臨界點 int null,
+	右側日期X decimal(15, 2) null,
+	右側日期Y decimal(15, 2) null,
+	右側日期W decimal(15, 2) null,
+	右側日期H decimal(15, 2) null,
+	右側日期字體大小 int null,
+	右側日期要列印 char(1) null,
+	右側日期樣式 char(2) null,
+	右側受款人垂直對齊方式 char(2) null,
+	右側金額要列印橫線在空的小格子上 int null,
+	autono int IDENTITY(1,1) NOT NULL
+	)
+
+GO
+
+alter table CHFPRINT add constraint PK_CHFPRINT primary key (BANK);
+GO
+
+INSERT INTO CHFPRINT VALUES
+('00',	'農田水利會',	'新細明體',	0.00,	0.00,	2.75,	0.25,	2.50,	0.50,	10,	1,	3.50,	0.25,	2.50,	0.75,
+10,	1,	4.50,	0.25,	2.50,	0.50,	10,	1,	5.25,	0.25,	2.50,	0.75,	10,	1,	6.25,	0.25,	2.50,
+0.50,	10,	1,	2.25,	7.75,	10.50,	0.50,	14,	1,	15,	10,	4.00,	7.25,	11.00,	0.50,	14,	1,
+0.00,	0.00,	3.00,	7.50,	10.75,	0.50,	14,	1,	16,	10,	4.00,	18.50,	0.75,	2.50,
+10,	1,	0, 	0.25,	2.75,	2.00,	1.00,	0,	0,	0.25,	6.00,	10.50,	0.50,	14,	1,	0,	9,	10,	1.25,	17.00,	2.50,
+0.50,	10,	1,	0,	0, 	0)
+GO
+
+
+ALTER TABLE BGP020 DROP COLUMN autono
+GO
+alter table BGP020 add  autono int identity (1, 1) not null
+GO
+alter table BGP020 alter column bg1 decimal(15, 2)  null
+alter table BGP020 alter column bg2 decimal(15, 2)  null
+alter table BGP020 alter column bg3 decimal(15, 2)  null
+alter table BGP020 alter column bg4 decimal(15, 2)  null
+alter table BGP020 alter column bg5 decimal(15, 2)  null
+GO

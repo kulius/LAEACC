@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="05/27/2016 15:29:08" ReportInfo.CreatorVersion="1.4.42.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="ACCNAME" DataType="System.Int32" Enabled="true" TableName="ACCNAME">
+        <Column Name="ACCNO" DataType="System.String"/>
+        <Column Name="ACCNAME" DataType="System.String"/>
+        <Column Name="BELONG" DataType="System.String"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="UNIT" DataType="System.String"/>
+        <Column Name="STAFF_NO" DataType="System.String"/>
+        <Column Name="ACCOUNT_NO" DataType="System.String"/>
+        <Column Name="BOOKACCNO" DataType="System.String"/>
+        <Column Name="OUTYEAR" DataType="System.Int16"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="myp" DataType="System.String"/>
+    <Parameter Name="ConnStr" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Left="37.8" Top="9.45" Width="94.5" Height="18.9" Text="[UserId]" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="151.2" Top="9.45" Width="94.5" Height="18.9" Text="[nudYear]" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="283.5" Top="9.45" Width="94.5" Height="18.9" Text="[vxtStartNo]" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="396.9" Top="9.45" Width="94.5" Height="18.9" Text="[vxtEndNo]" Font="宋体, 9pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="40.92" Width="718.2" Height="28.35">
+      <TextObject Name="Text3" Left="9.45" Width="302.4" Height="18.9" Text="ACCNO123213213"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="72.4" Width="718.2" Height="47.25" DataSource="ACCNAME">
+      <TextObject Name="Text2" Left="9.45" Top="18.9" Width="444.15" Height="18.9" Text="[ACCNAME.ACCNO]"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="122.78" Width="718.2" Height="18.9"/>
+  </ReportPage>
+  <ReportPage Name="Page2">
+    <ReportTitleBand Name="ReportTitle2" Width="718.2" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader2" Top="40.92" Width="718.2" Height="28.35"/>
+    <DataBand Name="Data2" Top="72.4" Width="718.2" Height="75.6"/>
+    <PageFooterBand Name="PageFooter2" Top="151.12" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

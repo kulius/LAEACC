@@ -1,0 +1,43 @@
+﻿/*** 查詢樣式 ***/
+#table-serch {
+    border:0px #ccc solid;             
+    width:100%;     
+    font-size:14px;            
+    margin:10px 0px 10px 0px;
+}
+#table-serch tr {
+    height:40px;
+}
+
+#table-serch th {
+    background-color:#87cefc;
+    text-align:right;
+    width:150px;
+}    
+
+
+/*** 主表格樣式 ***/
+#table-data {
+    border:0px #ccc solid;             
+    width:100%;     
+    font-size:14px;            
+    margin:15px 0px 15px 0px;
+}
+
+#table-data tr {
+    height:40px;
+}
+
+#table-data th {
+    background-color:#FAF0E6;
+    text-align:right;
+    width:140px;
+}
+.td-left {
+    float:left;
+}
+.td-right {
+    float:left;
+}
+
+

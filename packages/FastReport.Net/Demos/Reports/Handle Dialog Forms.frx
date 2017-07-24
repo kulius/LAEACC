@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ScriptText="using System;&#13;&#10;using System.Collections;&#13;&#10;using System.Collections.Generic;&#13;&#10;using System.ComponentModel;&#13;&#10;using System.Windows.Forms;&#13;&#10;using System.Drawing;&#13;&#10;using System.Data;&#13;&#10;using FastReport;&#13;&#10;using FastReport.Data;&#13;&#10;using FastReport.Dialog;&#13;&#10;using FastReport.Barcode;&#13;&#10;using FastReport.Table;&#13;&#10;using FastReport.Utils;&#13;&#10;&#13;&#10;namespace FastReport&#13;&#10;{&#13;&#10;  public class ReportScript&#13;&#10;  {&#13;&#10;&#13;&#10;    private void Form1_FormClosed(object sender, FormClosedEventArgs e)&#13;&#10;    {&#13;&#10;      Form2.Visible = CheckBox1.Checked;&#13;&#10;    }&#13;&#10;  }&#13;&#10;}&#13;&#10;" ReportInfo.Description="Demonstrates how to handle the visibility of several dialog forms.&#13;&#10;&#13;&#10;The report can contain several dialog forms. When you run the report, it will show the first dialog; if you click OK you will see the next dialog and so on. When you finish with all dialogs, you will see the report. If you click Cancel or close any dialog by the X button, the report execution will be terminated.&#13;&#10;&#13;&#10;You can skip the dialog if you set its Visible property to false." ReportInfo.Created="05/29/2008 20:29:50" ReportInfo.Modified="05/30/2008 16:41:02">
+  <Dictionary/>
+  <DialogPage Name="Form1" Width="290" Height="166" AcceptButton="btnOk" CancelButton="btnCancel" Text="Dialog 1" FormClosedEvent="Form1_FormClosed">
+    <ButtonControl Name="btnCancel" Left="201" Top="103" Anchor="Bottom, Right" Font="Tahoma, 8pt" Text="Cancel" DialogResult="Cancel"/>
+    <ButtonControl Name="btnOk" Left="118" Top="103" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="1" Text="OK" DialogResult="OK"/>
+    <CheckBoxControl Name="CheckBox1" Left="12" Top="60" Width="248" Height="17" Font="Tahoma, 8pt" TabIndex="2" Text="After closing this dialog, show the next dialog."/>
+    <LabelControl Name="Label1" Left="12" Top="12" Width="257" Height="26" Font="Tahoma, 8pt" TabIndex="3" Text="This report has two dialog forms.&#13;&#10;Check the checkbox to view the second dialog form."/>
+  </DialogPage>
+  <DialogPage Name="Form2" Height="252" AcceptButton="btnOk1" CancelButton="btnCancel1" Text="Dialog 2">
+    <ButtonControl Name="btnCancel1" Left="211" Top="189" Anchor="Bottom, Right" Font="Tahoma, 8pt" Text="Cancel" DialogResult="Cancel"/>
+    <ButtonControl Name="btnOk1" Left="128" Top="189" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="1" Text="OK" DialogResult="OK"/>
+  </DialogPage>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader1" Height="28.35"/>
+    <DataBand Name="Data1" Height="75.6"/>
+    <PageFooterBand Name="PageFooter1" Height="18.9"/>
+  </ReportPage>
+</Report>

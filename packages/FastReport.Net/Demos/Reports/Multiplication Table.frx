@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ScriptText="using System;&#13;&#10;using System.Collections;&#13;&#10;using System.Collections.Generic;&#13;&#10;using System.ComponentModel;&#13;&#10;using System.Windows.Forms;&#13;&#10;using System.Drawing;&#13;&#10;using System.Data;&#13;&#10;using FastReport;&#13;&#10;using FastReport.Data;&#13;&#10;using FastReport.Dialog;&#13;&#10;using FastReport.Barcode;&#13;&#10;using FastReport.Table;&#13;&#10;using FastReport.Utils;&#13;&#10;&#13;&#10;namespace FastReport&#13;&#10;{&#13;&#10;  public class ReportScript&#13;&#10;  {&#13;&#10;    // define two variables that will be printed in the report&#13;&#10;    public int x;&#13;&#10;    public int y;&#13;&#10;&#13;&#10;    private void Table1_ManualBuild(object sender, EventArgs e)&#13;&#10;    {&#13;&#10;      // first we need to print the table header. Always follow the rule: &#13;&#10;      // each table row must have the same number of columns. &#13;&#10;      &#13;&#10;      // print first two rows along with all its columns (the first &#13;&#10;      // header column and 10 data columns)&#13;&#10;      for (y = 0; y &lt; 2; y++)&#13;&#10;      {&#13;&#10;        // print a row&#13;&#10;        Table1.PrintRow(y);&#13;&#10;        &#13;&#10;        // print header column&#13;&#10;        Table1.PrintColumn(0);&#13;&#10;        // print 10 data columns&#13;&#10;        for (x = 1; x &lt;= 10; x++)&#13;&#10;        {&#13;&#10;          // print the data column (second column in the template)&#13;&#10;          Table1.PrintColumn(1);&#13;&#10;        }&#13;&#10;      }&#13;&#10;&#13;&#10;      // now print data rows.&#13;&#10;      for (y = 1; y &lt;= 10; y++)&#13;&#10;      {&#13;&#10;        // print the data row (third row in the template)&#13;&#10;        Table1.PrintRow(2);&#13;&#10;        &#13;&#10;        // print header column&#13;&#10;        Table1.PrintColumn(0);&#13;&#10;        // print 10 data columns&#13;&#10;        for (x = 1; x &lt;= 10; x++)&#13;&#10;        {&#13;&#10;          // print the data column (second column in the template)&#13;&#10;          Table1.PrintColumn(1);&#13;&#10;        }&#13;&#10;      }&#13;&#10;    }&#13;&#10;  }&#13;&#10;}&#13;&#10;" ReportInfo.Description="Demonstrates how to print multiple Table rows and columns with a script. To do this:&#13;&#10;&#13;&#10;- select the Table object;&#13;&#10;&#13;&#10;- go &quot;Properties&quot; window and click the &quot;Events&quot; button to view list of available events;&#13;&#10;&#13;&#10;- doubleclick the &quot;ManualBuild&quot; event;&#13;&#10;&#13;&#10;- you will see the empty event handler. You need to print rows using TableObject.PrintRow method; in each row, you must also print all columns (using PrintColumns method). See the script code for more details.&#13;&#10;&#13;&#10;When you run a report, the Table will repeat its rows and columns and fill it with data. Note that cell spans are handled automatically." ReportInfo.Created="05/16/2008 00:05:30" ReportInfo.Modified="06/04/2008 13:35:10">
+  <Dictionary/>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="311.85">
+      <TableObject Name="Table1" Left="9.45" Top="9.45" Width="189" Height="302.4" ManualBuildEvent="Table1_ManualBuild">
+        <TableColumn Name="Column1" Width="94.5"/>
+        <TableColumn Name="Column2" Width="94.5"/>
+        <TableRow Name="Row1" Height="113.4">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="White" Fill.Color="255, 192, 128" Text="The multiplication table" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 20pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="White" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="94.5">
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="White" Fill.Color="255, 192, 128" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 20pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Border.Color="White" Fill.Color="255, 192, 128" Text="[x]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 20pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="94.5">
+          <TableCell Name="Cell11" Border.Lines="All" Border.Color="White" Fill.Color="255, 192, 128" Text="[y]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 20pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" Border.Color="White" Fill.Color="255, 224, 192" Text="[x * y]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 20pt"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

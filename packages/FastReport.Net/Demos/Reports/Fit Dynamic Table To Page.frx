@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="This example demonstrates how to fit dynamically generated TableObject to page width. To do this:&#13;&#10;&#13;&#10;- use Table1.ResultTable property to access generated table;&#13;&#10;&#13;&#10;- use the AfterCalcBounds event to fix table columns, just before printing the result table.&#13;&#10;&#13;&#10;See more details in the report script." ReportInfo.Created="08/01/2008 14:01:38" ReportInfo.Modified="05/04/2009 14:27:29" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Table1_ManualBuild(object sender, EventArgs e)
+    {
+      // get the "Customers" datasource
+      DataSourceBase customers = Report.GetDataSource("Customers");
+      // init it
+      customers.Init();
+      
+      // number of columns in the datasource
+      int colCount = customers.Columns.Count;
+      
+      // print the table header which contains column titles. It's a row with index = 0.
+      Table1.PrintRow(0);
+      for (int i = 0; i < colCount; i++)
+      {
+        // fill the cell with column title
+        Cell1.Text = customers.Columns[i].Alias;
+        // print it
+        Table1.PrintColumn(0);
+      }
+      
+      // now print a datasource content
+      while (customers.HasMoreRows)
+      {
+        // print the table body. It's a row with index = 1.
+        Table1.PrintRow(1);
+        for (int i = 0; i < colCount; i++)
+        {
+          // fill the cell with datasource column's data
+          Cell2.Text = customers[customers.Columns[i]].ToString();
+          // print it
+          Table1.PrintColumn(0);
+        }
+        
+        // move to the next row
+        customers.Next();
+      }
+      
+      // AfterCalcBounds event is fired after calculating table bounds, just before
+      // printing the table. We will use it to correct the column's width.
+      Table1.ResultTable.AfterCalcBounds += new EventHandler(ResultTable_AfterCalcBounds);
+    }
+    
+    private void ResultTable_AfterCalcBounds(object sender, EventArgs e)
+    {
+      TableResult resultTable = sender as TableResult;
+      float tableWidth = resultTable.Width;
+      float pageWidth = Engine.PageWidth;
+      
+      if (tableWidth > pageWidth)
+      {
+        // table is wider than page, correct the columns width
+        float ratio = pageWidth / tableWidth;
+        foreach (TableColumn column in resultTable.Columns)
+        {
+          column.AutoSize = false;
+          column.Width *= ratio;
+        }
+        
+        // this will recalculate table rows height
+        resultTable.CalcHeight();
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="Customers" ReferenceName="NorthWind.Customers" Enabled="true">
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="ContactName" DataType="System.String"/>
+      <Column Name="ContactTitle" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Fax" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="122.85">
+      <TableObject Name="Table1" Top="56.7" Width="94.5" Height="37.8" FixedRows="1" ManualBuildEvent="Table1_ManualBuild">
+        <TableColumn Name="Column1" Width="94.5" AutoSize="true"/>
+        <TableRow Name="Row1" AutoSize="true">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="LightGray" Fill.Color="LightGray" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2" AutoSize="true">
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="LightGray" VertAlign="Center" Font="Tahoma, 8pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="CUSTOMERS TABLE" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

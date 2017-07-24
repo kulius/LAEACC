@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report DoublePass="true" TextQuality="Regular" ReportInfo.Description="Demonstrates how to sort groups by the total value of a group. To create this report:&#13;&#10;&#13;&#10;- create the group report similar to the &quot;General/Groups&quot; report;&#13;&#10;&#13;&#10;- make it two-pass (&quot;Report/Options...&quot; menu, &quot;Double pass&quot; checkbox);&#13;&#10;&#13;&#10;- add the GroupFooter1.BeforePrint script that will calculate and remember the total value for each group on the first pass;&#13;&#10;&#13;&#10;- add the GroupRank method that will return the calculated total value for each group on the second pass;&#13;&#10;&#13;&#10;- turn off the sort in the group header's editor;&#13;&#10;&#13;&#10;- invoke the data band's editor and set sort by GroupRank(), then by ProductName." ReportInfo.Created="01/17/2008 04:31:41" ReportInfo.Modified="11/21/2009 02:56:58" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private Hashtable groupList = new Hashtable();
+
+    private void GroupFooter1_BeforePrint(object sender, EventArgs e)
+    {
+      if (Engine.FirstPass)
+      {
+        string groupName = ((String)Report.GetColumnValue(&quot;Products.ProductName&quot;)).Substring(0,1);
+        int groupTotal = Report.GetTotalValue(&quot;TotalProducts&quot;);
+        groupList.Add(groupName, groupTotal);
+      }
+    }
+    
+    private object GroupRank()
+    {
+      if (Engine.FinalPass)
+      {
+        string groupName = ((String)Report.GetColumnValue(&quot;Products.ProductName&quot;)).Substring(0,1);
+        return groupList[groupName];
+      }
+      return 0;
+    }
+  }
+}
+</ScriptText>
+  <Styles>
+    <Style Name="EvenRows" Fill.Color="OldLace"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products" DataType="System.Int32" Enabled="true">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="TotalProducts" TotalType="Count" Evaluator="Data1" PrintOn="GroupFooter1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="PRODUCT LIST SORTED BY GROUP TOTAL" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="41.8" Width="718.2" Height="28.35" KeepWithData="true" Condition="[Products.ProductName].Substring(0,1)" SortOrder="None">
+      <TextObject Name="Text7" Left="9.45" Width="359.1" Height="28.35" Border.Lines="All" Border.Color="LightSkyBlue" Fill="Glass" Fill.Color="LightSkyBlue" Fill.Blend="0.2" Fill.Hatch="false" Text="[[Products.ProductName].Substring(0,1)]" Padding="5, 0, 0, 0" VertAlign="Center" Font="Tahoma, 10pt, style=Bold"/>
+      <DataBand Name="Data1" Top="74.15" Width="718.2" Height="18.9" DataSource="Products">
+        <TextObject Name="Text2" Left="9.45" Width="264.6" Height="18.9" Border.Lines="Left" Border.Color="LightSkyBlue" Text="[Products.ProductName]" VertAlign="Center" Font="Tahoma, 8pt">
+          <Highlight>
+            <Condition Expression="[Row#] % 2 == 0" Fill.Color="AliceBlue" TextFill.Color="Black" ApplyFill="true" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text4" Left="274.05" Width="94.5" Height="18.9" Border.Lines="Right" Border.Color="LightSkyBlue" Text="[Products.UnitPrice]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt">
+          <Highlight>
+            <Condition Expression="[Row#] % 2 == 0" Fill.Color="AliceBlue" TextFill.Color="Black" ApplyFill="true" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+        <Sort>
+          <Sort Expression="GroupRank()" Descending="true"/>
+          <Sort Expression="[Products.ProductName]"/>
+        </Sort>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="97.05" Width="718.2" Height="47.25" BeforePrintEvent="GroupFooter1_BeforePrint" KeepWithData="true">
+        <TextObject Name="Text8" Left="9.45" Width="359.1" Height="18.9" Border.Lines="Left, Right, Bottom" Border.Color="LightSkyBlue" Text="Total products: [TotalProducts]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="148.3" Width="718.2" Height="18.9">
+      <TextObject Name="Text9" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

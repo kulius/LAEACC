@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates how to use range filtering with DateTimePicker control. To do this:&#13;&#10;&#13;&#10;- put two DateTimePicker controls on a dialog form;&#13;&#10;&#13;&#10;- connect both to the same data column (using the &quot;DataColumn&quot; property);&#13;&#10;&#13;&#10;- select the first DateTimePicker and set its &quot;FilterOperation&quot; property to &quot;GreaterThanOrEqual&quot;;&#13;&#10;&#13;&#10;- select the second DateTimePicker and set its &quot;FilterOperation&quot; property to &quot;LessThanOrEqual&quot;;&#13;&#10;&#13;&#10;- the simpler way to do this: just drag&amp;drop the &quot;Orders.OrderDate&quot; data column on a dialog twice. FastReport will create the DateTimePicker controls and setup them automatically;&#13;&#10;&#13;&#10;- run a report." ReportInfo.Created="01/18/2008 00:04:46" ReportInfo.Modified="10/28/2008 02:38:54" ReportInfo.CreatorVersion="1.0.0.0">
+  <Styles>
+    <Style Name="EvenRows" Fill.Color="Linen"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Customers" ReferenceName="NorthWind.Customers">
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="ContactName" DataType="System.String"/>
+      <Column Name="ContactTitle" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Fax" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Orders" ReferenceName="NorthWind.Orders">
+      <Column Name="OrderID" DataType="System.Int32"/>
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="EmployeeID" DataType="System.Int32"/>
+      <Column Name="OrderDate" DataType="System.DateTime"/>
+      <Column Name="RequiredDate" DataType="System.DateTime"/>
+      <Column Name="ShippedDate" DataType="System.DateTime"/>
+      <Column Name="ShipVia" DataType="System.Int32"/>
+      <Column Name="Freight" DataType="System.Decimal"/>
+      <Column Name="ShipName" DataType="System.String"/>
+      <Column Name="ShipAddress" DataType="System.String"/>
+      <Column Name="ShipCity" DataType="System.String"/>
+      <Column Name="ShipRegion" DataType="System.String"/>
+      <Column Name="ShipPostalCode" DataType="System.String"/>
+      <Column Name="ShipCountry" DataType="System.String"/>
+    </TableDataSource>
+    <Relation Name="CustomersOrders" ReferenceName="NorthWind.CustomersOrders" ParentDataSource="Customers" ChildDataSource="Orders" ParentColumns="CustomerID" ChildColumns="CustomerID"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="66.15">
+      <TextObject Name="Text6" Width="718.2" Height="28.35" Text="CUSTOMERS ORDERS" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+      <TextObject Name="Text8" Top="28.35" Width="718.2" Height="18.9" Text="made between [DateTimePicker1.Value] and [DateTimePicker2.Value]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="70.15" Width="718.2" Height="28.35">
+      <TextObject Name="Text5" Width="94.5" Height="18.9" Text="OrderID" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text3" Left="103.95" Width="94.5" Height="18.9" Text="OrderDate" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text7" Left="207.9" Width="302.4" Height="18.9" Text="CompanyName" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data2" Top="102.5" Width="718.2" Height="18.9" EvenStyle="EvenRows" DataSource="Orders">
+      <TextObject Name="Text4" Width="94.5" Height="18.9" Text="[Orders.OrderID]" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text2" Left="103.95" Width="94.5" Height="18.9" Text="[Orders.OrderDate]" Format="Date" Format.Format="d" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text1" Left="207.9" Width="302.4" Height="18.9" Text="[Orders.Customers.CompanyName]" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="125.4" Width="718.2" Height="18.9">
+      <TextObject Name="Text10" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" Font="Tahoma, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <DialogPage Name="Form1" Width="222" Height="244" AcceptButton="btnOk" CancelButton="btnCancel" LoadEvent="">
+    <ButtonControl Name="btnCancel" Left="131" Top="181" Font="Tahoma, 8pt" TabIndex="0" Text="Cancel" DialogResult="Cancel"/>
+    <ButtonControl Name="btnOk" Left="48" Top="181" Font="Tahoma, 8pt" TabIndex="1" Text="OK" ClickEvent="" DialogResult="OK"/>
+    <DateTimePickerControl Name="DateTimePicker1" Left="8" Top="40" Font="Tahoma, 8pt" TabIndex="2" DataColumn="Orders.OrderDate" FilterOperation="GreaterThanOrEqual" Value="1994-01-01"/>
+    <DateTimePickerControl Name="DateTimePicker2" Left="8" Top="104" Font="Tahoma, 8pt" TabIndex="3" DataColumn="Orders.OrderDate" FilterOperation="LessThanOrEqual" Value="1996-12-31"/>
+    <LabelControl Name="Label1" Left="8" Top="16" Width="67" Height="13" Font="Tahoma, 8pt" TabIndex="4" Text="Range from:"/>
+    <LabelControl Name="Label2" Left="8" Top="80" Width="21" Height="13" Font="Tahoma, 8pt" TabIndex="5" Text="to:"/>
+  </DialogPage>
+</Report>

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="06/16/2016 04:31:52" ReportInfo.CreatorVersion="1.4.42.0">
+  <ScriptText>Imports System
+Imports System.Collections
+Imports System.Collections.Generic
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Imports FastReport
+Imports FastReport.Data
+Imports FastReport.Dialog
+Imports FastReport.Table
+Imports FastReport.Barcode
+Imports FastReport.Utils
+Imports System.Data
+Imports System.Data.SqlClient
+
+Namespace FastReport
+  Public Class ReportScript
+    
+    public sqlstr As String
+    public UserId,UserDate,sSeason,nudYear As String
+    public vxtStartNo,vxtEndNo As String
+    public rdoSumYes As String
+    public TotUsed,TotUnuse As Integer
+   
+    Private Sub Page1_StartPage(ByVal sender As Object, ByVal e As EventArgs)
+      UserId= CType(Report.GetParameterValue(&quot;UserId&quot;), String)
+      UserDate= CType(Report.GetParameterValue(&quot;UserDate&quot;), String)
+      sSeason= CType(Report.GetParameterValue(&quot;sSeason&quot;), String)
+      nudYear= CType(Report.GetParameterValue(&quot;nudYear&quot;), String)
+      vxtStartNo= CType(Report.GetParameterValue(&quot;vxtStartNo&quot;), String)
+      vxtEndNo= CType(Report.GetParameterValue(&quot;vxtEndNo&quot;), String)
+      rdoSumYes= CType(Report.GetParameterValue(&quot;rdoSumYes&quot;), String)  
+      Dim dt As DateTime = DateTime.Now
+      report.SetParameterValue(&quot;NDate&quot;, Convert.ToString(Convert.ToInt32(dt.Year) - 1911) + &quot;/&quot; + dt.ToString(&quot;MM&quot;) + &quot;/&quot; + dt.ToString(&quot;dd&quot;))
+      
+
+    End Sub
+
+
+    Private Sub Data2_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      Dim dt As DateTime =CType(Report.GetColumnValue(&quot;D.date1&quot;), DateTime)
+      Text59.Text= IIf(dt.ToShortDateString()=&quot;0001/1/1&quot;, &quot;&quot;, Convert.ToString(Convert.ToInt32(dt.Year) - 1911) + &quot;/&quot; + dt.ToString(&quot;MM&quot;) + &quot;/&quot; + dt.ToString(&quot;dd&quot;))
+      dt=CType(Report.GetColumnValue(&quot;D.date3&quot;), DateTime)
+      Text56.Text= IIf(dt.ToShortDateString()=&quot;0001/1/1&quot;, &quot;&quot;, Convert.ToString(Convert.ToInt32(dt.Year) - 1911) + &quot;/&quot; + dt.ToString(&quot;MM&quot;) + &quot;/&quot; + dt.ToString(&quot;dd&quot;))
+      
+      If CType(Report.GetColumnValue(&quot;D.useamt&quot;), Decimal)= 0 Then
+       TotUnuse += CType(Report.GetColumnValue(&quot;D.amt1&quot;), Decimal)
+      Else
+        TotUsed += CType(Report.GetColumnValue(&quot;D.useamt&quot;), Decimal)
+      End If
+      
+    End Sub
+
+    Private Sub Data1_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      
+      TotUsed=0
+      TotUnuse=0
+
+    End Sub
+    
+    Function FormatAccno(ByVal accno As String)
+      Dim i As Integer
+      If Grade(accno) = 8 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 17, 1)
+      If Grade(accno) = 7 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7)
+      If Grade(accno) = 6 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2)
+      If Grade(accno) = 5 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2)
+      If Grade(accno) = 1 Then
+        Return Strings.Mid(accno, 1, 1)
+      Else
+        Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4)
+      End If
+    End Function
+    
+    Function Grade(ByVal accno As String)  '回復會計科目級數
+      Select Case Len(Trim(accno))
+        Case Is = 1
+          Return 1
+        Case Is = 2
+          Return 2
+        Case Is = 3
+          Return 3
+        Case Is = 5
+          Return 4
+        Case Is &lt;= 7
+          Return 5
+        Case Is &lt;= 9
+          Return 6
+        Case Is &lt;= 16
+          Return 7
+        Case Is = 17
+          Return 8
+      End Select
+    End Function
+
+    Private Sub PageHeader1_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      Text48.Text=&quot;預算科目: &quot;+FormatAccno(CType(Report.GetColumnValue(&quot;M.accno&quot;), String))+CType(Report.GetColumnValue(&quot;M.accname&quot;), String)
+    End Sub
+  End Class
+End Namespace
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHm2n6hJ8/j9P3Stpi/Sfgaw==" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.accyear,a.accno, &#13;&#10;CASE WHEN len(a.accno)=17 THEN c.accname+'－'+b.accname &#13;&#10;WHEN len(a.accno)&gt;9 THEN d.accname+'－'+b.accname &#13;&#10;WHEN len(a.accno)&lt;=9 THEN b.accname END AS accname, &#13;&#10;a.unit, a.bg1+a.bg2+a.bg3+a.bg4+a.bg5+a.up1+a.up2+a.up3+a.up4 as bgamt, a.totper, a.totUSE, a.ctrl &#13;&#10;FROM bgf010 a INNER JOIN ACCNAME b ON a.ACCNO = b.ACCNO INNER JOIN ACCNAME c ON LEFT(a.ACCNO, 16) = c.ACCNO &#13;&#10;INNER JOIN ACCNAME d ON LEFT(a.ACCNO, 9) = d.ACCNO &#13;&#10;WHERE a.accyear= @nudYear and b.STAFF_NO = @UserId&#13;&#10;and a.accno&gt;= @vxtStartNo and a.accno&lt;= @vxtEndNo&#13;&#10;order by a.accno">
+        <Column Name="accno" DataType="System.String"/>
+        <Column Name="accname" DataType="System.String"/>
+        <Column Name="accyear" DataType="System.Int16"/>
+        <Column Name="unit" DataType="System.String"/>
+        <Column Name="bgamt" DataType="System.Decimal"/>
+        <Column Name="totper" DataType="System.Decimal"/>
+        <Column Name="totUSE" DataType="System.Decimal"/>
+        <Column Name="ctrl" DataType="System.String"/>
+        <CommandParameter Name="UserId" DataType="22" Expression="[UserId]"/>
+        <CommandParameter Name="nudYear" DataType="22" Expression="[nudYear]"/>
+        <CommandParameter Name="vxtStartNo" DataType="22" Expression="[vxtStartNo]"/>
+        <CommandParameter Name="vxtEndNo" DataType="22" Expression="[vxtEndNo]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="UNITTABLE" DataType="System.Int32" Enabled="true" SelectCommand="SELECT b.unitname from usertable a left outer join unittable b on a.userunit=b.unit where a.userid=@userid">
+        <Column Name="UNITNAME" DataType="System.String"/>
+        <CommandParameter Name="userid" DataType="22" Expression="[UserId]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table2" Alias="D" DataType="System.Int32" Enabled="true" SelectCommand="SELECT bgf020.bgno, bgf020.accyear, BGF020.accno, bgf020.date1, bgf020.date2, bgf020.amt1, bgf020.remark, &#13;&#10;bgf020.amt2, bgf020.amt3, bgf020.useableamt, ACCNAME.ACCNAME AS ACCNAME, bgf020.kind,bgf020.subject, bgf020.closemark, &#13;&#10;bgf030.date3, bgf030.date4, bgf030.useamt, bgf030.no_1_no  &#13;&#10;FROM BGF020 left outer JOIN bgf030 on bgf020.bgno=bgf030.bgno inner join ACCNAME ON BGF020.ACCNO = ACCNAME.ACCNO &#13;&#10;WHERE BGF020.ACCYEAR= @ACCYEAR &#13;&#10;AND BGF020.accno= @ACCNO ORDER BY BGF020.bgno">
+        <Column Name="bgno" DataType="System.String"/>
+        <Column Name="accyear" DataType="System.Int16"/>
+        <Column Name="accno" DataType="System.String"/>
+        <Column Name="date1" DataType="System.DateTime"/>
+        <Column Name="date2" DataType="System.DateTime"/>
+        <Column Name="amt1" DataType="System.Decimal"/>
+        <Column Name="remark" DataType="System.String"/>
+        <Column Name="amt2" DataType="System.Decimal"/>
+        <Column Name="amt3" DataType="System.Decimal"/>
+        <Column Name="useableamt" DataType="System.Decimal"/>
+        <Column Name="ACCNAME" DataType="System.String"/>
+        <Column Name="kind" DataType="System.String"/>
+        <Column Name="subject" DataType="System.String"/>
+        <Column Name="closemark" DataType="System.String"/>
+        <Column Name="date3" DataType="System.DateTime"/>
+        <Column Name="date4" DataType="System.DateTime"/>
+        <Column Name="useamt" DataType="System.Decimal"/>
+        <Column Name="no_1_no" DataType="System.Int32"/>
+        <CommandParameter Name="ACCNO" DataType="22" Expression="[M.accno]"/>
+        <CommandParameter Name="ACCYEAR" DataType="22" Expression="[M.accyear]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="sqlstr" DataType="System.String"/>
+    <Parameter Name="ConnStr" DataType="System.String" Expression="&quot;Data Source=KULIUSNB\SQL2012;AttachDbFilename=;Initial Catalog=accdb_db;Integrated Security=False;Persist Security Info=True;User ID=acc;Password=acc&quot;"/>
+    <Parameter Name="UserId" DataType="System.String" Expression="&quot;0390&quot;"/>
+    <Parameter Name="nudYear" DataType="System.String" Expression="&quot;105&quot;"/>
+    <Parameter Name="vxtStartNo" DataType="System.String" Expression="&quot;1&quot;"/>
+    <Parameter Name="vxtEndNo" DataType="System.String" Expression="&quot;59&quot;"/>
+    <Parameter Name="UnitTitle" DataType="System.String" Expression="&quot;臺灣彰化農田水利會&quot;"/>
+    <Parameter Name="UserUnit" DataType="System.String" Expression="&quot;0501&quot;"/>
+    <Parameter Name="rdoSumYes" DataType="System.String"/>
+    <Parameter Name="sSeason" DataType="System.String" Expression="&quot;2&quot;"/>
+    <Parameter Name="UserDate" DataType="System.String" Expression="&quot;105-05-01&quot;"/>
+    <Parameter Name="NDate" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" StartPageEvent="Page1_StartPage">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="28.35" CanShrink="true"/>
+    <PageHeaderBand Name="PageHeader1" Top="32.43" Width="1047.06" Height="66.15" CanShrink="true" BeforePrintEvent="PageHeader1_BeforePrint">
+      <TextObject Name="Text9" Left="481.95" Top="37.8" Width="103.95" Height="28.35" Border.Lines="All" Text="請購金額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text18" Left="585.9" Top="37.8" Width="103.95" Height="28.35" Border.Lines="All" Text="開支日期" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text19" Left="793.8" Top="37.8" Width="245.7" Height="28.35" Border.Lines="All" Text="受款人" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text21" Left="9.45" Top="37.8" Width="66.15" Height="28.35" Border.Lines="All" Text="請購編號" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text15" Left="765.45" Top="18.9" Width="274.05" Height="18.9" Text="列印日期:[NDate] 頁次:[Page#]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text14" Left="9.45" Top="18.9" Width="132.3" Height="18.9" Text="總預算:[M.bgamt]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text48" Left="9.45" Width="841.05" Height="18.9" Text="預算科目: [M.accno][M.accname]" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text49" Left="75.6" Top="37.8" Width="66.15" Height="28.35" Border.Lines="All" Text="請購日期" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text50" Left="141.75" Top="37.8" Width="340.2" Height="28.35" Border.Lines="All" Text="摘　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text52" Left="689.85" Top="37.8" Width="103.95" Height="28.35" Border.Lines="All" Text="開支金額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text73" Left="141.75" Top="18.9" Width="132.3" Height="18.9" Text="請購中:[M.totper]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text74" Left="274.05" Top="18.9" Width="132.3" Height="18.9" Text="已開支:[M.totUSE]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text75" Left="406.35" Top="18.9" Width="132.3" Height="18.9" Text="預算餘額:[[M.bgamt]-[M.totper]-[M.totUSE]]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="102.66" Width="1047.06" Height="28.35" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" StartNewPage="true" DataSource="Table">
+      <DataBand Name="Data2" Top="135.09" Width="1047.06" Height="28.35" BeforePrintEvent="Data2_BeforePrint" DataSource="Table2">
+        <TextObject Name="Text53" Left="481.95" Width="103.95" Height="28.35" Border.Lines="All" Text="[D.amt1]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt"/>
+        <TextObject Name="Text56" Left="585.9" Width="103.95" Height="28.35" Border.Lines="All" Text="[D.date3]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+        <TextObject Name="Text57" Left="793.8" Width="245.7" Height="28.35" Border.Lines="All" Text="[D.subject]" VertAlign="Center" Font="新細明體, 10pt"/>
+        <TextObject Name="Text58" Left="9.45" Width="66.15" Height="28.35" Border.Lines="All" Text="[D.bgno]" VertAlign="Center" Font="新細明體, 10pt"/>
+        <TextObject Name="Text59" Left="75.6" Width="66.15" Height="28.35" Border.Lines="All" Text="[D.date1]" VertAlign="Center" Font="新細明體, 10pt"/>
+        <TextObject Name="Text60" Left="141.75" Width="340.2" Height="28.35" Border.Lines="All" Text="[D.remark]" VertAlign="Center" Font="新細明體, 10pt"/>
+        <TextObject Name="Text62" Left="689.85" Width="103.95" Height="28.35" Border.Lines="All" Text="[D.useamt]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt"/>
+        <DataFooterBand Name="DataFooter1" Top="167.53" Width="1047.06" Height="28.35">
+          <TextObject Name="Text63" Left="481.95" Width="103.95" Height="28.35" Border.Lines="All" Text="[TotUnuse]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TextObject Name="Text66" Left="585.9" Width="103.95" Height="28.35" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TextObject Name="Text67" Left="793.8" Width="245.7" Height="28.35" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TextObject Name="Text68" Left="9.45" Width="66.15" Height="28.35" Border.Lines="All" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TextObject Name="Text69" Left="75.6" Width="66.15" Height="28.35" Border.Lines="All" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TextObject Name="Text70" Left="141.75" Width="340.2" Height="28.35" Border.Lines="All" Text="合計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+          <TextObject Name="Text72" Left="689.85" Width="103.95" Height="28.35" Border.Lines="All" Text="[TotUsed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt"/>
+        </DataFooterBand>
+      </DataBand>
+      <Sort>
+        <Sort Expression="[M.accno]"/>
+      </Sort>
+    </DataBand>
+  </ReportPage>
+  <ReportPage Name="Page2" Visible="false">
+    <ReportTitleBand Name="ReportTitle2" Width="718.2" Height="151.2">
+      <TextObject Name="Text7" Left="28.35" Top="18.9" Width="859.95" Height="18.9" Text="[sqlstr]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text6" Left="387.45" Top="47.25" Width="94.5" Height="18.9" Text="[vxtEndNo]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text1" Left="28.35" Top="47.25" Width="94.5" Height="18.9" Text="[UserId]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text4" Left="141.75" Top="47.25" Width="94.5" Height="18.9" Text="[nudYear]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text5" Left="274.05" Top="47.25" Width="94.5" Height="18.9" Text="[vxtStartNo]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text11" Left="623.7" Top="47.25" Width="160.65" Height="18.9" Text="[UnitTitle]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text12" Left="822.15" Top="47.25" Width="94.5" Height="18.9" Text="[UserUnit]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text37" Left="28.35" Top="75.6" Width="160.65" Height="18.9" Text="[rdoSumYes]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text38" Left="217.35" Top="75.6" Width="160.65" Height="18.9" Text="[UserUnit]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text46" Left="378" Top="75.6" Width="160.65" Height="18.9" Text="[sSeason]" Font="新細明體, 10pt"/>
+      <TextObject Name="Text47" Left="548.1" Top="75.6" Width="160.65" Height="18.9" Text="[UserDate]" Font="新細明體, 10pt"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

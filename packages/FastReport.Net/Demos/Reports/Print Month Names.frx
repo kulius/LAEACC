@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates how to print month names instead of month numbers. To do this:&#13;&#10;&#13;&#10;- select the matrix item that contains the month data column;&#13;&#10;&#13;&#10;- go to the Properties window, click the &quot;Events&quot; button and create an event handler for the &quot;BeforePrint&quot; event;&#13;&#10;&#13;&#10;- in the event handler, set the cell's Text based on cell's Value. See this example's event handler for details." ReportInfo.Created="05/16/2008 01:44:40" ReportInfo.Modified="07/31/2009 18:40:13" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private string[] monthNames = new string[] {
+      &quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot; };
+
+    private void Cell4_BeforePrint(object sender, EventArgs e)
+    {
+      // Cell4.Value is the month number. This property is of System.Object type, 
+      // so we have to typecast to int.
+      Cell4.Text = monthNames[(int)Cell4.Value - 1];
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="MatrixDemo" ReferenceName="NorthWind.MatrixDemo" DataType="System.Int32" Enabled="true">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Year" DataType="System.Int32"/>
+      <Column Name="Month" DataType="System.Int32"/>
+      <Column Name="ItemsSold" DataType="System.Int32"/>
+      <Column Name="Revenue" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="152.56">
+      <MatrixObject Name="Matrix1" Left="9.45" Top="47.25" Width="173.36" Height="68.84" FixedRows="2" FixedColumns="1" DataSource="MatrixDemo" Style="Orange">
+        <MatrixColumns>
+          <Header Expression="[MatrixDemo.Year]"/>
+          <Header Expression="[MatrixDemo.Month]"/>
+        </MatrixColumns>
+        <MatrixRows>
+          <Header Expression="[MatrixDemo.Name]"/>
+        </MatrixRows>
+        <MatrixCells>
+          <Cell Expression="[MatrixDemo.Revenue]"/>
+        </MatrixCells>
+        <TableColumn Name="Column1" Width="45.08" AutoSize="true"/>
+        <TableColumn Name="Column2" Width="58.86" AutoSize="true"/>
+        <TableColumn Name="Column3" Width="32.89" AutoSize="true"/>
+        <TableColumn Name="Column4" Width="36.53" AutoSize="true"/>
+        <TableRow Name="Row1" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" Text="Name" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" RowSpan="2"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" Text="[Year]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" ColSpan="2"/>
+          <TableCell Name="Cell7"/>
+          <TableCell Name="Cell10" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold" RowSpan="2"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell3"/>
+          <TableCell Name="Cell4" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" BeforePrintEvent="Cell4_BeforePrint" Text="[Month]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell11"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell5" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" Text="[Name]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="White" Fill.Color="255, 235, 155" Text="[Revenue]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" Border.Color="White" Fill.Color="255, 235, 155" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Border.Color="White" Fill.Color="255, 235, 155" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="17.21" AutoSize="true">
+          <TableCell Name="Cell13" Border.Lines="All" Border.Color="White" Fill.Color="255, 218, 70" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+          <TableCell Name="Cell14" Border.Lines="All" Border.Color="White" Fill.Color="255, 235, 155" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" Border.Color="White" Fill.Color="255, 235, 155" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell16" Border.Lines="All" Border.Color="White" Fill.Color="255, 235, 155" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+        </TableRow>
+      </MatrixObject>
+      <TextObject Name="Text1" Left="9.45" Top="9.45" Width="406.35" Height="18.9" Text="Revenue by Employee" Font="Tahoma, 10pt, style=Bold"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

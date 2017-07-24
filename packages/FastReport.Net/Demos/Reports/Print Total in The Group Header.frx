@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptText="using System;&#13;&#10;using System.Collections;&#13;&#10;using System.Collections.Generic;&#13;&#10;using System.ComponentModel;&#13;&#10;using System.Windows.Forms;&#13;&#10;using System.Drawing;&#13;&#10;using System.Data;&#13;&#10;using FastReport;&#13;&#10;using FastReport.Data;&#13;&#10;using FastReport.Dialog;&#13;&#10;using FastReport.Barcode;&#13;&#10;using FastReport.Table;&#13;&#10;using FastReport.Utils;&#13;&#10;&#13;&#10;namespace FastReport&#13;&#10;{&#13;&#10;  public class ReportScript&#13;&#10;  {&#13;&#10;    // The idea is to collect group totals on the first report pass, and to print&#13;&#10;    // the collected values on the second pass. &#13;&#10;    &#13;&#10;    // The variable that we going to print in the group header.&#13;&#10;    private int total;&#13;&#10;    &#13;&#10;    // The list that will hold totals for each group.&#13;&#10;    private List&lt;int&gt; totals = new List&lt;int&gt;();&#13;&#10;    &#13;&#10;    &#13;&#10;    // This handler is called before printing the group header. To create this handler:&#13;&#10;    // - select the group header;&#13;&#10;    // - go Properties window;&#13;&#10;    // - press &quot;Events&quot; button;&#13;&#10;    // - select &quot;BeforePrint&quot; event and doubleclick it.&#13;&#10;    private void GroupHeader1_BeforePrint(object sender, EventArgs e)&#13;&#10;    {&#13;&#10;      // Note: ((Int32)Report.GetVariableValue(&quot;Row#&quot;)) is a current group number;&#13;&#10;      // this string is automatically inserted when you drag &amp; drop&#13;&#10;      // the &quot;Row#&quot; system variable from the Data Dictionary window to the script.&#13;&#10;      // This value is not zero-based.&#13;&#10;      int groupNumber = ((Int32)Report.GetVariableValue(&quot;Row#&quot;));&#13;&#10;&#13;&#10;      // If this pass is final, get the collected value.&#13;&#10;      if (Engine.FinalPass)&#13;&#10;        total = totals[groupNumber - 1];&#13;&#10;    }&#13;&#10;&#13;&#10;    // This handler is called before printing the group footer.&#13;&#10;    private void GroupFooter1_BeforePrint(object sender, EventArgs e)&#13;&#10;    {&#13;&#10;      // Note: Report.GetTotalValue(&quot;TotalProducts&quot;) is a total value;&#13;&#10;      // this string is automatically inserted when you drag &amp; drop&#13;&#10;      // the &quot;TotalProducts&quot; total from the Data Dictionary window to the script.&#13;&#10;      int totalValue = (int)Report.GetTotalValue(&quot;TotalProducts&quot;);&#13;&#10;      &#13;&#10;      // if this pass is not final, add the total value to the totals list.&#13;&#10;      if (!Engine.FinalPass)&#13;&#10;        totals.Add(totalValue);&#13;&#10;    }&#13;&#10;  }&#13;&#10;}&#13;&#10;" DoublePass="true" TextQuality="Regular" ReportInfo.Description="Demonstrates how to use a script to print a group total in the group header (normally it is printed in the group footer). To create such report:&#13;&#10;&#13;&#10;- the idea is to collect group totals on the first report pass, and to print the collected values on the second pass. So you have to set the report to double-pass (this can be done in the Report|Options... menu).&#13;&#10;&#13;&#10;- switch to Code tab and see the script for more details." ReportInfo.Created="01/17/2008 04:31:41" ReportInfo.Modified="06/12/2008 17:44:02" ReportInfo.CreatorVersion="1.0.0.0">
+  <Styles>
+    <Style Name="EvenRows" Fill.Color="OldLace"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="TotalProducts" TotalType="Count" Evaluator="Data1" Resetter="GroupFooter1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="ALPHABETICAL PRODUCT LIST" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="41.8" Width="718.2" Height="28.35" BeforePrintEvent="GroupHeader1_BeforePrint" KeepWithData="true" Condition="[Products.ProductName].Substring(0,1)" SortOrder="None">
+      <TextObject Name="Text7" Left="9.45" Width="198.45" Height="28.35" Border.Lines="Left, Top, Bottom" Border.Color="LightSkyBlue" Fill="Glass" Fill.Color="LightSkyBlue" Fill.Blend="0.2" Fill.Hatch="false" Text="[[Products.ProductName].Substring(0,1)]" Padding="5, 0, 0, 0" VertAlign="Center" Font="Tahoma, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="207.9" Width="160.65" Height="28.35" Border.Lines="Right, Top, Bottom" Border.Color="LightSkyBlue" Fill="Glass" Fill.Color="LightSkyBlue" Fill.Blend="0.2" Fill.Hatch="false" Text="Total: [total]" Padding="5, 0, 0, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <DataBand Name="Data1" Top="74.15" Width="718.2" Height="18.9" DataSource="Products">
+        <TextObject Name="Text2" Left="9.45" Width="264.6" Height="18.9" Border.Lines="Left" Border.Color="LightSkyBlue" Text="[Products.ProductName]" VertAlign="Center" Font="Tahoma, 8pt">
+          <Highlight>
+            <Condition Expression="[Row#] % 2 == 0" Fill.Color="AliceBlue" TextFill.Color="Black" ApplyFill="true" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text4" Left="274.05" Width="94.5" Height="18.9" Border.Lines="Right" Border.Color="LightSkyBlue" Text="[Products.UnitPrice]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true">
+          <Highlight>
+            <Condition Expression="[Row#] % 2 == 0" Fill.Color="AliceBlue" TextFill.Color="Black" ApplyFill="true" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+        <Sort>
+          <Sort Expression="[Products.ProductName]"/>
+        </Sort>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="97.05" Width="718.2" Height="47.25" BeforePrintEvent="GroupFooter1_BeforePrint" KeepWithData="true">
+        <TextObject Name="Text8" Left="9.45" Width="359.1" Height="18.9" Border.Lines="Left, Right, Bottom" Border.Color="LightSkyBlue" Text="Total products: [TotalProducts]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="148.3" Width="718.2" Height="18.9">
+      <TextObject Name="Text9" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

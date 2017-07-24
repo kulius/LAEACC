@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="This report demonstrates the RichTextObject features." ReportInfo.Created="02/24/2008 16:32:17" ReportInfo.Modified="06/03/2009 03:17:20" ReportInfo.CreatorVersion="1.0.0.0">
+  <Dictionary>
+    <TableDataSource Name="Customers" ReferenceName="NorthWind.Customers" Enabled="true">
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="ContactName" DataType="System.String"/>
+      <Column Name="ContactTitle" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Fax" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <DataBand Name="Data1" Width="718.2" Height="75.6" CanGrow="true" DataSource="Customers">
+      <RichObject Name="Rich1" Left="18.9" Top="37.8" Width="359.1" Height="37.8" CanGrow="true" Text="{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil\fcharset0 Tahoma;}{\f1\fnil\fcharset204 Tahoma;}}&#13;&#10;{\colortbl ;\red0\green0\blue0;\red0\green0\blue255;}&#13;&#10;\viewkind4\uc1\pard\qc\cf1\lang1033\f0\fs20 Dear \b [Customers.ContactName]\b0 !\par&#13;&#10;\pard\par&#13;&#10;\pard\qj\tab We disturb you to inform that new version of FastReport is available for downloading at \cf2\ul www.fast-report.com\cf1\ulnone . Notices, suggestions and bug reports are welcomed.\par&#13;&#10;\pard\par&#13;&#10;With best regards,\par&#13;&#10;Fast Reports team\tab\tab\tab [Date]\par&#13;&#10;\cf0\lang1049\f1\fs17\par&#13;&#10;}&#13;&#10;">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+        </Formats>
+      </RichObject>
+      <Sort>
+        <Sort Expression="[Customers.ContactName]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="79.6" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" Font="Tahoma, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

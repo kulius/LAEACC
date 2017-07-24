@@ -1,0 +1,266 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="LAEACC.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="zh">
+<head runat="server">
+    <meta http-equiv="Content-Type" />
+    <meta content="text/html" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>WEB版主計行政整合作業系統</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="/active/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/active/images/favicon.ico" type="image/x-icon" />
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" />    
+
+    <!-- #jQueryEasyUI -->
+    <link rel="stylesheet" type="text/css" href="/active/EasyUI/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/active/EasyUI/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/active/EasyUI/themes/color.css">
+
+    <script type="text/javascript" src="/active/EasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="/active/EasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/active/EasyUI/locale/easyui-lang-zh_TW.js"></script>
+    <!-- #end jQueryEasyUI -->
+
+    <!-- Other -->
+    <!-- #日期選擇控件 -->
+    <script type="text/javascript" src="/active/js/My97DatePicker/WdatePicker.js"></script>
+
+     <!-- #修復MaskedEditFix -->
+    <script type="text/javascript" src="~/active/js/MaskedEditFix.js"></script>       
+               
+    <script type="text/javascript">       
+        //另開啟視窗v2.0
+        function MM_openBrWindow(theURL, winName, features, winWidth, winHeight) {
+            var PosX = (screen.width - winWidth) / 2;
+            var PosY = (screen.height - winHeight) / 2;
+
+            features += ",width=" + winWidth + ",height=" + winHeight + ",top=" + PosY + ",left=" + PosX;
+
+            window.open(theURL, winName, features);
+        }
+        //-->
+    </script>    
+
+    <asp:ContentPlaceHolder ID="MainHead" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body class="desktop-detected smart-style-3">
+    <form id="frmSite" runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>                
+                <%--架構指令碼--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--網站指令碼--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!-- HEADER -->
+        <header id="header">
+            <!-- Logo <div id="logo-group"> -->
+			<div><span id="logo"><asp:Label ID="txtLogo" Text="" runat="server" /> <asp:Label ID="txtOrgName1" Font-Size="16px" Font-Bold="true" runat="server" /></span></div>
+
+			<!-- 系統說明(含Dropdown視窗) -->
+			<div class="project-context hidden-xs">
+				<div style="margin:10px 0px 0px 0px;">
+                    姓名：<span style="color:#d6f8fa; font-size:14px; padding-right:50px;"><asp:Label ID="txtName" Text="" runat="server" /></span>
+                    單位：<span style="color:#f8fbd5; font-size:14px; padding-right:50px;"><asp:Label ID="txtUnit" Text="" runat="server" /></span>
+                    帳務日期：<span style="color:#fbbec8; font-size:14px;"><%:Session("DATE")%></span>
+				</div>				
+			</div> 
+			<!-- end 系統說明(含Dropdown視窗) -->
+
+			<!-- 其他功能說明: right nav area -->
+			<div class="pull-right">												
+				<!-- 登出按鍵 -->
+				<div id="change1" class="btn-header transparent pull-right">
+					<span><a href="/index.aspx?t=out" title="系統登出" data-action="userLogout" data-logout-msg="您是不是即將登出作業系統，若未完成存檔之資料，即將遺失!!" /><i class="fa fa-sign-out"></i></a></span>
+				</div>
+				<!-- end 登出按鍵 -->
+
+                <!-- 修改密碼 -->
+                <div id="change" class="btn-header transparent pull-right">
+                    <span><a class="pass" href="/Basic/frmPass.aspx"><i class="fa fa-user"></i></a></span>
+                </div>
+                <!-- end 修改密碼 -->
+
+                <!-- menu 控制項 -->
+				<div id="hide-menu" class="btn-header pull-right">
+					<span><a href="javascript:void(0);" data-action="toggleMenu" title="隱藏選單"><i class="fa fa-reorder"></i></a></span>
+				</div>
+				<!-- end 控制項 -->
+
+				<!-- 全營幕按鍵 -->
+				<div id="fullscreen" class="btn-header transparent pull-right">
+					<span><a href="javascript:void(0);" data-action="launchFullscreen" title="全螢幕"><i class="fa fa-arrows-alt"></i></a></span>
+				</div>
+				<!-- end 全營幕按鍵 -->				
+			</div>
+			<!-- end 其他功能說明: right nav area -->
+
+            <!-- multiple dropdown(可用來顯示系統模組權限) -->			
+		    <asp:Label ID="txtSystemLink" Text="" runat="server" />
+			<!-- end multiple (可用來顯示系統模組權限) -->
+		</header>
+
+        <!-- LEFT PANEL(左方功能選單) -->
+        <aside id="left-panel">
+			<!-- 登入預設系統 -->
+			<div class="login-info">
+				<span style="text-align:center;">
+					<a href="main.aspx" id="show-shortcut" data-action="toggleShortcut">
+						<span style="font-size:20px; font-weight:bold;"><%:ADO.dbGetRow(DNS_SYS,"a_sys_name","s_system_name","s_system_id = '" & Session("SYSID") & "'")%></span>						
+					</a> 					
+				</span>
+			</div>
+			<!-- end 登入者狀態 -->
+
+			<!-- 功能權限選單 -->
+			<nav>
+				<ul>
+                   								
+					<% strUserMenuPower(Session("SYSID"), Session("POWERUSERID")) %>
+				</ul>
+			</nav>
+            <!-- end 功能權限選單 -->
+
+            <!-- 關閉全項目功能表，顯示Icon -->
+			<span class="minifyme" data-action="minifyMenu"> 
+				<i class="fa fa-arrow-circle-left hit"></i> 
+			</span>
+            <!-- end 關閉全項目功能表，顯示Icon -->
+		</aside>
+
+        <!-- MAIN PANEL(主顯示區) -->
+        <div id="main" role="main">
+			<!-- RIBBON -->
+			<div id="ribbon" style="background-color:#f8f8dc;">
+				<!-- 重新整理 -->
+                <span class="ribbon-button-alignment"> 
+					<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+						<i class="fa fa-refresh"></i>
+					</span> 
+				</span>
+                <!-- end 重新整理 -->
+
+				<!-- 麵包屑 -->
+				<ol class="breadcrumb">
+					<li><a href="/LAE10406/main.aspx">首頁</a></li>                    
+                    <% Response.Write(strBreadcrumb(System.IO.Path.GetFileName(Request.PhysicalPath)))%>
+				</ol>
+				<!-- end 麵包屑 -->				
+			</div>
+			<!-- END RIBBON -->
+
+			<!-- MAIN CONTENT -->            
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>            
+			<!-- END MAIN CONTENT -->
+		</div>                         
+    </form>
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices) -->
+	<script data-pace-options='{ "restartOnRequestAfter": true }' src="active/js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+		if (!window.jQuery) {
+		    document.write('<script src="active/js/libs/jquery-2.1.1.min.js"><\/script>');
+		}
+	</script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script>
+		if (!window.jQuery.ui) {
+		    document.write('<script src="active/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+		}
+	</script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+	<script src="/active/js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+	<script src="/active/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+	<!-- CUSTOM NOTIFICATION -->
+	<script src="/active/js/notification/SmartNotification.min.js"></script>
+
+	<!-- JARVIS WIDGETS -->
+	<script src="/active/js/smartwidgets/jarvis.widget.min.js"></script>
+
+	<!-- EASY PIE CHARTS -->
+	<script src="/active/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+	<!-- SPARKLINES -->
+	<script src="/active/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- JQUERY VALIDATE -->
+	<script src="/active/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+	<!-- JQUERY MASKED INPUT -->
+	<script src="/active/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+	<!-- JQUERY SELECT2 INPUT -->
+	<script src="/active/js/plugin/select2/select2.min.js"></script>
+
+	<!-- JQUERY UI + Bootstrap Slider -->
+	<script src="/active/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+	<!-- browser msie issue fix -->
+	<script src="/active/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+	<!-- FastClick: For mobile devices -->
+	<script src="/active/js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!-- Demo purpose only -->
+	<script src="/active/js/demo.min.js" charset="big5"></script>
+
+	<!-- MAIN APP JS FILE -->
+	<script src="/active/js/app.min.js"></script>
+
+
+    <!--start Colorbox //-->
+    <link rel="stylesheet" href="/active/jQuery/colorbox-master/colorbox.css" />
+    <script type="text/javascript" src="/active/jQuery/colorbox-master/jquery.min.js"></script>
+    <script type="text/javascript" src="/active/jQuery/colorbox-master/jquery.colorbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".pass").colorbox({
+                iframe: true, width: "500px", height: "420px",
+                onClosed: function () { location.reload(true); }
+            });
+
+            //Example of preserving a JavaScript event for inline calls.
+            $("#click").click(function () {
+                $('#click').css({ "background-color": "#f00", "color": "#fff", "cursor": "inherit" }).text("Open this window again and this message will still be here.");
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

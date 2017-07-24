@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates how to handle an object's position in a script. To create such report:&#13;&#10;&#13;&#10;- select the object which you want to modify;&#13;&#10;&#13;&#10;- go Properties window and press &quot;Events&quot; button;&#13;&#10;&#13;&#10;- doubleclick the BeforePrint event. This will create the empty event handler;&#13;&#10;&#13;&#10;- modify the object's Left property in the handler's code." ReportInfo.Created="05/29/2008 19:24:54" ReportInfo.Modified="07/31/2009 18:42:38" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private int left = 0;
+    
+    private void Text1_BeforePrint(object sender, EventArgs e)
+    {
+      Text1.Left = left;
+      left += 20;
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="Categories" ReferenceName="NorthWind.Categories" DataType="System.Int32" Enabled="true">
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="CategoryName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Picture" DataType="System.Byte[]" BindableControl="Picture"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text2" Width="718.2" Height="28.35" Dock="Top" Text="CATEGORIES" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.8" Width="718.2" Height="18.9" DataSource="Categories">
+      <TextObject Name="Text1" Width="207.9" Height="18.9" BeforePrintEvent="Text1_BeforePrint" Text="[Categories.CategoryName]" VertAlign="Center" Font="Tahoma, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="64.7" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

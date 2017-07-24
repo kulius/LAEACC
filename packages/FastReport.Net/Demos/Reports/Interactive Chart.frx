@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ReportInfo.Description="Demonstrates how to create interactive report using MSChartObject. This report uses same technique described in the &quot;Interactive Reports&quot; section. Just set up the chart's Hyperlink to view another page in this report. Chart will automatically set the hyperlink's Value property when you click data point." ReportInfo.Created="03/06/2009 03:34:28" ReportInfo.Modified="03/10/2009 18:23:41" ReportInfo.CreatorVersion="1.0.0.0">
+  <Dictionary>
+    <TableDataSource Name="MatrixDemo" ReferenceName="NorthWind.MatrixDemo" Enabled="true">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Year" DataType="System.Int32"/>
+      <Column Name="Month" DataType="System.Int32"/>
+      <Column Name="ItemsSold" DataType="System.Int32"/>
+      <Column Name="Revenue" DataType="System.Decimal"/>
+    </TableDataSource>
+    <Parameter Name="SelectedEmployee" DataType="System.String"/>
+    <Total Name="TotalItems" Expression="[MatrixDemo.ItemsSold]" Evaluator="Data2" PrintOn="ReportSummary1"/>
+    <Total Name="TotalRevenue" Expression="[MatrixDemo.Revenue]" Evaluator="Data2" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="444.15">
+      <MSChartObject Name="MSChart1" Left="18.9" Top="66.15" Width="670.95" Height="330.75" Hyperlink.Kind="DetailPage" Hyperlink.DetailPageName="Page2" Hyperlink.ReportParameter="SelectedEmployee" DataSource="MatrixDemo" Filter="" ChartData="PENoYXJ0IFNpemU9IjI4OCwgMjMyIiBCb3JkZXJsaW5lQ29sb3I9IkRhcmtHcmF5IiBCb3JkZXJsaW5lV2lkdGg9IjIiIEJvcmRlcmxpbmVEYXNoU3R5bGU9IlNvbGlkIj4NCiAgPFNlcmllcz4NCiAgICA8U2VyaWVzIE5hbWU9IlNlcmllczEiIExlZ2VuZD0iRGVmYXVsdCIgWFZhbHVlVHlwZT0iU3RyaW5nIiBZVmFsdWVUeXBlPSJEb3VibGUiIENoYXJ0VHlwZT0iRG91Z2hudXQiIENoYXJ0QXJlYT0iRGVmYXVsdCIgTGFiZWw9IiNWQUxYOiAjVkFMWSIgQm9yZGVyQ29sb3I9IlRyYW5zcGFyZW50IiBGb250PSJUYWhvbWEsIDguMjVwdCwgR2RpQ2hhclNldD0yMDQiIEN1c3RvbVByb3BlcnRpZXM9IlBpZUxhYmVsU3R5bGU9T3V0c2lkZSwgUGllRHJhd2luZ1N0eWxlPUNvbmNhdmUsIFBpZUxpbmVDb2xvcj1TaWx2ZXIiPg0KICAgICAgPFBvaW50cz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIxIiBBeGlzTGFiZWw9IkEiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMiIgQXhpc0xhYmVsPSJCIiAvPg0KICAgICAgPC9Qb2ludHM+DQogICAgPC9TZXJpZXM+DQogIDwvU2VyaWVzPg0KICA8TGVnZW5kcz4NCiAgICA8TGVnZW5kIE5hbWU9IkRlZmF1bHQiIEVuYWJsZWQ9IkZhbHNlIiBJc1RleHRBdXRvRml0PSJGYWxzZSIgRm9udD0iVGFob21hLCA4cHQiPg0KICAgIDwvTGVnZW5kPg0KICA8L0xlZ2VuZHM+DQogIDxUaXRsZXM+DQogICAgPFRpdGxlIFRleHQ9Ikl0ZW1zIHNvbGQiIEZvbnQ9IlRhaG9tYSwgMTBwdCwgc3R5bGU9Qm9sZCIgTmFtZT0iVGl0bGUxIj4NCiAgICA8L1RpdGxlPg0KICA8L1RpdGxlcz4NCiAgPENoYXJ0QXJlYXM+DQogICAgPENoYXJ0QXJlYSBOYW1lPSJEZWZhdWx0Ij4NCiAgICAgIDxBeGlzWSBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWT4NCiAgICAgIDxBeGlzWCBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWD4NCiAgICAgIDxBeGlzWDIgSXNMYWJlbEF1dG9GaXQ9IkZhbHNlIj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY0LCA2NCwgNjQsIDY0IiAvPg0KICAgICAgICA8TGFiZWxTdHlsZSBGb250PSJUYWhvbWEsIDhwdCIgLz4NCiAgICAgIDwvQXhpc1gyPg0KICAgICAgPEF4aXNZMiBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWTI+DQogICAgPC9DaGFydEFyZWE+DQogIDwvQ2hhcnRBcmVhcz4NCiAgPEJvcmRlclNraW4gU2tpblN0eWxlPSJFbWJvc3MiIC8+DQo8L0NoYXJ0Pg==">
+        <MSChartSeries Name="Series4" GroupByXValue="true" PieExplode="BiggestValue" XValue="[MatrixDemo.Name]" YValue1="[MatrixDemo.ItemsSold]"/>
+      </MSChartObject>
+      <TextObject Name="Text12" Left="236.25" Top="406.35" Width="283.5" Height="28.35" Text="Click on pie slice to view detailed report." Padding="2, 2, 2, 2" Font="Tahoma, 10pt"/>
+      <TextObject Name="Text15" Width="718.2" Height="37.8" Text="Interactive Chart demo" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 16pt, style=Bold"/>
+    </ReportTitleBand>
+  </ReportPage>
+  <ReportPage Name="Page2" Visible="false">
+    <ReportTitleBand Name="ReportTitle2" Width="718.2" Height="37.8">
+      <TextObject Name="Text26" Width="415.8" Height="28.35" Text="[SelectedEmployee] orders" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="18.9">
+      <TextObject Name="Text21" Width="132.3" Height="18.9" Border.Lines="All" Border.Color="LightGray" Fill.Color="WhiteSmoke" Text="Name" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text22" Left="132.3" Width="66.15" Height="18.9" Border.Lines="All" Border.Color="LightGray" Fill.Color="WhiteSmoke" Text="Year" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text23" Left="198.45" Width="66.15" Height="18.9" Border.Lines="All" Border.Color="LightGray" Fill.Color="WhiteSmoke" Text="Month" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text24" Left="264.6" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="LightGray" Fill.Color="WhiteSmoke" Text="ItemsSold" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="Text25" Left="340.2" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="LightGray" Fill.Color="WhiteSmoke" Text="Revenue" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data2" Top="64.7" Width="718.2" Height="18.9" DataSource="MatrixDemo" Filter="[MatrixDemo.Name] == [SelectedEmployee]">
+      <TextObject Name="Text16" Width="132.3" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[MatrixDemo.Name]" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text17" Left="132.3" Width="66.15" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[MatrixDemo.Year]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text18" Left="198.45" Width="66.15" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[MatrixDemo.Month]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text19" Left="264.6" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[MatrixDemo.ItemsSold]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text20" Left="340.2" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[MatrixDemo.Revenue]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="87.6" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Left="264.6" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[TotalItems]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text2" Left="340.2" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="LightGray" Text="[TotalRevenue]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text3" Left="198.45" Width="66.15" Height="18.9" Text="Total:" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+    </ReportSummaryBand>
+  </ReportPage>
+</Report>

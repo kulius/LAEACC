@@ -1,0 +1,97 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Schild.Master.vb" Inherits="LAEACC.Schild" %>
+
+<!DOCTYPE html>
+
+<html lang="zh">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" />
+    <meta content="text/html" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>網頁對話</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="/active/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/active/images/favicon.ico" type="image/x-icon" />
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" />    
+</head>
+<body class="">        
+    <!-- MAIN CONTENT -->
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        
+    </asp:ContentPlaceHolder>    
+    <!-- END MAIN CONTENT -->   
+         
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices) -->
+	<script data-pace-options='{ "restartOnRequestAfter": true }' src="active/js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+		if (!window.jQuery) {
+		    document.write('<script src="active/js/libs/jquery-2.1.1.min.js"><\/script>');
+		}
+	</script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script>
+		if (!window.jQuery.ui) {
+		    document.write('<script src="active/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+		}
+	</script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+	<script src="/active/js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+	<script src="/active/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+	<!-- CUSTOM NOTIFICATION -->
+	<script src="/active/js/notification/SmartNotification.min.js"></script>
+
+	<!-- JARVIS WIDGETS -->
+	<script src="/active/js/smartwidgets/jarvis.widget.min.js"></script>
+
+	<!-- EASY PIE CHARTS -->
+	<script src="/active/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+	<!-- SPARKLINES -->
+	<script src="/active/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- JQUERY VALIDATE -->
+	<script src="/active/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+	<!-- JQUERY MASKED INPUT -->
+	<script src="/active/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+	<!-- JQUERY SELECT2 INPUT -->
+	<script src="/active/js/plugin/select2/select2.min.js"></script>
+
+	<!-- JQUERY UI + Bootstrap Slider -->
+	<script src="/active/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+	<!-- browser msie issue fix -->
+	<script src="/active/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+	<!-- FastClick: For mobile devices -->
+	<script src="/active/js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!-- Demo purpose only -->
+	<script src="/active/js/demo.min.js"></script>
+
+	<!-- MAIN APP JS FILE -->
+	<script src="/active/js/app.min.js"></script>
+
+    <script src="~/Scripts/jquery.inputmask/inputmask.js"></script>
+</body>
+</html>

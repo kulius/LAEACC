@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates how to create matrix with no columns. To do this:&#13;&#10;&#13;&#10;- drag the data from the Data Dictionary window to create row and cell;&#13;&#10;&#13;&#10;- we are not going to print the first row that contains column headers (they are empty). To do this, doubleclick the left-top cell and clear the text;&#13;&#10;&#13;&#10;- instead we would print the title. To turn it on, right-click the left-top corner of the matrix (where you see the &quot;move&quot; indicator) to show the matrix context menu, and click &quot;Show Title&quot; item to turn on the matrix title;&#13;&#10;&#13;&#10;- put the necessary text in the title." ReportInfo.Created="05/16/2008 01:44:40" ReportInfo.Modified="05/22/2008 02:05:53">
+  <Dictionary>
+    <TableDataSource Name="MatrixDemo" ReferenceName="NorthWind.MatrixDemo">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Year" DataType="System.Int32"/>
+      <Column Name="Month" DataType="System.Int32"/>
+      <Column Name="ItemsSold" DataType="System.Int32"/>
+      <Column Name="Revenue" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="152.56">
+      <MatrixObject Name="Matrix1" Left="9.45" Top="47.25" Width="203.06" Height="83.36" HeaderHeight="2" HeaderWidth="1" AutoSize="false" DataSource="MatrixDemo" ShowTitle="true" Style="Orange">
+        <MatrixColumns/>
+        <MatrixRows>
+          <Header Expression="[MatrixDemo.Name]"/>
+        </MatrixRows>
+        <MatrixCells>
+          <Cell Expression="[MatrixDemo.Revenue]"/>
+        </MatrixCells>
+        <TableColumn Name="Column1" Width="102.78"/>
+        <TableColumn Name="Column2" Width="100.28"/>
+        <TableRow Name="Row1" Height="26.66">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="White" Fill="Glass" Fill.Color="YellowGreen" Fill.Blend="0.29" Fill.Hatch="false" Text="Employee" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="White" Fill="Glass" Fill.Color="YellowGreen" Fill.Blend="0.29" Fill.Hatch="false" Text="Revenue" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2" Visible="false">
+          <TableCell Name="Cell3" Border.Lines="All" Border.Color="White" Fill.Color="YellowGreen" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell4" Fill.Color="184, 220, 109" Text="Drag data here to&#13;&#10;create a new column" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="Gray"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell5" Border.Lines="All" Border.Color="White" Fill.Color="YellowGreen" Text="[Name]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt"/>
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="White" Fill.Color="184, 220, 109" Text="[Revenue]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+        <TableRow Name="Row5">
+          <TableCell Name="Cell7" Border.Lines="All" Border.Color="White" Fill.Color="YellowGreen" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Border.Color="White" Fill.Color="184, 220, 109" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+      </MatrixObject>
+      <TextObject Name="Text1" Left="9.45" Top="9.45" Width="406.35" Height="18.9" Text="Revenue by Employee" Font="Tahoma, 10pt, style=Bold"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

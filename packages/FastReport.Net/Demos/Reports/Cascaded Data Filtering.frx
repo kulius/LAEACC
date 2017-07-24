@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ReportInfo.Description="Demonstrates how to implement cascaded filter. When you select an employee, the orders list will be refreshed. To do this:&#13;&#10;&#13;&#10;- put two comboboxes on a form, EmployeesComboBox and OrdersComboBox;&#13;&#10;&#13;&#10;- connect EmployeesComboBox to Employees.FirstName data column via its DataColumn property;&#13;&#10;&#13;&#10;- connect OrdersComboBox to Orders.OrderID data column;&#13;&#10;&#13;&#10;- select EmployeesComboBox and set its DetailControl property to OrdersComboBox. &#13;&#10;&#13;&#10;That's all, you don't need to write any code!" ReportInfo.Created="03/19/2009 00:41:35" ReportInfo.Modified="10/15/2009 23:19:41" ReportInfo.CreatorVersion="1.0.0.0">
+  <Dictionary>
+    <TableDataSource Name="Employees" ReferenceName="NorthWind.Employees" DataType="System.Int32" Enabled="true">
+      <Column Name="EmployeeID" DataType="System.Int32"/>
+      <Column Name="LastName" DataType="System.String"/>
+      <Column Name="FirstName" DataType="System.String"/>
+      <Column Name="Title" DataType="System.String"/>
+      <Column Name="TitleOfCourtesy" DataType="System.String"/>
+      <Column Name="BirthDate" DataType="System.DateTime"/>
+      <Column Name="HireDate" DataType="System.DateTime"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="HomePhone" DataType="System.String"/>
+      <Column Name="Extension" DataType="System.String"/>
+      <Column Name="Photo" DataType="System.Byte[]" BindableControl="Picture"/>
+      <Column Name="Notes" DataType="System.String"/>
+      <Column Name="ReportsTo" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="Order Details" ReferenceName="NorthWind.Order Details" DataType="System.Int32" Enabled="true">
+      <Column Name="OrderID" DataType="System.Int32"/>
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="Quantity" DataType="System.Int16"/>
+      <Column Name="Discount" DataType="System.Single"/>
+    </TableDataSource>
+    <TableDataSource Name="Orders" ReferenceName="NorthWind.Orders" DataType="System.Int32" Enabled="true">
+      <Column Name="OrderID" DataType="System.Int32"/>
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="EmployeeID" DataType="System.Int32"/>
+      <Column Name="OrderDate" DataType="System.DateTime"/>
+      <Column Name="RequiredDate" DataType="System.DateTime"/>
+      <Column Name="ShippedDate" DataType="System.DateTime"/>
+      <Column Name="ShipVia" DataType="System.Int32"/>
+      <Column Name="Freight" DataType="System.Decimal"/>
+      <Column Name="ShipName" DataType="System.String"/>
+      <Column Name="ShipAddress" DataType="System.String"/>
+      <Column Name="ShipCity" DataType="System.String"/>
+      <Column Name="ShipRegion" DataType="System.String"/>
+      <Column Name="ShipPostalCode" DataType="System.String"/>
+      <Column Name="ShipCountry" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products" DataType="System.Int32" Enabled="true">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+    <Relation Name="EmployeesOrders" ReferenceName="NorthWind.EmployeesOrders" ParentDataSource="Employees" ChildDataSource="Orders" ParentColumns="EmployeeID" ChildColumns="EmployeeID" Enabled="true"/>
+    <Relation Name="OrdersOrderDetails" ReferenceName="NorthWind.OrdersOrderDetails" ParentDataSource="Orders" ChildDataSource="Order Details" ParentColumns="OrderID" ChildColumns="OrderID" Enabled="true"/>
+    <Relation Name="ProductsOrderDetails" ReferenceName="NorthWind.ProductsOrderDetails" ParentDataSource="Products" ChildDataSource="Order Details" ParentColumns="ProductID" ChildColumns="ProductID" Enabled="true"/>
+    <Total Name="OrderTotal" Expression="[Order Details.UnitPrice] * [Order Details.Quantity]" Evaluator="Data3" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <DataBand Name="Data1" Width="718.2" Height="28.35" DataSource="Employees">
+      <TextObject Name="Text1" Width="359.1" Height="28.35" Text="[Employees.FirstName] [Employees.LastName]" Font="Tahoma, 14pt"/>
+      <DataBand Name="Data2" Top="32.35" Width="718.2" Height="28.35" DataSource="Orders">
+        <TextObject Name="Text2" Width="132.3" Height="18.9" Text="Order ID: [Orders.OrderID]" Font="Tahoma, 10pt"/>
+        <TextObject Name="Text3" Left="160.65" Width="198.45" Height="18.9" Text="Date: [Orders.OrderDate]" Format="Date" Format.Format="d" Font="Tahoma, 10pt"/>
+        <DataBand Name="Data3" Top="64.7" Width="718.2" Height="18.9" DataSource="Order Details">
+          <TextObject Name="Text4" Left="28.35" Width="207.9" Height="18.9" Text="[Order Details.Products.ProductName]" Font="Tahoma, 8pt"/>
+          <TextObject Name="Text5" Left="245.7" Width="94.5" Height="18.9" Text="[Order Details.UnitPrice]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Tahoma, 8pt"/>
+          <TextObject Name="Text6" Left="359.1" Width="37.8" Height="18.9" Text="[Order Details.Quantity]" Font="Tahoma, 8pt"/>
+          <TextObject Name="Text7" Left="340.2" Width="18.9" Height="18.9" Text="x" HorzAlign="Center" Font="Tahoma, 8pt"/>
+          <TextObject Name="Text8" Left="415.8" Width="75.6" Height="18.9" Text="[[Order Details.UnitPrice] * [Order Details.Quantity]]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Tahoma, 8pt"/>
+          <TextObject Name="Text9" Left="396.9" Width="18.9" Height="18.9" Text="=" Format="Currency" Format.UseLocale="true" Font="Tahoma, 8pt"/>
+        </DataBand>
+      </DataBand>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="87.6" Width="718.2" Height="37.8">
+      <TextObject Name="Text10" Left="415.8" Top="9.45" Width="75.6" Height="18.9" Text="[OrderTotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Tahoma, 8pt"/>
+      <TextObject Name="Text11" Left="311.85" Top="9.45" Width="85.05" Height="18.9" Text="Total:" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Tahoma, 8pt"/>
+      <LineObject Name="Line1" Left="491.4" Width="-463.05"/>
+    </ReportSummaryBand>
+  </ReportPage>
+  <DialogPage Name="Form1" Width="298" Height="174" AcceptButton="btnOk" CancelButton="btnCancel">
+    <ButtonControl Name="btnCancel" Left="205" Top="107" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="0" Text="Cancel" DialogResult="Cancel"/>
+    <ButtonControl Name="btnOk" Left="122" Top="107" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="1" Text="OK" DialogResult="OK"/>
+    <LabelControl Name="Label1" Left="12" Top="40" Width="57" Height="13" Font="Tahoma, 8pt" TabIndex="3" Text="Employee:"/>
+    <ComboBoxControl Name="EmployeesComboBox" Left="92" Top="36" Width="185" Font="Tahoma, 8pt" TabIndex="4" AutoFilter="false" DataColumn="Employees.FirstName" DetailControl="OrdersComboBox" DropDownStyle="DropDownList" DropDownWidth="185" ItemHeight="13" SelectedIndexChangedEvent="EmployeesComboBox_SelectedIndexChanged"/>
+    <LabelControl Name="Label2" Left="12" Top="72" Width="53" Height="13" Font="Tahoma, 8pt" TabIndex="6" Text="Order ID:"/>
+    <ComboBoxControl Name="OrdersComboBox" Left="92" Top="68" Width="89" Font="Tahoma, 8pt" TabIndex="7" AutoFill="false" DataColumn="Orders.OrderID" DropDownStyle="DropDownList" DropDownWidth="89" ItemHeight="13"/>
+    <LabelControl Name="Label3" Left="12" Top="12" Width="259" Height="13" Font="Tahoma, 8pt" TabIndex="8" Text="Select an employee and order ID to view order items"/>
+  </DialogPage>
+</Report>

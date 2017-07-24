@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="06/21/2017 23:29:56" ReportInfo.CreatorVersion="1.4.42.0">
+  <ScriptText>Imports System
+Imports System.Collections
+Imports System.Collections.Generic
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Imports FastReport
+Imports FastReport.Data
+Imports FastReport.Dialog
+Imports FastReport.Table
+Imports FastReport.Barcode
+Imports FastReport.Utils
+Imports System.Data
+Imports System.Data.SqlClient
+
+Namespace FastReport
+  Public Class ReportScript
+    
+    public sqlstr As String
+    public UserId,UserDate,sSeason,nudYear As String
+    public vxtStartNo,vxtEndNo As String
+    public rdoSumYes As String
+    public SYear,SMonth,SDay As string
+    public taccno,bankname,sfoot1,sfoot2 As string
+    public decAmt As integer
+    public D1accno,D2accno As string
+    public d1page,d2page as string
+   
+    Private Sub Page1_StartPage(ByVal sender As Object, ByVal e As EventArgs)
+      UserId= CType(Report.GetParameterValue(&quot;UserId&quot;), String)
+      UserDate= CType(Report.GetParameterValue(&quot;UserDate&quot;), String)
+      sSeason= CType(Report.GetParameterValue(&quot;sSeason&quot;), String)
+      nudYear= CType(Report.GetParameterValue(&quot;nudYear&quot;), String)
+      vxtStartNo= CType(Report.GetParameterValue(&quot;vxtStartNo&quot;), String)
+      vxtEndNo= CType(Report.GetParameterValue(&quot;vxtEndNo&quot;), String)
+      rdoSumYes= CType(Report.GetParameterValue(&quot;rdoSumYes&quot;), String)  
+      Dim dt As DateTime =CType(Report.GetColumnValue(&quot;M.DATE_1&quot;), DateTime)
+      SYear= Convert.ToString(Convert.ToInt32(dt.Year) - 1911)
+      SMonth= dt.ToString(&quot;MM&quot;)
+      SDay=dt.ToString(&quot;dd&quot;)  
+      'report.SetParameterValue(&quot;NDate&quot;, Convert.ToString(Convert.ToInt32(dt.Year) - 1911) + &quot;/&quot; + dt.ToString(&quot;MM&quot;) + &quot;/&quot; + dt.ToString(&quot;dd&quot;))
+      taccno=  FormatAccno(CType(Report.GetColumnValue(&quot;M.accno&quot;), String))+vbLf+ CType(Report.GetColumnValue(&quot;M.accname&quot;), String)
+      bankname= CType(Report.GetColumnValue(&quot;M.bankname&quot;), String)
+      
+      decAmt =  CType(Report.GetColumnValue(&quot;M.AMT&quot;), Decimal)- CType(Report.GetColumnValue(&quot;M.ACT_AMT&quot;), Decimal)
+      sfoot1 = IIf(decAmt = 0, &quot;－&quot;, FormatNumber(decAmt, 2))
+      decAmt = CType(Report.GetColumnValue(&quot;M.ACT_AMT&quot;), Decimal)
+      sfoot2 = IIf(decAmt = 0, &quot;－&quot;, FormatNumber(decAmt, 2))
+      
+      if CType(Report.GetParameterValue(&quot;intCopy&quot;), String)=&quot;0&quot; then
+        copy.Text=&quot;&quot;
+        copy1.Text=&quot;&quot;
+      end if
+      if CType(Report.GetParameterValue(&quot;intCopy&quot;), String)=&quot;1&quot; then
+        copy.Text=&quot;正本&quot;
+        copy1.Text=&quot;正本&quot;
+      end if
+      if CType(Report.GetParameterValue(&quot;intCopy&quot;), String)=&quot;2&quot; then
+        copy.Text=&quot;副本&quot;
+         copy1.Text=&quot;副本&quot;
+      end if 
+      
+      d1page=&quot;1&quot;
+      d2page=&quot;1&quot;
+    End Sub
+    
+    Function FormatAccno(ByVal accno As String)
+      Dim i As Integer
+      If Grade(accno) = 8 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 17, 1)
+      If Grade(accno) = 7 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 10, 7)
+      If Grade(accno) = 6 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 8, 2)
+      If Grade(accno) = 5 Then Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 6, 2)
+      If Grade(accno) = 1 Then
+        Return Strings.Mid(accno, 1, 1)
+      Else
+        Return Strings.Mid(accno, 1, 1) &amp; &quot;-&quot; &amp; Strings.Mid(accno, 2, 4)
+      End If
+    End Function
+    
+    Function Grade(ByVal accno As String)  '回復會計科目級數
+      Select Case Len(Trim(accno))
+        Case Is = 1
+          Return 1
+        Case Is = 2
+          Return 2
+        Case Is = 3
+          Return 3
+        Case Is = 5
+          Return 4
+        Case Is &lt;= 7
+          Return 5
+        Case Is &lt;= 9
+          Return 6
+        Case Is &lt;= 16
+          Return 7
+        Case Is = 17
+          Return 8
+      End Select
+    End Function
+
+    Private Sub Data2_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+               
+    End Sub
+
+    Private Sub Data3_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+       d1accno=  FormatAccno(CType(Report.GetColumnValue(&quot;D1.accno&quot;), String))+vbLf+ CType(Report.GetColumnValue(&quot;D1.name6&quot;), String)
+    End Sub
+
+    Private Sub Page2_StartPage(ByVal sender As object, ByVal e As EventArgs)
+      UserId= CType(Report.GetParameterValue(&quot;UserId&quot;), String)
+      UserDate= CType(Report.GetParameterValue(&quot;UserDate&quot;), String)
+      sSeason= CType(Report.GetParameterValue(&quot;sSeason&quot;), String)
+      nudYear= CType(Report.GetParameterValue(&quot;nudYear&quot;), String)
+      vxtStartNo= CType(Report.GetParameterValue(&quot;vxtStartNo&quot;), String)
+      vxtEndNo= CType(Report.GetParameterValue(&quot;vxtEndNo&quot;), String)
+      rdoSumYes= CType(Report.GetParameterValue(&quot;rdoSumYes&quot;), String)  
+      Dim dt As DateTime =CType(Report.GetColumnValue(&quot;M2.DATE_1&quot;), DateTime)
+      SYear= Convert.ToString(Convert.ToInt32(dt.Year) - 1911)
+      SMonth= dt.ToString(&quot;MM&quot;)
+      SDay=dt.ToString(&quot;dd&quot;)  
+      'report.SetParameterValue(&quot;NDate&quot;, Convert.ToString(Convert.ToInt32(dt.Year) - 1911) + &quot;/&quot; + dt.ToString(&quot;MM&quot;) + &quot;/&quot; + dt.ToString(&quot;dd&quot;))
+      taccno=  FormatAccno(CType(Report.GetColumnValue(&quot;M2.accno&quot;), String))+vbLf+ CType(Report.GetColumnValue(&quot;M2.accname&quot;), String)
+      bankname= CType(Report.GetColumnValue(&quot;M2.bankname&quot;), String)
+      
+      decAmt =  CType(Report.GetColumnValue(&quot;M2.AMT&quot;), Decimal)- CType(Report.GetColumnValue(&quot;M2.ACT_AMT&quot;), Decimal)
+      sfoot1 = IIf(decAmt = 0, &quot;－&quot;, FormatNumber(decAmt, 2))
+      decAmt = CType(Report.GetColumnValue(&quot;M.ACT_AMT&quot;), Decimal)
+      sfoot2 = IIf(decAmt = 0, &quot;－&quot;, FormatNumber(decAmt, 2))
+    End Sub
+
+    Private Sub Data4_BeforePrint(ByVal sender As object, ByVal e As EventArgs)
+      d2accno=  FormatAccno(CType(Report.GetColumnValue(&quot;D2.accno&quot;), String))+vbLf+ CType(Report.GetColumnValue(&quot;D2.name6&quot;), String)
+    End Sub
+  End Class
+End Namespace
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8XR8fzk+OzMtCV6YTVfRqdNCCRklwqEAEZvym6Pa6cyjqW8cXbbD3zhd4AST7tQHND3N43abz5rVqn5BHxH0RevxX6i7FufzMsqUbd7CgSk/jWlI4RL9lMrqzw93PEN4f1kXCl71b8BGHSk7zNHmMAqkQB8Ddu3dPbk6RsfakE7C" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.bankname as bankname,c.accname as accname from acf010 a&#13;&#10;left outer join chf020 b on a.bank=b.bank &#13;&#10; left outer join accname c on a.accno=c.accno &#13;&#10; where accyear= @accyear and kind='3'&#13;&#10; and no_1_no= @no_1_no order by seq,item">
+        <Column Name="accno" DataType="System.String"/>
+        <Column Name="accname" DataType="System.String"/>
+        <Column Name="ACCYEAR" DataType="System.Int16"/>
+        <Column Name="KIND" DataType="System.String"/>
+        <Column Name="NO_1_NO" DataType="System.Int32"/>
+        <Column Name="NO_2_NO" DataType="System.Int32"/>
+        <Column Name="SEQ" DataType="System.String"/>
+        <Column Name="ITEM" DataType="System.String"/>
+        <Column Name="DATE_1" DataType="System.DateTime"/>
+        <Column Name="DATE_2" DataType="System.DateTime"/>
+        <Column Name="DC" DataType="System.String"/>
+        <Column Name="REMARK" DataType="System.String"/>
+        <Column Name="AMT" DataType="System.Decimal"/>
+        <Column Name="ACT_AMT" DataType="System.Decimal"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="CHKNO" DataType="System.String"/>
+        <Column Name="CHKSEQ" DataType="System.Byte"/>
+        <Column Name="BOOKS" DataType="System.String"/>
+        <Column Name="systemdate" DataType="System.DateTime"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <Column Name="bankname" DataType="System.String"/>
+        <CommandParameter Name="no_1_no" DataType="22" Expression="[No1]"/>
+        <CommandParameter Name="accyear" DataType="22" Expression="[sYear]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="UNITTABLE" DataType="System.Int32" Enabled="true" SelectCommand="SELECT b.unitname from usertable a left outer join unittable b on a.userunit=b.unit where a.userid=@userid">
+        <Column Name="UNITNAME" DataType="System.String"/>
+        <CommandParameter Name="userid" DataType="22" Expression="[UserId]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table2" Alias="D1" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.accname as name6, c.accname as name7, d.accname as name8,CASE WHEN a.MAT_QTY &lt;&gt; 0 THEN CAST(a.REMARK AS nvarchar) + ' ' + CAST(CAST(a.MAT_QTY AS Integer) AS nvarchar) + 'x' + Convert(Varchar(24),CONVERT(money,a.amt),1) ELSE a.REMARK END AS N_REMARK&#13;&#10;from acf020 a &#13;&#10;LEFT OUTER JOIN accname b ON Rtrim(SUBSTRING(a.ACCNO,1,9)) = b.ACCNO&#13;&#10;LEFT OUTER JOIN accname c ON Rtrim(SUBSTRING(a.ACCNO,1,16)) = c.ACCNO and len(a.accno)&gt;9 &#13;&#10;LEFT OUTER JOIN accname d ON a.ACCNO = d.ACCNO and len(a.accno)=17 &#13;&#10;where accyear= @accyear and kind='3'&#13;&#10; and no_1_no= @no_1_no and seq = @seq order by item">
+        <Column Name="ACCYEAR" DataType="System.Int16"/>
+        <Column Name="KIND" DataType="System.String"/>
+        <Column Name="NO_1_NO" DataType="System.Int32"/>
+        <Column Name="NO_2_NO" DataType="System.Int32"/>
+        <Column Name="SEQ" DataType="System.String"/>
+        <Column Name="ITEM" DataType="System.String"/>
+        <Column Name="DC" DataType="System.String"/>
+        <Column Name="ACCNO" DataType="System.String"/>
+        <Column Name="REMARK" DataType="System.String"/>
+        <Column Name="AMT" DataType="System.Decimal"/>
+        <Column Name="COTN_CODE" DataType="System.String"/>
+        <Column Name="MAT_QTY" DataType="System.Decimal"/>
+        <Column Name="MAT_PRIC" DataType="System.Decimal"/>
+        <Column Name="OTHER_ACCNO" DataType="System.String"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <Column Name="name6" DataType="System.String"/>
+        <Column Name="name7" DataType="System.String"/>
+        <Column Name="name8" DataType="System.String"/>
+        <Column Name="N_REMARK" DataType="System.String"/>
+        <CommandParameter Name="no_1_no" DataType="22" Expression="[M.NO_1_NO]"/>
+        <CommandParameter Name="accyear" DataType="22" Expression="[M.ACCYEAR]"/>
+        <CommandParameter Name="seq" DataType="22" Expression="[M.SEQ]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table3" Alias="M2" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.bankname as bankname,c.accname as accname,&#13;&#10;(select max(seq) from acf010 where accyear = @accyear and kind in ('3','4') and no_1_no = @no_1_no) as max_seq&#13;&#10;from acf010 a&#13;&#10;left outer join chf020 b on a.bank=b.bank &#13;&#10; left outer join accname c on a.accno=c.accno &#13;&#10; where accyear= @accyear and kind='4'&#13;&#10; and no_1_no= @no_1_no order by seq, item">
+        <Column Name="ACCYEAR" DataType="System.Int16"/>
+        <Column Name="KIND" DataType="System.String"/>
+        <Column Name="NO_1_NO" DataType="System.Int32"/>
+        <Column Name="NO_2_NO" DataType="System.Int32"/>
+        <Column Name="SEQ" DataType="System.String"/>
+        <Column Name="ITEM" DataType="System.String"/>
+        <Column Name="DATE_1" DataType="System.DateTime"/>
+        <Column Name="DATE_2" DataType="System.DateTime"/>
+        <Column Name="DC" DataType="System.String"/>
+        <Column Name="ACCNO" DataType="System.String"/>
+        <Column Name="REMARK" DataType="System.String"/>
+        <Column Name="AMT" DataType="System.Decimal"/>
+        <Column Name="ACT_AMT" DataType="System.Decimal"/>
+        <Column Name="BANK" DataType="System.String"/>
+        <Column Name="CHKNO" DataType="System.String"/>
+        <Column Name="CHKSEQ" DataType="System.Byte"/>
+        <Column Name="BOOKS" DataType="System.String"/>
+        <Column Name="systemdate" DataType="System.DateTime"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <Column Name="bankname" DataType="System.String"/>
+        <Column Name="accname" DataType="System.String"/>
+        <Column Name="max_seq" DataType="System.String"/>
+        <CommandParameter Name="no_1_no " DataType="22" Expression="[No1]"/>
+        <CommandParameter Name="accyear" DataType="22" Expression="[sYear]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table4" Alias="D2" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.accname as name6, c.accname as name7, d.accname as name8,&#13;&#10;CASE WHEN a.MAT_QTY &lt;&gt; 0 THEN CAST(a.REMARK AS nvarchar) + ' ' + CAST(CAST(a.MAT_QTY AS Integer) AS nvarchar) + 'x' + Convert(Varchar(24),CONVERT(money,a.amt),1) ELSE a.REMARK END AS N_REMARK&#13;&#10;from acf020 a &#13;&#10;LEFT OUTER JOIN accname b ON Rtrim(SUBSTRING(a.ACCNO,1,9)) = b.ACCNO&#13;&#10;LEFT OUTER JOIN accname c ON Rtrim(SUBSTRING(a.ACCNO,1,16)) = c.ACCNO and len(a.accno)&gt;9 &#13;&#10;LEFT OUTER JOIN accname d ON a.ACCNO = d.ACCNO and len(a.accno)=17 &#13;&#10;where accyear= @accyear and kind='4'&#13;&#10; and no_1_no= @no_1_no and seq = @seq order by item">
+        <Column Name="ACCYEAR" DataType="System.Int16"/>
+        <Column Name="KIND" DataType="System.String"/>
+        <Column Name="NO_1_NO" DataType="System.Int32"/>
+        <Column Name="NO_2_NO" DataType="System.Int32"/>
+        <Column Name="SEQ" DataType="System.String"/>
+        <Column Name="ITEM" DataType="System.String"/>
+        <Column Name="DC" DataType="System.String"/>
+        <Column Name="ACCNO" DataType="System.String"/>
+        <Column Name="REMARK" DataType="System.String"/>
+        <Column Name="AMT" DataType="System.Decimal"/>
+        <Column Name="COTN_CODE" DataType="System.String"/>
+        <Column Name="MAT_QTY" DataType="System.Decimal"/>
+        <Column Name="MAT_PRIC" DataType="System.Decimal"/>
+        <Column Name="OTHER_ACCNO" DataType="System.String"/>
+        <Column Name="autono" DataType="System.Int32"/>
+        <Column Name="name6" DataType="System.String"/>
+        <Column Name="name7" DataType="System.String"/>
+        <Column Name="name8" DataType="System.String"/>
+        <Column Name="N_REMARK" DataType="System.String"/>
+        <CommandParameter Name="no_1_no" DataType="22" Expression="[M2.NO_1_NO]"/>
+        <CommandParameter Name="accyear" DataType="22" Expression="[M2.ACCYEAR]"/>
+        <CommandParameter Name="seq" DataType="22" Expression="[M2.SEQ]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="sqlstr" DataType="System.String"/>
+    <Parameter Name="ConnStr" DataType="System.String" Expression="&quot;Data Source=192.168.2.102;AttachDbFilename=;Initial Catalog=tcia_accdb_db;Integrated Security=False;Persist Security Info=True;User ID=acc;Password=acc&quot;"/>
+    <Parameter Name="UserId" DataType="System.String" Expression="&quot;0390&quot;"/>
+    <Parameter Name="nudYear" DataType="System.String" Expression="&quot;105&quot;"/>
+    <Parameter Name="vxtStartNo" DataType="System.String" Expression="&quot;1&quot;"/>
+    <Parameter Name="vxtEndNo" DataType="System.String" Expression="&quot;59&quot;"/>
+    <Parameter Name="UnitTitle" DataType="System.String" Expression="&quot;臺灣彰化農田水利會&quot;"/>
+    <Parameter Name="UserUnit" DataType="System.String" Expression="&quot;0501&quot;"/>
+    <Parameter Name="rdoSumYes" DataType="System.String"/>
+    <Parameter Name="sSeason" DataType="System.String" Expression="&quot;2&quot;"/>
+    <Parameter Name="UserDate" DataType="System.String" Expression="&quot;105-05-01&quot;"/>
+    <Parameter Name="NDate" DataType="System.String"/>
+    <Parameter Name="nudMon" DataType="System.String" Expression="&quot;5&quot;"/>
+    <Parameter Name="No1" DataType="System.String" Expression="&quot;287&quot;"/>
+    <Parameter Name="sYear" DataType="System.String" Expression="&quot;105&quot;"/>
+    <Parameter Name="intCopy" DataType="System.String" Expression="&quot;2&quot;"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="257" PaperHeight="182.1" RawPaperSize="13" StartPageEvent="Page1_StartPage">
+    <ReportTitleBand Name="ReportTitle1" Width="895.86" Height="28.35" CanShrink="true">
+      <TextObject Name="Text85" Left="-9450" Top="-9450" Width="189" Height="28.35" Text="[SYear][SMonth][SDay]" HorzAlign="Center" VertAlign="Center" Font="標楷體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="32.35" Width="895.86" Height="481.95" CanShrink="true" BeforePrintEvent="PageHeader1_BeforePrint">
+      <TextObject Name="Text112" Left="623.7" Top="75.6" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text111" Left="9.45" Top="75.6" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text110" Left="9.45" Top="151.2" Width="878.85" Height="330.75" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text83" Left="9.45" Top="75.6" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text84" Left="9.45" Top="113.4" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text9" Left="727.65" Top="151.2" Width="160.65" Height="28.35" Border.Lines="All" Text="金　　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text49" Left="9.45" Top="151.2" Width="245.7" Height="28.35" Border.Lines="All" Text="會　計　科　目　及　符　號" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text50" Left="255.15" Top="151.2" Width="472.5" Height="28.35" Border.Lines="All" Text="摘　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text13" Left="254.2" Top="56.7" Width="387.45" Height="37.8" Text="[UnitTitle]" HorzAlign="Center" VertAlign="Center" Font="標楷體, 20pt"/>
+      <TextObject Name="Text52" Left="94.5" Top="75.6" Width="37.8" Height="37.8" Text="[SYear]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text53" Left="151.2" Top="113.4" Width="56.7" Height="37.8" Text="[M.NO_1_NO]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text55" Left="9.45" Top="179.55" Width="28.35" Height="66.15" Border.Lines="All" CanBreak="false" Text="總帳科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text56" Left="37.8" Top="179.55" Width="217.35" Height="66.15" Border.Lines="All" Text="[taccno]" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text57" Left="255.15" Top="179.55" Width="472.5" Height="66.15" Border.Lines="All" VertAlign="Center" Font="新細明體, 9.75pt"/>
+      <TextObject Name="Text58" Left="727.65" Top="179.55" Width="160.65" Height="66.15" Border.Lines="All" Text="[M.AMT]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text80" Left="282.55" Top="94.5" Width="330.75" Height="28.35" Text="轉 帳 借 方 傳 票" HorzAlign="Center" VertAlign="Center" Font="標楷體, 18pt"/>
+      <LineObject Name="Line1" Left="321.3" Top="122.85" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line2" Left="321.3" Top="119.07" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line3" Left="311.85" Top="85.05" Width="283.5" Border.Style="Double" Border.Width="2" Diagonal="true"/>
+      <TextObject Name="Text81" Left="623.7" Top="113.4" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text82" Left="623.7" Top="75.6" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text86" Left="141.75" Top="75.6" Width="37.8" Height="37.8" Text="[SMonth]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text87" Left="189" Top="75.6" Width="40.86" Height="37.8" Text="[SDay]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <SubreportObject Name="Subreport1" Left="37.8" Top="245.7" Width="850.5" Height="47.25" ReportPage="Page3" PrintOnParent="true"/>
+      <TextObject Name="Text90" Left="9.45" Top="245.7" Width="28.35" Height="236.25" Border.Lines="All" CanBreak="false" Text="明細科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text94" Left="255.15" Top="434.7" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 9.75pt"/>
+      <TextObject Name="Text95" Left="37.8" Top="434.7" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text96" Left="727.65" Top="434.7" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text97" Left="255.15" Top="387.45" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 9.75pt"/>
+      <TextObject Name="Text98" Left="37.8" Top="387.45" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text99" Left="727.65" Top="387.45" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text100" Left="255.15" Top="340.2" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 9.75pt"/>
+      <TextObject Name="Text101" Left="37.8" Top="340.2" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text102" Left="727.65" Top="340.2" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text103" Left="255.15" Top="292.95" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 9.75pt"/>
+      <TextObject Name="Text104" Left="37.8" Top="292.95" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text105" Left="727.65" Top="292.95" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text106" Left="255.15" Top="245.7" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 9.75pt"/>
+      <TextObject Name="Text107" Left="37.8" Top="245.7" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text108" Left="727.65" Top="245.7" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="copy" Left="283.5" Top="122.85" Width="330.75" Height="28.35" Text="正本" HorzAlign="Center" VertAlign="Bottom" Font="標楷體, 14pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="518.3" Width="895.86" Height="28.35" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" StartNewPage="true" DataSource="Table">
+      <Sort>
+        <Sort Expression="[M.SEQ]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="550.65" Width="895.86" Height="128.52">
+      <TextObject Name="Text29" Left="9.45" Top="37.8" Width="878.85" Height="28.35" Text="製票：　　　　　　　覆核：　　　　　　　收(付)款人：　　　　　　　主辦出納人員：　　　　　　　主辦主計人員：" VertAlign="Center" Font="新細明體, 11pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2" Landscape="true" PaperWidth="257" PaperHeight="182.1" RawPaperSize="13" StartPageEvent="Page2_StartPage">
+    <ReportTitleBand Name="ReportTitle2" Width="895.86" Height="28.35" CanShrink="true">
+      <TextObject Name="Text113" Left="-8835.75" Top="-9440.55" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text114" Left="-9450" Top="-9440.55" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text115" Left="-9450" Top="-9364.95" Width="878.85" Height="340.2" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text116" Left="-9450" Top="-9440.55" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text117" Left="-9450" Top="-9402.75" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text118" Left="-8731.8" Top="-9364.95" Width="160.65" Height="28.35" Border.Lines="All" Text="金　　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text119" Left="-9450" Top="-9364.95" Width="245.7" Height="28.35" Border.Lines="All" Text="會　計　科　目　及　符　號" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text120" Left="-9204.3" Top="-9364.95" Width="472.5" Height="28.35" Border.Lines="All" Text="摘　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text121" Left="-9205.25" Top="-9450" Width="387.45" Height="37.8" Text="[UnitTitle]" HorzAlign="Center" VertAlign="Center" Font="標楷體, 20pt"/>
+      <TextObject Name="Text122" Left="-9364.95" Top="-9440.55" Width="37.8" Height="37.8" Text="[SYear]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text123" Left="-9308.25" Top="-9402.75" Width="66.15" Height="37.8" Text="[M.NO_1_NO]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text124" Left="-9450" Top="-9336.6" Width="28.35" Height="75.6" Border.Lines="All" CanBreak="false" Text="總帳科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text125" Left="-9421.65" Top="-9336.6" Width="217.35" Height="75.6" Border.Lines="All" Text="[taccno]" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text126" Left="-9204.3" Top="-9336.6" Width="472.5" Height="75.6" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text127" Left="-8731.8" Top="-9336.6" Width="160.65" Height="75.6" Border.Lines="All" Text="[M.AMT]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text128" Left="-9176.9" Top="-9412.2" Width="330.75" Height="28.35" Text="轉 帳 借 方 傳 票" HorzAlign="Center" VertAlign="Center" Font="標楷體, 18pt"/>
+      <LineObject Name="Line4" Left="-9138.15" Top="-9383.85" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line5" Left="-9138.15" Top="-9387.63" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line6" Left="-9147.6" Top="-9421.65" Width="283.5" Border.Style="Double" Border.Width="2" Diagonal="true"/>
+      <TextObject Name="Text129" Left="-8835.75" Top="-9402.75" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text130" Left="-8835.75" Top="-9440.55" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text131" Left="-9317.7" Top="-9440.55" Width="37.8" Height="37.8" Text="[SMonth]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text132" Left="-9270.45" Top="-9440.55" Width="40.86" Height="37.8" Text="[SDay]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text133" Left="-9450" Top="-9261" Width="28.35" Height="236.25" Border.Lines="All" CanBreak="false" Text="明細科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text134" Left="-9204.3" Top="-9072" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text135" Left="-9421.65" Top="-9072" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text136" Left="-8731.8" Top="-9072" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text137" Left="-9204.3" Top="-9119.25" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text138" Left="-9421.65" Top="-9119.25" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text139" Left="-8731.8" Top="-9119.25" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text140" Left="-9204.3" Top="-9166.5" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text141" Left="-9421.65" Top="-9166.5" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text142" Left="-8731.8" Top="-9166.5" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text143" Left="-9204.3" Top="-9213.75" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text144" Left="-9421.65" Top="-9213.75" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text145" Left="-8731.8" Top="-9213.75" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text146" Left="-9204.3" Top="-9261" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text147" Left="-9421.65" Top="-9261" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text148" Left="-8731.8" Top="-9261" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text149" Left="-8835.75" Top="-9440.55" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text150" Left="-9450" Top="-9440.55" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text151" Left="-9450" Top="-9364.95" Width="878.85" Height="340.2" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text152" Left="-9450" Top="-9440.55" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text153" Left="-9450" Top="-9402.75" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text154" Left="-8731.8" Top="-9364.95" Width="160.65" Height="28.35" Border.Lines="All" Text="金　　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text155" Left="-9450" Top="-9364.95" Width="245.7" Height="28.35" Border.Lines="All" Text="會　計　科　目　及　符　號" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text156" Left="-9204.3" Top="-9364.95" Width="472.5" Height="28.35" Border.Lines="All" Text="摘　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text157" Left="-9205.25" Top="-9450" Width="387.45" Height="37.8" Text="[UnitTitle]" HorzAlign="Center" VertAlign="Center" Font="標楷體, 20pt"/>
+      <TextObject Name="Text158" Left="-9364.95" Top="-9440.55" Width="37.8" Height="37.8" Text="[SYear]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text159" Left="-9308.25" Top="-9402.75" Width="66.15" Height="37.8" Text="[M.NO_1_NO]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text160" Left="-9450" Top="-9336.6" Width="28.35" Height="75.6" Border.Lines="All" CanBreak="false" Text="總帳科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text161" Left="-9421.65" Top="-9336.6" Width="217.35" Height="75.6" Border.Lines="All" Text="[taccno]" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text162" Left="-9204.3" Top="-9336.6" Width="472.5" Height="75.6" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text163" Left="-8731.8" Top="-9336.6" Width="160.65" Height="75.6" Border.Lines="All" Text="[M.AMT]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text164" Left="-9176.9" Top="-9412.2" Width="330.75" Height="28.35" Text="轉 帳 借 方 傳 票" HorzAlign="Center" VertAlign="Center" Font="標楷體, 18pt"/>
+      <LineObject Name="Line7" Left="-9138.15" Top="-9383.85" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line8" Left="-9138.15" Top="-9387.63" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line9" Left="-9147.6" Top="-9421.65" Width="283.5" Border.Style="Double" Border.Width="2" Diagonal="true"/>
+      <TextObject Name="Text165" Left="-8835.75" Top="-9402.75" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text166" Left="-8835.75" Top="-9440.55" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text167" Left="-9317.7" Top="-9440.55" Width="37.8" Height="37.8" Text="[SMonth]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text168" Left="-9270.45" Top="-9440.55" Width="40.86" Height="37.8" Text="[SDay]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text169" Left="-9450" Top="-9261" Width="28.35" Height="236.25" Border.Lines="All" CanBreak="false" Text="明細科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text170" Left="-9204.3" Top="-9072" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text171" Left="-9421.65" Top="-9072" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text172" Left="-8731.8" Top="-9072" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text173" Left="-9204.3" Top="-9119.25" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text174" Left="-9421.65" Top="-9119.25" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text175" Left="-8731.8" Top="-9119.25" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text176" Left="-9204.3" Top="-9166.5" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text177" Left="-9421.65" Top="-9166.5" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text178" Left="-8731.8" Top="-9166.5" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text179" Left="-9204.3" Top="-9213.75" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text180" Left="-9421.65" Top="-9213.75" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text181" Left="-8731.8" Top="-9213.75" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text182" Left="-9204.3" Top="-9261" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text183" Left="-9421.65" Top="-9261" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text184" Left="-8731.8" Top="-9261" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader2" Top="32.35" Width="895.86" Height="481.95">
+      <TextObject Name="Text185" Left="623.7" Top="75.6" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text186" Left="9.45" Top="75.6" Width="264.6" Height="75.6" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text187" Left="9.45" Top="151.2" Width="878.85" Height="330.75" Border.Lines="All" Border.Width="2" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text188" Left="9.45" Top="75.6" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text189" Left="9.45" Top="113.4" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text190" Left="727.65" Top="151.2" Width="160.65" Height="28.35" Border.Lines="All" Text="金　　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text191" Left="9.45" Top="151.2" Width="245.7" Height="28.35" Border.Lines="All" Text="會　計　科　目　及　符　號" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text192" Left="255.15" Top="151.2" Width="472.5" Height="28.35" Border.Lines="All" Text="摘　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text193" Left="254.2" Top="56.7" Width="387.45" Height="37.8" Text="[UnitTitle]" HorzAlign="Center" VertAlign="Center" Font="標楷體, 20pt"/>
+      <TextObject Name="Text194" Left="94.5" Top="75.6" Width="37.8" Height="37.8" Text="[SYear]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text195" Left="151.2" Top="113.4" Width="56.7" Height="37.8" Text="[M2.NO_1_NO]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text196" Left="9.45" Top="179.55" Width="28.35" Height="66.15" Border.Lines="All" CanBreak="false" Text="總帳科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text197" Left="37.8" Top="179.55" Width="217.35" Height="66.15" Border.Lines="All" Text="[taccno]" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text198" Left="255.15" Top="179.55" Width="472.5" Height="66.15" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text199" Left="727.65" Top="179.55" Width="160.65" Height="66.15" Border.Lines="All" Text="[M2.AMT]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text200" Left="282.55" Top="94.5" Width="330.75" Height="28.35" Text="轉 帳 貸 方 傳 票" HorzAlign="Center" VertAlign="Center" Font="標楷體, 18pt"/>
+      <LineObject Name="Line10" Left="321.3" Top="119.07" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line11" Left="321.3" Top="122.85" Width="255.15" Border.Style="Double" Diagonal="true"/>
+      <LineObject Name="Line12" Left="311.85" Top="85.05" Width="283.5" Border.Style="Double" Border.Width="2" Diagonal="true"/>
+      <TextObject Name="Text201" Left="623.7" Top="113.4" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳編號：轉 字第　　　　號" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text202" Left="623.7" Top="75.6" Width="264.6" Height="37.8" Border.Lines="All" Text="轉帳日期：　　年　　月　　日" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text203" Left="141.75" Top="75.6" Width="37.8" Height="37.8" Text="[SMonth]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text204" Left="189" Top="75.6" Width="40.86" Height="37.8" Text="[SDay]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt">
+        <Formats>
+          <NumberFormat UseLocale="false" DecimalDigits="0" NegativePattern="1"/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text205" Left="9.45" Top="245.7" Width="28.35" Height="236.25" Border.Lines="All" CanBreak="false" Text="明細科目" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text215" Left="255.15" Top="292.95" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text216" Left="37.8" Top="292.95" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text217" Left="727.65" Top="292.95" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text218" Left="255.15" Top="245.7" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text219" Left="727.65" Top="245.7" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text212" Left="255.15" Top="340.2" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text213" Left="37.8" Top="340.2" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text214" Left="727.65" Top="340.2" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text209" Left="255.15" Top="387.45" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text210" Left="37.8" Top="387.45" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text211" Left="727.65" Top="387.45" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text206" Left="255.15" Top="434.7" Width="472.5" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text207" Left="37.8" Top="434.7" Width="217.35" Height="47.25" Border.Lines="All" VertAlign="Center" Font="新細明體, 12pt"/>
+      <TextObject Name="Text208" Left="727.65" Top="434.7" Width="160.65" Height="47.25" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 12pt"/>
+      <SubreportObject Name="Subreport2" Left="37.8" Top="245.7" Width="850.5" Height="47.25" ReportPage="Page4" PrintOnParent="true"/>
+      <TextObject Name="copy1" Left="283.5" Top="122.85" Width="330.75" Height="28.35" Text="正本" HorzAlign="Center" VertAlign="Bottom" Font="標楷體, 14pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data2" Top="518.3" Width="895.86" Height="37.8" CanShrink="true" StartNewPage="true" DataSource="Table3">
+      <Sort>
+        <Sort Expression="[M2.SEQ]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter2" Top="560.1" Width="895.86" Height="128.52">
+      <TextObject Name="Text223" Left="9.45" Top="37.8" Width="878.85" Height="28.35" Text="製票：　　　　　　　覆核：　　　　　　　收(付)款人：　　　　　　　主辦出納人員：　　　　　　　主辦主計人員：" VertAlign="Center" Font="新細明體, 11pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page3" Landscape="true" PaperWidth="257" PaperHeight="182.1" RawPaperSize="13">
+    <DataBand Name="Data3" Width="895.86" Height="47.25" BeforePrintEvent="Data3_BeforePrint" DataSource="Table2">
+      <TextObject Name="Text70" Left="217.35" Width="472.5" Height="47.25" Text="[D1.name7][D1.name8]&#13;&#10;[D1.N_REMARK]" VertAlign="Center" Font="新細明體, 10.5pt"/>
+      <TextObject Name="Text71" Width="217.35" Height="47.25" Text="[d1accno]" VertAlign="Center" Font="新細明體, 10.5pt"/>
+      <TextObject Name="Text72" Left="689.85" Width="160.65" Height="47.25" Text="[D1.AMT]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10.5pt"/>
+      <TextObject Name="Text224" Left="850.5" Width="18.9" Height="47.25" Text="[D1.COTN_CODE]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10.5pt"/>
+    </DataBand>
+  </ReportPage>
+  <ReportPage Name="Page4" Landscape="true" PaperWidth="257" PaperHeight="182.1" RawPaperSize="13">
+    <DataBand Name="Data4" Width="895.86" Height="47.25" BeforePrintEvent="Data4_BeforePrint" DataSource="Table4">
+      <TextObject Name="Text220" Left="217.35" Width="472.5" Height="47.25" Text="[D2.name7][D2.name8]&#13;&#10;[D2.N_REMARK]" VertAlign="Center" Font="新細明體, 10.5pt"/>
+      <TextObject Name="Text221" Width="217.35" Height="47.25" Text="[d2accno]" VertAlign="Center" Font="新細明體, 10.5pt"/>
+      <TextObject Name="Text222" Left="689.85" Width="160.65" Height="47.25" Text="[D2.AMT]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10.5pt"/>
+      <TextObject Name="Text225" Left="850.5" Width="18.9" Height="47.25" Text="[D2.COTN_CODE]" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10.5pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

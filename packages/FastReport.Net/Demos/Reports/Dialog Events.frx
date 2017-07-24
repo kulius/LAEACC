@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="This report demonstrates how to handle dialog controls' events to modify the state of other controls. To do this:&#13;&#10;&#13;&#10;- there is nothing special to do if you know the MS Visual Studio :)" ReportInfo.Created="05/29/2008 20:21:07" ReportInfo.Modified="07/31/2009 18:23:54" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+      TextBox1.Enabled = CheckBox1.Checked;
+    }
+  }
+}
+</ScriptText>
+  <Dictionary/>
+  <DialogPage Name="Form1" Width="298" Height="298" AcceptButton="btnOk" CancelButton="btnCancel">
+    <ButtonControl Name="btnCancel" Left="209" Top="235" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="0" Text="Cancel" DialogResult="Cancel"/>
+    <ButtonControl Name="btnOk" Left="126" Top="235" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="1" Text="OK" DialogResult="OK"/>
+    <CheckBoxControl Name="CheckBox1" Left="12" Top="16" Width="262" Height="17" Font="Tahoma, 8pt" TabIndex="2" Text="Click this checkbox to enable/disable the TextBox" ClickEvent="" Checked="true" CheckState="Checked" CheckedChangedEvent="CheckBox1_CheckedChanged"/>
+    <TextBoxControl Name="TextBox1" Left="12" Top="36" Width="220" Font="Tahoma, 8pt" TabIndex="3" Text="TextBox1"/>
+  </DialogPage>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35"/>
+    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="75.6"/>
+    <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

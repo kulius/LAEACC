@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates group report. To create it:&#13;&#10;&#13;&#10;- go to &quot;Report|Configure Bands...&quot; menu;&#13;&#10;&#13;&#10;- press &quot;Add&quot; button and add a group header (this will add a data band and group footer as well);&#13;&#10;&#13;&#10;- return to the report page, doubleclick the group header to show its editor." ReportInfo.Created="01/17/2008 04:31:41" ReportInfo.Modified="06/12/2008 17:44:23" ReportInfo.CreatorVersion="1.0.0.0">
+  <Styles>
+    <Style Name="EvenRows" Fill.Color="OldLace"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="TotalProducts" TotalType="Count" Evaluator="Data1" Resetter="GroupFooter1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="ALPHABETICAL PRODUCT LIST" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="41.8" Width="718.2" Height="28.35" KeepWithData="true" Condition="[Products.ProductName].Substring(0,1)" SortOrder="None">
+      <TextObject Name="Text7" Left="9.45" Width="359.1" Height="28.35" Border.Lines="All" Border.Color="LightSkyBlue" Fill="Glass" Fill.Color="LightSkyBlue" Fill.Blend="0.2" Fill.Hatch="false" Text="[[Products.ProductName].Substring(0,1)]" Padding="5, 0, 0, 0" VertAlign="Center" Font="Tahoma, 10pt, style=Bold"/>
+      <DataBand Name="Data1" Top="74.15" Width="718.2" Height="18.9" DataSource="Products">
+        <TextObject Name="Text2" Left="9.45" Width="264.6" Height="18.9" Border.Lines="Left" Border.Color="LightSkyBlue" Text="[Products.ProductName]" VertAlign="Center" Font="Tahoma, 8pt">
+          <Highlight>
+            <Condition Expression="[Row#] % 2 == 0" Fill.Color="AliceBlue" TextFill.Color="Black" ApplyFill="true" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text4" Left="274.05" Width="94.5" Height="18.9" Border.Lines="Right" Border.Color="LightSkyBlue" Text="[Products.UnitPrice]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" Format="Currency" Format.UseLocale="true">
+          <Highlight>
+            <Condition Expression="[Row#] % 2 == 0" Fill.Color="AliceBlue" TextFill.Color="Black" ApplyFill="true" ApplyTextFill="false"/>
+          </Highlight>
+        </TextObject>
+        <Sort>
+          <Sort Expression="[Products.ProductName]"/>
+        </Sort>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="97.05" Width="718.2" Height="47.25" KeepWithData="true">
+        <TextObject Name="Text8" Left="9.45" Width="359.1" Height="18.9" Border.Lines="Left, Right, Bottom" Border.Color="LightSkyBlue" Text="Total products: [TotalProducts]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="148.3" Width="718.2" Height="18.9">
+      <TextObject Name="Text9" Left="623.7" Width="94.5" Height="18.9" Text="[PageN]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

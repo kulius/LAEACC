@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates how to highlight some values in the matrix. To do this:&#13;&#10;&#13;&#10;- select the cell that you need to highlight;&#13;&#10;&#13;&#10;- click the &quot;Highlight&quot; button on the &quot;Text&quot; toolbar;&#13;&#10;&#13;&#10;- add a new highlight condition. Use the &quot;Value&quot; member to refer to the cell value." ReportInfo.Created="05/16/2008 01:44:40" ReportInfo.Modified="05/27/2008 15:16:35">
+  <Dictionary>
+    <TableDataSource Name="MatrixDemo" ReferenceName="NorthWind.MatrixDemo">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Year" DataType="System.Int32"/>
+      <Column Name="Month" DataType="System.Int32"/>
+      <Column Name="ItemsSold" DataType="System.Int32"/>
+      <Column Name="Revenue" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="151.2">
+      <MatrixObject Name="Matrix1" Left="9.45" Top="66.15" Width="285.48" Height="78.29" HeaderHeight="1" HeaderWidth="2" AutoSize="false" DataSource="MatrixDemo" Style="Orange">
+        <MatrixColumns>
+          <Header Expression="[MatrixDemo.Name]"/>
+        </MatrixColumns>
+        <MatrixRows>
+          <Header Expression="[MatrixDemo.Year]"/>
+          <Header Expression="[MatrixDemo.Month]"/>
+        </MatrixRows>
+        <MatrixCells>
+          <Cell Expression="[MatrixDemo.Revenue]"/>
+        </MatrixCells>
+        <TableColumn Name="Column1" Width="48.26"/>
+        <TableColumn Name="Column2" Width="56.78"/>
+        <TableColumn Name="Column3" Width="96.66"/>
+        <TableColumn Name="Column4" Width="83.78"/>
+        <TableRow Name="Row1" Height="26.66">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="DimGray" Fill="Glass" Fill.Color="Maroon" Fill.Blend="0.21" Fill.Hatch="false" Text="Year" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="DimGray" Fill="Glass" Fill.Color="Maroon" Fill.Blend="0.21" Fill.Hatch="false" Text="Month" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White"/>
+          <TableCell Name="Cell7" Border.Lines="All" Border.Color="DimGray" Fill="Glass" Fill.Color="Maroon" Fill.Blend="0.21" Fill.Hatch="false" Text="[Name]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White"/>
+          <TableCell Name="Cell10" Border.Lines="All" Border.Color="DimGray" Fill="Glass" Fill.Color="Maroon" Fill.Blend="0.21" Fill.Hatch="false" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="17.21">
+          <TableCell Name="Cell3" Border.Lines="All" Border.Color="DimGray" Fill.Color="Maroon" Text="[Year]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White" RowSpan="2"/>
+          <TableCell Name="Cell4" Border.Lines="All" Border.Color="DimGray" Fill.Color="Maroon" Text="[Month]" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White"/>
+          <TableCell Name="Cell8" Border.Lines="All" Border.Color="DimGray" Fill.Color="166, 0, 0" Text="[Revenue]" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White" Format="Currency" Format.UseLocale="true">
+            <Highlight>
+              <Condition Expression="Value &gt; 3000" Fill="Glass" Fill.Color="64, 64, 64" Fill.Blend="0.13" Fill.Hatch="false" TextFill.Color="White" ApplyFill="true" ApplyTextFill="false"/>
+            </Highlight>
+          </TableCell>
+          <TableCell Name="Cell11" Border.Lines="All" Border.Color="DimGray" Fill.Color="166, 0, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="17.21">
+          <TableCell Name="Cell5" Fill.Color="Maroon"/>
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="DimGray" Fill.Color="Maroon" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White"/>
+          <TableCell Name="Cell9" Border.Lines="All" Border.Color="DimGray" Fill.Color="166, 0, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White" Format="Currency" Format.UseLocale="true"/>
+          <TableCell Name="Cell12" Border.Lines="All" Border.Color="DimGray" Fill.Color="166, 0, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt" TextFill.Color="White" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="17.21">
+          <TableCell Name="Cell13" Border.Lines="All" Border.Color="DimGray" Fill.Color="Maroon" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White" ColSpan="2"/>
+          <TableCell Name="Cell14" Fill.Color="Maroon"/>
+          <TableCell Name="Cell15" Border.Lines="All" Border.Color="DimGray" Fill.Color="166, 0, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White" Format="Currency" Format.UseLocale="true"/>
+          <TableCell Name="Cell16" Border.Lines="All" Border.Color="DimGray" Fill.Color="166, 0, 0" HorzAlign="Right" VertAlign="Center" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White" Format="Currency" Format.UseLocale="true"/>
+        </TableRow>
+      </MatrixObject>
+      <TextObject Name="Text1" Left="9.45" Top="9.45" Width="406.35" Height="37.8" Text="Revenue by Employee&#13;&#10;Highlight values &gt; 3000" Font="Tahoma, 10pt, style=Bold"/>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

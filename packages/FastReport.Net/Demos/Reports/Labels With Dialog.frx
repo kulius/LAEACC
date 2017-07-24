@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report TextQuality="Regular" ReportInfo.Description="Demonstrates how to offset starting position when printing labels. See the report script for more details." ReportInfo.Created="01/17/2008 17:08:04" ReportInfo.Modified="04/28/2009 20:28:38" ReportInfo.CreatorVersion="1.0.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private bool firstTime = true;
+    
+    private void Data1_BeforePrint(object sender, EventArgs e)
+    {
+      if (firstTime)
+      {
+        // start column
+        for (int i = 1; i < udColumn.Value; i++)
+        {
+          // for multi-column report, StartNewPage starts a new column
+          Engine.StartNewPage();
+        }
+      
+        // start row
+        Engine.CurY = Data1.Height * ((float)udRow.Value - 1);
+        
+        // reset flag
+        firstTime = false;
+      }
+    }
+  }
+}
+</ScriptText>
+  <Styles Name="Standard">
+    <Style Name="Title" Font="Arial, 12pt, style=Bold"/>
+    <Style Name="Header" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Group" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Data"/>
+    <Style Name="Footer"/>
+    <Style Name="EvenRows" Fill.Color="WhiteSmoke"/>
+  </Styles>
+  <Dictionary>
+    <TableDataSource Name="Customers" ReferenceName="NorthWind.Customers" Enabled="true">
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="ContactName" DataType="System.String"/>
+      <Column Name="ContactTitle" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Fax" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Columns.Count="2" Columns.Width="95" Columns.Positions="0,95">
+    <DataBand Name="Data1" Width="359.1" Height="132.3" BeforePrintEvent="Data1_BeforePrint" DataSource="Customers">
+      <TableObject Name="Table1" Left="9.45" Top="9.45" Width="340.2" Height="122.85">
+        <TableColumn Name="Column1" Width="151.2"/>
+        <TableColumn Name="Column2" Width="189"/>
+        <TableRow Name="Row1" Height="28.35">
+          <TableCell Name="Cell1" Border.Lines="Bottom" Border.Color="White" Fill="Glass" Fill.Color="Chocolate" Fill.Blend="0.18" Fill.Hatch="false" Text="[Customers.CompanyName]" Padding="5, 0, 0, 0" VertAlign="Center" Font="Tahoma, 12pt, style=Bold" TextFill.Color="White" ColSpan="2"/>
+          <TableCell Name="Cell2" Fill.Color="Chocolate" Font="Tahoma, 8pt" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Border.Lines="Right" Border.Color="White" Fill.Color="Chocolate" Text="Country" Padding="5, 2, 0, 2" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell7" Fill.Color="Chocolate" Text="[Customers.Country]" Padding="2, 2, 2, 2" Font="Tahoma, 8pt" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="37.8">
+          <TableCell Name="Cell11" Border.Lines="Right" Border.Color="White" Fill.Color="Chocolate" Text="Address" Padding="5, 2, 0, 2" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell12" Fill.Color="Chocolate" Text="[Customers.Address]" Padding="2, 2, 2, 2" Font="Tahoma, 8pt" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell16" Border.Lines="Right" Border.Color="White" Fill.Color="Chocolate" Text="City" Padding="5, 2, 0, 2" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell17" Fill.Color="Chocolate" Text="[Customers.City]" Padding="2, 2, 2, 2" Font="Tahoma, 8pt" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row5">
+          <TableCell Name="Cell21" Border.Lines="Right" Border.Color="White" Fill.Color="Chocolate" Text="Postal code" Padding="5, 2, 0, 2" Font="Tahoma, 8pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell22" Fill.Color="Chocolate" Text="[Customers.PostalCode]" Padding="2, 2, 2, 2" Font="Tahoma, 8pt" TextFill.Color="White"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+  </ReportPage>
+  <DialogPage Name="Form1" Width="298" Height="174" AcceptButton="btnOk" CancelButton="btnCancel">
+    <ButtonControl Name="btnCancel" Left="205" Top="107" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="0" Text="Cancel" DialogResult="Cancel"/>
+    <ButtonControl Name="btnOk" Left="122" Top="107" Anchor="Bottom, Right" Font="Tahoma, 8pt" TabIndex="1" Text="OK" DialogResult="OK"/>
+    <GroupBoxControl Name="GroupBox1" Left="12" Top="8" Width="268" Height="84" Font="Tahoma, 8pt" TabIndex="4" Text="Starting position">
+      <NumericUpDownControl Name="udColumn" Left="136" Top="20" Font="Tahoma, 8pt" TabIndex="2" Text="1" Maximum="2" Minimum="1" Value="1"/>
+      <NumericUpDownControl Name="udRow" Left="136" Top="48" Font="Tahoma, 8pt" TabIndex="3" Text="1" Maximum="7" Minimum="1" Value="1"/>
+      <LabelControl Name="Label1" Left="12" Top="24" Width="46" Height="13" Font="Tahoma, 8pt" TabIndex="5" Text="Column:"/>
+      <LabelControl Name="Label2" Left="12" Top="52" Width="32" Height="13" Font="Tahoma, 8pt" TabIndex="5" Text="Row:"/>
+    </GroupBoxControl>
+  </DialogPage>
+</Report>
