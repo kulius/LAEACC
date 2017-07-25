@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="05/26/2017 10:37:10" ReportInfo.CreatorVersion="1.4.42.0">
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="07/25/2017 11:22:17" ReportInfo.CreatorVersion="1.4.42.0">
   <ScriptText>Imports System
 Imports System.Collections
 Imports System.Collections.Generic
@@ -177,8 +177,6 @@ Namespace FastReport
       if CType(Report.GetParameterValue(&quot;ckprint3&quot;), String) = &quot;1&quot; then
         右側日期.visible=true
       end if
-      
-      
     End Sub
     
     Private Function NumberToCn(numPric As Decimal) As String
@@ -256,7 +254,7 @@ Namespace FastReport
 End Namespace
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBH8EUUWvE3AKzRoCNeqAJJJA==" ConnectionStringExpression="[ConnStr]">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHH4UC1JZuqDmDNz9JdxoZ/g==" ConnectionStringExpression="[ConnStr]">
       <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select * from CHFPRINT&#13;&#10;where BANK = @Bank">
         <Column Name="BANK" DataType="System.String"/>
         <Column Name="公司全銜" DataType="System.String"/>
@@ -366,7 +364,6 @@ End Namespace
     <Parameter Name="Bank" DataType="System.String" Expression="&quot;00&quot;"/>
     <Parameter Name="Bankname" DataType="System.String"/>
     <Parameter Name="sDate" DataType="System.String" Expression="&quot;105-01-12&quot;"/>
-    <Parameter Name="Chkname" DataType="System.String" Expression="&quot;先傑電腦股份有限公司&quot;"/>
     <Parameter Name="Amt" DataType="System.Decimal" Expression="123456789"/>
     <Parameter Name="Remark" DataType="System.String"/>
     <Parameter Name="BankBalance" DataType="System.Decimal" Expression="40000"/>

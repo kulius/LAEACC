@@ -428,6 +428,10 @@ Public Class PAY021
                 Param.Add("sDate", Session("UserDate"))
             End If
 
+            Param.Add("ckprint1", IIf(ckprint1.Checked = True, "1", "0"))
+            Param.Add("ckprint2", IIf(ckprint2.Checked = True, "1", "0"))
+            Param.Add("ckprint3", IIf(ckprint3.Checked = True, "1", "0"))
+
             Param.Add("sSeason", Session("sSeason"))    '第幾季
             Param.Add("UserDate", Session("UserDate"))    '登入日期
 

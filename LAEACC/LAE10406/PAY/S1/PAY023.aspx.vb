@@ -172,6 +172,10 @@ Public Class PAY023
                 Param.Add("Remark", txtNewChkno.Text & txtRemark.Text)
                 Param.Add("BankBalance", ViewState("BankBalance"))
 
+                Param.Add("ckprint1", IIf(ckprint1.Checked = True, "1", "0"))
+                Param.Add("ckprint2", IIf(ckprint2.Checked = True, "1", "0"))
+                Param.Add("ckprint3", IIf(ckprint3.Checked = True, "1", "0"))
+
                 Param.Add("sSeason", Session("sSeason"))    '第幾季
                 Param.Add("UserDate", Session("UserDate"))    '登入日期
 
@@ -267,9 +271,9 @@ Public Class PAY023
             Param.Add("Remark", txtNewChkno.Text & txtRemark.Text)
             Param.Add("BankBalance", ViewState("BankBalance"))
 
-            Param.Add("ckprint1", IIf(ckprint1.Checked, 1, 0))
-            Param.Add("ckprint2", IIf(ckprint2.Checked, 1, 0))
-            Param.Add("ckprint3", IIf(ckprint3.Checked, 1, 0))
+            Param.Add("ckprint1", IIf(ckprint1.Checked = True, "1", "0"))
+            Param.Add("ckprint2", IIf(ckprint2.Checked = True, "1", "0"))
+            Param.Add("ckprint3", IIf(ckprint3.Checked = True, "1", "0"))
 
             Param.Add("sSeason", Session("sSeason"))    '第幾季
             Param.Add("UserDate", Session("UserDate"))    '登入日期
