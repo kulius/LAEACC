@@ -226,14 +226,11 @@ Public Class WebService
         WSobjCon.Open()
         
         If Trim(prefixText) = "" Then
-            WSstrSQL = "SELECT psstr FROM psname where unit='0403' order by psstr "
+            WSstrSQL = "SELECT DISTINCT TOP 20 psstr FROM psname where unit='0403' order by psstr DESC "
         Else
-            WSstrSQL = "SELECT psstr FROM psname where unit='0403' and psstr LIKE '%" & prefixText & "%' order by psstr"
+            WSstrSQL = "SELECT DISTINCT TOP 20 psstr FROM psname where unit='0403' and psstr LIKE '%" & prefixText & "%' order by psstr DESC"
         End If
-       
-        
-        '
-
+                      '
         WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)
         WSobjDR = WSobjCmd.ExecuteReader
 

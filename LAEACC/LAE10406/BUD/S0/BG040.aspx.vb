@@ -64,7 +64,10 @@ Public Class BG040
         sqlstr = "SELECT psstr  FROM psname where unit='" & Session("UserUnit") & "' and seq=9999 order by psstr"
         
 
-
+        Select Case Session("UnitTitle")
+            Case "屏東"
+                ConfirmButtonExtender1.Enabled = False
+        End Select
     End Sub
 
     Protected Sub Page_SaveStateComplete(sender As Object, e As System.EventArgs) Handles Me.SaveStateComplete
@@ -460,7 +463,7 @@ Public Class BG040
         Else
             MessageBx("更新失敗" & sqlstr)
         End If
-        MessageBx("本筆不再開支，更新成功")
+        MessageBx("本筆將全部開支或最後一次開支，更新成功")
         FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
     End Sub
 

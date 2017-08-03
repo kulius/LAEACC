@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="06/21/2017 23:29:53" ReportInfo.CreatorVersion="1.4.42.0">
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="05/23/2017 10:52:39" ReportInfo.CreatorVersion="1.4.42.0">
   <ScriptText>Imports System
 Imports System.Collections
 Imports System.Collections.Generic
@@ -152,7 +152,7 @@ Namespace FastReport
 End Namespace
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHfL3ynCYRzTm3dBVK0sJNkQ==" ConnectionStringExpression="[ConnStr]">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBH7fhBm53kQCqcDO++emWCOg==" ConnectionStringExpression="[ConnStr]">
       <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select date_2,CONVERT(char(10), date_2, 20) as date2 &#13;&#10; ,(SELECT min(no_2_no) from acf010 where date_2=acf070.date_2 and item='9' and kind=1 GROUP BY kind ) as sno1&#13;&#10; ,(SELECT max(no_2_no) from acf010 where date_2=acf070.date_2 and item='9' and kind=1 GROUP BY kind ) as eno1&#13;&#10; ,(SELECT min(no_2_no) from acf010 where date_2=acf070.date_2 and item='9' and kind=2 GROUP BY kind ) as sno2&#13;&#10; ,(SELECT max(no_2_no) from acf010 where date_2=acf070.date_2 and item='9' and kind=2 GROUP BY kind ) as eno2&#13;&#10; ,(SELECT min(no_2_no) from acf010 where date_2=acf070.date_2 and item='1' and kind=3 GROUP BY kind ) as sno3&#13;&#10; ,(SELECT max(no_2_no) from acf010 where date_2=acf070.date_2 and item='1' and kind=3 GROUP BY kind ) as eno3&#13;&#10;from acf070 where date_2&gt;= @dtpDateS&#13;&#10; and date_2&lt;= @dtpDateE&#13;&#10; group by date_2 order by date_2">
         <Column Name="date_2" DataType="System.DateTime"/>
         <Column Name="date2" DataType="System.String"/>
@@ -221,8 +221,8 @@ End Namespace
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15" StartPageEvent="Page1_StartPage">
     <ReportTitleBand Name="ReportTitle1" Width="1047.06" CanShrink="true"/>
-    <PageHeaderBand Name="PageHeader1" Top="4" Width="1047.06" Height="111.51" CanShrink="true" BeforePrintEvent="PageHeader1_BeforePrint">
-      <TextObject Name="Text21" Left="9.45" Top="86.94" Width="113.4" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="合　　計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+    <PageHeaderBand Name="PageHeader1" Top="4" Width="1047.06" Height="124.74" CanShrink="true" BeforePrintEvent="PageHeader1_BeforePrint">
+      <TextObject Name="Text21" Left="9.45" Top="86.94" Width="113.4" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="合　　計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text15" Left="765.45" Top="43.47" Width="274.05" Height="18.9" Text="第[txtNo]頁" HorzAlign="Right" VertAlign="Center" Font="新細明體, 10pt">
         <Formats>
           <GeneralFormat/>
@@ -245,14 +245,14 @@ End Namespace
           <GeneralFormat/>
         </Formats>
       </TextObject>
-      <TextObject Name="Text54" Left="122.85" Top="86.94" Width="94.5" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="轉　　帳" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text55" Left="217.35" Top="86.94" Width="103.95" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="專戶存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text56" Left="321.3" Top="86.94" Width="103.95" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="銀行存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text50" Left="425.25" Top="62.37" Width="198.45" Height="49.14" Border.Lines="All" Border.Color="Highlight" Text="會計科目及符號" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text57" Left="623.7" Top="86.94" Width="103.95" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="銀行存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text58" Left="727.65" Top="86.94" Width="94.5" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="專戶存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text59" Left="822.15" Top="86.94" Width="103.95" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="轉　　帳" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text60" Left="926.1" Top="86.94" Width="113.4" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="合　　計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text54" Left="122.85" Top="86.94" Width="94.5" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="轉　　帳" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text55" Left="217.35" Top="86.94" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="專戶存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text56" Left="321.3" Top="86.94" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="銀行存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text50" Left="425.25" Top="62.37" Width="198.45" Height="62.37" Border.Lines="All" Border.Color="Highlight" Text="會計科目及符號" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text57" Left="623.7" Top="86.94" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="銀行存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text58" Left="727.65" Top="86.94" Width="94.5" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="專戶存款" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text59" Left="822.15" Top="86.94" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="轉　　帳" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text60" Left="926.1" Top="86.94" Width="113.4" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="合　　計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text61" Left="9.45" Top="62.37" Width="415.8" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="收　　　　　　　　　　　　　　　　方" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text62" Left="623.7" Top="62.37" Width="415.8" Height="24.57" Border.Lines="All" Border.Color="Highlight" Text="付　　　　　　　　　　　　　　　　方" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text63" Left="9.45" Top="43.47" Width="198.45" Height="18.9" Text="轉帳傳票:[sNo3]~[eNo3]" VertAlign="Center" Font="新細明體, 10pt">
@@ -264,25 +264,25 @@ End Namespace
         </Formats>
       </TextObject>
     </PageHeaderBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="119.51" Width="1047.06" Height="37.8" CanShrink="true" Condition="[M.date_2]">
-      <DataBand Name="Data1" Top="161.31" Width="1047.06" Height="28.35" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" AfterDataEvent="Data1_AfterData" StartNewPage="true" DataSource="Table">
-        <DataBand Name="Data3" Top="193.66" Width="1047.06" Height="28.35" CanShrink="true" BeforePrintEvent="Data3_BeforePrint" DataSource="Table2"/>
-        <DataBand Name="Data4" Top="226.01" Width="1047.06" Height="37.8" CanShrink="true" BeforePrintEvent="Data4_BeforePrint" DataSource="Table3"/>
-        <DataBand Name="Data5" Top="267.81" Width="1047.06" Height="37.8" CanGrow="true" CanShrink="true" BeforePrintEvent="Data5_BeforePrint" DataSource="Table4"/>
-        <DataBand Name="Data2" Top="309.61" Width="1047.06" Height="22.68" BeforePrintEvent="Data2_BeforePrint" DataSource="Table1">
-          <TextObject Name="Text64" Left="9.45" Width="113.4" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[[CRAMT1]+[CRAMT2]+[CRAMT3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text65" Left="122.85" Width="94.5" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[CRAMT3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text66" Left="217.35" Width="103.95" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[CRAMT2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text67" Left="321.3" Width="103.95" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[CRAMT1]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text69" Left="623.7" Width="103.95" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[DEAMT1]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text70" Left="727.65" Width="94.5" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[DEAMT2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text71" Left="822.15" Width="103.95" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[DEAMT3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text72" Left="926.1" Width="113.4" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[[DEAMT1]+[DEAMT2]+[DEAMT3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-          <TextObject Name="Text68" Left="425.25" Width="198.45" Height="22.68" Border.Lines="All" Border.Color="Highlight" Text="[accname]" VertAlign="Center" Font="新細明體, 9pt"/>
-          <DataFooterBand Name="DataFooter2" Top="336.29" Width="1047.06" Height="75.6">
+    <GroupHeaderBand Name="GroupHeader1" Top="132.74" Width="1047.06" Height="37.8" CanShrink="true" Condition="[M.date_2]">
+      <DataBand Name="Data1" Top="174.54" Width="1047.06" Height="28.35" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" AfterDataEvent="Data1_AfterData" StartNewPage="true" DataSource="Table">
+        <DataBand Name="Data3" Top="206.89" Width="1047.06" Height="28.35" CanShrink="true" BeforePrintEvent="Data3_BeforePrint" DataSource="Table2"/>
+        <DataBand Name="Data4" Top="239.24" Width="1047.06" Height="37.8" CanShrink="true" BeforePrintEvent="Data4_BeforePrint" DataSource="Table3"/>
+        <DataBand Name="Data5" Top="281.04" Width="1047.06" Height="37.8" CanGrow="true" CanShrink="true" BeforePrintEvent="Data5_BeforePrint" DataSource="Table4"/>
+        <DataBand Name="Data2" Top="322.84" Width="1047.06" Height="37.8" BeforePrintEvent="Data2_BeforePrint" DataSource="Table1">
+          <TextObject Name="Text64" Left="9.45" Width="113.4" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[[CRAMT1]+[CRAMT2]+[CRAMT3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text65" Left="122.85" Width="94.5" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[CRAMT3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text66" Left="217.35" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[CRAMT2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text67" Left="321.3" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[CRAMT1]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text69" Left="623.7" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[DEAMT1]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text70" Left="727.65" Width="94.5" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[DEAMT2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text71" Left="822.15" Width="103.95" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[DEAMT3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text72" Left="926.1" Width="113.4" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[[DEAMT1]+[DEAMT2]+[DEAMT3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+          <TextObject Name="Text68" Left="425.25" Width="198.45" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="[accname]" VertAlign="Center" Font="新細明體, 9pt"/>
+          <DataFooterBand Name="DataFooter2" Top="364.64" Width="1047.06" Height="151.2">
             <TextObject Name="Text74" Left="425.25" Top="37.8" Width="198.45" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="本　日　結　存" HorzAlign="Center" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text75" Left="425.25" Top="56.7" Width="198.45" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="合 　　　       計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text76" Left="9.45" Top="37.8" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text75" Left="425.25" Top="56.7" Width="198.45" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="合 　　　       計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text76" Left="9.45" Top="68.04" Width="113.4" Height="34.02" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text77" Left="122.85" Top="37.8" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text78" Left="217.35" Top="37.8" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text79" Left="321.3" Top="37.8" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
@@ -291,7 +291,7 @@ End Namespace
             <TextObject Name="Text82" Left="822.15" Top="37.8" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text83" Left="926.1" Top="37.8" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]-[SumDeamt1]+[Upbalance3]+[SumCramt2]-[SumDeamt2]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text84" Left="425.25" Width="198.45" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="本　日　合　計" HorzAlign="Center" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text85" Left="9.45" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[SumCramt1]+[SumCramt2]+[SumCramt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text85" Left="9.45" Width="113.4" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[SumCramt1]+[SumCramt2]+[SumCramt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text86" Left="122.85" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumCramt3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text87" Left="217.35" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumCramt2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text88" Left="321.3" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumCramt1]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
@@ -299,17 +299,17 @@ End Namespace
             <TextObject Name="Text90" Left="727.65" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumDeamt2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text91" Left="822.15" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumDeamt3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text92" Left="926.1" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[SumDeamt1]+[SumDeamt2]+[SumDeamt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text101" Left="623.7" Top="56.7" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]-[SumDeamt1]+[SumDeamt1]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text102" Left="727.65" Top="56.7" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance3]+[SumCramt2]-[SumDeamt2]+[SumDeamt2]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text103" Left="822.15" Top="56.7" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumDeamt3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text104" Left="926.1" Top="56.7" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]-[SumDeamt1]+[SumDeamt1]+[Upbalance3]+[SumCramt2]-[SumDeamt2]+[SumDeamt2]+[SumDeamt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text105" Left="9.45" Top="56.7" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]+[Upbalance3]+[SumCramt2]+[SumCramt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text106" Left="122.85" Top="56.7" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[SumCramt3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text107" Left="217.35" Top="56.7" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance3]+[SumCramt2]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text108" Left="321.3" Top="56.7" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text101" Left="623.7" Top="56.7" Width="103.95" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]-[SumDeamt1]+[SumDeamt1]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text102" Left="727.65" Top="56.7" Width="94.5" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance3]+[SumCramt2]-[SumDeamt2]+[SumDeamt2]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text103" Left="822.15" Top="56.7" Width="103.95" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[SumDeamt3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text104" Left="926.1" Top="56.7" Width="113.4" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]-[SumDeamt1]+[SumDeamt1]+[Upbalance3]+[SumCramt2]-[SumDeamt2]+[SumDeamt2]+[SumDeamt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text105" Left="9.45" Top="102.06" Width="113.4" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]+[Upbalance3]+[SumCramt2]+[SumCramt3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text106" Left="122.85" Top="56.7" Width="94.5" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[SumCramt3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text107" Left="217.35" Top="56.7" Width="103.95" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance3]+[SumCramt2]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text108" Left="321.3" Top="56.7" Width="103.95" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[SumCramt1]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text100" Left="926.1" Top="18.9" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text73" Left="425.25" Top="18.9" Width="198.45" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="昨　日　結　存" HorzAlign="Center" VertAlign="Center" Font="新細明體, 9pt"/>
-            <TextObject Name="Text93" Left="9.45" Top="18.9" Width="113.4" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[Upbalance3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
+            <TextObject Name="Text93" Left="9.45" Top="34.02" Width="113.4" Height="34.02" Border.Lines="All" Border.Color="Highlight" Text="[[Upbalance2]+[Upbalance3]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text94" Left="122.85" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text95" Left="217.35" Top="18.9" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[Upbalance3]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
             <TextObject Name="Text96" Left="321.3" Top="18.9" Width="103.95" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[Upbalance2]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
@@ -319,8 +319,8 @@ End Namespace
           </DataFooterBand>
         </DataBand>
       </DataBand>
-      <GroupFooterBand Name="GroupFooter1" Top="442.57" Width="1047.06" Height="37.8" CanShrink="true">
-        <ChildBand Name="Child1" Top="415.89" Width="1047.06" Height="22.68" FillUnusedSpace="true">
+      <GroupFooterBand Name="GroupFooter1" Top="546.52" Width="1047.06" Height="37.8" CanShrink="true">
+        <ChildBand Name="Child1" Top="519.84" Width="1047.06" Height="22.68" FillUnusedSpace="true">
           <TextObject Name="Text110" Left="9.45" Width="113.4" Height="22.68" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
           <TextObject Name="Text111" Left="122.85" Width="94.5" Height="22.68" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
           <TextObject Name="Text112" Left="217.35" Width="103.95" Height="22.68" Border.Lines="All" Border.Color="Highlight" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 9pt"/>
@@ -333,7 +333,7 @@ End Namespace
         </ChildBand>
       </GroupFooterBand>
     </GroupHeaderBand>
-    <PageFooterBand Name="PageFooter1" Top="484.37" Width="1047.06" Height="52.92">
+    <PageFooterBand Name="PageFooter1" Top="588.32" Width="1047.06" Height="52.92">
       <TextObject Name="Text109" Left="9.45" Top="1.89" Width="1030.05" Height="28.35" Text="製表　　　　　　　　　　　　　　　過帳　　　　　　　　　　　　　　　覆核　　　　　　　　　　　　　　　主辦主計人員" VertAlign="Center" Font="新細明體, 10pt"/>
     </PageFooterBand>
   </ReportPage>

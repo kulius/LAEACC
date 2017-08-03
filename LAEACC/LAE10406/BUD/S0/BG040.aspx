@@ -173,7 +173,7 @@
 
                                         <!--#伺服器驗證-->
                                         <AjaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server"
-                                            TargetControlID="btnSure" ConfirmText="確定本筆不再開支??" BehaviorID="_content_ConfirmButtonExtender1">
+                                            TargetControlID="btnSure" ConfirmText="確定本筆將全部開支或最後一次開支??" BehaviorID="_content_ConfirmButtonExtender1">
                                         </AjaxToolkit:ConfirmButtonExtender>
 
                                         <!--#自動完成-->

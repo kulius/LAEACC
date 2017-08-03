@@ -40,78 +40,90 @@
                                         <div class="widget-body form-horizontal">
                                             <div style="background-color:#71eb8a; font-size:16px; padding-top:20px;">
                                                 <fieldset>
-                                                    
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label">銀行：</label>  
-                                                        <div class="col-lg-2 control-label"><asp:TextBox ID="txtBank" runat="server" /></div>  
-                                                        <div class="col-lg-2 control-label"><asp:Label ID="lblBankname" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" /></div>  
-                                                        
+                                                        <div class="col-lg-10">
+                                                            <asp:TextBox ID="txtBank" runat="server" />
+                                                            <asp:Label ID="lblBankname" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" />
+                                                        </div>  
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">支票號碼：</label>  
-                                                        <div class="col-lg-2 control-label"><asp:TextBox ID="txtChkNo" runat="server" /></div>  
-                                                        <div class="col-lg-1 control-label"><asp:Button ID="btnChkno" Text="調出支票" CssClass="btn btn-primary" runat="server" /></div>
-                                                        <label class="col-lg-2 control-label"><asp:Label ID="lblMsg" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" /></label>
+                                                        <label class="col-lg-2 control-label">支票號碼：</label> 
+                                                        <div class="col-lg-10">
+                                                            <asp:TextBox ID="txtChkNo" runat="server" />
+                                                            <asp:Button ID="btnChkno" Text="調出支票" CssClass="btn btn-primary" runat="server" />
+                                                            <asp:Label ID="lblMsg" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" />
+                                                        </div>  
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label">支票金額：</label>
-                                                        <div class="col-lg-2 control-label" ><asp:Label ID="lblamt" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" />	</div>
+                                                        <div class="col-lg-10"><asp:Label ID="lblamt" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" /></div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label">傳票：</label>
-                                                        <div class="col-lg-2 control-label" ><asp:Label ID="lblNo1" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" />	</div>
+                                                        <div class="col-lg-10"><asp:Label ID="lblNo1" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" /></div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label"></label>
-                                                        <label class="col-lg-2"  ><asp:Label ID="lblChkname" ForeColor="Blue" Font-Size="12pt" Width="520px" Font-Bold="True"  runat="server" />	</label>
+                                                        <label class="col-lg-10"><asp:Label ID="lblChkname" ForeColor="Blue" Font-Size="12pt" Width="520px" Font-Bold="True"  runat="server" />	</label>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label"></label>
-                                                        <label class="col-lg-2 " ><asp:Label ID="lblRemark" ForeColor="Blue" Font-Size="12pt" Width="520px" Font-Bold="True"  runat="server" />	</label>
+                                                        <label class="col-lg-10"><asp:Label ID="lblRemark" ForeColor="Blue" Font-Size="12pt" Width="520px" Font-Bold="True"  runat="server" />	</label>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label">新支票號碼：</label>
-                                                        <label class="col-lg-2 control-label"><asp:TextBox ID="txtNewChkno" runat="server" /></label>  
-                                                        <label class="col-lg-4 control-label">一般支票欲轉電子支票者,請輸入TRyyy00000</label>
+                                                        <label class="col-lg-2 control-label">支票號碼：</label>
+                                                        <label class="col-lg-10">
+                                                            <asp:TextBox ID="txtUChkno" Text="" runat="server" />
+                                                            新支票號碼：<asp:Label ID="txtNewChkno" ForeColor="Red" Font-Size="18px" Font-Bold="true" runat="server" />
+                                                            <span style="font-size:10px;">(一般支票欲轉電子支票者,請輸入TRyyy00000)</span>
+                                                        </label>  
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label">受款人：</label>
-                                                        <label class="col-lg-5 control-label"><asp:TextBox ID="txtChkname" Width="520px" runat="server" /></label>
-                                                        <AjaxToolkit:AutoCompleteExtender 
-                                                            ID="AutoCompleteExtender1"                             
-                                                            runat="server"                
-                                                            TargetControlID="txtChkname"
-                                                            ServicePath="~/active/WebService.asmx"
-                                                            ServiceMethod="GetPayRemark"
-                                                            MinimumPrefixLength="0" 
-                                                            CompletionInterval="100"
-                                                            CompletionSetCount="12" DelimiterCharacters="" Enabled="True" />
+                                                        <label class="col-lg-10">
+                                                            <asp:TextBox ID="txtChkname" Width="520px" runat="server" />
+                                                            <AjaxToolkit:AutoCompleteExtender 
+                                                                ID="AutoCompleteExtender1"                             
+                                                                runat="server"                
+                                                                TargetControlID="txtChkname"
+                                                                ServicePath="~/active/WebService.asmx"
+                                                                ServiceMethod="GetPayRemark"
+                                                                MinimumPrefixLength="0" 
+                                                                CompletionInterval="100"
+                                                                CompletionSetCount="12" DelimiterCharacters="" Enabled="True" />
+                                                        </label>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-lg-2 control-label">摘要：</label>
-                                                        <label class="col-lg-5 control-label"><asp:TextBox ID="txtRemark" Width="520px" runat="server" /></label> 
+                                                        <label class="col-lg-10"><asp:TextBox ID="txtRemark" Width="520px" runat="server" /></label> 
                                                     </div>    
 
                                                     <div class="form-group">
-                                                        <label class="col-lg-2 control-label"><asp:CheckBox runat="server" ID="ckprint1" Text="劃線"/></label>
-                                                        <label class="col-lg-2 control-label"><asp:CheckBox runat="server" ID="ckprint2" Text="禁止背書轉讓"/></label>
-                                                        <label class="col-lg-2 control-label"><asp:CheckBox runat="server" ID="ckprint3" Text="支票日期"/></label>
+                                                        <label class="col-lg-2"></label>
+                                                        <label class="col-lg-8">
+                                                            <asp:CheckBox runat="server" ID="ckprint1" Text="劃線"/>
+                                                            <asp:CheckBox runat="server" ID="ckprint2" Text="禁止背書轉讓"/>
+                                                            <asp:CheckBox runat="server" ID="ckprint3" Text="支票日期"/>
+                                                            <asp:TextBox ID="txtDate" Width="100px"  onClick="WdatePicker({dateFmt:'yyy-MM-dd',skin:'whyGreen'})" runat="server" />
+                                                        </label>
+                                                        <label class="col-lg-2"></label>
                                                     </div>                                                
                                                     
                                                     <div class="form-group">
-                                                        
-                                                        <div class="col-lg-2 control-label"><asp:Button ID="btnFinish" Text="確定" CssClass="btn btn-primary" runat="server" /></div>
-                                                        <div class="col-lg-2 control-label"><asp:Button ID="btnGiveUp" Text="放棄" CssClass="btn btn-primary" runat="server" /></div>
-           
+                                                        <div class="col-lg-4"></div>
+                                                        <div class="col-lg-4">
+                                                            <asp:Button ID="btnFinish" Text="確定" CssClass="btn btn-primary" runat="server" />
+                                                            <asp:Button ID="btnGiveUp" Text="放棄" CssClass="btn btn-primary" runat="server" />
+                                                        </div>
+                                                        <div class="col-lg-4"></div>
                                                     </div>
                                                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                                                                <ContentTemplate></ContentTemplate>
-                                                                <Triggers>
-                                                                    <asp:PostBackTrigger ControlID="btnFinish" />
-                                                                </Triggers>
-                                                            </asp:UpdatePanel>     
-                                                   
-                                                                                                 
+                                                        <ContentTemplate></ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:PostBackTrigger ControlID="btnFinish" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>                                                                                                                                                         
                                                 </fieldset>
                                             </div>
                                         </div>

@@ -204,13 +204,13 @@ Public Class SiteMaster
         objDR = objCmd.ExecuteReader
 
         '將每個系統皆放入回首頁選項
-        Response.Write("<li" & IIf(Path.GetFileName(Request.PhysicalPath) = "", " class='active'", "") & ">")
-        Response.Write("<a href='/LAE10406/main.aspx' title='回首頁'><i class='fa fa-lg fa-fw fa-home'></i> <span class='menu-item-parent'>回首頁</span></a>")
+        Response.Write("<li" & IIf(Path.GetFileName(Request.PhysicalPath) = "", " class='active'", "") & " style='font-size:14px;'>")
+        Response.Write("<a href='/LAE10406/main.aspx' title='回首頁'><i class='fa fa-lg fa-fw fa-home'></i> <span class='menu-item-parent' style='font-size:16px;'>回首頁</span></a>")
         Response.Write("</li>")
 
         Do While objDR.Read
             Response.Write("<li>")
-            Response.Write("<a href='#'><i class='fa fa-lg fa-fw " & IIf(Trim(objDR("s_unit_css").ToString) = "", "fa-asterisk", Trim(objDR("s_unit_css").ToString)) & "'></i> <span class='menu-item-parent'>" & Trim(objDR("s_unit_name").ToString) & "</span></a>")
+            Response.Write("<a href='#'><i class='fa fa-lg fa-fw " & IIf(Trim(objDR("s_unit_css").ToString) = "", "fa-asterisk", Trim(objDR("s_unit_css").ToString)) & "'></i> <span class='menu-item-parent' style='font-size:16px;'>" & Trim(objDR("s_unit_name").ToString) & "</span></a>")
             Response.Write("<ul>")
 
 
@@ -251,9 +251,8 @@ Public Class SiteMaster
                     strURL = "/LAE10406/" & Trim(objDR1("s_system_id").ToString) & "/" & Trim(objDR1("s_unit_id").ToString) & "/" & Trim(objDR1("s_unitem_id").ToString) & ".aspx" & If(Trim(objDR1("custom_value").ToString) = "", "", "?cvalue=" & Trim(objDR1("custom_value").ToString))
                 End If
 
-
                 Response.Write("<li" & IIf(Path.GetFileName(Request.PhysicalPath) = Trim(objDR1("s_unitem_id").ToString), " class='active'", "") & ">")
-                Response.Write("<a href='" & strURL & "'>" & Trim(objDR1("s_item_name").ToString) & "</a>")
+                Response.Write("<a href='" & strURL & "' style='font-size:16px;'>" & Trim(objDR1("s_item_name").ToString) & "</a>")
                 Response.Write("</li>")
             Loop
 

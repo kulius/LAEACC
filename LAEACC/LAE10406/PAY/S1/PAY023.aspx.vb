@@ -119,6 +119,7 @@ Public Class PAY023
         lblNo1.Text = mydataset.Tables("chf010").Rows(0).Item("no_1_no")
         lblChkname.Text = txtChkname.Text  '記錄原先資料
         lblRemark.Text = txtRemark.Text     '記錄原先資料
+        txtUChkno.Text = mydataset.Tables("chf010").Rows(0).Item("CHKNO")
 
         '電子轉帳 ADD & mod 
         txtNewChkno.Enabled = True
@@ -148,6 +149,7 @@ Public Class PAY023
         txtChkname.Visible = True
         btnFinish.Visible = True
         btnGiveUp.Visible = True
+        txtUChkno.Visible = True
         txtNewChkno.Visible = True
         txtNewChkno.Focus()
     End Sub
@@ -166,15 +168,20 @@ Public Class PAY023
 
                 Param.Add("Bank", txtBank.Text)
                 Param.Add("Bankname", lblBankname.Text)
-                Param.Add("sDate", ViewState("sDate"))
                 Param.Add("Chkname", txtChkname.Text)
                 Param.Add("Amt", lblamt.Text)
-                Param.Add("Remark", txtNewChkno.Text & txtRemark.Text)
+                Param.Add("Remark", txtUChkno.Text & txtRemark.Text)
                 Param.Add("BankBalance", ViewState("BankBalance"))
 
                 Param.Add("ckprint1", IIf(ckprint1.Checked = True, "1", "0"))
                 Param.Add("ckprint2", IIf(ckprint2.Checked = True, "1", "0"))
                 Param.Add("ckprint3", IIf(ckprint3.Checked = True, "1", "0"))
+
+                If ckprint3.Checked = True Then
+                    Param.Add("sDate", txtDate.Text)
+                Else
+                    Param.Add("sDate", ViewState("sDate"))
+                End If
 
                 Param.Add("sSeason", Session("sSeason"))    '第幾季
                 Param.Add("UserDate", Session("UserDate"))    '登入日期
@@ -186,40 +193,40 @@ Public Class PAY023
         End If
 
         '檢查支票碼重複
-        If txtChkNo.Text <> txtNewChkno.Text Then
+        If txtChkNo.Text <> txtUChkno.Text Then
             '由一般支票轉為電子支票
-            If Mid(txtChkNo.Text, 1, 2) <> "TR" And Mid(txtNewChkno.Text, 1, 2) = "TR" Then
-                If Len(RTrim(txtNewChkno.Text)) < 10 Or Not IsNumeric(Mid(txtNewChkno.Text, 6, 5)) Then
+            If Mid(txtChkNo.Text, 1, 2) <> "TR" And Mid(txtUChkno.Text, 1, 2) = "TR" Then
+                If Len(RTrim(txtUChkno.Text)) < 10 Or Not IsNumeric(Mid(txtUChkno.Text, 6, 5)) Then
                     MessageBx("請輸入TR" & Format(Session("sYear"), "000") & "00000" & "的支票格式")
                     Exit Sub
                 End If
-                sqlstr = "SELECT chkno FROM chf010 where chkno='" & txtNewChkno.Text & "'"
+                sqlstr = "SELECT chkno FROM chf010 where chkno='" & txtUChkno.Text & "'"
                 mydataset = Master.ADO.openmember("", "chf010", sqlstr)
-                If mydataset.Tables("chf010").Rows.Count > 0 Or Val(Mid(txtNewChkno.Text, 6, 5)) = 0 Then '有重複
+                If mydataset.Tables("chf010").Rows.Count > 0 Or Val(Mid(txtUChkno.Text, 6, 5)) = 0 Then '有重複
                     '取新轉帳支票號
-                    txtNewChkno.Text = "TR" & Format(Session("sYear"), "000") & Format(Master.Controller.RequireNO(DNS_ACC, CInt(Session("sYear")), "T"), "00000")
+                    txtUChkno.Text = "TR" & Format(Session("sYear"), "000") & Format(Master.Controller.RequireNO(DNS_ACC, CInt(Session("sYear")), "T"), "00000")
                 Else
                     '沒重複也要判斷號數不可大於控制檔
                     sqlstr = "SELECT * FROM acfno where kind='T' and accyear=" & Session("sYear")
                     mydataset = Master.ADO.openmember("", "acfno", sqlstr)
                     If mydataset.Tables("acfno").Rows.Count > 0 Then
-                        If Val(Mid(txtNewChkno.Text, 6, 5)) - 1 > Master.ADO.nz(mydataset.Tables("acfno").Rows(0).Item("cont_no"), 0) Then
-                            txtNewChkno.Text = "TR" & Format(Session("sYear"), "000") & Format(Master.Controller.RequireNO(DNS_ACC, CInt(Session("sYear")), "T"), "00000")
+                        If Val(Mid(txtUChkno.Text, 6, 5)) - 1 > Master.ADO.nz(mydataset.Tables("acfno").Rows(0).Item("cont_no"), 0) Then
+                            txtUChkno.Text = "TR" & Format(Session("sYear"), "000") & Format(Master.Controller.RequireNO(DNS_ACC, CInt(Session("sYear")), "T"), "00000")
                         End If
                     End If
                 End If
             End If
-            sqlstr = "SELECT chkno FROM chf010 where chkno='" & txtNewChkno.Text & "'"
+            sqlstr = "SELECT chkno FROM chf010 where chkno='" & txtUChkno.Text & "'"
             mydataset = Master.ADO.openmember(DNS_ACC, "chf010", sqlstr)
             If mydataset.Tables("chf010").Rows.Count > 0 Then
                 MessageBx("支票碼重複")
-                txtNewChkno.Focus()
+                txtUChkno.Focus()
                 Exit Sub
             End If
             mydataset = Nothing
 
             '資料處理
-            sqlstr = "update acf010 set chkno='" & txtNewChkno.Text.ToUpper & "' where accyear=" & Session("sYear") & _
+            sqlstr = "update acf010 set chkno='" & txtUChkno.Text.ToUpper & "' where accyear=" & Session("sYear") & _
                      " and chkno='" & txtChkNo.Text & "' and kind='2' and item='9'"
             retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
             If retstr <> "sqlok" Then
@@ -227,12 +234,12 @@ Public Class PAY023
             End If
 
             '記錄最後一張支票號
-            If Mid(txtNewChkno.Text, 1, 2) <> "TR" Then
-                sqlstr = "update chf020 set chkno = '" & txtNewChkno.Text & "' where bank='" & txtBank.Text & "'"
+            If Mid(txtUChkno.Text, 1, 2) <> "TR" Then
+                sqlstr = "update chf020 set chkno = '" & txtUChkno.Text & "' where bank='" & txtBank.Text & "'"
                 retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
             Else
                 Master.ADO.GenInsSql("accyear", Session("sYear"), "N")
-                Master.ADO.GenInsSql("vchkno", txtNewChkno.Text, "T")
+                Master.ADO.GenInsSql("vchkno", txtUChkno.Text, "T")
                 Master.ADO.GenInsSql("date_1", Session("UserDate"), "D")
                 Master.ADO.GenInsSql("bank", txtBank.Text, "T")
                 sqlstr = "insert into chf050 " & Master.ADO.GenInsFunc
@@ -240,13 +247,13 @@ Public Class PAY023
                 If retstr <> "sqlok" Then
                     MessageBx("新增支票寫入chf050失敗,請檢查" & sqlstr)
                 Else
-                    MessageBx("新電子支票=" & txtNewChkno.Text)
+                    MessageBx("新電子支票=" & txtUChkno.Text)
                 End If
             End If
         End If
 
         '更正chf010 
-        sqlstr = "update chf010 set chkno = '" & txtNewChkno.Text.ToUpper & "', chkname = N'" & txtChkname.Text & _
+        sqlstr = "update chf010 set chkno = '" & txtUChkno.Text.ToUpper & "', chkname = N'" & txtChkname.Text & _
                  "', remark = N'" & txtRemark.Text & "' where bank='" & txtBank.Text & _
                  "' and chkno='" & txtChkNo.Text & "' and accyear=" & Session("sYear")
         retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
@@ -257,7 +264,7 @@ Public Class PAY023
         lblMsg.Text = "修改完成"
 
         '電子轉帳 MOD
-        If Mid(txtNewChkno.Text, 1, 2) <> "TR" Then
+        If Mid(txtUChkno.Text, 1, 2) <> "TR" Then
             Dim Param As Dictionary(Of String, String) = New Dictionary(Of String, String)
             Param.Add("UnitTitle", Session("UnitTitle"))    '水利會名稱
             Param.Add("UserUnit", Session("UserUnit"))  '使用者單位代號
@@ -265,15 +272,20 @@ Public Class PAY023
 
             Param.Add("Bank", txtBank.Text)
             Param.Add("Bankname", lblBankname.Text)
-            Param.Add("sDate", ViewState("sDate"))
             Param.Add("Chkname", txtChkname.Text)
             Param.Add("Amt", lblamt.Text)
-            Param.Add("Remark", txtNewChkno.Text & txtRemark.Text)
+            Param.Add("Remark", txtUChkno.Text & txtRemark.Text)
             Param.Add("BankBalance", ViewState("BankBalance"))
 
             Param.Add("ckprint1", IIf(ckprint1.Checked = True, "1", "0"))
             Param.Add("ckprint2", IIf(ckprint2.Checked = True, "1", "0"))
             Param.Add("ckprint3", IIf(ckprint3.Checked = True, "1", "0"))
+
+            If ckprint3.Checked = True Then
+                Param.Add("sDate", txtDate.Text)
+            Else
+                Param.Add("sDate", ViewState("sDate"))
+            End If
 
             Param.Add("sSeason", Session("sSeason"))    '第幾季
             Param.Add("UserDate", Session("UserDate"))    '登入日期
@@ -299,6 +311,7 @@ Public Class PAY023
         txtChkname.Visible = False
         btnFinish.Visible = False
         btnGiveUp.Visible = False
+        txtUChkno.Visible = False
         txtNewChkno.Visible = False
     End Sub
 End Class

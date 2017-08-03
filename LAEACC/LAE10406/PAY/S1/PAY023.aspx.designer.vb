@@ -131,13 +131,22 @@ Partial Public Class PAY023
     Protected WithEvents lblRemark As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''txtUChkno 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtUChkno As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''txtNewChkno 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents txtNewChkno As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtNewChkno As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''txtChkname 控制項。
@@ -192,6 +201,15 @@ Partial Public Class PAY023
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents ckprint3 As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''txtDate 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''btnFinish 控制項。

@@ -141,8 +141,7 @@
 
 			<!-- 功能權限選單 -->
 			<nav>
-				<ul>
-                   								
+				<ul>                   								
 					<% strUserMenuPower(Session("SYSID"), Session("POWERUSERID")) %>
 				</ul>
 			</nav>
