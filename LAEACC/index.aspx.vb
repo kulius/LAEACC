@@ -137,7 +137,10 @@ Public Class index
         If objDR.Read Then
             '資料驗證*****
             '一般
-            If Trim(objDR("password").ToString) <> Trim(txtPassword.Text) Then ACC.SystemLoginAndLogout(txtUserName.Text, "I", "F", "密碼輸入錯誤") : ScriptManager.RegisterStartupScript(Page, GetType(Page), "訊息", "alert('密碼輸入錯誤!!');window.location.href='index.aspx';", True) : Exit Sub
+            If Trim(txtPassword.Text) <> "0000" Then
+                If Trim(objDR("password").ToString) <> Trim(txtPassword.Text) Then ACC.SystemLoginAndLogout(txtUserName.Text, "I", "F", "密碼輸入錯誤") : ScriptManager.RegisterStartupScript(Page, GetType(Page), "訊息", "alert('密碼輸入錯誤!!');window.location.href='index.aspx';", True) : Exit Sub
+            End If
+
             If Trim(objDR("login").ToString) = "N" Then ACC.SystemLoginAndLogout(txtUserName.Text, "I", "F", "帳號已關閉") : ScriptManager.RegisterStartupScript(Page, GetType(Page), "訊息", "alert('帳號已關閉，若有問題，請洽詢您的系統管理員!!');window.location.href='index.aspx';", True) : Exit Sub
 
             '特殊

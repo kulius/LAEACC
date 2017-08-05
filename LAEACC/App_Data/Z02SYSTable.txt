@@ -146,3 +146,51 @@ INSERT INTO a_sys_nunit_item VALUES ('BAILF030','BAI','S3','工程登記檔維�
 GO
 INSERT INTO a_sys_nunit_item VALUES ('BAILF040','BAI','S4','保管品查詢','1',null,null)
 GO
+
+
+DELETE a_sys_nunit where s_system_id='PGM'
+GO
+INSERT INTO a_sys_nunit VALUES ('S0','PGM','日常作業',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S1','PGM','資料維護',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S2','PGM','折舊作業',NULL,NULL)
+INSERT INTO a_sys_nunit VALUES ('S3','PGM','報表列印',NULL,NULL)
+GO
+DELETE a_sys_nunit_item where s_system_id='PGM'
+GO
+INSERT INTO a_sys_nunit_item VALUES ('PGM010','PGM','S0','財物新增','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGM020','PGM','S0','財物報廢','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGM030','PGM','S0','財物交接','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGM040','PGM','S0','財物增減值','4',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('PGMB010','PGM','S1','財物分類檔維護','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMB020','PGM','S1','財物主檔維護','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMB030','PGM','S1','財物增減值檔維護','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMB040','PGM','S1','建物主檔維護','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMB050','PGM','S1','查詢財物折舊資料','5',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('PGMC010','PGM','S2','自動提列','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMC020','PGM','S2','預提下年度折舊','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMC030','PGM','S2','財物折舊檔維護','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMC040','PGM','S2','列印折舊明細表','4',null,null)
+GO
+INSERT INTO a_sys_nunit_item VALUES ('PGMD010','PGM','S3','財物標籤','1',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD020','PGM','S3','財物保管增加單','2',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD030','PGM','S3','財產增加單','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD040','PGM','S3','財產減損單','4',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD050','PGM','S3','擬報廢物品清單','5',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD060','PGM','S3','固定資產明細表(財物)','6',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD070','PGM','S3','固定資產明細表(建物)','7',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD080','PGM','S3','備品明細表','8',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD090','PGM','S3','單位保管財產及物品明細表','9',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD100','PGM','S3','個人保管財產及物品明細表','10',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD110','PGM','S3','單位保管財物移交清冊','11',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD120','PGM','S3','個人保管財物移交清冊','12',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD130','PGM','S3','建物移交清冊','13',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD140','PGM','S3','財產目錄','14',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD150','PGM','S3','財物標準分類表','15',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD160','PGM','S3','折舊明細表','16',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD170','PGM','S3','甲式財產卡(財物)','17',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD180','PGM','S3','甲式財產卡(建物)','18',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD190','PGM','S3','水利工程明細卡(含總卡)','19',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMD200','PGM','S3','財產報告表','20',null,null)
+GO
