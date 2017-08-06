@@ -66,24 +66,24 @@ Public Class main
         'Loop Until sLine Is Nothing
         'objReader.Close()
 
-        'path = Request.PhysicalApplicationPath + "App_Data\Z02SYSTable.txt"
-        'Dim objReader1 As New StreamReader(path)
+        path = Request.PhysicalApplicationPath + "App_Data\Z02SYSTable.txt"
+        Dim objReader1 As New StreamReader(path)
 
-        'sLine = ""
-        'sSql = ""
-        'Do
-        '    sLine = objReader1.ReadLine()
-        '    If Not sLine Is Nothing Then
+        sLine = ""
+        sSql = ""
+        Do
+            sLine = objReader1.ReadLine()
+            If Not sLine Is Nothing Then
 
-        '        If sLine.Trim = "GO" Then
-        '            Master.ADO.runsql(DNS_SYS, sSql)
-        '            sSql = ""
-        '        Else
-        '            sSql = sSql + sLine + vbNewLine
-        '        End If
-        '    End If
-        'Loop Until sLine Is Nothing
-        'objReader1.Close()
+                If sLine.Trim = "GO" Then
+                    Master.ADO.runsql(DNS_SYS, sSql)
+                    sSql = ""
+                Else
+                    sSql = sSql + sLine + vbNewLine
+                End If
+            End If
+        Loop Until sLine Is Nothing
+        objReader1.Close()
 
         path = Request.PhysicalApplicationPath + "App_Data\Z03PGMTable.txt"
         Dim objReader2 As New StreamReader(path)

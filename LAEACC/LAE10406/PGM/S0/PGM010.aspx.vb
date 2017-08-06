@@ -1,7 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
 
-Public Class PGMB010
+Public Class PGM010
     Inherits System.Web.UI.Page
 
     '資料庫連線字串
@@ -34,8 +34,9 @@ Public Class PGMB010
         '++ 物件初始化 ++
         strPage = System.IO.Path.GetFileName(Request.PhysicalPath) '取得檔案名稱
 
-        txtQueryKindNo.Attributes.Add("onchange", "return ismaxlength(this)")
-        txtQueryKindNo2.Attributes.Add("onchange", "return ismaxlength(this)")
+        txtQueryPrNo.Attributes.Add("onchange", "return ismaxlength(this)")
+        txtQueryPrNo2.Attributes.Add("onchange", "return ismaxlength(this)")
+        txtPrNo.Attributes.Add("onchange", "return ismaxlength(this)")
 
         ViewState("MyOrder") = "KindNo"  '預設排序欄位
 
@@ -48,20 +49,22 @@ Public Class PGMB010
         TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
 
 
-        sqlstr = "SELECT * FROM CODE where kind='單位' " & _
-                " order by codeno"
-        Master.Controller.objDropDownListOptionEX(cboQueryUnit, DNS_PGM, sqlstr, "codeno", "codename", 0)
-        Master.Controller.objDropDownListOptionEX(cboUnit, DNS_PGM, sqlstr, "codeno", "codename", 0)
 
         sqlstr = "SELECT * FROM CODE where kind='使用年限' " & _
                 " order by CAST(CODENO AS integer)"
         Master.Controller.objDropDownListOptionEX(cboQueryUseyear, DNS_PGM, sqlstr, "codeno", "codename", 0)
+        Master.Controller.objDropDownListOptionEX(cboQueryUseyear2, DNS_PGM, sqlstr, "codeno", "codename", 0)
         Master.Controller.objDropDownListOptionEX(cboUseYear, DNS_PGM, sqlstr, "codeno", "codename", 0)
 
-        sqlstr = "SELECT * FROM CODE where kind='材質' " & _
-                " order by codeno"
-        Master.Controller.objDropDownListOptionEX(cboQueryMaterial, DNS_PGM, sqlstr, "codeno", "codename", 0)
-        Master.Controller.objDropDownListOptionEX(cboMaterial, DNS_PGM, sqlstr, "codeno", "codename", 0)
+        sqlstr = "SELECT * FROM CODE where kind='報廢原因' " & _
+        " order by CODENO"
+        Master.Controller.objDropDownListOptionEX(cboQueryDiscardMode, DNS_PGM, sqlstr, "codeno", "codename", 0)
+        Master.Controller.objDropDownListOptionEX(cboEndRemark, DNS_PGM, sqlstr, "codeno", "codename", 0)
+
+        Dim strcount As String = "" : For I As Integer = 1 To 100 Step 1 : strcount &= I & "," : Next '新增數量
+        Master.Controller.objDropDownListOptionGG(cboAddCount, "--請選擇--," & strcount, "," & strcount)
+        Dim strWhoKeep As String = "個人保管,單位保管"
+        Master.Controller.objDropDownListOptionGG(cboWhoKeep, "--請選擇--," & strWhoKeep, "," & strWhoKeep)
     End Sub
 
     Protected Sub Page_SaveStateComplete(sender As Object, e As System.EventArgs) Handles Me.SaveStateComplete
@@ -76,7 +79,7 @@ Public Class PGMB010
             SetControls(0) '設定所有輸入控制項的唯讀狀態
 
             '資料查詢*****
-            FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
+            'FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
         End If
     End Sub
     Public Sub MessageBx(ByVal sMessage As String)
@@ -199,42 +202,137 @@ Public Class PGMB010
 
 #Region "@主要SQL FILL INSERT DELETE UPDATE FIND@"
     Public Sub FillData(ByVal strOrder As String, ByVal strSortType As String, Optional ByVal strSearch As String = "")
-        Dim kindno, kindno2, name, unit, material, useyear As String
-        kindno = Trim(txtQueryKindNo.Text)
-        kindno2 = Trim(txtQueryKindNo2.Text)
-        name = Trim(txtQueryName.Text)
-        unit = Trim(cboQueryUnit.Text)
-        material = Trim(cboQueryMaterial.Text)
+        '檢查與查詢相關的欄位是否輸入正確
+        Dim prno, prno2, acno, acno2, bgno, bgno2, spdate, spdate2 As String
+        Dim senddate, senddate2, keepunit, keepunit2, keepemp, keepemp2 As String
+        Dim srdate, srdate2, amt, amt2, useyear, useyear2, uses, specremark As String
+        Dim rdate, rdate2, enddate, enddate2, pdate, pdate2 As DateTime
+        Dim name, comefrom, model, queryDiscardMode As String
+        prno = Trim(txtQueryPrNo.Text)
+        prno2 = Trim(txtQueryPrNo2.Text)
+        acno = Trim(txtQueryAcNo.Text)
+        acno2 = Trim(txtQueryAcNo2.Text)
+        bgno = Trim(txtQueryBgAcNo.Text)
+        bgno2 = Trim(txtQueryBgAcNo2.Text)
+        spdate = Trim(txtQueryPDate.Text)
+        spdate2 = Trim(txtQueryPDate2.Text)
+        senddate = Trim(txtQueryEndDate.Text)
+        senddate2 = Trim(txtQueryEndDate2.Text)
+        keepunit = Trim(txtQueryKeepUnit.Text)
+        keepunit2 = Trim(txtQueryKeepUnit2.Text)
+        keepemp = Trim(txtQueryEmpNo.Text)
+        keepemp2 = Trim(txtQueryEmpNo2.Text)
+        srdate = Trim(txtQueryRevisedDate.Text)
+        srdate2 = Trim(txtQueryRevisedDate2.Text)
+        amt = Trim(txtQueryAmt.Text)
+        amt2 = Trim(txtQueryAmt2.Text)
         useyear = Trim(cboQueryUseyear.Text)
+        useyear2 = Trim(cboQueryUseyear2.Text)
+        uses = Trim(txtQueryUses.Text)
+        specremark = Trim(txtQuerySpecRemark.Text)
+        name = Trim(txtQueryName.Text)
+        comefrom = Trim(txtQueryComeFrom.Text)
+        model = Trim(txtQueryModel.Text)
+        queryDiscardMode = cboQueryDiscardMode.SelectedIndex
 
-        Dim sqlstr, qstr, sortstr As String
-        sqlstr = "SELECT * from PPTName  " & _
-                 "where 1=1 "
-
-        qstr = " and (kindno >= '" & kindno & "' or '" & kindno & "'='')"
-        qstr += " and (kindno <= '" & kindno2 & "' or '" & kindno2 & "'='')"
-        qstr += " and (name like '%" & name & "%'  or '" & name & "'='')"
-        qstr += " and (unit like '%" & unit & "%' or '" & unit & "'='')"
-        qstr += " and (material like '%" & material & "%' or '" & material & "'='')"
-        qstr += " and (useyear=" & IIf(useyear = "", 0, useyear) & " or '" & useyear & "'='')"
-
-        sortstr = ""
-
-        If strOrder <> "" Then
-            sortstr = IIf(strOrder = "", sortstr, " ORDER BY " & strOrder & " " & strSortType)
+        '檢查是否至少輸入一項查詢條件
+        If prno = "" And prno2 = "" And acno = "" And acno2 = "" And bgno = "" And bgno2 = "" And spdate = "" And spdate2 = "" _
+        And senddate = "" And senddate2 = "" And keepunit = "" And keepunit2 = "" And keepemp = "" And keepemp2 = "" _
+        And srdate = "" And srdate2 = "" And amt = "" And amt2 = "" And useyear = "" And useyear2 = "" And uses = "" And specremark = "" _
+        And name = "" And comefrom = "" And model = "" Then
+            MessageBx("至少要輸入一項查詢條件")
+            Exit Sub
+        End If
+        '檢查各欄位是否輸入有效值
+        If prno > prno2 And (prno <> "" And prno2 <> "") Then
+            MessageBx("起始財物編號必須小於終止財物編號")
+            Exit Sub
+        End If
+        If acno > acno2 And (acno <> "" And acno2 <> "") Then
+            MessageBx("起始會計科目編號必須小於終止會計科目編號")
+            Exit Sub
+        End If
+        If bgno > bgno2 And (bgno <> "" And bgno2 <> "") Then
+            MessageBx("起始預算科目編號必須小於終止預算科目編號")
+            Exit Sub
+        End If
+        If keepunit > keepunit2 And (keepunit <> "" And keepunit2 <> "") Then
+            MessageBx("起始單位代碼必須小於終止單位代碼")
+            Exit Sub
+        End If
+        If keepemp > keepemp2 And (keepemp <> "" And keepemp2 <> "") Then
+            MessageBx("起始員工代號必須小於終止員工代號")
+            Exit Sub
+        End If
+        If Not IsNumeric(amt) And amt <> "" Then
+            MessageBx("起始原值只能輸入數字")
+            Exit Sub
+        End If
+        If Not IsNumeric(amt2) And amt2 <> "" Then
+            MessageBx("終止原值只能輸入數字")
+            Exit Sub
+        End If
+        If amt > amt2 And (amt <> "" And amt2 <> "") Then
+            MessageBx("起始原值必須小於終止原值")
+            Exit Sub
+        End If
+        If Not IsNumeric(useyear) And useyear <> "" Then
+            MessageBx("起始使用年限只能輸入數字")
+            Exit Sub
+        End If
+        If Not IsNumeric(useyear2) And useyear2 <> "" Then
+            MessageBx("終止使用年限只能輸入數字")
+            Exit Sub
+        End If
+        If useyear > useyear2 And (useyear <> "" And useyear2 <> "") Then
+            MessageBx("起始使用年限必須小於終止使用年限")
+            Exit Sub
         End If
 
-        sqlstr = sqlstr + qstr + sortstr
+        If pdate > pdate2 And (spdate <> "" And spdate2 <> "") Then
+            MessageBx("起始購入日期必須小於終止購入日期")
+            Exit Sub
+        End If
 
-        lbl_sort.Text = Master.Controller.objSort(IIf(strSortType = "", "ASC", strSortType))
-        Master.Controller.objDataGrid(DataGridView, lbl_GrdCount, DNS_PGM, sqlstr, "查詢資料檔")
+        If enddate > enddate2 And (senddate <> "" And senddate2 <> "") Then
+            MessageBx("起始報廢日期必須小於終止報廢日期")
+            Exit Sub
+        End If
+
+        If rdate > rdate2 And (srdate <> "" And srdate2 <> "") Then
+            MessageBx("起始修改日期必須小於終止修改日期")
+            Exit Sub
+        End If
+
+
+
+        'btnQuery.Enabled = False
+
+        Dim info As New PGMainInfo(prno, prno2, name, acno, acno2, spdate, spdate2, keepemp, keepemp2 _
+        , keepunit, keepunit2, useyear, useyear2, amt, amt2, bgno, bgno2, comefrom, model _
+        , senddate, senddate2, uses, specremark, srdate, srdate2, queryDiscardMode, "dummy")
+
+        Dim PGMainDAL As PGMainDAL = New PGMainDAL
+        Dim mDT As DataTable = New DataTable
+        Dim mDV As DataView = New DataView
+        mDT = PGMainDAL.Query(info)
+        mDV.Table = mDT
+        mDV.Sort = "prno"
+        DataGridView.DataSource = mDV
+        DataGridView.DataBind()
+
+        lbl_GrdCount.Text = mDV.Count
+        If mDV.Count = 0 Then
+            MessageBx("找不到資料，請重新設定查詢條件")
+        End If
+        TabContainer1.ActiveTabIndex = 0
 
         '判斷是否有值可供選擇*****
-        If DataGridView.Items.Count > 0 Then
-            Dim txtID As Label = DataGridView.Items(0).FindControl("id")
-            txtKey1.Text = txtID.Text
-            FindData(txtID.Text)
-        End If
+        'If DataGridView.Items.Count > 0 Then
+        '    Dim txtID As Label = DataGridView.Items(0).FindControl("id")
+        '    txtKey1.Text = txtID.Text
+        '    FindData(txtID.Text)
+        'End If
     End Sub
     '存檔
     Public Sub SaveData(ByVal PrevTableStatus As Integer)
@@ -242,31 +340,31 @@ Public Class PGMB010
         Dim blnCheck As Boolean = False
 
         Dim kindno, name, unit, material, useyear, rowFilter As String
-        Dim length As Integer
-        kindno = Trim(txtKindNo.Text)
-        length = Len(kindno)
-        name = Trim(txtName.Text)
-        unit = Trim(cboUnit.Text)
-        material = Trim(cboMaterial.Text)
-        useyear = Trim(cboUseYear.Text)
-        If Not IsNumeric(kindno) Then
-            MessageBx("編號必須輸入不大於6位的數字")
-            PrevTableStatus = "0"
-        End If
-        If length <> 1 And length <> 3 And length <> 6 Then
-            MessageBx("編號長度必須是 1 位或 3 位或是 6 位數字")
-            PrevTableStatus = "0"
-        End If
-        If name = String.Empty Then
-            MessageBx("名稱不可空白")
-            PrevTableStatus = "0"
-        End If
-        If Not IsNumeric(useyear) Or useyear.IndexOf("-") >= 0 Then
-            MessageBx("使用年限必須輸入正整數")
-            PrevTableStatus = "0"
-        End If
+        'Dim length As Integer
+        'kindno = Trim(txtKindNo.Text)
+        'length = Len(kindno)
+        'name = Trim(txtName.Text)
+        'unit = Trim(cboUnit.Text)
+        'material = Trim(cboMaterial.Text)
+        'useyear = Trim(cboUseYear.Text)
+        'If Not IsNumeric(kindno) Then
+        '    MessageBx("編號必須輸入不大於6位的數字")
+        '    PrevTableStatus = "0"
+        'End If
+        'If length <> 1 And length <> 3 And length <> 6 Then
+        '    MessageBx("編號長度必須是 1 位或 3 位或是 6 位數字")
+        '    PrevTableStatus = "0"
+        'End If
+        'If name = String.Empty Then
+        '    MessageBx("名稱不可空白")
+        '    PrevTableStatus = "0"
+        'End If
+        'If Not IsNumeric(useyear) Or useyear.IndexOf("-") >= 0 Then
+        '    MessageBx("使用年限必須輸入正整數")
+        '    PrevTableStatus = "0"
+        'End If
 
-        Dim pgKind As New PGKindInfo(kindno, name, unit, material, useyear)
+        Dim pgKind As New PGKindInfo(kindno, name, Unit, material, useyear)
 
         '-- 不可重複(只有新增才需判斷) --
         Dim strRow As String = ""
@@ -390,20 +488,66 @@ Public Class PGMB010
 
         Dim sqlstr, qstr, strD, strC As String
 
-        sqlstr = "SELECT * from PPTName " & _
-         "where  kindno ='" & strKey1 & "'"
+        sqlstr = "SELECT * from PPTF010 " & _
+         "where  PRNO ='" & strKey1 & "'"
 
 
         objCmd99 = New SqlCommand(sqlstr, objCon99)
         objDR99 = objCmd99.ExecuteReader
 
         If objDR99.Read Then
-            txtKindNo.Text = objDR99("KindNo").ToString
-            txtName.Text = objDR99("Name").ToString
-            cboUnit.Text = objDR99("Unit").ToString
-            cboMaterial.Text = objDR99("Material").ToString
-            cboUseYear.Text = objDR99("UseYear").ToString
-            lblkey.Text = Trim(objDR99("kindno").ToString)
+
+            Dim kindNo As String, no As String, prno As String
+            prno = objDR99("prno").ToString
+            kindNo = Microsoft.VisualBasic.Left(prno, 6)
+            no = Mid(prno, 7)
+            txtPrNo.Text = kindNo
+            cboAddCount.SelectedIndex = 0
+            txtNo.Text = no
+            txtNo2.Text = no
+            txtName.Text = objDR99("name").ToString
+            txtUnit.Text = objDR99("prno").ToString
+            txtMaterial.Text = objDR99("material").ToString
+            cboUseYear.Text = objDR99("useyear").ToString
+            txtAcNo.Text = objDR99("acno").ToString
+            txtQty.Text = objDR99("qty").ToString
+            txtAmt.Text = objDR99("amt").ToString
+            txtEndAmt.Text = objDR99("endamt").ToString
+            txtBgAcNo.Text = objDR99("bgacno").ToString
+            txtBgAcName.Text = objDR99("bgname").ToString
+            txtComeFrom.Text = objDR99("comefrom").ToString
+            txtMadeDate.Text = objDR99("madedate").ToString
+            txtModel.Text = objDR99("model").ToString
+            txtPlace.Text = objDR99("place").ToString
+            Dim keepemp As String = objDR99("keepempno").ToString & ""
+            If keepemp = String.Empty Then
+                cboWhoKeep.SelectedIndex = 1
+                txtWhoKeep.Text = objDR99("keepunit").ToString & ""
+            Else
+                cboWhoKeep.SelectedIndex = 0
+                txtWhoKeep.Text = objDR99("keepempno").ToString & ""
+            End If
+            txtUses.Text = objDR99("uses").ToString
+            txtBorrow.Text = objDR99("borrow").ToString
+            txtPDate.Text = objDR99("pdate").ToString
+            txtEndDate.Text = objDR99("enddate").ToString
+            cboEndRemark.Text = objDR99("endremk").ToString
+            txtRemark.Text = objDR99("remark").ToString
+            txtSpecRemark.Text = objDR99("spec_remark").ToString
+            'lblNetAmt.Text = "增減值 = " & objDR99("totalAddDel").ToString & " , 淨值 = " & objDR99("netAmt").ToString & " , 折舊率 = " & Format(objDR99("depreciationRatio").ToString, "0.00%")
+            'btnAddReviseOK.Text = "確定修改"
+            'txtPrNo.Enabled = False
+            'btnPrNo.Enabled = False
+            'cboAddCount.Enabled = False
+            'txtNo.Enabled = False
+            'lblNetAmt.Visible = True
+            'btnGetPrNo.Enabled = False
+            'btnEndDate.Enabled = True
+            'txtEndDate.Enabled = True
+            'cboEndRemark.Enabled = True
+            'btnDeleteOK.Enabled = True
+
+            lblkey.Text = Trim(objDR99("prno").ToString)
         End If
 
         objDR99.Close()    '關閉連結
@@ -432,9 +576,9 @@ Public Class PGMB010
     End Sub
 
 #End Region
-   
 
-    
+
+
 
     Protected Sub btnQuery_Click(sender As Object, e As EventArgs) Handles btnQuery.Click
         ViewState("MyOrder") = ""
