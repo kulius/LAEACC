@@ -1112,6 +1112,7 @@
     <Content Include="App_Data\AC030轉帳傳票.frx">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\Z03PGMTable.txt" />
     <Content Include="App_Data\Z02SYSTable.txt" />
     <Content Include="App_Data\Z01ACCTable.txt" />
     <Content Include="Content\bootstrap.css" />
@@ -1233,6 +1234,7 @@
     <Content Include="LAE10406\PAY\S4\CHF010.aspx" />
     <Content Include="LAE10406\PAY\S4\PAY_PSNAME.aspx" />
     <Content Include="LAE10406\PAY\S5\CHF040.aspx" />
+    <Content Include="LAE10406\PGM\S1\PGMB010.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPMENU.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPUNIT.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPUSER.aspx" />
@@ -2120,6 +2122,17 @@
       <DependentUpon>CHF040.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LAE10406\PGM\PGMEntity\PGKindInfo.vb" />
+    <Compile Include="LAE10406\PGM\PGMSQLServerDAL\PGKindDAL.vb" />
+    <Compile Include="LAE10406\PGM\S1\PGMB010.aspx.designer.vb">
+      <DependentUpon>PGMB010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PGM\S1\PGMB010.aspx.vb">
+      <DependentUpon>PGMB010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PGM\SqlHelper.vb" />
+    <Compile Include="LAE10406\PGM\SqlHelperParameterCache.vb" />
     <Compile Include="LAE10406\SYS\01\SYSGROUPMENU.aspx.designer.vb">
       <DependentUpon>SYSGROUPMENU.aspx</DependentUpon>
     </Compile>
@@ -2246,7 +2259,6 @@
     <Folder Include="LAE10406\BAI\" />
     <Folder Include="LAE10406\CHR\" />
     <Folder Include="LAE10406\INC\01\" />
-    <Folder Include="LAE10406\PGM\" />
     <Folder Include="LAE10406\REC\" />
   </ItemGroup>
   <PropertyGroup>

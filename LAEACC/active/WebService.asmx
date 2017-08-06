@@ -17,6 +17,8 @@ Public Class WebService
 
     '--資料庫共用變數--
     Dim WSDNS As String = ConfigurationManager.ConnectionStrings("DNS_ACC").ConnectionString
+    Dim DNS_PGM As String = ConfigurationManager.ConnectionStrings("DNS_PGM").ConnectionString
+    
     
 #Region "類別模組"
     '資料庫
@@ -34,7 +36,45 @@ Public Class WebService
     
     
     '++ 查詢專用[資料未含特殊代號] ++
-    
+    '** 查詢摘要 **
+    <WebMethod(EnableSession:=True)> _
+    Public Function GetPGMKindNo(ByVal prefixText As String, ByVal count As Integer) As String()
+        If count = 0 Then
+            count = 10
+        End If
+        
+        '防呆
+        If prefixText.Equals("%#)*)*)*DDD") Then
+            Return New String(0) {}
+        End If
+                
+        Dim i As Integer = 0
+        Dim items As List(Of String) = New List(Of String)(count)
+        
+        
+        '開啟查詢
+        WSobjCon = New SqlConnection(DNS_PGM)
+        WSobjCon.Open()
+        
+        If Trim(prefixText) = "" Then
+            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as KName  FROM PPTName where  "
+        Else
+            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as Kname  FROM PPTName where  rtrim(left(KindNo+space(10),10)+Name) LIKE '%" & prefixText & "%'"
+        End If
+
+        WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)
+        WSobjDR = WSobjCmd.ExecuteReader
+
+        Do While WSobjDR.Read
+            items.Add(Trim(WSobjDR("Kname")))
+            System.Math.Min(System.Threading.Interlocked.Increment(i), i - 1)
+        Loop
+
+        WSobjCon.Close()
+        
+        
+        Return items.ToArray
+    End Function
     '** 查詢摘要 **
     <WebMethod(EnableSession:=True)> _
     Public Function GetCompletionListRemark(ByVal prefixText As String, ByVal count As Integer) As String()

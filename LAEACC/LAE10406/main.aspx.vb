@@ -7,6 +7,7 @@ Public Class main
     Dim strSSQL As String '查詢資料
     Dim DNS_ACC As String = ConfigurationManager.ConnectionStrings("DNS_ACC").ConnectionString
     Dim DNS_SYS As String = ConfigurationManager.ConnectionStrings("DNS_SYS").ConnectionString
+    Dim DNS_PGM As String = ConfigurationManager.ConnectionStrings("DNS_PGM").ConnectionString
 #End Region
 
 #Region "Page及功能操作"
@@ -51,37 +52,56 @@ Public Class main
 
         Dim sLine As String = ""
         Dim sSql As String = ""
-        Do
-            sLine = objReader.ReadLine()
-            If Not sLine Is Nothing Then
+        'Do
+        '    sLine = objReader.ReadLine()
+        '    If Not sLine Is Nothing Then
 
-                If sLine.Trim = "GO" Then
-                    Master.ADO.runsql(DNS_ACC, sSql)
-                    sSql = ""
-                Else
-                    sSql = sSql + sLine + vbNewLine
-                End If
-            End If
-        Loop Until sLine Is Nothing
-        objReader.Close()
+        '        If sLine.Trim = "GO" Then
+        '            Master.ADO.runsql(DNS_ACC, sSql)
+        '            sSql = ""
+        '        Else
+        '            sSql = sSql + sLine + vbNewLine
+        '        End If
+        '    End If
+        'Loop Until sLine Is Nothing
+        'objReader.Close()
 
-        path = Request.PhysicalApplicationPath + "App_Data\Z02SYSTable.txt"
-        Dim objReader1 As New StreamReader(path)
+        'path = Request.PhysicalApplicationPath + "App_Data\Z02SYSTable.txt"
+        'Dim objReader1 As New StreamReader(path)
+
+        'sLine = ""
+        'sSql = ""
+        'Do
+        '    sLine = objReader1.ReadLine()
+        '    If Not sLine Is Nothing Then
+
+        '        If sLine.Trim = "GO" Then
+        '            Master.ADO.runsql(DNS_SYS, sSql)
+        '            sSql = ""
+        '        Else
+        '            sSql = sSql + sLine + vbNewLine
+        '        End If
+        '    End If
+        'Loop Until sLine Is Nothing
+        'objReader1.Close()
+
+        path = Request.PhysicalApplicationPath + "App_Data\Z03PGMTable.txt"
+        Dim objReader2 As New StreamReader(path)
 
         sLine = ""
         sSql = ""
         Do
-            sLine = objReader1.ReadLine()
+            sLine = objReader2.ReadLine()
             If Not sLine Is Nothing Then
 
                 If sLine.Trim = "GO" Then
-                    Master.ADO.runsql(DNS_SYS, sSql)
+                    Master.ADO.runsql(DNS_PGM, sSql)
                     sSql = ""
                 Else
                     sSql = sSql + sLine + vbNewLine
                 End If
             End If
         Loop Until sLine Is Nothing
-        objReader1.Close()
+        objReader2.Close()
     End Sub
 End Class
