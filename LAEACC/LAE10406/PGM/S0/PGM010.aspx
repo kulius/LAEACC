@@ -252,7 +252,7 @@
                             <div style="clear:both; height:5px;"></div> 
 
                             <!--詳細內容顯示區-->                           
-                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="1">
+                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="3">
                                 <AjaxToolkit:TabPanel ID="TabPanel1" runat="server">
                                     <HeaderTemplate>多筆瀏灠</HeaderTemplate>
                                     <ContentTemplate>
@@ -405,7 +405,9 @@
                                             <tr>
                                                 <th>*財物編號：</th>
                                                 <td>
-                                                    <asp:TextBox ID="txtTraPrNo" CssClass="form-control" Width="200px" runat="server" />
+                                                    <asp:TextBox ID="txtTraPrNo" runat="server" />
+                                                    <asp:Button ID="btnTransGetPrNo" Text="查詢財物" runat="server" />
+                                                </td>
                                                 <th>財物名稱：</th>
                                                 <td>
                                                     <asp:Label ID="txtTraName" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" />
@@ -430,14 +432,17 @@
 
                                                 <th>*保管：</th>
                                                 <td><asp:DropDownList ID="cboTraNewWhoKeep" runat="server" />
-                                                <asp:TextBox ID="txtTraNewWhoKeep" CssClass="form-control" Width="100px" runat="server" /></td>
+                                                <asp:TextBox ID="txtTraNewWhoKeep" runat="server" /></td>
+                                                <AjaxToolkit:AutoCompleteExtender 
+                                                        ID="AutoCompleteExtender5" runat="server" ServicePath="~/active/WebService.asmx"               
+                                                        TargetControlID="txtTraNewWhoKeep"  ServiceMethod="GetPGMWhoKeep"
+                                                        MinimumPrefixLength="0"   CompletionInterval="100" CompletionSetCount="12" BehaviorID="_content_AutoCompleteExtender1" DelimiterCharacters="" />
 
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td colspan="4">
                                                     <asp:Button ID="btnTransferQuery" Text="查詢交接紀錄" runat="server" />
-                                                </td>
-                                                 <td>
+                                                
                                                     <asp:Button ID="btnTransfer" Text="執行交接作業" runat="server" />
                                                 </td>
                                             </tr>
@@ -454,7 +459,9 @@
                                             <tr>
                                                 <th>*財物編號：</th>
                                                 <td>
-                                                    <asp:TextBox ID="txtDisPrNo" CssClass="form-control" Width="200px" runat="server" />
+                                                    <asp:TextBox ID="txtDisPrNo" runat="server" />
+                                                    <asp:Button ID="btnDisGetPrNo" Text="查詢財物" runat="server" />
+                                                </td>
                                                 </td>
                                                 <th>財物名稱：</th>
                                                 <td>
@@ -483,10 +490,9 @@
 
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td colspan="4">
                                                     <asp:Button ID="btnDiscardQuery" Text="查詢當日報廢清單" runat="server" />
-                                                </td>
-                                                 <td>
+
                                                     <asp:Button ID="btnDiscard" Text="執行報廢作業" runat="server" />
                                                 </td>
                                             </tr>

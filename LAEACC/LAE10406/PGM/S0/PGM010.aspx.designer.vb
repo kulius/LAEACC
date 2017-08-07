@@ -698,6 +698,15 @@ Partial Public Class PGM010
     Protected WithEvents txtTraPrNo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''btnTransGetPrNo 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnTransGetPrNo As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''txtTraName 控制項。
     '''</summary>
     '''<remarks>
@@ -770,6 +779,15 @@ Partial Public Class PGM010
     Protected WithEvents txtTraNewWhoKeep As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''AutoCompleteExtender5 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents AutoCompleteExtender5 As Global.AjaxControlToolkit.AutoCompleteExtender
+
+    '''<summary>
     '''btnTransferQuery 控制項。
     '''</summary>
     '''<remarks>
@@ -804,6 +822,15 @@ Partial Public Class PGM010
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents txtDisPrNo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnDisGetPrNo 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnDisGetPrNo As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''txtDisName 控制項。
