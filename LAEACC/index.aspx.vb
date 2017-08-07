@@ -31,7 +31,7 @@ Public Class index
 #End Region
 
 #Region "Page及功能操作"
-    Private Sub index_Init(sender As Object, e As EventArgs) Handles Me.Init        
+    Private Sub index_Init(sender As Object, e As EventArgs) Handles Me.Init
         If Request("t") = "out" Then ACC.SystemLoginAndLogout(Session("USERID"), "O", "S", "登出成功") : Session.Clear() : Response.Write("<script>top.location.href='index.aspx';</script>") '系統登出
 
         '++ 物件初始化 ++

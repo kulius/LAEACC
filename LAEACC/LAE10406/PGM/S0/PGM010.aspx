@@ -41,6 +41,11 @@
                 obj.value = substr(obj.value, 10)
             obj.value = obj.value.trim()
         }
+        function ismaxlength2(obj) {
+            if (stringBytes(obj.value) > 5)
+                obj.value = substr(obj.value, 5)
+            obj.value = obj.value.trim()
+        }
     </script>
 </asp:content>
 
@@ -236,6 +241,13 @@
                             <!--控制項-->
                             <div style="margin:5px 0px 5px 0px;">
                                 <uc1:UCBase ID="UCBase1" runat="server" />
+
+                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                    <ContentTemplate></ContentTemplate>
+                                    <Triggers>
+                                        <asp:PostBackTrigger ControlID="UCBase1" />
+                                    </Triggers>
+                                </asp:UpdatePanel></td>
                             </div>
                             <div style="clear:both; height:5px;"></div> 
 
@@ -292,15 +304,21 @@
                                             <tr>
                                                 <th>*財物編號：</th>
                                                 <td>
-                                                    <asp:TextBox ID="txtPrNo" CssClass="form-control" Width="200px" runat="server" />
+                                                    <asp:TextBox ID="txtPrNo" CssClass="form-control" Width="200px" runat="server" AutoPostBack="True" OnTextChanged="txtPrNo_TextChanged" />
                                                     <asp:Label ID="lblkey" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" Visible="False" runat="server" />
                                                     <AjaxToolkit:AutoCompleteExtender 
                                                         ID="AutoCompleteExtender3" runat="server" ServicePath="~/active/WebService.asmx"               
                                                         TargetControlID="txtPrNo"  ServiceMethod="GetPGMKindNo"
                                                         MinimumPrefixLength="0"   CompletionInterval="100" CompletionSetCount="12" BehaviorID="_content_AutoCompleteExtender1" DelimiterCharacters="" />
+                                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                                        <ContentTemplate></ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:PostBackTrigger ControlID="txtPrNo" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel> 
                                                 </td>
-                                                <th>新增：</th>
-                                                <td><asp:DropDownList ID="cboAddCount" runat="server" />件
+                                                <th>新增(件)：</th>
+                                                <td><asp:DropDownList ID="cboAddCount" runat="server" />
                                                 </td>
                                                 <th>*序號：</th>
                                                 <td>
@@ -310,7 +328,7 @@
                                                     <asp:TextBox ID="txtNo2" CssClass="form-control" Width="100px" runat="server" />
                                                 </td>
                                                 <td>
-                                                    <asp:Button ID="btnGetPrNo" Text="重新取得序號" runat="server" />
+                                                    <asp:Button ID="btnGetPrNo" Text="取得序號" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -355,8 +373,12 @@
                                             </tr>
                                             <tr>
                                                 <th>*保管：</th>
-                                                <td><asp:DropDownList ID="cboWhoKeep" runat="server" />
-                                                <asp:TextBox ID="txtWhoKeep" CssClass="form-control" Width="100px" runat="server" /></td>
+                                                <td><asp:DropDownList ID="cboWhoKeep" runat="server" AutoPostBack="true"/>
+                                                <asp:TextBox ID="txtWhoKeep" CssClass="form-control" Width="150px" runat="server" /></td>
+                                                    <AjaxToolkit:AutoCompleteExtender 
+                                                        ID="AutoCompleteExtender4" runat="server" ServicePath="~/active/WebService.asmx"               
+                                                        TargetControlID="txtWhoKeep"  ServiceMethod="GetPGMWhoKeep"
+                                                        MinimumPrefixLength="0"   CompletionInterval="100" CompletionSetCount="12" BehaviorID="_content_AutoCompleteExtender1" DelimiterCharacters="" />
                                                 <th>借用單位：</th>
                                                 <td><asp:TextBox ID="txtBorrow" CssClass="form-control" Width="100px" runat="server" /></td>
                                                 <th>報廢日期：</th>
@@ -366,9 +388,9 @@
                                             </tr>
                                             <tr>
                                                 <th>規格備註：</th>
-                                                <td colspan="3"><asp:TextBox ID="txtSpecRemark" CssClass="form-control" Width="400px" TextMode="MultiLine" Height="100"  runat="server" /></td>
+                                                <td colspan="3"><asp:TextBox ID="txtSpecRemark" CssClass="form-control" Width="400px" TextMode="MultiLine" Height="100px"  runat="server" /></td>
                                                 <th>備註：</th>
-                                                <td colspan="3"><asp:TextBox ID="txtRemark" CssClass="form-control" Width="400px" TextMode="MultiLine" Height="100" runat="server" /></td>
+                                                <td colspan="3"><asp:TextBox ID="txtRemark" CssClass="form-control" Width="400px" TextMode="MultiLine" Height="100px" runat="server" /></td>
                                             </tr>
                                             
                                         </table>  

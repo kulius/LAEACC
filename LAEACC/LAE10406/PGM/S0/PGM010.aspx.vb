@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
 
+
 Public Class PGM010
     Inherits System.Web.UI.Page
 
@@ -37,6 +38,7 @@ Public Class PGM010
         txtQueryPrNo.Attributes.Add("onchange", "return ismaxlength(this)")
         txtQueryPrNo2.Attributes.Add("onchange", "return ismaxlength(this)")
         txtPrNo.Attributes.Add("onchange", "return ismaxlength(this)")
+        txtWhoKeep.Attributes.Add("onchange", "return ismaxlength2(this)")
 
         ViewState("MyOrder") = "KindNo"  '預設排序欄位
 
@@ -47,6 +49,16 @@ Public Class PGM010
 
         'Focus*****
         TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
+
+        Dim s1 As String = Request.QueryString("cvalue")
+
+        If s1 = "PGM020" Then
+            TabContainer1.ActiveTabIndex = 3 '指定Tab頁籤
+        End If
+
+        If s1 = "PGM030" Then
+            TabContainer1.ActiveTabIndex = 2 '指定Tab頁籤
+        End If
 
 
 
@@ -63,7 +75,7 @@ Public Class PGM010
 
         Dim strcount As String = "" : For I As Integer = 1 To 100 Step 1 : strcount &= I & "," : Next '新增數量
         Master.Controller.objDropDownListOptionGG(cboAddCount, "--請選擇--," & strcount, "," & strcount)
-        Dim strWhoKeep As String = "個人保管,單位保管"
+        Dim strWhoKeep As String = "個人保管,單位保管,"
         Master.Controller.objDropDownListOptionGG(cboWhoKeep, "--請選擇--," & strWhoKeep, "," & strWhoKeep)
     End Sub
 
@@ -191,6 +203,8 @@ Public Class PGM010
             Case 0 '一般模式
 
             Case 1 '新增模式
+                cboAddCount.Text = "1"
+                txtQty.Text = "1"
                 TabContainer1.ActiveTabIndex = 1
             Case 2 '修改模式
                 TabContainer1.ActiveTabIndex = 1
@@ -339,46 +353,221 @@ Public Class PGM010
         Dim SaveStatus As Boolean = False
         Dim blnCheck As Boolean = False
 
-        Dim kindno, name, unit, material, useyear, rowFilter As String
-        'Dim length As Integer
-        'kindno = Trim(txtKindNo.Text)
-        'length = Len(kindno)
-        'name = Trim(txtName.Text)
-        'unit = Trim(cboUnit.Text)
-        'material = Trim(cboMaterial.Text)
-        'useyear = Trim(cboUseYear.Text)
-        'If Not IsNumeric(kindno) Then
-        '    MessageBx("編號必須輸入不大於6位的數字")
-        '    PrevTableStatus = "0"
+        Dim kindno, prno, prno2, acno, no, no2, bgno, sPDate As String
+        Dim unit, material, bgname, sEndDate, keepunit, keepemp As String
+        Dim qty, amt, endAmt, useyear, uses, specRemark, remark As String
+        Dim sMadeDate, place, whokeep, borrow, endRemark As String
+        Dim pDate, madeDate, endDate As DateTime
+        Dim name, comefrom, model, revisedEmpNo As String
+        If txtPrNo.Enabled Then '新增的時候,不可以編輯報廢相關資料
+            txtEndDate.Text = ""
+            cboEndRemark.Text = ""
+        End If
+        kindno = Trim(txtPrNo.Text)
+        acno = Trim(txtAcNo.Text)
+        no = Trim(txtNo.Text)
+        no2 = Trim(txtNo2.Text)
+        bgno = Trim(txtBgAcNo.Text)
+        sPDate = Trim(txtPDate.Text)
+        unit = Trim(txtUnit.Text)
+        material = Trim(txtMaterial.Text)
+        bgname = Trim(txtBgAcName.Text)
+        sEndDate = Trim(txtEndDate.Text)
+        qty = Trim(txtQty.Text)
+        amt = Trim(txtAmt.Text)
+        endAmt = Trim(txtEndAmt.Text)
+        useyear = Trim(cboUseYear.Text)
+        uses = Trim(txtUses.Text)
+        specRemark = Trim(txtSpecRemark.Text)
+        remark = Trim(txtRemark.Text)
+        sMadeDate = Trim(txtMadeDate.Text)
+        place = Trim(txtPlace.Text)
+        whokeep = Trim(txtWhoKeep.Text)
+        borrow = Trim(txtBorrow.Text)
+        endRemark = Trim(cboEndRemark.Text)
+        name = Trim(txtName.Text)
+        comefrom = Trim(txtComeFrom.Text)
+        model = Trim(txtModel.Text)
+
+        If Not IsNumeric(kindno) Then
+            MessageBx("財物編號必須輸入6位數字")
+            txtPrNo.Focus()
+            PrevTableStatus = "0"
+        End If
+        'If Not gPS2.IsPGKindIDValid(kindno) Then
+        '    MessageBx("財物編號不存在或不是6位數字,請重新輸入", , gMsgTitle)
+        '    txtPrNo.SelectAll()
+        '    txtPrNo.Focus()
+        '    Exit Sub
         'End If
-        'If length <> 1 And length <> 3 And length <> 6 Then
-        '    MessageBx("編號長度必須是 1 位或 3 位或是 6 位數字")
-        '    PrevTableStatus = "0"
+        If name = "" Then
+            MessageBx("必須輸入財物名稱")
+            txtName.Focus()
+            PrevTableStatus = "0"
+        End If
+        'If Not gAS.IsIDValid(acno) And acno <> "" Then
+        '    MessageBx("會計科目編號是無效的,請重新輸入", , gMsgTitle)
+        '    txtAcNo.SelectAll()
+        '    txtAcNo.Focus()
+        '    Exit Sub
         'End If
-        'If name = String.Empty Then
-        '    MessageBx("名稱不可空白")
-        '    PrevTableStatus = "0"
-        'End If
-        'If Not IsNumeric(useyear) Or useyear.IndexOf("-") >= 0 Then
-        '    MessageBx("使用年限必須輸入正整數")
-        '    PrevTableStatus = "0"
+        If (no = "") Then
+            MessageBx("必須指定序號")
+            txtNo.Focus()
+            PrevTableStatus = "0"
+        End If
+        'If Not gBS.IsIDValid(bgno) And bgno <> "" Then
+        '    MessageBx("預算科目編號是無效的,請重新輸入", , gMsgTitle)
+        '    txtBgAcNo.SelectAll()
+        '    txtBgAcNo.Focus()
+        '    Exit Sub
         'End If
 
-        Dim pgKind As New PGKindInfo(kindno, name, Unit, material, useyear)
+        If sPDate <> "" Then
+            sPDate = sDateCDToAD(sPDate)
+            pDate = CDate(sPDate)
+        Else
+            MessageBx("購入日期不得為空")
+            txtPDate.Focus()
+            PrevTableStatus = "0"
+        End If
+
+        If pDate > Now Then
+            MessageBx("購入日期不可大於今天")
+            txtPDate.Focus()
+            PrevTableStatus = "0"
+        End If
+        'If (Not gDT.DateRegExp.IsMatch(sEndDate) Or Not IsDate(sEndDate)) And sEndDate <> "" Then
+        '    MessageBx("報廢日期的格式必須為 " & gDT.DatePattern & " 或是日期超過該月的限制", , gMsgTitle)
+        '    txtEndDate.SelectAll()
+        '    txtEndDate.Focus()
+        '    Exit Sub
+        'Else
+        '    If sEndDate <> "" Then endDate = CDate(sEndDate) : sEndDate = gDT.CFDate(sEndDate, gDT.IsTaiwanCalendar)
+        'End If
+
+        If sEndDate <> "" Then
+            sEndDate = sDateCDToAD(sEndDate)
+            endDate = CDate(sEndDate)
+
+            If endDate > Now Then
+                MessageBx("報廢日期不可大於今天")
+                txtEndDate.Focus()
+                PrevTableStatus = "0"
+            End If
+
+        End If
+
+
+        If endRemark = "" And sEndDate <> "" Then
+            MessageBx("已經填寫了報廢日期就必須指定報廢原因")
+            cboEndRemark.Focus()
+            PrevTableStatus = "0"
+        End If
+        If endRemark <> "" And sEndDate = "" Then
+            MessageBx("已經填寫了報廢原因就必須指定報廢日期")
+            txtEndDate.Focus()
+            PrevTableStatus = "0"
+        End If
+        If (Not IsNumeric(qty)) Or qty.IndexOf("-") >= 0 Or qty.IndexOf(".") >= 0 Then
+            MessageBx("數量必須輸入正整數")
+            txtQty.Focus()
+            PrevTableStatus = "0"
+        End If
+        If (Not IsNumeric(amt)) Or amt.IndexOf("-") >= 0 Then
+            MessageBx("原值必須輸入正整數")
+            txtAmt.Focus()
+            PrevTableStatus = "0"
+        End If
+        If (Not IsNumeric(endAmt)) Or endAmt.IndexOf("-") >= 0 Then
+            MessageBx("預估殘值必須輸入正整數")
+            txtEndAmt.Focus()
+            PrevTableStatus = "0"
+        End If
+        If (Not IsNumeric(useyear)) Or useyear.IndexOf("-") >= 0 Or useyear.IndexOf(".") >= 0 Then
+            MessageBx("使用年限必須輸入正整數")
+            cboUseYear.Focus()
+            PrevTableStatus = "0"
+        End If
+        'If (Not gDT.DateRegExp.IsMatch(sMadeDate) Or Not IsDate(sMadeDate)) And sMadeDate <> "" Then
+        '    MessageBx("製造日期的格式必須為 " & gDT.DatePattern & " 或是日期超過該月的限制", , gMsgTitle)
+        '    txtMadeDate.SelectAll()
+        '    txtMadeDate.Focus()
+        '    Exit Sub
+        'Else
+        '    If sMadeDate <> "" Then madeDate = CDate(sMadeDate) : sMadeDate = gDT.CFDate(sMadeDate, gDT.IsTaiwanCalendar)
+        'End If
+
+        If sMadeDate <> "" Then
+            sMadeDate = sDateCDToAD(sMadeDate)
+            madeDate = CDate(sMadeDate)
+
+            If madeDate > Now Then
+                MessageBx("製造日期不可大於今天")
+                txtMadeDate.Focus()
+                PrevTableStatus = "0"
+            End If
+
+        End If
+
+        '報廢原因和報廢日期都填寫了,保管者就必須清空 <--主任說不需要
+        'If endRemark <> "" And sEndDate <> "" Then
+        'mKeepEmpName = ""
+        'mKeepUnitName = ""
+        'keepunit = ""
+        'keepemp = ""
+        'txtWhoKeep.Text = ""
+        'Else
+        If cboWhoKeep.Text = "個人保管" Then '個人保管
+            Dim emp As String
+            emp = findemp(whokeep)
+            If emp = "" Then
+                MessageBx("必須指定有效的員工編號，且不可以是離職員工")
+                txtWhoKeep.Focus()
+                PrevTableStatus = "0"
+            Else
+                keepunit = ""
+                keepemp = whokeep
+            End If
+        End If
+        If cboWhoKeep.Text = "單位保管" Then
+            Dim unit2 As String
+            unit2 = findunit(whokeep)
+            If unit2 = "" Then
+                MessageBx("必須指定有效的單位代號")
+                txtWhoKeep.Focus()
+                PrevTableStatus = "0"
+            Else
+                keepunit = whokeep
+                keepemp = ""
+            End If
+        End If
+        'End If
+
+
+
+
+        prno = kindno & no
+        prno2 = kindno & no2
+        revisedEmpNo = Session("USERID")
+        'mRevisedEmpName = gEmpName
+        'mRevisedDate = gDT.GetNowFromServer
+
+        Dim info As PGMainInfo
+        info = New PGMainInfo(prno, prno2, name, acno, sPDate, unit, qty, keepemp, keepunit _
+        , useyear, amt, endAmt, bgno, bgname, comefrom, model, sEndDate, endRemark, borrow _
+        , material, uses, sMadeDate, remark, place, specRemark, revisedEmpNo)
 
         '-- 不可重複(只有新增才需判斷) --
         Dim strRow As String = ""
         If PrevTableStatus = "1" Then
-            'lblNo.Text = Master.Controller.AutoNumber(Mid(Session("DATE"), 1, 3), 5, DNS_ACC, "BGF020", "BGNO", "BGNO LIKE '" & Mid(Session("DATE"), 1, 3) & "%'") '請購編號                
-            'strRow = Master.ADO.dbGetRow(DNS_ACC, "BGF020", "BGNO", "BGNO = '" & lblNo.Text & "'")
-            'blnCheck = IIf(strRow <> "", True, False) : If blnCheck = True Then MsgBox("【請購編號】，已存在!!") : Exit Sub
             txtKey1.Text = lblkey.Text
         End If
         Dim loadkey As String = lblkey.Text
 
         '判斷程序為新增或修改*****
-        If PrevTableStatus = "1" Then SaveStatus = InsertData(pgKind) : ViewState("FileKey") = txtKey1.Text '新增
-        If PrevTableStatus = "2" Then SaveStatus = UpdateData(pgKind) : ViewState("FileKey") = txtKey1.Text '修改
+        If PrevTableStatus = "1" Then SaveStatus = InsertData(info) : ViewState("FileKey") = txtKey1.Text '新增
+        If PrevTableStatus = "2" Then SaveStatus = UpdateData(info) : ViewState("FileKey") = txtKey1.Text '修改
 
         If SaveStatus = True Then
             ViewState("MyStatus") = 0
@@ -396,22 +585,27 @@ Public Class PGM010
     End Sub
 
     '新增
-    Public Function InsertData(pgKind As PGKindInfo) As Boolean
+    Public Function InsertData(info As PGMainInfo) As Boolean
         Dim blnCheck As Boolean = False
         Dim result As Integer
-        Dim PKG As PGKindDAL = New PGKindDAL
 
-        result = PKG.Insert(pgKind)
+        result = PGMainDAL.Insert(info)
         Select Case result
             Case 1
+                'If gIsPopupPrintPGKeepAdd Then
+                '    If MsgBox("新增成功，是否要列印財物保管增加單？", MsgBoxStyle.OkCancel, gMsgTitle) = MsgBoxResult.Ok Then
+                '        gPrintForm.PrintPGKeepAdd(New PGMainInfo(prno, prno2), False)
+                '    End If
+                'Else
+
+                'End If
                 MessageBx("新增成功")
+                PrintPGKeepAdd(info.PRNO, info.PRNO2) '傳票印一份
                 blnCheck = True
             Case -1
-                MessageBx("新增失敗，原因是 編號已經存在")
+                MessageBx("新增失敗，原因是 至少有一筆財物已經佔用該序號區間，必須指定新的序號")
             Case -2
-                MessageBx("新增失敗，原因是 編號長度必須是 1 位或 3 位或是 6 位數字")
-            Case -3
-                MessageBx("新增失敗，原因是 此編號之上沒有母編號，必須先建立母編號之後才可以新增子編號")
+                MessageBx("新增失敗，原因是 在建物主檔至少有一筆財物已經佔用該序號區間，必須指定新的序號")
             Case Else
                 MessageBx("未知的傳回值")
         End Select
@@ -419,18 +613,16 @@ Public Class PGM010
         Return blnCheck
     End Function
     '修改
-    Public Function UpdateData(pgKind As PGKindInfo) As Boolean
+    Public Function UpdateData(info As PGMainInfo) As Boolean
         Dim blnCheck As Boolean = False
         Dim result As Integer
-        Dim PKG As PGKindDAL = New PGKindDAL
-
-        result = PKG.Update(pgKind)
+        result = PGMainDAL.Update(info)
         Select Case result
             Case 1
                 MessageBx("修改成功")
                 blnCheck = True
             Case -1
-                MessageBx("修改失敗，原因是 找不到編號")
+                MessageBx("修改失敗，原因是 找不到此財物編號 ")
             Case Else
                 MessageBx("未知的傳回值")
         End Select
@@ -443,25 +635,23 @@ Public Class PGM010
         Dim SaveStatus As Boolean = False
         Dim result As Integer
         Dim keyvalue As String
-        Dim PKG As PGKindDAL = New PGKindDAL
-
         keyvalue = Trim(lblkey.Text)
 
-        Dim pgkind As PGKindInfo = New PGKindInfo(keyvalue)
-        result = PKG.Delete(pgkind)
-
+        Dim info As PGMainInfo = New PGMainInfo(keyvalue)
+        result = PGMainDAL.Delete(info)
         Select Case result
             Case 1
                 SaveStatus = True
             Case -1
-                MsgBox("刪除失敗，原因是 找不到編號")
+                MessageBx("刪除失敗，原因是 找不到此筆財物編號 ")
             Case -2
-                MsgBox("刪除失敗，原因是 此編號之下仍有其他子編號，必須先刪除所有子編號才可以刪除母編號")
+                MessageBx("刪除失敗，原因是 財物增減值檔仍有此財物的資料，必須先刪除財物增減值檔的資料才允許刪除財物主檔的資料")
             Case -3
-                MsgBox("刪除失敗，原因是 財物主檔有資料參考到此編號")
+                MessageBx("刪除失敗，原因是 財物折舊檔仍有此財物的資料，必須先刪除財物折舊檔的資料才允許刪除財物主檔的資料")
             Case Else
-                MsgBox("未知的傳回值")
+                MessageBx("未知的傳回值")
         End Select
+
 
         If SaveStatus = True Then
             ViewState("MyStatus") = 0
@@ -498,6 +688,7 @@ Public Class PGM010
         If objDR99.Read Then
 
             Dim kindNo As String, no As String, prno As String
+            lblkey.Text = objDR99("prno").ToString
             prno = objDR99("prno").ToString
             kindNo = Microsoft.VisualBasic.Left(prno, 6)
             no = Mid(prno, 7)
@@ -506,7 +697,7 @@ Public Class PGM010
             txtNo.Text = no
             txtNo2.Text = no
             txtName.Text = objDR99("name").ToString
-            txtUnit.Text = objDR99("prno").ToString
+            txtUnit.Text = objDR99("Unit").ToString
             txtMaterial.Text = objDR99("material").ToString
             cboUseYear.Text = objDR99("useyear").ToString
             txtAcNo.Text = objDR99("acno").ToString
@@ -521,30 +712,31 @@ Public Class PGM010
             txtPlace.Text = objDR99("place").ToString
             Dim keepemp As String = objDR99("keepempno").ToString & ""
             If keepemp = String.Empty Then
-                cboWhoKeep.SelectedIndex = 1
+                cboWhoKeep.SelectedIndex = 2
                 txtWhoKeep.Text = objDR99("keepunit").ToString & ""
             Else
-                cboWhoKeep.SelectedIndex = 0
+                cboWhoKeep.SelectedIndex = 1
                 txtWhoKeep.Text = objDR99("keepempno").ToString & ""
             End If
             txtUses.Text = objDR99("uses").ToString
             txtBorrow.Text = objDR99("borrow").ToString
-            txtPDate.Text = objDR99("pdate").ToString
+            txtPDate.Text = Master.Models.strDateADToChiness(Trim(objDR99("PDate").ToShortDateString.ToString))
             txtEndDate.Text = objDR99("enddate").ToString
             cboEndRemark.Text = objDR99("endremk").ToString
             txtRemark.Text = objDR99("remark").ToString
             txtSpecRemark.Text = objDR99("spec_remark").ToString
             'lblNetAmt.Text = "增減值 = " & objDR99("totalAddDel").ToString & " , 淨值 = " & objDR99("netAmt").ToString & " , 折舊率 = " & Format(objDR99("depreciationRatio").ToString, "0.00%")
             'btnAddReviseOK.Text = "確定修改"
-            'txtPrNo.Enabled = False
+            txtPrNo.Enabled = False
             'btnPrNo.Enabled = False
-            'cboAddCount.Enabled = False
-            'txtNo.Enabled = False
-            'lblNetAmt.Visible = True
-            'btnGetPrNo.Enabled = False
+            cboAddCount.Enabled = False
+            txtNo.Enabled = False
+            txtNo2.Enabled = False
+            lblNetAmt.Visible = True
+            btnGetPrNo.Enabled = False
             'btnEndDate.Enabled = True
-            'txtEndDate.Enabled = True
-            'cboEndRemark.Enabled = True
+            txtEndDate.Enabled = True
+            cboEndRemark.Enabled = True
             'btnDeleteOK.Enabled = True
 
             lblkey.Text = Trim(objDR99("prno").ToString)
@@ -583,5 +775,187 @@ Public Class PGM010
     Protected Sub btnQuery_Click(sender As Object, e As EventArgs) Handles btnQuery.Click
         ViewState("MyOrder") = ""
         FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
+    End Sub
+
+    Protected Sub txtPrNo_TextChanged(sender As Object, e As EventArgs) Handles txtPrNo.TextChanged
+        Dim length As Integer = Len(Trim(txtPrNo.Text))
+        If length = 6 Then
+            LoadPGKind()
+        End If
+
+    End Sub
+    Private Function LoadPGKind() As Boolean
+        Dim kindNo As String = Trim(txtPrNo.Text)
+        If kindNo = String.Empty Then
+            txtName.Text = ""
+            txtUnit.Text = ""
+            txtMaterial.Text = ""
+            cboUseYear.Text = ""
+            txtNo.Text = ""
+            txtNo2.Text = ""
+            Return False
+        End If
+
+        '開啟查詢
+        objCon99 = New SqlConnection(DNS_PGM)
+        objCon99.Open()
+
+        Dim sqlstr As String
+
+        sqlstr = "SELECT * from PPTName " & _
+         "where  KindNo ='" & kindNo & "'"
+
+        objCmd99 = New SqlCommand(sqlstr, objCon99)
+        objDR99 = objCmd99.ExecuteReader
+
+        If objDR99.Read Then
+            txtName.Text = objDR99("Name").ToString
+            txtUnit.Text = objDR99("Unit").ToString
+            txtMaterial.Text = objDR99("Material").ToString
+            cboUseYear.Text = objDR99("UseYear").ToString
+            LoadNo()
+            Return True
+        Else
+            txtName.Text = ""
+            txtUnit.Text = ""
+            txtMaterial.Text = ""
+            cboUseYear.Text = ""
+            txtNo.Text = ""
+            txtNo2.Text = ""
+            MessageBx("找不到此筆財物編號的資料")
+            Return False
+        End If
+
+        objDR99.Close()    '關閉連結
+        objCon99.Close()
+        objCmd99.Dispose() '手動釋放資源
+        objCon99.Dispose()
+        objCon99 = Nothing '移除指標
+
+
+    End Function
+
+    '取得此財務分類編號可用的序號
+    Private Function LoadNo() As Boolean
+        Dim intFrom, intTo As Integer
+        Dim strFrom, strTo As String
+        Dim count As Integer = cboAddCount.Text
+        Dim kindNo As String = Trim(txtPrNo.Text)
+
+        If kindNo = String.Empty Then
+            MessageBx("財物分類編號必須為6碼")
+            txtPrNo.Focus()
+            Exit Function
+        End If
+
+
+        intFrom = PGMainDAL.GetPrNo(kindNo, count)
+        If intFrom < 0 Then
+            If intFrom = -1 Then MessageBx("此財物分類編號之下已經沒有可用的連續 " & count & "  個序號")
+            If intFrom = -2 Then
+                MessageBx("此財物分類編號不存在,請重新輸入")
+                txtName.Text = ""
+                txtUnit.Text = ""
+                txtMaterial.Text = ""
+                cboUseYear.Text = ""
+            End If
+            txtNo.Text = ""
+            txtNo2.Text = ""
+            txtPrNo.Focus()
+            Exit Function
+        Else
+            intTo = intFrom + count - 1
+            strFrom = CStr(intFrom)
+            strTo = CStr(intTo)
+            strFrom = New String("0", 4 - Len(strFrom)) & strFrom
+            strTo = New String("0", 4 - Len(strTo)) & strTo
+            txtNo.Text = strFrom
+            txtNo2.Text = strTo
+            Return True
+        End If
+    End Function
+
+    Protected Sub btnGetPrNo_Click(sender As Object, e As EventArgs) Handles btnGetPrNo.Click
+        If LoadPGKind() Then MessageBx("成功取得可用之序號")
+    End Sub
+
+    Protected Sub cboWhoKeep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboWhoKeep.SelectedIndexChanged
+        If cboWhoKeep.Text = "單位保管" Then
+            Session("PGMWhoKeep") = "Unit"
+        Else
+            Session("PGMWhoKeep") = "emp"
+        End If
+    End Sub
+
+    Private Function findemp(ByVal strno As String) As String
+
+        '開啟查詢
+        objCon99 = New SqlConnection(DNS_SYS)
+        objCon99.Open()
+
+        Dim sqlstr As String
+
+        sqlstr = "SELECT * from users " & _
+         "where  employee_id ='" & strno & "'"
+
+        objCmd99 = New SqlCommand(sqlstr, objCon99)
+        objDR99 = objCmd99.ExecuteReader
+
+        If objDR99.Read Then
+            Return objDR99("name").ToString
+        Else
+            Return ""
+        End If
+
+        objDR99.Close()    '關閉連結
+        objCon99.Close()
+        objCmd99.Dispose() '手動釋放資源
+        objCon99.Dispose()
+        objCon99 = Nothing '移除指標
+    End Function
+
+    Private Function findunit(ByVal strno As String) As String
+
+        '開啟查詢
+        objCon99 = New SqlConnection(DNS_SYS)
+        objCon99.Open()
+
+        Dim sqlstr As String
+
+        sqlstr = "SELECT * from unit " & _
+         "where  unit_id ='" & strno & "'"
+
+        objCmd99 = New SqlCommand(sqlstr, objCon99)
+        objDR99 = objCmd99.ExecuteReader
+
+        If objDR99.Read Then
+            Return objDR99("unit_name").ToString
+        Else
+            Return ""
+        End If
+
+        objDR99.Close()    '關閉連結
+        objCon99.Close()
+        objCmd99.Dispose() '手動釋放資源
+        objCon99.Dispose()
+        objCon99 = Nothing '移除指標
+    End Function
+
+    Sub PrintPGKeepAdd(ByVal prno As String, ByVal prno2 As String)
+
+        Dim Param As Dictionary(Of String, String) = New Dictionary(Of String, String)
+        Param.Add("UnitTitle", Session("UnitTitle"))    '水利會名稱
+        Param.Add("UserUnit", Session("UserUnit"))  '使用者單位代號
+        Param.Add("UserId", Session("UserId"))    '使用者代號
+
+        Param.Add("No1", prno)    '使用者代號
+        Param.Add("No2", prno2)    '使用者代號
+
+        Param.Add("sSeason", Session("sSeason"))    '第幾季
+        Param.Add("UserDate", Session("UserDate"))    '登入日期
+
+
+        Master.PrintFR("PGM010財物保管增加單", Session("ORG"), DNS_PGM, Param)
+
     End Sub
 End Class

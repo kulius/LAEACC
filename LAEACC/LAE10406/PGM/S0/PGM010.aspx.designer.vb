@@ -311,6 +311,15 @@ Partial Public Class PGM010
     Protected WithEvents UCBase1 As Global.LAEACC.UCBase
 
     '''<summary>
+    '''UpdatePanel4 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents UpdatePanel4 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''TabContainer1 控制項。
     '''</summary>
     '''<remarks>
@@ -399,6 +408,15 @@ Partial Public Class PGM010
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents AutoCompleteExtender3 As Global.AjaxControlToolkit.AutoCompleteExtender
+
+    '''<summary>
+    '''UpdatePanel3 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
     '''cboAddCount 控制項。
@@ -597,6 +615,15 @@ Partial Public Class PGM010
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents txtWhoKeep As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''AutoCompleteExtender4 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents AutoCompleteExtender4 As Global.AjaxControlToolkit.AutoCompleteExtender
 
     '''<summary>
     '''txtBorrow 控制項。

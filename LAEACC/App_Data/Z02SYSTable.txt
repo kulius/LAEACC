@@ -158,8 +158,8 @@ GO
 DELETE a_sys_nunit_item where s_system_id='PGM'
 GO
 INSERT INTO a_sys_nunit_item VALUES ('PGM010','PGM','S0','財物新增','1',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGM020','PGM','S0','財物報廢','2',null,'S0/PGM010')
-INSERT INTO a_sys_nunit_item VALUES ('PGM030','PGM','S0','財物交接','3',null,'S0/PGM010')
+INSERT INTO a_sys_nunit_item VALUES ('PGM020','PGM','S0','財物報廢','2','PGM020','S0/PGM010')
+INSERT INTO a_sys_nunit_item VALUES ('PGM030','PGM','S0','財物交接','3','PGM030','S0/PGM010')
 INSERT INTO a_sys_nunit_item VALUES ('PGM040','PGM','S0','財物增減值','4',null,null)
 GO
 INSERT INTO a_sys_nunit_item VALUES ('PGMB010','PGM','S1','財物分類檔維護','1',null,null)

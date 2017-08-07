@@ -18,6 +18,7 @@ Public Class WebService
     '--資料庫共用變數--
     Dim WSDNS As String = ConfigurationManager.ConnectionStrings("DNS_ACC").ConnectionString
     Dim DNS_PGM As String = ConfigurationManager.ConnectionStrings("DNS_PGM").ConnectionString
+    Dim DNS_SYS As String = ConfigurationManager.ConnectionStrings("DNS_SYS").ConnectionString
     
     
 #Region "類別模組"
@@ -36,6 +37,54 @@ Public Class WebService
     
     
     '++ 查詢專用[資料未含特殊代號] ++
+    '** 查詢保管人 **
+    <WebMethod(EnableSession:=True)> _
+    Public Function GetPGMWhoKeep(ByVal prefixText As String, ByVal count As Integer) As String()
+        If count = 0 Then
+            count = 10
+        End If
+        
+        '防呆
+        If prefixText.Equals("%#)*)*)*DDD") Then
+            Return New String(0) {}
+        End If
+                
+        Dim i As Integer = 0
+        Dim items As List(Of String) = New List(Of String)(count)
+        
+        
+        '開啟查詢
+        WSobjCon = New SqlConnection(DNS_SYS)
+        WSobjCon.Open()
+        
+        If HttpContext.Current.Session("PGMWhoKeep") = "Unit" Then
+            If Trim(prefixText) = "" Then
+                WSstrSQL = "SELECT rtrim(left(unit_id+space(5),5)+unit_name) as euser  FROM unit where  "
+            Else
+                WSstrSQL = "SELECT rtrim(left(unit_id+space(5),5)+unit_name) as euser  FROM unit where  rtrim(left(unit_id+space(5),5)+unit_name)  LIKE '%" & prefixText & "%'"
+            End If
+        Else
+            If Trim(prefixText) = "" Then
+                WSstrSQL = "SELECT rtrim(left(employee_id+space(5),5)+name) as euser  FROM users where  "
+            Else
+                WSstrSQL = "SELECT rtrim(left(employee_id+space(5),5)+name) as euser  FROM users where  rtrim(left(employee_id+space(5),5)+name)  LIKE '%" & prefixText & "%'"
+            End If
+        End If
+
+
+        WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)
+        WSobjDR = WSobjCmd.ExecuteReader
+
+        Do While WSobjDR.Read
+            items.Add(Trim(WSobjDR("euser")))
+            System.Math.Min(System.Threading.Interlocked.Increment(i), i - 1)
+        Loop
+
+        WSobjCon.Close()
+        
+        
+        Return items.ToArray
+    End Function
     '** 查詢摘要 **
     <WebMethod(EnableSession:=True)> _
     Public Function GetPGMKindNo(ByVal prefixText As String, ByVal count As Integer) As String()
@@ -57,9 +106,9 @@ Public Class WebService
         WSobjCon.Open()
         
         If Trim(prefixText) = "" Then
-            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as KName  FROM PPTName where  "
+            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as KName  FROM PPTName where substring(KindNo,1,1)<>'3' "
         Else
-            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as Kname  FROM PPTName where  rtrim(left(KindNo+space(10),10)+Name) LIKE '%" & prefixText & "%'"
+            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as Kname  FROM PPTName where substring(KindNo,1,1)<>'3' and rtrim(left(KindNo+space(10),10)+Name) LIKE '%" & prefixText & "%'"
         End If
 
         WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)
@@ -270,7 +319,7 @@ Public Class WebService
         Else
             WSstrSQL = "SELECT DISTINCT TOP 20 psstr FROM psname where unit='0403' and psstr LIKE '%" & prefixText & "%' order by psstr DESC"
         End If
-                      '
+        '
         WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)
         WSobjDR = WSobjCmd.ExecuteReader
 
