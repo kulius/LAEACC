@@ -1235,6 +1235,7 @@
     <Content Include="LAE10406\PAY\S4\PAY_PSNAME.aspx" />
     <Content Include="LAE10406\PAY\S5\CHF040.aspx" />
     <Content Include="LAE10406\PGM\S0\PGM010.aspx" />
+    <Content Include="LAE10406\PGM\S0\PGM040.aspx" />
     <Content Include="LAE10406\PGM\S1\PGMB010.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPMENU.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPUNIT.aspx" />
@@ -2134,6 +2135,13 @@
     </Compile>
     <Compile Include="LAE10406\PGM\S0\PGM010.aspx.vb">
       <DependentUpon>PGM010.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LAE10406\PGM\S0\PGM040.aspx.designer.vb">
+      <DependentUpon>PGM040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PGM\S0\PGM040.aspx.vb">
+      <DependentUpon>PGM040.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LAE10406\PGM\S1\PGMB010.aspx.designer.vb">

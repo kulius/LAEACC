@@ -39,6 +39,7 @@ Public Class PGM010
         txtQueryPrNo2.Attributes.Add("onchange", "return ismaxlength(this)")
         txtPrNo.Attributes.Add("onchange", "return ismaxlength(this)")
         txtWhoKeep.Attributes.Add("onchange", "return ismaxlength2(this)")
+        txtTraNewWhoKeep.Attributes.Add("onchange", "return ismaxlength2(this)")
 
         ViewState("MyOrder") = "KindNo"  '預設排序欄位
 
@@ -72,11 +73,16 @@ Public Class PGM010
         " order by CODENO"
         Master.Controller.objDropDownListOptionEX(cboQueryDiscardMode, DNS_PGM, sqlstr, "codeno", "codename", 0)
         Master.Controller.objDropDownListOptionEX(cboEndRemark, DNS_PGM, sqlstr, "codeno", "codename", 0)
+        Master.Controller.objDropDownListOptionEX(cboDisEndRemark, DNS_PGM, sqlstr, "codeno", "codename", 0)
+
+
 
         Dim strcount As String = "" : For I As Integer = 1 To 100 Step 1 : strcount &= I & "," : Next '新增數量
         Master.Controller.objDropDownListOptionGG(cboAddCount, "--請選擇--," & strcount, "," & strcount)
         Dim strWhoKeep As String = "個人保管,單位保管,"
         Master.Controller.objDropDownListOptionGG(cboWhoKeep, "--請選擇--," & strWhoKeep, "," & strWhoKeep)
+        Master.Controller.objDropDownListOptionGG(cboTraNewWhoKeep, "--請選擇--," & strWhoKeep, "," & strWhoKeep)
+
     End Sub
 
     Protected Sub Page_SaveStateComplete(sender As Object, e As System.EventArgs) Handles Me.SaveStateComplete
@@ -957,5 +963,271 @@ Public Class PGM010
 
         Master.PrintFR("PGM010財物保管增加單", Session("ORG"), DNS_PGM, Param)
 
+    End Sub
+
+    Protected Sub btnTransGetPrNo_Click(sender As Object, e As EventArgs) Handles btnTransGetPrNo.Click
+        Dim prno As String = Trim(txtTraPrNo.Text)
+        If Len(prno) < 10 Then
+            txtTraName.Text = ""
+            txtTraWhoKeep.Text = ""
+            txtTraPDate.Text = ""
+            txtTraEndDate.Text = ""
+            lblTraEndRemark.Text = ""
+
+            MessageBx("財務編號長度必須大於10")
+            Exit Sub
+        End If
+
+
+        Dim dt As DataTable
+        Dim info As New PGMainInfo(prno, prno)
+        dt = PGMainDAL.Query(info)
+        If dt.Rows.Count = 0 Then
+            txtTraName.Text = ""
+            txtTraWhoKeep.Text = ""
+            txtTraPDate.Text = ""
+            txtTraEndDate.Text = ""
+            lblTraEndRemark.Text = ""
+            MessageBx("找不到此筆財物編號的資料")
+        Else
+            Dim dr As DataRow = dt.Rows(0)
+            Dim keepEmp As String = dr("keepempno") & ""
+            txtTraName.Text = dr("name")
+            If keepEmp = String.Empty Then
+                txtTraWhoKeep.Text = dr("keepunit") & " " & dr("keepUnitName")
+            Else
+                txtTraWhoKeep.Text = keepEmp & " " & dr("keepempname")
+            End If
+            txtTraPDate.Text = sDateADToCD(dr("pdate").ToString)
+            txtTraEndDate.Text = sDateADToCD(dr("enddate").ToString)
+            lblTraEndRemark.Text = dr("endremk") & ""
+        End If
+
+
+    End Sub
+
+    Protected Sub btnTransferQuery_Click(sender As Object, e As EventArgs) Handles btnTransferQuery.Click
+
+    End Sub
+
+    Protected Sub btnTransfer_Click(sender As Object, e As EventArgs) Handles btnTransfer.Click
+        Dim endDate As String = Trim(txtTraEndDate.Text)
+        If endDate <> String.Empty Then
+            MessageBx("財物已經報廢了，不可執行交接作業")
+        Else
+            Dim prno As String = Trim(txtTraPrNo.Text)
+            If prno = String.Empty Then
+                MessageBx("必須輸入財物編號")
+                txtTraPrNo.Focus()
+                Exit Sub
+            End If
+            If Len(prno) <> 10 Then
+                MessageBx("財物編號必須為10碼")
+                txtTraPrNo.Focus()
+                Exit Sub
+            End If
+            BatchTransfer(prno)
+        End If
+        btnTransfer.Enabled = True
+    End Sub
+
+    Private Sub BatchTransfer(ByVal prnoList As String)
+
+        Dim whokeep, keepunit, keepemp, sPdate, empName, unitName As String
+        Dim pdate As DateTime
+        whokeep = Trim(txtTraNewWhoKeep.Text)
+        sPdate = Trim(txtTransferDate.Text)
+
+        If prnoList = String.Empty Then
+            MessageBx("必須輸入財物編號")
+            txtTraPrNo.Focus()
+            Exit Sub
+        End If
+
+
+        If sPdate <> "" Then
+            sPdate = sDateCDToAD(sPdate)
+            pdate = CDate(sPdate)
+        Else
+            MessageBx("交接日期不得為空")
+            txtPDate.Focus()
+        End If
+
+        If pdate > Now Then
+            MessageBx("購入日期不可大於今天")
+            txtPDate.Focus()
+        End If
+
+        If cboTraNewWhoKeep.Text = "個人保管" Then '個人保管
+            Dim emp As String
+            emp = findemp(whokeep)
+            If emp = "" Then
+                MessageBx("必須指定有效的員工編號，且不可以是離職員工")
+                txtTraNewWhoKeep.Focus()
+                Exit Sub
+            Else
+                empName = emp
+                unitName = ""
+                keepunit = ""
+                keepemp = whokeep
+            End If
+        End If
+        If cboTraNewWhoKeep.Text = "單位保管" Then
+            Dim unit2 As String
+            unit2 = findunit(whokeep)
+            If unit2 = "" Then
+                MessageBx("必須指定有效的單位代號")
+                txtTraNewWhoKeep.Focus()
+                Exit Sub
+            Else
+                empName = ""
+                unitName = unit2
+                keepunit = whokeep
+                keepemp = ""
+            End If
+        End If
+
+
+        Dim result As Integer, revisedEmpNo, revisedEmpName As String
+        revisedEmpNo = Session("USERID")
+        revisedEmpName = Session("USERNAME")
+        result = PGMainDAL.Transfer(prnoList, sPdate, keepemp, keepunit, revisedEmpNo)
+        Select Case result
+            Case 1
+                MessageBx("全部交接成功")
+                '修改目前的資料
+                Dim arr As String() = prnoList.Split(",")
+                For Each pn As String In arr
+                    If pn = txtTraPrNo.Text Then
+                        If keepemp = String.Empty Then
+                            txtTraWhoKeep.Text = keepunit & " " & unitName
+                        Else
+                            txtTraWhoKeep.Text = keepemp & " " & empName
+                        End If
+                        Exit For
+                    End If
+                Next
+
+            Case -1
+                MessageBx("全部執行失敗，原因是 財物編號不存在")
+            Case -2
+                MessageBx("全部執行失敗，原因是 財物編號 已經報廢了，已經報廢的財物不可執行交接作業")
+            Case Else
+                MessageBx("未知的傳回值")
+        End Select
+    End Sub
+
+    Protected Sub btnDisGetPrNo_Click(sender As Object, e As EventArgs) Handles btnDisGetPrNo.Click
+        Dim prno As String = Trim(txtDisPrNo.Text)
+        If Len(prno) < 10 Then
+            txtDisName.Text = ""
+            txtDisWhoKeep.Text = ""
+            txtDisPDate.Text = ""
+            txtDisEndDate2.Text = ""
+            lblDisEndRemark.Text = ""
+
+            MessageBx("財務編號長度必須大於10")
+            Exit Sub
+        End If
+
+
+        Dim dt As DataTable
+        Dim info As New PGMainInfo(prno, prno)
+        dt = PGMainDAL.Query(info)
+        If dt.Rows.Count = 0 Then
+            txtDisName.Text = ""
+            txtDisWhoKeep.Text = ""
+            txtDisPDate.Text = ""
+            txtDisEndDate2.Text = ""
+            lblDisEndRemark.Text = ""
+            MessageBx("找不到此筆財物編號的資料")
+        Else
+            Dim dr As DataRow = dt.Rows(0)
+            Dim keepEmp As String = dr("keepempno") & ""
+            txtDisName.Text = dr("name")
+            If keepEmp = String.Empty Then
+                txtDisWhoKeep.Text = dr("keepunit") & " " & dr("keepUnitName")
+            Else
+                txtDisWhoKeep.Text = keepEmp & " " & dr("keepempname")
+            End If
+            txtDisPDate.Text = sDateADToCD(dr("pdate").ToString)
+            txtDisEndDate2.Text = sDateADToCD(dr("enddate").ToString)
+            lblDisEndRemark.Text = dr("endremk") & ""
+        End If
+    End Sub
+
+    Protected Sub btnDiscard_Click(sender As Object, e As EventArgs) Handles btnDiscard.Click
+        Dim endDate As String = Trim(txtDisEndDate2.Text)
+        If endDate <> String.Empty Then
+            MsgBox("財物已經報廢了，不可再次執行報廢作業，若要修改報廢日期請利用財務主檔的修改功能")
+        Else
+            Dim prno As String = Trim(txtDisPrNo.Text)
+            If prno = String.Empty Then
+                MessageBx("必須輸入財物編號")
+                txtDisPrNo.Focus()
+                Exit Sub
+            End If
+            If Len(prno) <> 10 Then
+                MessageBx("財物編號必須為10碼")
+                txtDisPrNo.Focus()
+                Exit Sub
+            End If
+            btnDiscard.Enabled = False
+            BatchDiscard(prno)
+        End If
+    End Sub
+
+    Private Sub BatchDiscard(ByVal prnoList As String)
+
+        Dim sEndDate, endRemark As String
+        Dim endDate As DateTime
+
+        endRemark = Trim(cboDisEndRemark.Text)
+        sEndDate = Trim(txtDisEndDate.Text)
+
+        If prnoList = String.Empty Then
+            MessageBx("必須輸入財物編號")
+            txtDisPrNo.Focus()
+            Exit Sub
+        End If
+
+        If endRemark = String.Empty Then
+            MessageBx("必須輸入報廢原因")
+            cboDisEndRemark.Focus()
+            Exit Sub
+        End If
+
+        If sEndDate <> "" Then
+            sEndDate = sDateCDToAD(sEndDate)
+            endDate = CDate(sEndDate)
+        Else
+            MessageBx("報廢日期不得為空")
+            txtPDate.Focus()
+        End If
+
+        If sEndDate > Now Then
+            MessageBx("報廢日期不可大於今天")
+            txtPDate.Focus()
+        End If
+
+        
+        Dim result As Integer, revisedEmpNo, revisedEmpName As String
+        revisedEmpNo = Session("USERID")
+        revisedEmpName = Session("USERNAME")
+        result = PGMainDAL.Discard(prnoList, sEndDate, endRemark, revisedEmpNo)
+        Select Case result
+            Case 1
+                MessageBx("全部報廢成功")
+               
+
+            Case -1
+                MessageBx("全部執行失敗，原因是 財物編號不存在")
+
+            Case -2
+                MessageBx("全部執行失敗，原因是 財物編號  已經報廢了，已經報廢的財物不可再次執行報廢作業,若要修改報廢日期請利用財務主檔的修改功能")
+                
+            Case Else
+                MessageBx("未知的傳回值")
+        End Select
     End Sub
 End Class
