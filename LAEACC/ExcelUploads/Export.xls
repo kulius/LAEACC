@@ -6,7 +6,7 @@
 <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
 <Title></Title>
 <Author></Author>
-<Created>2016/11/14 上午 12:00:00T10:08:19.6206935Z</Created>
+<Created>2017/08/08 上午 12:00:00T01:20:59.3223254Z</Created>
 <Version></Version>
 </DocumentProperties>
 <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
@@ -26,12 +26,12 @@
 
 <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1" />
 <Borders>
-<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
-<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
+<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 <Border ss:Position="Bottom" 
-ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 <Border ss:Position="Right" 
-ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 </Borders>
 </Style>
 <Style ss:ID="s2">
@@ -39,12 +39,12 @@ ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
 
 <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1" />
 <Borders>
-<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
-<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
+<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 <Border ss:Position="Bottom" 
-ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 <Border ss:Position="Right" 
-ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 </Borders>
 </Style>
 <Style ss:ID="s3">
@@ -52,1418 +52,248 @@ ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
 
 <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1" />
 <Borders>
-<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
-<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+<Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
+<Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 <Border ss:Position="Bottom" 
-ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 <Border ss:Position="Right" 
-ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
+ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#3399FF"/>
 </Borders>
 </Style>
 </Styles>
 <Worksheet ss:Name="Page 1">
-<Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="108" x:FullColumns="1" x:FullRows="1">
-<Column ss:AutoFitWidth="0" ss:Width="61.81"/>
+<Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="18" x:FullColumns="1" x:FullRows="1">
 <Column ss:AutoFitWidth="0" ss:Width="151.09"/>
 <Column ss:AutoFitWidth="0" ss:Width="41.21"/>
-<Column ss:AutoFitWidth="0" ss:Width="109.88"/>
+<Column ss:AutoFitWidth="0" ss:Width="61.81"/>
+<Column ss:AutoFitWidth="0" ss:Width="61.81"/>
+<Column ss:AutoFitWidth="0" ss:Width="164.83"/>
+<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
+<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
+<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
+<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
+<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
 <Column ss:AutoFitWidth="0" ss:Width="144.22"/>
-<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
-<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
-<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
-<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
-<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
-<Column ss:AutoFitWidth="0" ss:Width="89.28"/>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s1">
-<Data ss:Type="String">填報月份</Data></Cell><Cell ss:Index="2" ss:StyleID="s1">
-<Data ss:Type="String">單位</Data></Cell><Cell ss:Index="3" ss:StyleID="s1">
-<Data ss:Type="String">年度</Data></Cell><Cell ss:Index="4" ss:StyleID="s1">
-<Data ss:Type="String">科目編號</Data></Cell><Cell ss:Index="5" ss:StyleID="s1">
+<Data ss:Type="String">單位</Data></Cell><Cell ss:Index="2" ss:StyleID="s1">
+<Data ss:Type="String">年度</Data></Cell><Cell ss:Index="3" ss:StyleID="s1">
+<Data ss:Type="String">填報月份</Data></Cell><Cell ss:Index="4" ss:StyleID="s1">
+<Data ss:Type="String">應付年度</Data></Cell><Cell ss:Index="5" ss:StyleID="s1">
 <Data ss:Type="String">科目</Data></Cell><Cell ss:Index="6" ss:StyleID="s1">
-<Data ss:Type="String">上月餘額借方</Data></Cell><Cell ss:Index="7" ss:StyleID="s1">
-<Data ss:Type="String">上月餘額貸方</Data></Cell><Cell ss:Index="8" ss:StyleID="s1">
-<Data ss:Type="String">本月總額借方</Data></Cell><Cell ss:Index="9" ss:StyleID="s1">
-<Data ss:Type="String">本月總額貸方</Data></Cell><Cell ss:Index="10" ss:StyleID="s1">
-<Data ss:Type="String">本月餘額借方</Data></Cell><Cell ss:Index="11" ss:StyleID="s1">
-<Data ss:Type="String">本月餘額貸方</Data></Cell><Cell ss:Index="12"/></Row>
+<Data ss:Type="String">應付數</Data></Cell><Cell ss:Index="7" ss:StyleID="s1">
+<Data ss:Type="String">本月實付數</Data></Cell><Cell ss:Index="8" ss:StyleID="s1">
+<Data ss:Type="String">本月累計實付數</Data></Cell><Cell ss:Index="9" ss:StyleID="s1">
+<Data ss:Type="String">本月減免數</Data></Cell><Cell ss:Index="10" ss:StyleID="s1">
+<Data ss:Type="String">本月累計減免數</Data></Cell><Cell ss:Index="11" ss:StyleID="s1">
+<Data ss:Type="String">餘額</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">資產</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">14608313999.30</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2675077331.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String"></Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202應付費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">7656311.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">2926.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">4274901.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">14608313999.30</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2675077331.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Data ss:Type="String">3118.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">3378292.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">流動資產</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">4394023820.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105001其他工程維護-河川公地測量.復建測設等(1工區)苑裡第1次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">24464.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">4394023820.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-11</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">現金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">4256375138.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">4256375138.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1102</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">銀行存款</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">817041709.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">817041709.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1103</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">專戶存款</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">3439333429.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">3439333429.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-12</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">短期投資</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">5304452.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">5304452.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">有價證券</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">5304452.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">5304452.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-13</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">應收款項</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">2247.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">2247.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1310</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他應收款</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">2247.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">2247.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-17</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">預付款項</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">132341983.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">132341983.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1702</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">預付費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">30645024.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">30645024.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-1703</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">預付工程款</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">101696959.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">101696959.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-2</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">基金及長期投資</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">367786448.78</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">367786448.78</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-21</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">基金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">367786448.78</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">367786448.78</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-2101</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">存出聯合建設基金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">153584639.95</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">153584639.95</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-2102</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">存出業務週轉基金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">2553649.83</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">2553649.83</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-2105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">職員退撫基金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">211648159.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">211648159.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">固定資產</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">9790408478.52</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2675077331.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">9790408478.52</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2675077331.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-31</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">土地</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">1645697417.70</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">1645697417.70</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3101</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">土地</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">1645697417.70</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">1645697417.70</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-32</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">水利工程</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">7414329417.42</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2533914103.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">7414329417.42</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2533914103.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">水利工程</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">7414329417.42</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">7414329417.42</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3202</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">累計折舊–水利工程</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2533914103.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2533914103.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-33</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">房屋及建築</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">570181252.60</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">100068706.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">570181252.60</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">100068706.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3301</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">房屋及建築</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">570181252.60</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">570181252.60</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3302</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">累計折舊–房屋及建築</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">100068706.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">100068706.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-34</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">機械及設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">31029841.80</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">24810710.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">31029841.80</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">24810710.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3401</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">機械及設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">31029841.80</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">31029841.80</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3402</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">累計折舊–機械及設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">24810710.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">24810710.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-35</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">交通及運輸設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">8014401.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">7265095.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">8014401.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">7265095.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3501</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">交通及運輸設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">8014401.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">8014401.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3502</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">累計折舊–交通及運輸設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">7265095.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">7265095.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-36</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">16808096.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">9018717.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">16808096.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">9018717.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3601</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">16808096.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">16808096.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3602</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">累計折舊–其他設備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">9018717.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">9018717.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-37</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">未完工程</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">104348052.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">104348052.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-3701</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">未完工程</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">104348052.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">104348052.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-5</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他資產</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">56095252.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">56095252.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-53</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">雜項資產</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">56095252.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">56095252.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-5301</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">存出保證金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">300.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">300.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">1-5303</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">保管品</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">56094952.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">56094952.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">負債</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">585748503.15</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">585748503.15</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-1</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">流動負債</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">189478893.20</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">189478893.20</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-12</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">應付款項</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">47439072.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">47439072.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-1202</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">應付費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">47439072.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">47439072.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-13</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">預收代收款項</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">141612526.20</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">141612526.20</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-1302</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">代收款</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">141612526.20</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">141612526.20</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-14</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">暫收款項</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">427295.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">427295.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-1401</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">暫收款</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">427295.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">427295.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-3</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他負債</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">123514907.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">123514907.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-31</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">雜項負債</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">123514907.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">123514907.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-3101</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">存入保證金</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">67419955.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">67419955.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-3102</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">存入保證品</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">56094952.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">56094952.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-4</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業及負債準備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">272754702.95</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">272754702.95</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-41</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業準備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">61106543.95</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">61106543.95</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-4109</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">雜項準備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">61106543.95</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">61106543.95</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-42</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">負債準備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">211648159.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">211648159.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">2-4205</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">職員退撫基金準備</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">211648159.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">211648159.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">淨值</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">10853755512.15</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">10853755512.15</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-1</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">10853755512.15</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">10853755512.15</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-11</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">資本公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">10332222721.28</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">10332222721.28</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-1101</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">收入公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2830952896.94</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2830952896.94</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-1102</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">受贈公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">6027613005.95</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">6027613005.95</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-1103</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">固定資產增值公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">1473656818.39</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">1473656818.39</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-12</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">521532790.87</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">521532790.87</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-1201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業公積</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">521532790.87</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">521532790.87</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-2</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">餘絀</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">24464.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-23</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">本期餘絀</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105002其他工程維護-河川公地測量.復建測設等(1工區)山腳第1次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">46564.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">46564.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105003其他工程維護-河川公地測量.復建測設等(1工區)泰安第1次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">344641.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">206785.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">137856.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105004其他工程維護-河川公地測量.復建測設等(1工區)泰安第2次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">30600.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">18360.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">12240.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105005其他工程維護-河川公地測量.復建測設等(2工區)大肚第1次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">40619.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">40619.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">3-2301</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">本期餘絀</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105006其他工程維護-河川公地測量.復建測設等(2工區)八寶第2次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">15324.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">15324.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">820568695.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">820568695.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-1</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">347926385.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">347926385.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-12</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">使用費收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">141987994.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">141987994.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-1201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">建造物使用費收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">28148994.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">28148994.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-1202</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">餘水使用費收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">113839000.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">113839000.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-14</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">補助款收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">205938391.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">205938391.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-1401</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">會費補助款收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">190583000.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">190583000.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-1402</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">工程補助款收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">14922345.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">14922345.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-1403</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">業務補助款收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">433046.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">433046.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-2</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業外收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">472642310.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">472642310.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-21</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">財務收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">44889254.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">44889254.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-2101</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">利息收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">24092454.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">24092454.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-2102</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">租金收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">20796800.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">20796800.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-22</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">整理收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">415111066.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">415111066.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-2201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">整理收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">415111066.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">415111066.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-23</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">罰款收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2990730.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2990730.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-2301</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">罰款收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">2990730.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">2990730.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-29</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他事業外收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">9651260.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">9651260.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">4-2909</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">雜項收入</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">9651260.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">9651260.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">326836042.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105007其他工程維護-河川公地測量.復建測設等(2工區)大雅第2次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">48394.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">326836042.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">48394.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105008其他工程維護-河川公地測量.復建測設等(2工區)大肚第3次</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">190498.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">114299.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">76199.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105009其他工程維護-日南圳灌區灌排分離測量調查.規劃委託服務</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">1830000.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">1830000.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105010其他工程維護-臺中灌區水路系統縱橫斷面測繪計畫(第1期)</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">1218000.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">1218000.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Row ss:Height="20.6">
+<Cell ss:Index="1" ss:StyleID="s3">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105011抽水機維護費-105后里圳幹線14小給抽水井改善(322)</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">1150685.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">1150685.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">320575898.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105012調查費-105年度圳路之底泥重金屬檢測調查工作</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">550080.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">550080.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">320575898.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-11</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">給排水費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">49088385.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105013房屋管理費-卓蘭工作站辦公廳騎樓更新工程(322)</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">780457.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">778587.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">49088385.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">1870.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1102</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">工程設備維護費</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">32638929.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105014房屋管理費-大南工作站辦公室壁癌防漏修繕工程(322)</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">883070.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">2926.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
+<Data ss:Type="String">874031.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">32638929.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
+<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">9039.00</Data></Cell><Cell ss:Index="12"/></Row>
 <Row ss:Height="20.6">
 <Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1103</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">灌溉費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">16449456.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
+<Data ss:Type="String">臺中水利會</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
+<Data ss:Type="String">106</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
+<Data ss:Type="String">6</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
+<Data ss:Type="String">105</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
+<Data ss:Type="String">2-1202-  -  -105015房屋管理費-王田工作站頂樓矮牆修繕工程(322)</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
+<Data ss:Type="String">502915.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
+<Data ss:Type="String">501667.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">16449456.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-12</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">業務費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">17085745.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">17085745.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">財務業務費</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">11005970.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">11005970.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1202</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">水利小組業務費</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">6079775.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">6079775.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-13</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">管理費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">254295723.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">254295723.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1301</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">議事費用</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">6469454.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">6469454.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1302</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">總務管理費</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">247826269.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">247826269.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-16</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他事業支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">106045.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">106045.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-1609</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他事業支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">106045.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">106045.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-2</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">事業外支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">6260144.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">6260144.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-22</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">整理支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">215619.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">215619.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-2201</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">整理支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">215619.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">215619.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-29</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">其他事業外支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">6044525.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">6044525.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
-<Row ss:Height="20.6">
-<Cell ss:Index="1" ss:StyleID="s3">
-<Data ss:Type="String">11</Data></Cell><Cell ss:Index="2" ss:StyleID="s3">
-<Data ss:Type="String">彰化農田水利會</Data></Cell><Cell ss:Index="3" ss:StyleID="s3">
-<Data ss:Type="String">105</Data></Cell><Cell ss:Index="4" ss:StyleID="s3">
-<Data ss:Type="String">5-2909</Data></Cell><Cell ss:Index="5" ss:StyleID="s3">
-<Data ss:Type="String">雜項支出</Data></Cell><Cell ss:Index="6" ss:StyleID="s2">
-<Data ss:Type="String">6044525.00</Data></Cell><Cell ss:Index="7" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="8" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="9" ss:StyleID="s2">
-<Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="10" ss:StyleID="s2">
-<Data ss:Type="String">6044525.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
+<Data ss:Type="String">1248.00</Data></Cell><Cell ss:Index="11" ss:StyleID="s2">
 <Data ss:Type="String">0.00</Data></Cell><Cell ss:Index="12"/></Row>
 </Table>
 <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -1479,7 +309,7 @@ ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#0078D7"/>
 <PageBreaks xmlns="urn:schemas-microsoft-com:office:excel">
 <RowBreaks>
 <RowBreak>
-<Row>107</Row>
+<Row>17</Row>
 </RowBreak>
 </RowBreaks>
 </PageBreaks>
