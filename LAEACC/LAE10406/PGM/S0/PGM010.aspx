@@ -58,7 +58,7 @@
             <table id="table-serch" rules="all">                                            
                 <tr>
                     <td style="text-align:center;">
-                        編號
+                        財務編號
                     </td>
                     <td style="text-align:center;">
                         <asp:TextBox ID="txtQueryPrNo"  Width="120" runat="server" AutoPostBack="true"  />
