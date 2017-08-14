@@ -210,7 +210,7 @@ Public Class BG010
 
         strSSQL = "select a.*, b.accname from pay000 a left outer join accname b " & _
                         "on a.accno=b.accno where a.bgno is null and left(a.unit,3)='" & Mid(Session("UserUnit"), 1, 3) & _
-                        "'  order by a.accyear, a.batno"
+                        "'  order by a.accyear desc, a.batno desc"
         Master.Controller.objDataGrid(dtgPay000, lbl_dtgPay000GrdCount, DNS_ACC, strSSQL, "查詢資料檔")
 
 

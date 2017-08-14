@@ -1321,6 +1321,7 @@
     <Content Include="App_Data\chia\AC010收入傳票.frx" />
     <Content Include="App_Data\chia\AC030轉帳傳票.frx" />
     <Content Include="App_Data\PGM010財物保管增加單.frx" />
+    <Content Include="App_Data\mlia\BGP040每日請購推算登記簿.frx" />
     <None Include="My Project\PublishProfiles\Web版主計行政整合作業系統.pubxml" />
     <Content Include="Schild.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

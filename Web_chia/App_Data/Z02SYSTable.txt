@@ -194,3 +194,6 @@ INSERT INTO a_sys_nunit_item VALUES ('PGMD180','PGM','S3','甲式財產卡(建�
 INSERT INTO a_sys_nunit_item VALUES ('PGMD190','PGM','S3','水利工程明細卡(含總卡)','19',null,null)
 INSERT INTO a_sys_nunit_item VALUES ('PGMD200','PGM','S3','財產報告表','20',null,null)
 GO
+
+INSERT INTO a_sys_nunit_item VALUES ('ACM000','ACC','S1','一鍵上傳農委會','0',null,null)
+GO
