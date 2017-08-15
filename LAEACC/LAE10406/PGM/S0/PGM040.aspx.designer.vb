@@ -158,15 +158,6 @@ Partial Public Class PGM040
     Protected WithEvents btnQueryClear As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''UCBase1 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents UCBase1 As Global.LAEACC.UCBase
-
-    '''<summary>
     '''TabContainer1 控制項。
     '''</summary>
     '''<remarks>
@@ -230,13 +221,13 @@ Partial Public Class PGM040
     Protected WithEvents TabPanel2 As Global.AjaxControlToolkit.TabPanel
 
     '''<summary>
-    '''txtKindNo 控制項。
+    '''txtPrNo 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents txtKindNo As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtPrNo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''lblkey 控制項。
@@ -248,40 +239,175 @@ Partial Public Class PGM040
     Protected WithEvents lblkey As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''btnGetPrNo 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnGetPrNo As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''txtName 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents txtName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''cboUnit 控制項。
+    '''txtWhoKeep 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents cboUnit As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtWhoKeep As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''cboMaterial 控制項。
+    '''txtPurchaseDate 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents cboMaterial As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtPurchaseDate As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''cboUseYear 控制項。
+    '''txtOriginalAmt 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents cboUseYear As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtOriginalAmt As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtEndAmt 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtEndAmt As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtTotalAddDel 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtTotalAddDel As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtNetAmt 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtNetAmt As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtDepreciation 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtDepreciation As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtUseYear 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtUseYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtEndDate 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtEndDate As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblEndRemark 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents lblEndRemark As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtAddDelDate 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtAddDelDate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtAmt 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtAmt As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtRemark 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtRemark As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnAddDelQuery 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnAddDelQuery As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnAddReviseOK 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnAddReviseOK As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnDeleteOK 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnDeleteOK As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnAddReviseCancel 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnAddReviseCancel As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Master 屬性。
