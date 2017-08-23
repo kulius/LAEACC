@@ -157,6 +157,8 @@ Public Class SiteMaster
 
     '可操作系統權限
     Sub strUserMenuPower(ByVal SystemID As String, ByVal UserID As String)
+        Dim strPageID As String = Request.QueryString("cvalue")
+
         '第一層選單*****
         objCon = New SqlConnection(DNS_SYS)
         objCon.Open()
@@ -250,8 +252,13 @@ Public Class SiteMaster
                 Else
                     strURL = "/LAE10406/" & Trim(objDR1("s_system_id").ToString) & "/" & Trim(objDR1("s_unit_id").ToString) & "/" & Trim(objDR1("s_unitem_id").ToString) & ".aspx" & If(Trim(objDR1("custom_value").ToString) = "", "", "?cvalue=" & Trim(objDR1("custom_value").ToString))
                 End If
+                '依呼叫的程式呈現選單預設值
+                If strPageID <> "" Then
+                    Response.Write("<li" & IIf(strPageID = Trim(objDR1("custom_value").ToString), " class='active'", "") & ">")
+                Else
+                    Response.Write("<li" & IIf(Path.GetFileName(Request.PhysicalPath) = Trim(objDR1("s_unitem_id").ToString), " class='active'", "") & ">")
+                End If
 
-                Response.Write("<li" & IIf(Path.GetFileName(Request.PhysicalPath) = Trim(objDR1("s_unitem_id").ToString), " class='active'", "") & ">")
                 Response.Write("<a href='" & strURL & "' style='font-size:16px;'>" & Trim(objDR1("s_item_name").ToString) & "</a>")
                 Response.Write("</li>")
             Loop
@@ -283,6 +290,10 @@ Public Class SiteMaster
 
     '導覽連結
     Function strBreadcrumb(ByVal strPageID As String) As String
+        Dim s1 As String = Request.QueryString("cvalue")
+        If s1 <> "" Then
+            strPageID = s1
+        End If
         Dim strString As String = ADO.dbGetRow(DNS_SYS, "a_sys_nunit_item", "s_item_name", "s_unitem_id = '" & strPageID & "'")
 
         If strString <> "" Then strString = "<li>" & ADO.dbGetRow(DNS_SYS, "a_sys_nunit_item", "s_item_name", "s_unitem_id = '" & strPageID & "'") & "</li>"

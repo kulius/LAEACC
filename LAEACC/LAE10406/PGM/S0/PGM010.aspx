@@ -252,7 +252,7 @@
                             <div style="clear:both; height:5px;"></div> 
 
                             <!--詳細內容顯示區-->                           
-                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="3">
+                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="1">
                                 <AjaxToolkit:TabPanel ID="TabPanel1" runat="server">
                                     <HeaderTemplate>多筆瀏灠</HeaderTemplate>
                                     <ContentTemplate>
