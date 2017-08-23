@@ -462,7 +462,8 @@ Public Class SiteMaster
 
         FastReport.Utils.Config.WebMode = True
 
-        Dim XLSExport As New FastReport.Export.Xml.XMLExport
+        'Dim XLSExport As New FastReport.Export.Xml.XMLExport
+        Dim XLSExport As New FastReport.Export.OoXML.Excel2007Export()
 
         Dim report As New FastReport.Report
 
@@ -487,7 +488,7 @@ Public Class SiteMaster
 
         Response.WriteFile(savePath)
         Response.Flush()
-        Response.[End]()
+        Response.End()
 
     End Function
 
