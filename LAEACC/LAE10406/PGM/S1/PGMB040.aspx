@@ -75,6 +75,7 @@
                                                           
                     <td style="text-align:center;">
                         <asp:Button ID="btnQuery" Text="搜尋" runat="server" />
+
                     </td>
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate></ContentTemplate>

@@ -17,6 +17,7 @@
                 }
             }
             return len;
+
         }
         function substr(str, len) {
             if (!str || !len) { return ''; }
