@@ -44,7 +44,7 @@
                                                         共<asp:Label ID="lbl_GrdCount" ForeColor="Red" Font-Size="14pt" Font-Bold="True" Text="0" runat="server" />筆符合&nbsp;                                                
                                                         <asp:Label ID="lbl_sort" runat="server" />
                                                     </div>
-                                                    <asp:DataGrid ID="DataGridView" Width = "100%" AllowSorting="True" AllowPaging="True" CssClass="table table-bordered table-condensed smart-form" runat="server" >
+                                                    <asp:DataGrid ID="DataGridView" Width = "100%" AllowSorting="True" AllowPaging="false" CssClass="table table-bordered table-condensed smart-form" runat="server" >
                                                         <columns>
                                                             <asp:TemplateColumn HeaderText="管理" HeaderStyle-Width="40" ItemStyle-HorizontalAlign="Center">
                                                                 <itemtemplate>                                                                                                            
