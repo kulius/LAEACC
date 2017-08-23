@@ -140,17 +140,17 @@ Public Class AC030
     End Sub
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         '++ 控制頁面初始化 ++
-        txtRemark1.Attributes.Add("maxlength", "70")
+        txtRemark1.Attributes.Add("maxlength", "170") '70
         txtRemark1.Attributes.Add("onkeyup", "return ismaxlength(this)")
-        txtRemark2.Attributes.Add("maxlength", "70")
+        txtRemark2.Attributes.Add("maxlength", "170")
         txtRemark2.Attributes.Add("onkeyup", "return ismaxlength(this)")
-        txtRemark3.Attributes.Add("maxlength", "70")
+        txtRemark3.Attributes.Add("maxlength", "170")
         txtRemark3.Attributes.Add("onkeyup", "return ismaxlength(this)")
-        txtRemark4.Attributes.Add("maxlength", "70")
+        txtRemark4.Attributes.Add("maxlength", "170")
         txtRemark4.Attributes.Add("onkeyup", "return ismaxlength(this)")
-        txtRemark5.Attributes.Add("maxlength", "70")
+        txtRemark5.Attributes.Add("maxlength", "170")
         txtRemark5.Attributes.Add("onkeyup", "return ismaxlength(this)")
-        txtRemark6.Attributes.Add("maxlength", "70")
+        txtRemark6.Attributes.Add("maxlength", "170")
         txtRemark6.Attributes.Add("onkeyup", "return ismaxlength(this)")
 
         txtAmt2.Attributes.Add("OnBlur", "return sumamt()")
