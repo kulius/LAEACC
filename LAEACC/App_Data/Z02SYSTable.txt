@@ -168,9 +168,9 @@ INSERT INTO a_sys_nunit_item VALUES ('PGMB030','PGM','S1','財物增減值檔維
 INSERT INTO a_sys_nunit_item VALUES ('PGMB040','PGM','S1','建物主檔維護','4',null,null)
 INSERT INTO a_sys_nunit_item VALUES ('PGMB050','PGM','S1','查詢財物折舊資料','5',null,null)
 GO
-INSERT INTO a_sys_nunit_item VALUES ('PGMC010','PGM','S2','自動提列','1',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGMC020','PGM','S2','預提下年度折舊','2',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGMC030','PGM','S2','財物折舊檔維護','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMC010','PGM','S2','自動提列','1','PGMC010','S1/PGMB050')
+INSERT INTO a_sys_nunit_item VALUES ('PGMC020','PGM','S2','預提下年度折舊','2','PGMC020','S1/PGMB050')
+INSERT INTO a_sys_nunit_item VALUES ('PGMC030','PGM','S2','財物折舊檔維護','3','PGMC030','S1/PGMB050')
 INSERT INTO a_sys_nunit_item VALUES ('PGMC040','PGM','S2','列印折舊明細表','4',null,null)
 GO
 INSERT INTO a_sys_nunit_item VALUES ('PGMD010','PGM','S3','財物標籤','1',null,null)

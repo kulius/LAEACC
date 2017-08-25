@@ -2312,6 +2312,7 @@
     <Folder Include="LAE10406\BAI\" />
     <Folder Include="LAE10406\CHR\" />
     <Folder Include="LAE10406\INC\01\" />
+    <Folder Include="LAE10406\PGM\S2\" />
     <Folder Include="LAE10406\REC\" />
   </ItemGroup>
   <PropertyGroup>

@@ -127,7 +127,7 @@
                             <div style="clear:both; height:5px;"></div> 
 
                             <!--詳細內容顯示區-->                           
-                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="1">
+                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="3">
                                 <AjaxToolkit:TabPanel ID="TabPanel1" runat="server">
                                     <HeaderTemplate>多筆瀏灠</HeaderTemplate>
                                     <ContentTemplate>
@@ -269,10 +269,99 @@
                                                 <th>備註：</th>
                                                 <td colspan="3"><asp:TextBox ID="txtRemark" CssClass="form-control" Width="400px" TextMode="MultiLine" Height="60px"  runat="server" /></td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <asp:Button ID="btnDepreciationQuery" Text="查詢折舊紀錄" runat="server" />
+                                                </td>
+                                            </tr>
                                             
                                         </table>                                          
                                     </ContentTemplate>
-                                </AjaxToolkit:TabPanel>                                
+                                </AjaxToolkit:TabPanel>  
+                                
+                                <AjaxToolkit:TabPanel ID="TabPanel3" runat="server">
+                                    <HeaderTemplate>自動提列折舊</HeaderTemplate>
+                                    <ContentTemplate>
+                                        <table id="table-data" rules="all">
+                                            
+                                            <tr>
+                                                <th>*提列資料</th>
+                                                <td>
+                                                    <asp:DropDownList ID="cboAutoDepreciationData" runat="server" />
+                                                </td>
+                                                <th>*提列方式</th>
+                                                <td>
+                                                    <asp:DropDownList ID="cboAutoDepreciationMode" runat="server" />
+                                                    <br>
+                                                    同一會計年度請勿使用不同的方式來提列
+                                                </td>
+                                                <th>*提列日期：</th>
+                                                <td><asp:TextBox ID="txtAutoDepreciationDate" Width="100px"  onClick="WdatePicker({dateFmt:'yyy-MM-dd',skin:'whyGreen'})" runat="server" /></td>
+
+                                                 <td>
+                                                    <asp:Button ID="btnAutoDepreciation" Text="執行" runat="server" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="7">
+                                                    <ul>
+                                                        <li>自動提列的規則如下</li>
+                                                        <li>1.使用年限 = 0 者，不予提列</li>
+                                                        <li>2.已經報廢者，不予提列</li>
+                                                        <li>3.會計科目編號在 131~136 之間才予以提列</li>
+                                                        <li>4.按年提列者，財物的購入年份要小於提列年份才予以提列，也就是購入當年不提列</li>
+                                                        <li>5.按月提列者，財物的購入年月要小於或等於提列年月才予以提列，若等於時，當月15日以前購入者才須提列</li>
+                                                        <li>6.按年提列者，同一財物若同年度已經提列過就不再提列折舊</li>
+                                                        <li>7.按月提列者，同一財物若同年同月份已經提列過就不再提列折舊</li>
+                                                        <li>8.剩餘折舊值小於或等於 0 者不提列折舊 (剩餘折舊值 = 原值 - 殘值 + 增減值 - 已提折舊值)</li>
+
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>  
+                                        
+                                    </ContentTemplate>
+                                </AjaxToolkit:TabPanel>     
+                                
+                                 <AjaxToolkit:TabPanel ID="TabPanel4" runat="server">
+                                    <HeaderTemplate>預提下年度折舊</HeaderTemplate>
+                                    <ContentTemplate>
+                                        <table id="table-data" rules="all">
+                                           <tr>
+                                                <td colspan="4">
+                                                    預提下年度折舊一律按年度提列，且一般財物和建物會同時提列，
+                                                    請注意必須確實提列完今年的折舊之後再執行此功能才可得到準確之數據，
+                                                    預提折舊之結果是放在暫存資料表中，不會影響到系統本身的折舊資料
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <th>下個年度是</th>
+                                                 <td><asp:Label ID="lblNextYear" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                                 <td>
+                                                    <asp:Button ID="btnPreAutoDepreciation" Text="執行" runat="server" />
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="btnCopyPreDepreciation" Enabled="false" Text="複製預提折舊資料" runat="server" />
+                                                </td>
+                                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                                    <ContentTemplate></ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:PostBackTrigger ControlID="btnCopyPreDepreciation" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel> 
+                                            </tr>
+                                        </table>  
+                                        <asp:Label ID="Label2" ForeColor="Red" Font-Size="14pt" Font-Bold="True" Text="0" runat="server" />
+                                            <asp:DataGrid ID="DataGrid1" Width="2048px"  style="font-size:14px;" CssClass="table table-bordered table-condensed smart-form" runat="server" >
+                                                <Columns>
+
+                                                </Columns>
+                                            </asp:DataGrid>
+                                        
+                                    </ContentTemplate>
+                                </AjaxToolkit:TabPanel>                         
                             </AjaxToolkit:TabContainer>
                             <div style="padding-bottom:1px;">&nbsp;</div>                            
                         </article>

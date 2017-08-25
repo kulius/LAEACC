@@ -43,13 +43,32 @@ Public Class PGMB050
 
         ViewState("MyOrder") = "prno"  '預設排序欄位
 
+        'Focus*****
+        TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
+
+        Dim s1 As String = Request.QueryString("cvalue")
+
+        If s1 = "PGMC010" Then
+            TabContainer1.ActiveTabIndex = 2 '指定Tab頁籤
+        End If
+
+        If s1 = "PGMC020" Then
+            TabContainer1.ActiveTabIndex = 3 '指定Tab頁籤
+        End If
         'DataGrid*****
         Master.Controller.objDataGridStyle(DataGridView, "M")
 
         UCBase1.SetButtons_Visible()                         '初始化控制鍵
 
-        'Focus*****
-        TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
+
+
+        Dim str1 As String = "一般財物,建物,"
+        Master.Controller.objDropDownListOptionGG(cboAutoDepreciationData, "--請選擇--," & str1, "," & str1)
+
+        Dim str2 As String = "按年提列,按月提例,"
+        Master.Controller.objDropDownListOptionGG(cboAutoDepreciationMode, "--請選擇--," & str2, "," & str2)
+
+        lblNextYear.Text = Now.Year - 1911 + 1
 
 
         'sqlstr = "SELECT * FROM CODE where kind='單位' " & _
@@ -80,7 +99,7 @@ Public Class PGMB050
             SetControls(0) '設定所有輸入控制項的唯讀狀態
 
             '資料查詢*****
-            FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
+            'FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
         End If
     End Sub
     Public Sub MessageBx(ByVal sMessage As String)
@@ -287,167 +306,77 @@ Public Class PGMB050
         Dim SaveStatus As Boolean = False
         Dim blnCheck As Boolean = False
 
-        'Dim kindno, prno, acno, no, sPDate As String
-        'Dim builNo, landNo1, landNo2, landArea, part, area1 As String
-        'Dim area2, area3, endAmt, useyear, stru, tax, remark As String
-        'Dim addr, amt, kind, borrow, useMode, sEndDate As String
-        'Dim pDate, endDate As DateTime
+        Dim prno, sDepreciationDate, amt, remark As String
+        Dim name, purchaseDate, sEndDate, endRemark As String
+        Dim depreciationDate As DateTime
 
-        'kindno = Trim(txtPrNo.Text)
-        'builNo = Trim(txtBuilNo.Text)
-        'acno = Trim(txtAcNo.Text)
-        'no = Trim(txtNo.Text)
-        'landNo2 = Trim(txtLandNo2.Text)
-        'landNo1 = Trim(txtLandNo1.Text)
-        'sPDate = Trim(txtPDate.Text)
-        'landArea = Trim(txtLandArea.Text)
-        'part = Trim(txtPart.Text)
-        'area1 = Trim(txtArea1.Text)
-        'area2 = Trim(txtArea2.Text)
-        'area3 = Trim(txtArea3.Text)
-        'sEndDate = Trim(txtEndDate.Text)
-        'stru = Trim(txtStru.Text)
-        'amt = Trim(txtAmt.Text)
-        'endAmt = Trim(txtEndAmt.Text)
-        'useyear = Trim(txtUseYear.Text)
-        'tax = Trim(txtTax.Text)
-        'addr = Trim(txtAddr.Text)
-        'remark = Trim(txtRemark.Text)
-        'useMode = Trim(txtUseMode.Text)
-        'borrow = Trim(txtBorrow.Text)
-        'kind = Trim(cboKind.Text)
+        prno = Trim(txtPrNo.Text)
+        sDepreciationDate = Trim(txtDepreciationDate.Text)
+        amt = Trim(txtAmt.Text)
+        remark = Trim(txtRemark.Text)
 
-        'If Not IsNumeric(kindno) Then
-        '    MessageBx("財物編號必須輸入6位數字")
-        '    txtPrNo.Focus()
-        '    PrevTableStatus = "0"
-        '    Exit Sub
-        'End If
-        ''If Not gPS3.IsPGKindIDValid(kindno) Then
-        ''    MessageBx("財物編號不存在，請指定屬於建物的財物編號")
-        ''    txtPrNo.Focus()
-        ''    Exit Sub
-        ''End If
-        'If addr = "" Then
-        '    MessageBx("必須輸入地址")
-        '    txtAddr.Focus()
-        '    PrevTableStatus = "0"
-        '    Exit Sub
-        'End If
-        'If stru = "" Then
-        '    MessageBx("必須輸入房屋構造")
-        '    txtStru.Focus()
-        '    PrevTableStatus = "0"
-        '    Exit Sub
-        'End If
-        'If useMode = "" Then
-        '    MessageBx("必須輸入使用現況")
-        '    txtUseMode.Focus()
-        '    PrevTableStatus = "0"
-        '    Exit Sub
-        'End If
-        'If kind = "" Then
-        '    MessageBx("必須輸入房屋類別")
-        '    cboKind.Focus()
-        '    PrevTableStatus = "0"
-        '    Exit Sub
-        'End If
-        'If (no = "") Then
-        '    MessageBx("必須指定序號")
-        '    txtNo.Focus()
-        '    PrevTableStatus = "0"
-        '    Exit Sub
-        'End If
+        name = Trim(txtName.Text)
+        purchaseDate = Trim(txtPurchaseDate.Text)
+        sEndDate = Trim(txtEndDate.Text)
+        endRemark = lblEndRemark.Text
 
-        'If sPDate <> "" Then
-        '    sPDate = sDateCDToAD(sPDate)
-        '    pDate = CDate(sPDate)
-        '    If pDate > Now Then
-        '        MessageBx("登記日期不可大於今天")
-        '        txtPDate.Focus()
-        '        PrevTableStatus = "0"
-        '    End If
-        'Else
-        '    MessageBx("登記日期不得為空")
-        '    txtPDate.Focus()
-        '    PrevTableStatus = "0"
-        'End If
+        If Not IsNumeric(prno) Or Len(prno) <> 10 Then
+            MessageBx("財物編號必須輸入10位數字")
+            txtPrNo.Focus()
+            Exit Sub
+        End If
+        If sEndDate <> String.Empty Then
+            MessageBx("財物已經報廢了，不可執行折舊作業")
+            txtPrNo.Focus()
+            Exit Sub
+        End If
+        If Not IsNumeric(amt) Then
+            MessageBx("金額必須輸入整數")
+            txtAmt.Focus()
+            Exit Sub
+        End If
 
-        'If sEndDate <> "" Then
-        '    sEndDate = sDateCDToAD(sEndDate)
-        '    endDate = CDate(sEndDate)
-        '    If endDate > Now Then
-        '        MessageBx("報廢日期不可大於今天")
-        '        txtEndDate.Focus()
-        '        PrevTableStatus = "0"
-        '    End If
-        'End If
+        If sDepreciationDate <> "" Then
+            sDepreciationDate = sDateCDToAD(sDepreciationDate)
+            depreciationDate = CDate(sDepreciationDate)
+            If depreciationDate > Now Then
+                MessageBx("提列日期不可大於今天")
+                txtDepreciationDate.Focus()
+                PrevTableStatus = "0"
+            End If
+        Else
+            MessageBx("提列日期不得為空")
+            txtDepreciationDate.Focus()
+            PrevTableStatus = "0"
+        End If
 
-
-        'If (Not IsNumeric(landArea)) Or landArea.IndexOf("-") >= 0 Then
-        '    MessageBx("基地面積必須輸入正數")
-        '    txtLandArea.Focus()
-        '    Exit Sub
-        'End If
-        'If (Not IsNumeric(area1)) Or area1.IndexOf("-") >= 0 Then
-        '    MessageBx("主物面積必須輸入正數")
-        '    txtArea1.Focus()
-        '    Exit Sub
-        'End If
-        'If (Not IsNumeric(area2)) Or area2.IndexOf("-") >= 0 Then
-        '    MessageBx("附屬建物面積必須輸入正數")
-        '    txtArea2.Focus()
-        '    Exit Sub
-        'End If
-        'If (Not IsNumeric(area3)) Or area3.IndexOf("-") >= 0 Then
-        '    MessageBx("房屋坪數必須輸入正數")
-        '    txtArea3.Focus()
-        '    Exit Sub
-        'End If
-        'If (Not IsNumeric(amt)) Or amt.IndexOf("-") >= 0 Then
-        '    MessageBx("金額必須輸入正數")
-        '    txtAmt.Focus()
-        '    Exit Sub
-        'End If
-        'If (Not IsNumeric(endAmt)) Or endAmt.IndexOf("-") >= 0 Then
-        '    MessageBx("預估殘值必須輸入正數")
-        '    txtEndAmt.Focus()
-        '    Exit Sub
-        'End If
-        'If (Not IsNumeric(useyear)) Or useyear.IndexOf("-") >= 0 Or useyear.IndexOf(".") >= 0 Then
-        '    MessageBx("使用年限必須輸入正整數")
-        '    txtUseYear.Focus()
-        '    Exit Sub
-        'End If
-
-        'Dim result As Integer
-        'prno = kindno & no
-
-        'Dim info As BuildingInfo
-        'info = New BuildingInfo(prno, acno, sPDate, builNo, landNo1, landNo2, landArea, part, area1, area2, area3, useyear, amt, sEndDate, endAmt, stru, tax, addr, kind, useMode, borrow, remark)
+        Dim info As DepreciationInfo
+        info = New DepreciationInfo(Session("mid"), prno, Session("mACNO"), sDepreciationDate, amt, remark, name, purchaseDate, Session("mOriginalAmt"), Session("mEndAmt"), Session("mTotalAddDel"), Session("mNetAmt"), Session("mDepreciation"), Session("mUseYear"), Session("mKeepEmpName"), Session("mKeepUnitName"), sEndDate, endRemark)
 
 
 
+      
 
-        ''-- 不可重複(只有新增才需判斷) --
-        'Dim strRow As String = ""
-        'If PrevTableStatus = "1" Then
-        '    txtKey1.Text = lblkey.Text
-        'End If
-        'Dim loadkey As String = lblkey.Text
 
-        ''判斷程序為新增或修改*****
-        'If PrevTableStatus = "1" Then SaveStatus = InsertData(info) : ViewState("FileKey") = txtKey1.Text '新增
-        'If PrevTableStatus = "2" Then SaveStatus = UpdateData(info) : ViewState("FileKey") = txtKey1.Text '修改
+        '-- 不可重複(只有新增才需判斷) --
+        Dim strRow As String = ""
+        If PrevTableStatus = "1" Then
+            txtKey1.Text = lblkey.Text
+        End If
+        Dim loadkey As String = lblkey.Text
 
-        'If SaveStatus = True Then
-        '    ViewState("MyStatus") = 0
-        '    SetControls(0)
-        '    FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
-        '    TabContainer1.ActiveTabIndex = 0
-        '    UCBase1.SetButtons()
-        '    FindData(loadkey) '直接查詢值
-        'End If
+        '判斷程序為新增或修改*****
+        If PrevTableStatus = "1" Then SaveStatus = InsertData(info) : ViewState("FileKey") = txtKey1.Text '新增
+        If PrevTableStatus = "2" Then SaveStatus = UpdateData(info) : ViewState("FileKey") = txtKey1.Text '修改
+
+        If SaveStatus = True Then
+            ViewState("MyStatus") = 0
+            SetControls(0)
+            FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
+            TabContainer1.ActiveTabIndex = 0
+            UCBase1.SetButtons()
+            FindData(loadkey) '直接查詢值
+        End If
 
 
         '異動後初始化*****
@@ -456,18 +385,24 @@ Public Class PGMB050
     End Sub
 
     '新增
-    Public Function InsertData(info As BuildingInfo) As Boolean
+    Public Function InsertData(info As DepreciationInfo) As Boolean
         Dim blnCheck As Boolean = False
         Dim result As Integer
-        result = BuildingDAL.Insert(info)
+        result = DepreciationDAL.Insert(info, Session("mid"))
         Select Case result
             Case 1
                 MessageBx("新增成功")
                 blnCheck = True
+                'mDepreciation = CDec(mDepreciation) + CDec(amt)
+                'mNetAmt = CDec(mOriginalAmt) + CDec(mTotalAddDel) - CDec(mDepreciation)
+                'txtDepreciation.Text = mDepreciation
+                'txtNetAmt.Text = mNetAmt
+                'AddToGrid(info)
+                'If mIsClearDataAfterAdd Then ClearData()
             Case -1
-                MessageBx("新增失敗，原因是 此筆財物編號已經存在，必須指定新的編號")
+                MessageBx("新增失敗，原因是 此筆財物編號不存在於財物主檔或是建物主檔中，或是此筆財物編號的會記科目欄位沒有資料，因此不可提列折舊")
             Case -2
-                MessageBx("新增失敗，原因是 在財物主檔至少有一筆財物已經佔用此編號，必須指定新的編號")
+                MessageBx("新增失敗，原因是 此筆財物編號和提列日期已經存在折舊檔中，必須修改提列日期")
             Case Else
                 MessageBx("未知的傳回值")
         End Select
@@ -475,16 +410,22 @@ Public Class PGMB050
         Return blnCheck
     End Function
     '修改
-    Public Function UpdateData(info As BuildingInfo) As Boolean
+    Public Function UpdateData(info As DepreciationInfo) As Boolean
         Dim blnCheck As Boolean = False
         Dim result As Integer
-        result = BuildingDAL.Update(info)
+        result = DepreciationDAL.Update(info)
         Select Case result
             Case 1
                 MessageBx("修改成功")
                 blnCheck = True
+                'mDepreciation = CDec(mDepreciation) - CDec(mAmt) + CDec(amt)
+                'mNetAmt = CDec(mOriginalAmt) + CDec(mTotalAddDel) - CDec(mDepreciation)
+                'txtDepreciation.Text = mDepreciation
+                'txtNetAmt.Text = mNetAmt
+                'ReviseToGrid(info)
+                'If mIsClearDataAfterAdd Then ClearData()
             Case -1
-                MessageBx("修改失敗，原因是 找不到此財物編號 ")
+                MessageBx("修改失敗，原因是 找不到此筆資料")
             Case Else
                 MessageBx("未知的傳回值")
         End Select
@@ -498,19 +439,26 @@ Public Class PGMB050
         Dim result As Integer
         Dim keyvalue As String
 
-        keyvalue = Trim(lblkey.Text)
-        Dim info As BuildingInfo
-        info = New BuildingInfo(keyvalue)
-        result = BuildingDAL.Delete(info)
+
+        If Session("mid") Then
+            MessageBx("這是加總過的資料，不可刪除")
+            Exit Sub
+        End If
+        Dim prno As String = txtPrNo.Text
+        Dim id As String = Session("mid")
+        Dim info As DepreciationInfo
+
+
+        info = New DepreciationInfo(id, prno, False)
+        result = DepreciationDAL.Delete(info)
         Select Case result
             Case 1
                 SaveStatus = True
             Case -1
-                MessageBx("刪除失敗，原因是 找不到此筆財物編號 ")
+                MessageBx("刪除失敗，原因是 找不到此筆資料 ")
             Case Else
                 MessageBx("未知的傳回值")
         End Select
-
 
         If SaveStatus = True Then
             ViewState("MyStatus") = 0
@@ -528,49 +476,42 @@ Public Class PGMB050
 
     '請購推算檔
     Sub Data_Load(ByVal strKey1 As String)
-        'Dim info As New BuildingInfo(strKey1, strKey1)
+        Dim intI, SumUp As Integer
+        Dim strI, strColumn1, strColumn2 As String
 
-        'Dim mDT As DataTable = New DataTable
-        'Dim mDV As DataView = New DataView
-        'Dim dr As DataRow
+        '開啟查詢
+        objCon99 = New SqlConnection(DNS_PGM)
+        objCon99.Open()
 
-        'mDT = BuildingDAL.Query(info)
-        'dr = mDT.Rows(0)
+        Dim sqlstr, qstr, strD, strC As String
 
-        'Dim kindNo As String, no As String, prno As String
-        'prno = dr("prno")
-        'kindNo = Microsoft.VisualBasic.Left(prno, 6)
-        'no = Mid(prno, 7)
-        'txtPrNo.Text = kindNo
-        'txtNo.Text = no
-        'txtBuilNo.Text = dr("builno") & ""
-        'txtAcNo.Text = dr("acno") & ""
-        'txtLandNo2.Text = dr("land_no2") & ""
-        'txtLandNo1.Text = dr("land_no1") & ""
-        'txtPDate.Text = sDateADToCD(dr("pdate").ToString)
-        'txtLandArea.Text = dr("land_area") & ""
-        'txtPart.Text = dr("part") & ""
-        'txtArea1.Text = dr("area1")
-        'txtArea2.Text = dr("area2")
-        'txtArea3.Text = dr("area3")
-        'txtEndDate.Text = sDateADToCD(dr("enddate").ToString)
-        'txtStru.Text = dr("stru")
-        'txtAmt.Text = dr("amt")
-        'txtEndAmt.Text = dr("endamt")
-        'txtUseYear.Text = dr("useyear")
-        'txtTax.Text = dr("tax") & ""
-        'txtAddr.Text = dr("addr")
-        'txtRemark.Text = dr("remark") & ""
-        'txtUseMode.Text = dr("usemode")
-        'txtBorrow.Text = dr("borrow") & ""
-        'cboKind.Text = dr("kind")
-        'lblNetAmt.Text = "淨值 = " & dr("netAmt") '& " , 折舊率 = " & Format(dr("depreciationRatio"), "0.00%")
-        'txtPrNo.Enabled = False
-        'txtNo.Enabled = False
-        'txtEndDate.Enabled = True
-        'lblkey.Text = dr("prno")
+        sqlstr = "SELECT * from PPTF030 " & _
+         "where  ID ='" & strKey1 & "'"
 
 
+        objCmd99 = New SqlCommand(sqlstr, objCon99)
+        objDR99 = objCmd99.ExecuteReader
+
+        If objDR99.Read Then
+            Session("mid") = objDR99("ID").ToString
+            lblkey.Text = objDR99("ID").ToString
+            txtPrNo.Text = objDR99("prno").ToString
+            txtDepreciationDate.Text = sDateADToCD(objDR99("pdate").ToString)
+            txtAmt.Text = objDR99("amt").ToString
+            txtRemark.Text = objDR99("remark").ToString
+
+        End If
+
+        objDR99.Close()    '關閉連結
+        objCon99.Close()
+        objCmd99.Dispose() '手動釋放資源
+        objCon99.Dispose()
+        objCon99 = Nothing '移除指標
+
+
+        Dim prno As String = txtPrNo.Text
+
+        Query(prno)
     End Sub
     Sub FindData(ByVal strKey1 As String)
         '防呆*****
@@ -601,4 +542,256 @@ Public Class PGMB050
     End Sub
 
 
+    Protected Sub btnGetPrNo_Click(sender As Object, e As EventArgs) Handles btnGetPrNo.Click
+        Dim prno As String = txtPrNo.Text
+        Query(prno)
+    End Sub
+
+    Protected Sub btnDepreciationQuery_Click(sender As Object, e As EventArgs) Handles btnDepreciationQuery.Click
+        Dim prno As String = Trim(txtPrNo.Text)
+        If prno = String.Empty Then
+            MessageBx("必須輸入財物編號")
+            txtPrNo.Focus()
+            Exit Sub
+        End If
+        If Len(prno) <> 10 Then
+            MessageBx("財物編號必須為10碼")
+            txtPrNo.Focus()
+            Exit Sub
+        End If
+
+
+        Dim info As New DepreciationInfo(prno, prno)
+        mDT = DepreciationDAL.Query(info)
+        mDV.Table = mDT
+        mDV.Sort = "prno"
+        DataGridView.DataSource = mDV
+        DataGridView.DataBind()
+
+        lbl_GrdCount.Text = mDV.Count
+
+        If mDV.Count = 0 Then
+            MessageBx("查無資料")
+            '使大部分控制項失效
+            'DisableControl()
+        Else
+            '使大部分控制項生效,並選擇第一筆資料
+            'EnableControl()
+        End If
+        TabContainer1.ActiveTabIndex = 0
+    End Sub
+
+    Sub Query(ByVal prno As String)
+        If prno = String.Empty Then
+            txtName.Text = ""
+            txtWhoKeep.Text = ""
+            txtPurchaseDate.Text = ""
+            txtEndDate.Text = ""
+            lblEndRemark.Text = ""
+            txtOriginalAmt.Text = ""
+            txtEndAmt.Text = ""
+            txtTotalAddDel.Text = ""
+            txtNetAmt.Text = ""
+            txtDepreciation.Text = ""
+            txtUseYear.Text = ""
+        Else
+            Dim dt As DataTable
+            Dim info As New PGMainInfo(prno, prno)
+            dt = PGMainDAL.Query(info)
+
+            If dt.Rows.Count = 0 Then '在財物主檔找不到資料,還要去建物主檔找
+
+                Dim info2 As New BuildingInfo(prno, prno)
+                dt = BuildingDAL.Query(info2)
+
+                If dt.Rows.Count = 0 Then
+                    txtName.Text = ""
+                    txtWhoKeep.Text = ""
+                    txtPurchaseDate.Text = ""
+                    txtEndDate.Text = ""
+                    lblEndRemark.Text = ""
+                    txtOriginalAmt.Text = ""
+                    txtEndAmt.Text = ""
+                    txtTotalAddDel.Text = ""
+                    txtNetAmt.Text = ""
+                    txtDepreciation.Text = ""
+                    txtUseYear.Text = ""
+                    MessageBx("找不到此筆財物編號的資料")
+
+                Else '在建物主檔找到資料
+
+                    Dim dr As DataRow = dt.Rows(0)
+                    txtName.Text = dr("kind") '在這使用建物的 kind 欄位來當作財物名稱
+                    txtWhoKeep.Text = ""
+
+                    txtPurchaseDate.Text = sDateADToCD(dr("pdate").ToString)
+                    txtEndDate.Text = sDateADToCD(dr("enddate").ToString)
+                    lblEndRemark.Text = ""
+                    txtOriginalAmt.Text = dr("amt")
+                    txtEndAmt.Text = dr("endamt")
+                    txtTotalAddDel.Text = dr("totalAddDel")
+                    txtNetAmt.Text = dr("netamt")
+                    txtDepreciation.Text = dr("depreciation")
+                    txtUseYear.Text = dr("useyear")
+                    Session("mKeepEmpName") = ""
+                    Session("mKeepUnitName") = ""
+                    Session("mACNO") = dr("acno") & ""
+                    Session("mOriginalAmt") = dr("amt")
+                    Session("mEndAmt") = dr("endamt")
+                    Session("mTotalAddDel") = dr("totalAddDel")
+                    Session("mNetAmt") = dr("netamt")
+                    Session("mDepreciation") = dr("depreciation")
+                    Session("mUseYear") = dr("useyear")
+                End If
+
+            Else '在財物主檔找到資料
+                Dim dr As DataRow = dt.Rows(0)
+                Dim keepEmp As String = dr("keepempno") & ""
+                txtName.Text = dr("name")
+                If keepEmp = String.Empty Then
+                    txtWhoKeep.Text = dr("keepunit") & " " & dr("keepUnitName")
+                    Session("mKeepEmpName") = ""
+                    Session("mKeepUnitName") = dr("keepUnitName") & ""
+                Else
+                    txtWhoKeep.Text = keepEmp & " " & dr("keepempname")
+                    Session("mKeepEmpName") = dr("keepempname") & ""
+                    Session("mKeepUnitName") = ""
+                End If
+                Session("mACNO") = dr("acno") & ""
+                txtPurchaseDate.Text = sDateADToCD(dr("pdate").ToString)
+                txtEndDate.Text = sDateADToCD(dr("enddate").ToString)
+                lblEndRemark.Text = dr("endremk") & ""
+                txtOriginalAmt.Text = dr("amt")
+                txtEndAmt.Text = dr("endamt")
+                txtTotalAddDel.Text = dr("totalAddDel")
+                txtNetAmt.Text = dr("netamt")
+                txtDepreciation.Text = dr("depreciation")
+                txtUseYear.Text = dr("useyear")
+                Session("mOriginalAmt") = dr("amt")
+                Session("mEndAmt") = dr("endamt")
+                Session("mTotalAddDel") = dr("totalAddDel")
+                Session("mNetAmt") = dr("netamt")
+                Session("mDepreciation") = dr("depreciation")
+                Session("mUseYear") = dr("useyear")
+            End If
+
+        End If
+    End Sub
+
+    Protected Sub btnAutoDepreciation_Click(sender As Object, e As EventArgs) Handles btnAutoDepreciation.Click
+        Dim sDepreciationDate, sDepreciationDate2 As String
+        Dim depreciationDate As DateTime
+        Dim method, kind As Integer
+        Dim year, month As Integer
+
+        sDepreciationDate = Trim(txtAutoDepreciationDate.Text)
+        method = cboAutoDepreciationMode.SelectedIndex - 1 '按年或按月提列
+        kind = cboAutoDepreciationData.SelectedIndex - 1 '提列財物或是建物
+
+        If sDepreciationDate <> "" Then
+            sDepreciationDate = sDateCDToAD(sDepreciationDate)
+            depreciationDate = CDate(sDepreciationDate)
+            If depreciationDate.Year > Now.Year Then
+                MessageBx("提列日期不可大於今年")
+                txtAutoDepreciationDate.Focus()
+                Exit Sub
+            End If
+
+            If method = 1 And depreciationDate.Year = Now.Year And depreciationDate.Month > Now.Month Then '按月提列
+                MessageBx("按月提列者其提列日期不可大於本月")
+                txtAutoDepreciationDate.Focus()
+                Exit Sub
+            End If
+        Else
+            MessageBx("提列日期不得為空")
+            txtAutoDepreciationDate.Focus()
+            Exit Sub
+        End If
+
+
+        Dim result As Integer
+        result = DepreciationDAL.Depreciate(sDepreciationDate, method, kind)
+        MessageBx("總共提列了 " & result & " 筆財物的折舊資料，現在要查詢折舊明細資料")
+
+        '建立出日期區間以便等下要查詢折舊明細資料
+        year = depreciationDate.Year
+        month = depreciationDate.Month
+        If method = 0 Then '按年提列
+            sDepreciationDate = year & "/1/1"
+            sDepreciationDate2 = year & "/12/31"
+        Else
+            sDepreciationDate = year & "/" & month & "/1"
+            sDepreciationDate2 = year & "/" & month & "/" & DateTime.DaysInMonth(year, month)
+        End If
+
+        Dim info As New DepreciationInfo(sDepreciationDate, sDepreciationDate2, "")
+
+        mDT = DepreciationDAL.Query(info)
+        mDV.Table = mDT
+        mDV.Sort = "acno,prno"
+        DataGridView.DataSource = mDV
+        DataGridView.DataBind()
+
+        lbl_GrdCount.Text = mDV.Count
+        If mDV.Count = 0 Then
+            MessageBx("找不到資料，請重新設定查詢條件")
+        End If
+        TabContainer1.ActiveTabIndex = 0
+
+
+
+    End Sub
+
+    Protected Sub btnPreAutoDepreciation_Click(sender As Object, e As EventArgs) Handles btnPreAutoDepreciation.Click
+        btnPreAutoDepreciation.Enabled = False
+        Dim result As String, dt As DataTable
+        Dim sDepreciationDate As String
+        sDepreciationDate = (Now.Year + 1) & "/1/1"
+        mDT = DepreciationDAL.PreDepreciate(sDepreciationDate, result)
+        MsgBox("總共提列了 " & result & " 筆財物的折舊資料，現在要查詢折舊明細資料")
+
+        mDV.Table = mDT
+        mDV.Sort = "acno,prno"
+        DataGrid1.DataSource = mDV
+        DataGrid1.DataBind()
+
+        'Dim dv As DataView = dt.DefaultView
+        'dv.Sort = "acno,prno"
+        'DataGrid1.DataSource = mDV
+        'DataGrid1.DataBind()
+
+        Label2.Text = mDV.Count
+
+
+        If mDV.Count = 0 Then
+            MessageBx("查無資料")
+            btnCopyPreDepreciation.Enabled = False
+        Else
+            btnCopyPreDepreciation.Enabled = True
+        End If
+        btnPreAutoDepreciation.Enabled = True
+    End Sub
+
+    Protected Sub btnCopyPreDepreciation_Click(sender As Object, e As EventArgs) Handles btnCopyPreDepreciation.Click
+        'Dim dt As DataTable, dv As DataView
+        'dv = dgPreAutoDepreciation.DataSource
+        'dt = dv.Table
+        'CopyAllGridData(dgPreAutoDepreciation, dt, dv, gMsgTitle)
+        'MsgBox("複製成功，您可以將這些資料貼到其他應用程式作後續處理，譬如Excel")
+        Dim sw As New System.IO.StringWriter
+        Dim hw As New System.Web.UI.HtmlTextWriter(sw)
+
+        'GridView1.EditIndex = False 
+
+        Response.Clear()
+        Response.AppendHeader("Content-Disposition", "attachment; filename=P.xls")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        DataGrid1.RenderControl(hw)
+        Response.Write(sw.ToString())
+        Response.End()
+
+        'GridView1.EditIndex = True 
+
+    End Sub
 End Class

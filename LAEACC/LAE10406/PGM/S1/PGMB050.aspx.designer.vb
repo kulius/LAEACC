@@ -392,6 +392,123 @@ Partial Public Class PGMB050
     Protected WithEvents txtRemark As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''btnDepreciationQuery 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnDepreciationQuery As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''TabPanel3 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TabPanel3 As Global.AjaxControlToolkit.TabPanel
+
+    '''<summary>
+    '''cboAutoDepreciationData 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents cboAutoDepreciationData As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''cboAutoDepreciationMode 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents cboAutoDepreciationMode As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtAutoDepreciationDate 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents txtAutoDepreciationDate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnAutoDepreciation 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnAutoDepreciation As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''TabPanel4 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TabPanel4 As Global.AjaxControlToolkit.TabPanel
+
+    '''<summary>
+    '''lblNextYear 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents lblNextYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''btnPreAutoDepreciation 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnPreAutoDepreciation As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnCopyPreDepreciation 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnCopyPreDepreciation As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''UpdatePanel3 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Label2 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''DataGrid1 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents DataGrid1 As Global.System.Web.UI.WebControls.DataGrid
+
+    '''<summary>
     '''Master 屬性。
     '''</summary>
     '''<remarks>
