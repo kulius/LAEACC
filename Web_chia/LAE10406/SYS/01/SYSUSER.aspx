@@ -12,7 +12,15 @@
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>        
-            <!--關鍵值隱藏區-->
+            
+        </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="BtnImport" />
+        </Triggers>
+    </asp:UpdatePanel>
+
+
+    <!--關鍵值隱藏區-->
             <asp:Label ID="txtKey1" Text="" Visible="false" runat="server" />
    
             <!--主項目區-->
@@ -124,9 +132,4 @@
                     </div>
                 </section>
             </div>
-        </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="BtnImport" />
-        </Triggers>
-    </asp:UpdatePanel>
 </asp:Content>

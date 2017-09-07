@@ -941,6 +941,15 @@ Partial Public Class AC010
     Protected WithEvents AutoCompleteExtender6 As Global.AjaxControlToolkit.AutoCompleteExtender
 
     '''<summary>
+    '''AutoCompleteExtender11 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents AutoCompleteExtender11 As Global.AjaxControlToolkit.AutoCompleteExtender
+
+    '''<summary>
     '''AutoCompleteExtender1 控制項。
     '''</summary>
     '''<remarks>

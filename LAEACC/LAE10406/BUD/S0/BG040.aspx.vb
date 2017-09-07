@@ -654,13 +654,10 @@ Public Class BG040
             If ii = 1 Then  ' click the ok botton
                 sqlstr = "insert into psname (unit, seq, psstr) values ('" & Session("UserUnit") & "', 9999, '" & txtSubject.Text & "')"
                 Master.ADO.runsql(DNS_ACC, sqlstr)
+
+                MsgBox("片語檔" & txtSubject.Text & "已加入完成", MsgBoxStyle.Information)
             End If
         End If
     End Sub
-
-
-
-
-
 #End Region
 End Class

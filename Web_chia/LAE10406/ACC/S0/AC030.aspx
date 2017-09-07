@@ -390,29 +390,7 @@
                                                    
                                                     <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender11" runat="server"
                                                         TargetControlID="vxtAccno1" Mask="N-NNNN" BehaviorID="_content_MaskedEditExtender11" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                   
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server"
-                                                        TargetControlID="vxtAccno2" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender1" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server"
-                                                        TargetControlID="vxtAccno3" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender2" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender3" runat="server"
-                                                        TargetControlID="vxtAccno4" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender3" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender4" runat="server"
-                                                        TargetControlID="vxtAccno5" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender4" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender5" runat="server"
-                                                        TargetControlID="vxtAccno6" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender5" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender6" runat="server"
-                                                        TargetControlID="vxtOther2" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender6" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender7" runat="server"
-                                                        TargetControlID="vxtOther3" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender7" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender8" runat="server"
-                                                        TargetControlID="vxtOther4" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender8" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender9" runat="server"
-                                                        TargetControlID="vxtOther5" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender9" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
-                                                    <AjaxToolkit:MaskedEditExtender ID="MaskedEditExtender10" runat="server"
-                                                        TargetControlID="vxtOther6" Mask="N-NNNN-NN-NN-NNNNNNN-N" Filtered=" " BehaviorID="_content_MaskedEditExtender10" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />                                        
-                                                   
+                                                    
                                                     <AjaxToolkit:AutoCompleteExtender 
                                                             ID="AutoCompleteExtender2"                             
                                                             runat="server"                

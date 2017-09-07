@@ -163,14 +163,14 @@ INSERT INTO a_sys_nunit_item VALUES ('PGM030','PGM','S0','財物交接','3','PGM
 INSERT INTO a_sys_nunit_item VALUES ('PGM040','PGM','S0','財物增減值','4',null,null)
 GO
 INSERT INTO a_sys_nunit_item VALUES ('PGMB010','PGM','S1','財物分類檔維護','1',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGMB020','PGM','S1','財物主檔維護','2',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGMB030','PGM','S1','財物增減值檔維護','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMB020','PGM','S1','財物主檔維護','2','PGMB020','S0/PGM010')
+INSERT INTO a_sys_nunit_item VALUES ('PGMB030','PGM','S1','財物增減值檔維護','3','PGMB030','S0/PGM040')
 INSERT INTO a_sys_nunit_item VALUES ('PGMB040','PGM','S1','建物主檔維護','4',null,null)
 INSERT INTO a_sys_nunit_item VALUES ('PGMB050','PGM','S1','查詢財物折舊資料','5',null,null)
 GO
-INSERT INTO a_sys_nunit_item VALUES ('PGMC010','PGM','S2','自動提列','1',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGMC020','PGM','S2','預提下年度折舊','2',null,null)
-INSERT INTO a_sys_nunit_item VALUES ('PGMC030','PGM','S2','財物折舊檔維護','3',null,null)
+INSERT INTO a_sys_nunit_item VALUES ('PGMC010','PGM','S2','自動提列','1','PGMC010','S1/PGMB050')
+INSERT INTO a_sys_nunit_item VALUES ('PGMC020','PGM','S2','預提下年度折舊','2','PGMC020','S1/PGMB050')
+INSERT INTO a_sys_nunit_item VALUES ('PGMC030','PGM','S2','財物折舊檔維護','3','PGMC030','S1/PGMB050')
 INSERT INTO a_sys_nunit_item VALUES ('PGMC040','PGM','S2','列印折舊明細表','4',null,null)
 GO
 INSERT INTO a_sys_nunit_item VALUES ('PGMD010','PGM','S3','財物標籤','1',null,null)
@@ -196,4 +196,11 @@ INSERT INTO a_sys_nunit_item VALUES ('PGMD200','PGM','S3','財產報告表','20'
 GO
 
 INSERT INTO a_sys_nunit_item VALUES ('ACM000','ACC','S1','一鍵上傳農委會','0',null,null)
+GO
+
+DELETE a_sys_nunit_item where s_unitem_id='AC011'
+DELETE a_sys_nunit_item where s_unitem_id='AC031'
+GO
+INSERT INTO a_sys_nunit_item VALUES ('AC011','ACC','S0','修改收支傳票','0','AC011','S0/AC010')
+INSERT INTO a_sys_nunit_item VALUES ('AC031','ACC','S0','修改轉帳傳票','0','AC031','S0/AC030')
 GO

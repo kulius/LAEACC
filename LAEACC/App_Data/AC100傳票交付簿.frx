@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="09/19/2016 23:03:44" ReportInfo.CreatorVersion="1.4.42.0">
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="08/29/2017 14:17:14" ReportInfo.CreatorVersion="1.4.42.0">
   <ScriptText>Imports System
 Imports System.Collections
 Imports System.Collections.Generic
@@ -107,8 +107,8 @@ Namespace FastReport
 End Namespace
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHy02RHcF02ePtZEzAKnV1pQ==" ConnectionStringExpression="[ConnStr]">
-      <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select a.* from &#13;&#10;(SELECT accyear,date_1, kind, no_1_no, seq, item, accno, remark, amt, dc, bank FROM acf010 where accyear= @nudYear&#13;&#10;and ((kind='1' and no_1_no between @txtSno1 and @txtEno1 )&#13;&#10;or (kind='2' and no_1_no between @txtSno2 and @txtEno2 )&#13;&#10;or (kind='3' and no_1_no between @txtSno3 and @txtEno3 ))) a &#13;&#10;order by a.date_1, a.kind, a.no_1_no, a.dc, a.seq, a.item">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8XR8fzk+OzMtCV6YTVfRqdNCCRklwqEAEZvym6Pa6cyjqW8cXbbD3zhd4AST7tQHND3N43abz5rVqn5BHxH0RevxX6i7FufzMsqUbd7CgSk/jWlI4RL9lMrqzw93PEN4f6XKnC+c9eAYoKe4ezBcEYEiCPQ89EZzUMQynOeOqyTAmF52dRrGbHJFmdDtyA9sVQ==" ConnectionStringExpression="[ConnStr]">
+      <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select a.* from &#13;&#10;(SELECT accyear,date_1, kind, no_1_no, seq, item, accno, remark, amt, dc, bank FROM acf010 where accyear= @nudYear&#13;&#10;and ((kind='1' and no_1_no between @txtSno1 and @txtEno1 )&#13;&#10;or (kind='2' and no_1_no between @txtSno2 and @txtEno2 )&#13;&#10;or (kind='3' and no_1_no between @txtSno3 and @txtEno3 ))) a &#13;&#10;ORDER BY  date_1 ASC, kind DESC, no_1_no ASC, dc ASC, seq ASC, item DESC">
         <Column Name="date_1" DataType="System.DateTime"/>
         <Column Name="kind" DataType="System.String"/>
         <Column Name="no_1_no" DataType="System.Int32"/>
@@ -168,8 +168,8 @@ End Namespace
       <TextObject Name="Text61" Left="9.45" Top="66.15" Width="170.1" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="傳　　　票" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text62" Left="614.25" Top="66.15" Width="94.5" Height="37.8" Border.Lines="All" Border.Color="Highlight" Text="金    額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
     </PageHeaderBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="107.62" Width="718.2" Height="37.8" CanShrink="true" Condition="[M.accyear]">
-      <DataBand Name="Data1" Top="149.09" Width="718.2" Height="18.9" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="Table">
+    <GroupHeaderBand Name="GroupHeader1" Top="107.95" Width="718.2" Height="37.8" CanShrink="true" Condition="[M.accyear]" SortOrder="None">
+      <DataBand Name="Data1" Top="149.75" Width="718.2" Height="18.9" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="Table">
         <TextObject Name="Text1" Left="9.45" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[MDate]" Font="新細明體, 10pt"/>
         <TextObject Name="Text63" Left="85.05" Width="37.8" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[MKind]" HorzAlign="Center" Font="新細明體, 10pt"/>
         <TextObject Name="Text4" Left="122.85" Width="56.7" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[M.no_1_no]" HorzAlign="Right" Font="新細明體, 12pt"/>
@@ -177,8 +177,8 @@ End Namespace
         <TextObject Name="Text6" Left="274.05" Width="340.2" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[M.remark]" Font="新細明體, 12pt"/>
         <TextObject Name="Text7" Left="614.25" Width="94.5" Height="18.9" Border.Lines="All" Border.Color="Highlight" Text="[M.amt]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" WordWrap="false" Font="新細明體, 12pt" Trimming="EllipsisCharacter"/>
       </DataBand>
-      <GroupFooterBand Name="GroupFooter1" Top="194.23" Width="718.2" Height="37.8" CanShrink="true">
-        <ChildBand Name="Child1" Top="171.66" Width="718.2" Height="18.9" FillUnusedSpace="true">
+      <GroupFooterBand Name="GroupFooter1" Top="195.55" Width="718.2" Height="37.8" CanShrink="true">
+        <ChildBand Name="Child1" Top="172.65" Width="718.2" Height="18.9" FillUnusedSpace="true">
           <TextObject Name="Text65" Left="9.45" Width="75.6" Height="18.9" Border.Lines="All" Border.Color="Highlight" Font="新細明體, 10pt"/>
           <TextObject Name="Text66" Left="85.05" Width="37.8" Height="18.9" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" Font="新細明體, 10pt"/>
           <TextObject Name="Text67" Left="122.85" Width="56.7" Height="18.9" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" Font="新細明體, 12pt"/>
@@ -188,7 +188,7 @@ End Namespace
         </ChildBand>
       </GroupFooterBand>
     </GroupHeaderBand>
-    <PageFooterBand Name="PageFooter1" Top="235.7" Width="718.2" Height="47.25">
+    <PageFooterBand Name="PageFooter1" Top="237.35" Width="718.2" Height="47.25">
       <TextObject Name="Text64" Top="9.45" Width="699.3" Height="28.35" Text="出納人員簽收：" HorzAlign="Center" VertAlign="Center" Font="新細明體, 12pt"/>
     </PageFooterBand>
   </ReportPage>

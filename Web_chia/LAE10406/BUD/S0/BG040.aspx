@@ -153,6 +153,12 @@
                                                 <td colspan="3">
                                                     <asp:TextBox ID="txtSubject" CssClass="form-control td-left" Width="40%" placeholder="直接開支才填受款人" runat="server" />
                                                     <asp:Button ID="btnAddSubject" Text="將受款人增入片語" CssClass="btn btn-warning td-right" runat="server" />
+                                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                                        <ContentTemplate></ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:PostBackTrigger ControlID="btnAddSubject" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
                                                     <asp:Label ID="lblSubject" ForeColor="Blue" Font-Size="12pt" Font-Bold="True"  runat="server" />
                                                 </td>
                                             </tr>
