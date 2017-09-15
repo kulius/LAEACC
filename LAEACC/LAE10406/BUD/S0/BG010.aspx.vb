@@ -209,7 +209,7 @@ Public Class BG010
 
         strSSQL = "select a.*, b.accname from pay000 a left outer join accname b " & _
                         "on a.accno=b.accno where a.bgno is null and left(a.unit,3)='" & Mid(Session("UserUnit"), 1, 3) & _
-                        "'  order by a.accyear ASC, a.batno ASC"
+                        "'  order by a.accyear desc,a.batno asc"
         Master.Controller.objDataGrid(dtgPay000, lbl_dtgPay000GrdCount, DNS_ACC, strSSQL, "查詢資料檔")
 
 
@@ -692,6 +692,11 @@ Public Class BG010
             '顯示值
             '預算科目
             'Master.Controller.objDropDownListOptionCK(ACCNO, Trim(objDR99("ACCNO").ToString))
+
+
+            If Trim(objDR99("DATE1").ToString) <> "" And Trim(objDR99("DATE2").ToString) <> "" Then
+                UCBase1.FindControl("btnDelete").Visible = False
+            End If
         End If
 
         objDR99.Close()    '關閉連結

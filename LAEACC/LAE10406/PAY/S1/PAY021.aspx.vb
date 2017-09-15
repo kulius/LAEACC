@@ -456,6 +456,8 @@ Public Class PAY021
         DataGridView.DataSource = dtCurrentTable
         DataGridView.DataBind()
 
+
+        '初始化
         lblTotAmt.Text = ""
         txtChkNo.Text = ""
         btnSure.Visible = False
@@ -465,6 +467,9 @@ Public Class PAY021
         lblTotNo.Text = ""
         TabContainer1.ActiveTabIndex = 0         '回datagrid PAGE 1
 
+        ckprint1.Checked = False
+        ckprint2.Checked = False
+        ckprint3.Checked = False : txtDate.Text = ""
     End Sub
 
     Protected Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

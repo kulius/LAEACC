@@ -79,6 +79,10 @@
     Protected Sub Page_Init(sender As Object, e As System.EventArgs) Handles Me.Init
         '檔案名稱
         FileName = System.IO.Path.GetFileName(Request.PhysicalPath)
+
+        Select Case System.IO.Path.GetFileName(Request.PhysicalPath)
+            Case "CHF040" : UpdatePanel1.Visible = True
+        End Select
     End Sub
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then

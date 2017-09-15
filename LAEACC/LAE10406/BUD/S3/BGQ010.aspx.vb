@@ -314,6 +314,11 @@ Public Class BGQ010
             'KEY、異動人員及日期*****
             txtKey1.Text = Trim(objDR99("BGNO").ToString)
 
+
+            '關閉刪除鍵
+            If Trim(objDR99("date1").ToString) <> "" And Trim(objDR99("date2").ToString) <> "" And Trim(objDR99("date3").ToString) <> "" And Trim(objDR99("date4").ToString) <> "" Then
+                btnDelete.Visible = False
+            End If
         End If
 
         objDR99.Close()    '關閉連結

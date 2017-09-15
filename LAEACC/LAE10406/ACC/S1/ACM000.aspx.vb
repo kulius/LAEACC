@@ -683,6 +683,8 @@ Public Class ACM000
                 Master.ADO.GenInsSql("fill_month", mm, "T")
                 Master.ADO.GenInsSql("in_years", IIf(Val(Mid(strAccno, 10, 3)) < 60, "", Val(Mid(strAccno, 10, 3))), "T") '取年度
                 Master.ADO.GenInsSql("acc_no_name", Master.Models.FormatAccno(strAccno) & strAccname, "U")
+                Master.ADO.GenInsSql("acc_no", Master.Models.FormatAccno(.Rows(inti).Item("ACCNO").ToString), "T")
+                Master.ADO.GenInsSql("acc_name", .Rows(inti).Item("ACCNAME").ToString, "U")
                 Master.ADO.GenInsSql("receivable", .Rows(inti).Item("AMT1").ToString, "N")
                 Master.ADO.GenInsSql("month_end_income", .Rows(inti).Item("AMT2").ToString, "N")
                 Master.ADO.GenInsSql("month_end_income_total", .Rows(inti).Item("AMT3").ToString, "N")
@@ -787,6 +789,8 @@ Public Class ACM000
                 Master.ADO.GenInsSql("fill_month", mm, "T")
                 Master.ADO.GenInsSql("urge_years", IIf(Val(Mid(strAccno, 10, 3)) < 60, "", Val(Mid(strAccno, 10, 3))), "T") '取年度
                 Master.ADO.GenInsSql("acc_no_name", Master.Models.FormatAccno(strAccno) & strAccname, "U")
+                Master.ADO.GenInsSql("acc_no", Master.Models.FormatAccno(.Rows(inti).Item("ACCNO").ToString), "T")
+                Master.ADO.GenInsSql("acc_name", .Rows(inti).Item("ACCNAME").ToString, "U")
                 Master.ADO.GenInsSql("urge", .Rows(inti).Item("AMT1").ToString, "N")
                 Master.ADO.GenInsSql("month_end_income", .Rows(inti).Item("AMT2").ToString, "N")
                 Master.ADO.GenInsSql("month_end_income_total", .Rows(inti).Item("AMT3").ToString, "N")
@@ -890,6 +894,8 @@ Public Class ACM000
                 Master.ADO.GenInsSql("fill_month", mm, "T")
                 Master.ADO.GenInsSql("pay_years", IIf(Val(Mid(strAccno, 10, 3)) < 60, "", Val(Mid(strAccno, 10, 3))), "T") '取年度
                 Master.ADO.GenInsSql("acc_no_name", Master.Models.FormatAccno(strAccno) & strAccname, "U")
+                Master.ADO.GenInsSql("acc_no", Master.Models.FormatAccno(.Rows(inti).Item("ACCNO").ToString), "T")
+                Master.ADO.GenInsSql("acc_name", .Rows(inti).Item("ACCNAME").ToString, "U")
                 Master.ADO.GenInsSql("payable", .Rows(inti).Item("AMT1").ToString, "N")
                 Master.ADO.GenInsSql("month_end_income", .Rows(inti).Item("AMT2").ToString, "N")
                 Master.ADO.GenInsSql("month_end_income_total", .Rows(inti).Item("AMT3").ToString, "N")
@@ -964,6 +970,4 @@ Public Class ACM000
         End If
 
     End Function
-
-   
 End Class

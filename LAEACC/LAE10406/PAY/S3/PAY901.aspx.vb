@@ -69,13 +69,13 @@ Public Class PAY901
     Public Sub FillData(Optional ByVal strQuery As String = "")
         Dim txtCount As Label = New Label
 
-        strSSQL = "SELECT DISTINCT '' AS 領款日期, b.REMARK AS 領款名稱, b.ACT_AMT AS 金額, a.CHKNO AS 支票號碼,"
+        strSSQL = "SELECT  '' AS 領款日期, b.REMARK AS 領款名稱, b.ACT_AMT AS 金額, a.CHKNO AS 支票號碼,"
         strSSQL &= " (SELECT SUM(ACT_AMT) FROM ACF010 t1 WHERE b.CHKNO = t1.CHKNO)AS 支票金額, '' AS 領款人"
         strSSQL &= " FROM CHF010 a"
         strSSQL &= " LEFT JOIN ACF010 b ON a.CHKNO = b.CHKNO"
         strSSQL &= " WHERE 1=1 AND LEN(a.CHKNO) > 5"
         strSSQL &= strQuery
-        strSSQL &= " ORDER BY a.CHKNO ASC"
+        strSSQL &= " ORDER BY a.END_NO ASC"
 
         Master.Controller.objDataGrid(DataGridView, txtCount, DNS_ACC, strSSQL, "查詢檔")
     End Sub
@@ -85,13 +85,13 @@ Public Class PAY901
         Dim MyDataSet As DataSet
 
 
-        strSSQL = "SELECT DISTINCT '' AS 領款日期, b.REMARK AS 領款名稱, b.ACT_AMT AS 金額, a.CHKNO AS 支票號碼,"
+        strSSQL = "SELECT  '' AS 領款日期, b.REMARK AS 領款名稱, b.ACT_AMT AS 金額, a.CHKNO AS 支票號碼,"
         strSSQL &= " (SELECT SUM(ACT_AMT) FROM ACF010 t1 WHERE b.CHKNO = t1.CHKNO)AS 支票金額, '' AS 領款人"
         strSSQL &= " FROM CHF010 a"
         strSSQL &= " LEFT JOIN ACF010 b ON a.CHKNO = b.CHKNO"
         strSSQL &= " WHERE 1=1 AND LEN(a.CHKNO) > 5"
         strSSQL &= strQuery
-        strSSQL &= " ORDER BY a.CHKNO ASC"
+        strSSQL &= " ORDER BY a.END_NO ASC"
 
         MyDataSet = Master.ADO.openmember(DNS_ACC, "查詢檔", strSSQL)
 

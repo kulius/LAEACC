@@ -11,6 +11,12 @@
         <asp:Button ID="btnAddNew" Text="新增" CommandName="AddNew" CssClass="btn btn-primary" runat="server" />
         <asp:Button ID="btnEdit" Text="修改" CommandName="Edit" CssClass="btn btn-primary" runat="server" />
         <asp:Button ID="btnDelete" Text="刪除" CommandName="Delete" CssClass="btn btn-primary" runat="server" />
+
+        <asp:UpdatePanel ID="UpdatePanel1" Visible="false" runat="server">
+            <Triggers>
+                <asp:PostBackTrigger ControlID="btnSave" />
+            </Triggers>
+        </asp:UpdatePanel>
     </div>
     <div id="Navigation" style="float:left;" runat="server">
         <span style="color:#666; font-size:18px; font-weight:bold; padding:8px 0px 0px 0px;">|</span>

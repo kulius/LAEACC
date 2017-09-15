@@ -1256,16 +1256,17 @@ Public Class AC010
 
                         drCurrentRow = dtCurrentTable.NewRow()
 
-                        drCurrentRow("bgno") = bgno
-                        drCurrentRow("accno") = accno
-                        drCurrentRow("remark") = remark
-                        drCurrentRow("subject") = subject
-                        drCurrentRow("useamt") = useamt
-                        drCurrentRow("kind") = kind
-                        drCurrentRow("autono") = autono
+                        If InStr(drCurrentRow.Item(0).ToString, bgno) = 0 Then
+                            drCurrentRow("bgno") = bgno
+                            drCurrentRow("accno") = accno
+                            drCurrentRow("remark") = remark
+                            drCurrentRow("subject") = subject
+                            drCurrentRow("useamt") = useamt
+                            drCurrentRow("kind") = kind
+                            drCurrentRow("autono") = autono
 
-                        dtCurrentTable.Rows.Add(drCurrentRow)
-
+                            dtCurrentTable.Rows.Add(drCurrentRow)
+                        End If
                     End If
 
                     ViewState("dtgTarget") = dtCurrentTable

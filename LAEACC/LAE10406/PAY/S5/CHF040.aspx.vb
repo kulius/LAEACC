@@ -52,10 +52,6 @@ Public Class CHF040
 
 
         dtpDateS.Text = Session("sYear") & "-01-01"
-
-
-
-
     End Sub
     Protected Sub Page_SaveStateComplete(sender As Object, e As System.EventArgs) Handles Me.SaveStateComplete
         '++ 物件初始化 ++
@@ -89,7 +85,6 @@ Public Class CHF040
                 FlagMoveSeat(3, ViewState("ItemIndex"))
             Case "Last"       '最末筆
                 FlagMoveSeat(4, DataGridView.Items.Count - 1)
-
             Case "Save"       '存檔
                 SaveData(ViewState("MyStatus"))
             Case "CancelEdit" '還原
@@ -138,15 +133,6 @@ Public Class CHF040
     End Sub
 
 #End Region
-#Region "按鍵選項"
-    '查詢
-
-
-    '清除條件
-
-#End Region
-
-
 
 #Region "@共用底層副程式@"
     '載入資料
@@ -207,9 +193,6 @@ Public Class CHF040
         '-- 不可重複(只有新增才需判斷) --
         Dim strRow As String = ""
         If PrevTableStatus = "1" Then
-            'lblNo.Text = Master.Controller.AutoNumber(Mid(Session("DATE"), 1, 3), 5, DNS_ACC, "BGF020", "BGNO", "BGNO LIKE '" & Mid(Session("DATE"), 1, 3) & "%'") '請購編號                
-            'strRow = Master.ADO.dbGetRow(DNS_ACC, "BGF020", "BGNO", "BGNO = '" & lblNo.Text & "'")
-            'blnCheck = IIf(strRow <> "", True, False) : If blnCheck = True Then MsgBox("【請購編號】，已存在!!") : Exit Sub
             txtKey1.Text = lblkey.Text
         End If
         Dim loadkey As String = lblkey.Text
@@ -219,6 +202,27 @@ Public Class CHF040
         If PrevTableStatus = "2" Then SaveStatus = UpdateData() : ViewState("FileKey") = txtKey1.Text '修改
 
         If SaveStatus = True Then
+            '開啟直接列印
+            Dim Param As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            Param.Add("UnitTitle", Session("UnitTitle"))    '水利會名稱
+            Param.Add("UserUnit", Session("UserUnit"))  '使用者單位代號
+            Param.Add("UserId", Session("UserId"))    '使用者代號
+
+            Param.Add("dtpRDate", Master.Models.strDateChinessToAD(dtpRDate.Text))
+
+
+            Param.Add("name", txtName.Text)
+            Param.Add("because", txtBecause.Text)
+            Param.Add("remark", txtRemark.Text)
+            Param.Add("amt", txtAmt.Text)
+
+
+            Param.Add("sSeason", Session("sSeason"))    '第幾季
+            Param.Add("UserDate", Session("UserDate"))    '登入日期
+
+            Master.PrintFR("PYA_CHF040收據套印", Session("ORG"), DNS_ACC, Param)
+
+
             ViewState("MyStatus") = 0
             SetControls(0)
             FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
@@ -253,7 +257,6 @@ Public Class CHF040
         retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
 
         If retstr = "sqlok" Then
-            MessageBx("新增成功")
             blnCheck = True
         Else
             MessageBx("新增full  " & sqlstr)
@@ -290,7 +293,6 @@ Public Class CHF040
         sqlstr = "update CHF040 set " & Master.ADO.genupdfunc & " where autono=" & KeyValue
         retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
         If retstr = "sqlok" Then
-            MessageBx("修改成功")
             blnCheck = True
         Else
             MessageBx("修改full  " & sqlstr)
@@ -420,44 +422,6 @@ Public Class CHF040
 
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         FillData(ViewState("MyOrder"), ViewState("MySort"), ViewState("MySearch"))
-    End Sub
-
-
-    Protected Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim sqlstr, retstr, updstr As String
-
-        Master.ADO.GenInsSql("rdate", dtpRDate.Text, "D")
-        Master.ADO.GenInsSql("name", txtName.Text, "U")
-        Master.ADO.GenInsSql("because", txtBecause.Text, "U")
-        Master.ADO.GenInsSql("remark", txtRemark.Text, "U")
-        Master.ADO.GenInsSql("amt", txtAmt.Text, "N")
-        sqlstr = "insert into CHF040 " & Master.ADO.GenInsFunc
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-
-        If retstr = "sqlok" Then
-
-            Dim Param As Dictionary(Of String, String) = New Dictionary(Of String, String)
-            Param.Add("UnitTitle", Session("UnitTitle"))    '水利會名稱
-            Param.Add("UserUnit", Session("UserUnit"))  '使用者單位代號
-            Param.Add("UserId", Session("UserId"))    '使用者代號
-
-            Param.Add("dtpRDate", Master.Models.strDateChinessToAD(dtpRDate.Text))
-
-
-            Param.Add("name", txtName.Text)
-            Param.Add("because", txtBecause.Text)
-            Param.Add("remark", txtRemark.Text)
-            Param.Add("amt", txtAmt.Text)
-
-
-            Param.Add("sSeason", Session("sSeason"))    '第幾季
-            Param.Add("UserDate", Session("UserDate"))    '登入日期
-
-            Master.PrintFR("PYA_CHF040收據套印", Session("ORG"), DNS_ACC, Param)
-
-        Else
-            MessageBx("新增full  " & sqlstr)
-        End If
     End Sub
 
     Protected Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click

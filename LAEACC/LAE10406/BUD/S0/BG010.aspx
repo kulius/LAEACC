@@ -221,46 +221,43 @@
                                                         <HeaderStyle Width="40px" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateColumn>                                                                                
-                                                    <asp:TemplateColumn HeaderText="年度" SortExpression="a.ACCYEAR">
+                                                    <asp:TemplateColumn HeaderText="年度" >
                                                         <itemtemplate><asp:Label ID="年度" Text='<%# Container.DataItem("ACCYEAR").ToString%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="40px" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="批號" SortExpression="a.BATNO">
+                                                    <asp:TemplateColumn HeaderText="批號">
                                                         <itemtemplate><asp:Label ID="批號" Text='<%# Container.DataItem("BATNO").ToString%>' runat="server" /></itemtemplate>
                                                         <HeaderStyle Width="40px" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="開支科目" SortExpression="a.ACCNO">
+                                                    <asp:TemplateColumn HeaderText="開支科目" >
                                                         <itemtemplate><asp:Label ID="開支科目" Text='<%# Container.DataItem("ACCNO").ToString%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="100px" />
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="科目名稱" SortExpression="accname">
+                                                    <asp:TemplateColumn HeaderText="科目名稱" >
                                                         <itemtemplate><asp:Label ID="科目名稱" Text='<%# Container.DataItem("accname").ToString%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="160px" />
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="受款人" SortExpression="a.NAME1">
+                                                    <asp:TemplateColumn HeaderText="受款人" >
                                                         <itemtemplate><asp:Label ID="受款人" Text='<%# Container.DataItem("NAME1").ToString%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="100px" />
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="摘要" SortExpression="a.REMARK">
+                                                    <asp:TemplateColumn HeaderText="摘要" >
                                                         <itemtemplate><asp:Label ID="摘要" Text='<%# Container.DataItem("REMARK").ToString%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="120px" />
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="金額" SortExpression="a.AMT">
+                                                    <asp:TemplateColumn HeaderText="金額" >
                                                         <itemtemplate><asp:Label ID="金額" Text='<%# FormatNumber(Container.DataItem("AMT").ToString, 2)%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="100px" />
                                                         <ItemStyle HorizontalAlign="Right" />
                                                     </asp:TemplateColumn>                                                                                                              
-                                                    <asp:TemplateColumn HeaderText="組室" SortExpression="a.UNIT">
+                                                    <asp:TemplateColumn HeaderText="組室">
                                                         <itemtemplate><asp:Label ID="組室" Text='<%# Container.DataItem("UNIT").ToString%>' runat="server" /></itemtemplate>                                                       
                                                         <HeaderStyle Width="40px" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:TemplateColumn> 
-                                                    <asp:TemplateColumn HeaderText="單據列印" SortExpression="a.PDATE">
-                                                        <itemtemplate><asp:Label ID="單據列印" Text='<%# Master.Models.strDateADToChiness(Container.DataItem("PDATE").ToShortDateString.ToString)%>' runat="server" /></itemtemplate>                                                       
-                                                        <HeaderStyle Width="60px" />
-                                                    </asp:TemplateColumn>                                                       
+                                                  
                                                 </columns>
                                             </asp:DataGrid>
                                         </div>                                        
