@@ -111,7 +111,7 @@ Public Class PAY010
         Dim retstr As String
         Dim intI As Integer
         Dim SBank, SDate As String
-        Dim IncomeAmt, PayAmt, DayBalance As Decimal
+        Dim IncomeAmt, PayAmt, DayBalance As Double
         Dim myDataSet, myDataSet2 As DataSet
 
         sqlstr = "SELECT * FROM  CHF020 where day_income<>0 or day_pay<>0 or date_2 is not null order by bank"
@@ -147,8 +147,6 @@ Public Class PAY010
                 retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
                 If retstr <> "sqlok" Then MessageBx("update chf030 error " & sqlstr)
             End If
-
-
         Next
         mydataset = Nothing
         myDataSet2 = Nothing

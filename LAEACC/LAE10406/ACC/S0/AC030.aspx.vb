@@ -1589,7 +1589,6 @@ Public Class AC030
 
     Sub Save_Credit()  '將貸方screen put array data
         Dim strI As String
-
         Dim CAryAccno(8, 5) As String  '宣告CREDIT 9*6 array
         Dim CAryRemark(8, 5) As String
         Dim CAryAmt(8, 5) As Decimal
@@ -1615,12 +1614,14 @@ Public Class AC030
             CAryAccno(ViewState("CreditPage"), intI) = box.Text.Trim
             box = TabPanel2.FindControl("txtRemark" & strI)
             CAryRemark(ViewState("CreditPage"), intI) = box.Text.Trim
+
             If Trim(Mid(CAryAccno(ViewState("CreditPage"), intI), 1, 1)) = "" Then '科目不完整時,不可有金額
                 CAryAmt(ViewState("CreditPage"), intI) = 0
             Else
                 box = TabPanel2.FindControl("txtAmt" & strI)
                 CAryAmt(ViewState("CreditPage"), intI) = Master.Models.ValComa(box.Text)
             End If
+
             If intI > 0 Then
                 box = TabPanel2.FindControl("txtcode" & strI)
                 CAryCode(ViewState("CreditPage"), intI) = box.Text.ToUpper
@@ -1634,18 +1635,18 @@ Public Class AC030
             End If
         Next
 
-        'ViewState("DAryAccno") = DAryAccno
-        'ViewState("DAryRemark") = DAryRemark
-        'ViewState("DAryAmt") = DAryAmt
-        'ViewState("DAryCode") = DAryCode
-        'ViewState("DAryOther") = DAryOther
-        'ViewState("DAryQty") = DAryQty
         Session("CAryAccno") = CAryAccno
         Session("CAryRemark") = CAryRemark
         Session("CAryAmt") = CAryAmt
         Session("CAryCode") = CAryCode
         Session("CAryOther") = CAryOther
         Session("CAryQty") = CAryQty
+        'ViewState("DAryAccno") = DAryAccno
+        'ViewState("DAryRemark") = DAryRemark
+        'ViewState("DAryAmt") = DAryAmt
+        'ViewState("DAryCode") = DAryCode
+        'ViewState("DAryOther") = DAryOther
+        'ViewState("DAryQty") = DAryQty
         Call Check_data()
         'If checkError = True Then
         '    Exit Sub
@@ -1786,15 +1787,15 @@ Public Class AC030
             End If
         Else
             Call Save_Credit()  '先儲存本頁資料
-            CAryRemark = DirectCast(ViewState("CAryRemark"), String(,))
-            DAryRemark = DirectCast(ViewState("DAryRemark"), String(,))
+            CAryRemark = DirectCast(Session("CAryRemark"), String(,))
+            DAryRemark = DirectCast(Session("DAryRemark"), String(,))
 
             If ViewState("checkError") = True Then Exit Sub '資料檢查有問題
             If ViewState("CreditPage") < 8 Then
                 ViewState("CreditPage") += 1
                 Call Load_Credit()
                 If Trim(txtRemark1.Text) = "" Then
-                    If txtRemark1.Text = "" Then txtRemark1.Text = CAryRemark(ViewState("CreditPage") - 1, 0) '下一頁時, copy 上一頁摘要
+                    If txtRemark1.Text = "" Then txtRemark1.Text = DAryRemark(ViewState("CreditPage") - 1, 0) '下一頁時, copy 上一頁摘要
                 End If
                 If ViewState("CreditPage") = 8 Then btnPageDown.Enabled = False
             End If
