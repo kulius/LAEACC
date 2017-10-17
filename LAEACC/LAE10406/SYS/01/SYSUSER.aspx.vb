@@ -46,8 +46,8 @@ Public Class SYSUSER
 
         UCBase1.SetButtons_Visible()                         '初始化控制鍵
 
-        Master.Controller.objDropDownListOptionDB(cbounit_id, DNS_SYS, "unit_id", "unit_id", "unit_name", 0)
-        Master.Controller.objDropDownListOptionDB(txtunit_id, DNS_SYS, "unit_id", "unit_id", "unit_name", 0)
+        Master.Controller.objDropDownListOptionDB(cbounit_id, Master.DNS_SYS, "unit", "unit_id", "unit_name")
+        Master.Controller.objDropDownListOptionDB(txtunit_id, Master.DNS_SYS, "unit", "unit_id", "unit_name")
 
         'Focus*****
         TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
@@ -74,6 +74,9 @@ Public Class SYSUSER
     End Sub
     'UserControl控制項
     Protected Sub UCBase1_Click(ByVal sender As Object, ByVal e As UCBase.ClickEventArgs) Handles UCBase1.Click
+
+
+
         'ViewState("MyStatus")：目前按鍵狀態
         Select Case e.CommandName
             Case "First"      '第一筆

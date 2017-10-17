@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="SYSUSER.aspx.vb" Inherits="LAEACC.SYSUSER" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="SYSUSER.aspx.vb" EnableEventValidation="false" Inherits="LAEACC.SYSUSER" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 
 <%@ MasterType VirtualPath="~/Site.master" %>
@@ -12,15 +12,7 @@
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>        
-            
-        </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="BtnImport" />
-        </Triggers>
-    </asp:UpdatePanel>
-
-
-    <!--關鍵值隱藏區-->
+            <!--關鍵值隱藏區-->
             <asp:Label ID="txtKey1" Text="" Visible="false" runat="server" />
    
             <!--主項目區-->
@@ -34,7 +26,7 @@
                                         <tr>
                                             <th >所屬單位：</th>
                                             <td >
-                                                <asp:DropDownList ID="cbounit_id" CssClass="form-control td-left" Width="40%" AutoPostBack="True" runat="server" />  
+                                                <asp:DropDownList ID="cbounit_id" CssClass="form-control td-left" Width="40%" runat="server" />  
                                                 <asp:Button ID="btnS" Text="查詢" CssClass="btn btn-warning td-right" runat="server" />  
                                             </td>
                                             <th >匯入使用者及所屬單位：</th>
@@ -132,4 +124,9 @@
                     </div>
                 </section>
             </div>
+        </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="BtnImport" />
+        </Triggers>
+    </asp:UpdatePanel> 
 </asp:Content>

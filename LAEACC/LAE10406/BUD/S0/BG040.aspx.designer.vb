@@ -329,6 +329,15 @@ Partial Public Class BG040
     Protected WithEvents btnAddSubject As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''UpdatePanel2 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''lblSubject 控制項。
     '''</summary>
     '''<remarks>
