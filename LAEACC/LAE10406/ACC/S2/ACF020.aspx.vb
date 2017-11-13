@@ -543,8 +543,8 @@ Public Class ACF020
         Dim sqlstr, qstr, sortstr As String
         sqlstr = "SELECT a.accyear as 年度,a.kind as 類別,a.no_1_no as 製票號,a.no_2_no as 傳票號,a.seq as 頁次,a.item as 項次,"
         sqlstr = sqlstr + " RIGHT('0'+CAST(CONVERT(CHAR(8),b.DATE_1,112)-19110000 AS VARCHAR(8)),7) as 製票日期 ,RIGHT('0'+CAST(CONVERT(CHAR(8),b.DATE_2,112)-19110000 AS VARCHAR(8)),7) as 收付日期,"
-        sqlstr = sqlstr + " a.dc as 借貸方,a.accno as 會計科目,a.remark as 摘要,a.amt as 金額,"
-        sqlstr = sqlstr + " a.COTN_CODE as 內容別,b.bank as 銀行,a.MAT_QTY as 材料數量,a.MAT_PRIC as 材料單價,a.OTHER_ACCNO as 相關科目"
+        sqlstr = sqlstr + " a.dc as 借貸方,a.accno as 會計科目,a.remark as 摘要,REPLACE(CONVERT(varchar(128),CAST(a.amt AS MONEY),1),'.00','') as 金額,"
+        sqlstr = sqlstr + " a.COTN_CODE as 內容別,b.bank as 銀行,a.MAT_QTY as 材料數量,REPLACE(CONVERT(varchar(128),CAST(a.MAT_PRIC AS MONEY),1),'.00','') as 材料單價,a.OTHER_ACCNO as 相關科目"
         sqlstr = sqlstr + " FROM  ACF020 a left outer join acf010 b on a.accyear=b.accyear and a.kind=b.kind and a.no_1_no=b.no_1_no "
         sqlstr = sqlstr + "where a.seq=b.seq and b.item='1' and a.accyear=" & ViewState("Syear") & " and a.kind>='" & ViewState("Skind") & "' and a.kind<='" & ViewState("Ekind") & "' and "
         Select Case ViewState("Sfile")

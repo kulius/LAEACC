@@ -202,7 +202,7 @@ Public Class BG010
         strSSQL &= " WHERE a.CLOSEMARK <> 'Y' and a.date2 is null"
         strSSQL &= strSearch
         strSSQL &= IIf(Session("USERID") = "admin", "", " and b.STAFF_NO = '" & Session("USERID") & "'")
-        strSSQL &= " ORDER BY a.bgno ASC"
+        strSSQL &= " ORDER BY a.bgno DESC"
 
         lbl_sort.Text = Master.Controller.objSort(IIf(strSortType = "", "ASC", strSortType))
         Master.Controller.objDataGrid(DataGridView, lbl_GrdCount, DNS_ACC, strSSQL, "查詢資料檔")
@@ -219,8 +219,8 @@ Public Class BG010
             Dim txtID As Label = DataGridView.Items(0).FindControl("id")
             txtKey1.Text = txtID.Text
             FindData(txtID.Text)
-
-            FlagMoveSeat(0, DataGridView.Items.Count - 1)
+            FlagMoveSeat(0, 0)
+            'FlagMoveSeat(0, DataGridView.Items.Count - 1)
         End If
     End Sub
     '移動DataGridView指標

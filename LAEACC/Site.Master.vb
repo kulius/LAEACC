@@ -568,15 +568,9 @@ Public Class SiteMaster
             Response.Write("<TR>")
             k = 0
             For k = 0 To tColumnCount - 1 Step k + 1
-                If IsNumeric(s_DataTable.Rows(j)(k).ToString()) = True Then
-                    Response.Write("<TD style='mso-number-format:\\@;'>")
-                    Response.Write(s_DataTable.Rows(j)(k).ToString())
-                    Response.Write("</TD>")
-                Else
-                    Response.Write("<TD>")
-                    Response.Write(s_DataTable.Rows(j)(k).ToString())
-                    Response.Write("</TD>")
-                End If
+                Response.Write("<TD style='mso-number-format:\\@;'>")
+                Response.Write(s_DataTable.Rows(j)(k).ToString())
+                Response.Write("</TD>")
             Next
             Response.Write("</TR>")
         Next

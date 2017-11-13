@@ -79,7 +79,7 @@
                                                 共<asp:Label ID="lbl_GrdCount" ForeColor="Red" Font-Size="14" Font-Bold="true" Text="0" runat="server" />筆符合&nbsp;                                                
                                                 <asp:Label ID="lbl_sort" runat="server" />
                                             </div>
-                                            <asp:DataGrid ID="DataGridView" Width="100%" AllowSorting="false" AllowPaging="true" style="font-size:14px;" CssClass="table table-bordered table-condensed smart-form" runat="server" >
+                                            <asp:DataGrid ID="DataGridView" Width="2000" AllowSorting="false" AllowPaging="true" style="font-size:14px;" CssClass="table table-bordered table-condensed smart-form" runat="server" >
                                                 <columns>
                                                     <asp:TemplateColumn HeaderText="管理" HeaderStyle-Width="40" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate>                                                                                                            
@@ -100,19 +100,19 @@
                                                     <asp:TemplateColumn HeaderText="製票號" HeaderStyle-Width="50" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="製票號" Text='<%# Container.DataItem("no_1_no").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="傳票號" HeaderStyle-Width="50" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="傳票號" HeaderStyle-Width="50" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="傳票號" Text='<%# Container.DataItem("no_2_no").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="頁次" HeaderStyle-Width="20" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="頁次" HeaderStyle-Width="20" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="頁次" Text='<%# Container.DataItem("seq").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="項次" HeaderStyle-Width="20" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="項次" HeaderStyle-Width="20" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="項次" Text='<%# Container.DataItem("item").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="製票日期" SortExpression="DATE_1" HeaderStyle-Width="60" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="製票日期" SortExpression="DATE_1" HeaderStyle-Width="70" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate><asp:Label ID="製票日期" Text='<%# Master.Models.strDateADToChiness(Container.DataItem("DATE_1").ToString)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="收付日期" SortExpression="DATE_2" HeaderStyle-Width="60" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="收付日期" SortExpression="DATE_2" HeaderStyle-Width="70" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate><asp:Label ID="收付日期" Text='<%# Master.Models.strDateADToChiness(Container.DataItem("DATE_2").ToString)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
                                                     <asp:TemplateColumn HeaderText="借貸方" HeaderStyle-Width="32" ItemStyle-HorizontalAlign="Center">
@@ -124,10 +124,10 @@
                                                     <asp:TemplateColumn HeaderText="摘要" HeaderStyle-Width="200" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate><asp:Label ID="摘要" Text='<%# Container.DataItem("remark").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>   
-                                                    <asp:TemplateColumn HeaderText="金額" HeaderStyle-Width="110" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="金額" HeaderStyle-Width="110" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="金額" Text='<%# FormatNumber(Container.DataItem("amt").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>   
-                                                    <asp:TemplateColumn HeaderText="實收付數" HeaderStyle-Width="110" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="實收付數" HeaderStyle-Width="110" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="實收付數" Text='<%# FormatNumber(Container.DataItem("act_amt").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>   
                                                     <asp:TemplateColumn HeaderText="銀行" HeaderStyle-Width="32" ItemStyle-HorizontalAlign="Center">

@@ -250,7 +250,9 @@ Public Class BGQ010
                  "bgf030.rel, bgf030.date3, bgf030.date4, isnull(bgf030.useamt,0) as useamt, bgf030.no_1_no,bgf030.autono, bgf030.remark as remark3 " & _
                  "FROM BGF020 left outer JOIN bgf030 on bgf020.bgno=bgf030.bgno inner join ACCNAME ON BGF020.ACCNO = ACCNAME.ACCNO " & _
                  " WHERE BGF020.ACCYEAR=" & nudYear.Text & " AND BGF020.accno='" & lblAccno1.Text & "'" & _
-                 " and bgf020.BGNO = '" & strKey1 & "' and bgf030.REL = '" & strKey2 & "'"
+                 " and bgf020.BGNO = '" & strKey1 & "'"
+
+        If strKey2 <> "" Then strSQL99 &= " and bgf030.REL = '" & strKey2 & "'"
 
 
         objCmd99 = New SqlCommand(strSQL99, objCon99)
@@ -752,8 +754,8 @@ Public Class BGQ010
         Dim i, TOTBG, TOTUSE As Integer
 
         sqlstr = "SELECT bgf020.bgno as 請購編號, bgf020.accyear as 年度, BGF020.accno as 科目,ACCNAME.ACCNAME AS 科目名稱, " & _
-                 " Convert(Varchar(32),CONVERT(money,bgf020.amt1),1) as 請購金額, Convert(Varchar(32),CONVERT(money,isnull(bgf030.useamt, 0)),1) as 開支金額, bgf020.remark as 摘要, bgf020.kind as 收支,bgf020.subject as 受款人,  " & _
-                 " RIGHT('0'+CAST(CONVERT(CHAR(8),bgf020.date1,112)-19110000 AS VARCHAR(8)),7) as 請購日期 ,RIGHT('0'+CAST(CONVERT(CHAR(8),bgf020.date2,112)-19110000 AS VARCHAR(8)),7) as 主計審核 ,RIGHT('0'+CAST(CONVERT(CHAR(8),bgf030.date3,112)-19110000 AS VARCHAR(8)),7) as 單位開支,RIGHT('0'+CAST(CONVERT(CHAR(8),bgf030.date4,112)-19110000 AS VARCHAR(8)),7) as 主計開支 , bgf030.no_1_no as 傳票編號 " & _
+                 " REPLACE(CONVERT(varchar(128),CAST(bgf020.amt1 AS MONEY),1),'.00','') as 請購金額, REPLACE(CONVERT(varchar(128),CAST(isnull(bgf030.useamt, 0) AS MONEY),1),'.00','') as 開支金額, bgf020.remark as 摘要, bgf020.kind as 收支,bgf020.subject as 受款人,  " & _
+                 " RIGHT('0'+CAST(CONVERT(CHAR(8),bgf020.date1,112)-19110000 AS VARCHAR(8)),7) as 請購日期 ,RIGHT('0'+CAST(CONVERT(CHAR(8),bgf020.date2,112)-19110000 AS VARCHAR(8)),7) as 主計審核 , RIGHT('0'+CAST(CONVERT(CHAR(8),bgf030.date3,112)-19110000 AS VARCHAR(8)),7) as 單位開支,RIGHT('0'+CAST(CONVERT(CHAR(8),bgf030.date4,112)-19110000 AS VARCHAR(8)),7) as 主計開支 , bgf030.no_1_no as 傳票編號 " & _
                  " FROM BGF020 left outer JOIN bgf030 on bgf020.bgno=bgf030.bgno inner join ACCNAME ON BGF020.ACCNO = ACCNAME.ACCNO" & _
                  IIf(InStr(Session("UserUnit"), "050") = 0, " AND ACCNAME.STAFF_NO = '" & Session("USERID") & "'", "") & _
                  " WHERE BGF020.ACCYEAR=" & IIf(nudQyear.Text <> "", nudQyear.Text, nudYear.Text) & _

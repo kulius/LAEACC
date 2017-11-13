@@ -437,6 +437,7 @@ Public Class CHF040
         Param.Add("because", txtBecause.Text)
         Param.Add("remark", txtRemark.Text)
         Param.Add("amt", txtAmt.Text)
+        Param.Add("famt", Format(Val(txtAmt.Text), "###,##0"))
 
 
         Param.Add("sSeason", Session("sSeason"))    '第幾季
