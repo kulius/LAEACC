@@ -169,7 +169,7 @@ Public Class BGQ100
              "a.unit, a.bg1+a.bg2+a.bg3+a.bg4+a.bg5+a.up1+a.up2+a.up3+a.up4 as bgamt, a.totper, a.totUSE, a.ctrl, a.flow  " & _
              "FROM bgf010 a INNER JOIN ACCNAME b ON a.ACCNO = b.ACCNO INNER JOIN ACCNAME c ON LEFT(a.ACCNO, 16) = c.ACCNO " & _
              "INNER JOIN ACCNAME d ON LEFT(a.ACCNO, 9) = d.ACCNO " & _
-             "WHERE a.accyear=" & nudYear.Text & " and b.STAFF_NO = '" & Trim(ViewState("UserId")) & "' and a.accno = '" & Trim(txtID.Text) & "'"
+             "WHERE a.accyear=" & nudYear.Text & " and b.unit = '" & Session("UserUnit") & "' and a.accno = '" & Trim(txtID.Text) & "'"
 
         mydataset = Master.ADO.openmember(DNS_ACC, "BGF010", sqlstr)
 

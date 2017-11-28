@@ -9,7 +9,7 @@
 </asp:content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
+<asp:UpdatePanel ID="UpdatePanel1" runat="server" >
        <Triggers>
           <asp:PostBackTrigger ControlID="btnExcel" />
            <asp:PostBackTrigger ControlID="btnPrint1" />
