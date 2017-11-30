@@ -150,3 +150,6 @@ alter table BGP020 alter column bg3 decimal(15, 2)  null
 alter table BGP020 alter column bg4 decimal(15, 2)  null
 alter table BGP020 alter column bg5 decimal(15, 2)  null
 GO
+
+
+alter table BGP030 alter column accname nvarchar(60)  null

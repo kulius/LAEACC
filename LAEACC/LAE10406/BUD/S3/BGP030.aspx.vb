@@ -178,6 +178,8 @@ Public Class BGP030
         sqlstr += " and a.accno>='" & vxtStartNo.Text & "' and a.accno<='" & vxtEndNo.Text & _
                   "' order by a.accno"
         mydataset = Master.ADO.openmember(DNS_ACC, "BGF010", sqlstr)
+        'labInfo1.Text = sqlstr
+
         '要統計    'first sum 8 grade
         If rdoSumYes.Checked Then
             Dim cutLen As Integer = 0
@@ -265,6 +267,7 @@ Public Class BGP030
 
         sqlstr = "delete BGP030 where userid='" & ViewState("UserId") & "'"    '先清空tempfile 
         retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
+        'Label2.Text = sqlstr
         If retstr <> "sqlok" Then
             MessageBx("刪除BGp030失敗" & sqlstr)
             Exit Sub

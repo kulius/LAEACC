@@ -131,6 +131,15 @@ Partial Public Class BGP030
     Protected WithEvents btnExport As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Label2 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Master 屬性。
     '''</summary>
     '''<remarks>

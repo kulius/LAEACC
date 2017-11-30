@@ -394,7 +394,12 @@ Public Class SYSUSER
             'lblYear.Text = Trim(objDR99("ACCYEAR").ToString)
             'lblDatec.Text = Master.Models.strStrToDate(Trim(objDR99("DATEC").ToString))
 
-            Master.Controller.objDropDownListOptionCK(txtunit_id, Trim(objDR99("unit_id").ToString))
+
+            If Master.ADO.dbGetRow(DNS_SYS, " unit ", " unit_name ", " unit_id='" & Trim(objDR99("unit_id").ToString) & "' ") <> "" Then
+                Master.Controller.objDropDownListOptionCK(txtunit_id, Trim(objDR99("unit_id").ToString))
+            Else
+                txtunit_id.SelectedIndex = -1
+            End If
         End If
 
         objDR99.Close()    '關閉連結
