@@ -537,7 +537,7 @@ Public Class ACF010
         Dim sqlstr, qstr, sortstr As String
         sqlstr = "SELECT accyear as 年度,kind as 類別,no_1_no as 製票號,no_2_no as 傳票號,seq as 頁次,item as 項次, "
         sqlstr = sqlstr & " RIGHT('0'+CAST(CONVERT(CHAR(8),DATE_1,112)-19110000 AS VARCHAR(8)),7) as 製票日期 ,RIGHT('0'+CAST(CONVERT(CHAR(8),DATE_2,112)-19110000 AS VARCHAR(8)),7) as 收付日期,"
-        sqlstr = sqlstr & " dc as 借貸方,accno as 會計科目,remark as 摘要,amt as 金額,act_amt as 實收付數,bank as 銀行,chkno as 支票號碼,"
+        sqlstr = sqlstr & " dc as 借貸方,accno as 會計科目,remark as 摘要,REPLACE(CONVERT(varchar(128),CAST(amt AS MONEY),1),'.00','') as 金額, REPLACE(CONVERT(varchar(255),CAST(act_amt AS MONEY),1),'.00','') as 實收付數,bank as 銀行,chkno as 支票號碼,"
         sqlstr = sqlstr & " books as 過帳碼 "
         sqlstr = sqlstr & " FROM  acf010 where accyear=" & ViewState("Syear") & " and kind>='" & ViewState("Skind") & "' and kind<='" & ViewState("Ekind") & "' and "
         Select Case ViewState("Sfile")

@@ -176,24 +176,6 @@ Partial Public Class CHF040
     Protected WithEvents txtAmt As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Amt1_Mask 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents Amt1_Mask As Global.AjaxControlToolkit.MaskedEditExtender
-
-    '''<summary>
-    '''btnSave 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''btnPrint 控制項。
     '''</summary>
     '''<remarks>

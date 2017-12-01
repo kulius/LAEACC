@@ -50,7 +50,7 @@ Public Class PAY_ACF010
 
         nudYear.Text = Session("sYear")
         TxtStartNo.Text = "1"    '起值
-        TxtEndNo.Text = "15000"      '迄值
+        TxtEndNo.Text = "35000"      '迄值
 
 
 

@@ -85,7 +85,7 @@ Public Class WebService
         
         Return items.ToArray
     End Function
-    '** 琩高篕璶 **
+    '** 琩高癩絪腹 **
     <WebMethod(EnableSession:=True)> _
     Public Function GetPGMKindNo(ByVal prefixText As String, ByVal count As Integer) As String()
         If count = 0 Then
@@ -109,6 +109,46 @@ Public Class WebService
             WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as KName  FROM PPTName where substring(KindNo,1,1)<>'3' "
         Else
             WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as Kname  FROM PPTName where substring(KindNo,1,1)<>'3' and rtrim(left(KindNo+space(10),10)+Name) LIKE '%" & prefixText & "%'"
+        End If
+
+        WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)
+        WSobjDR = WSobjCmd.ExecuteReader
+
+        Do While WSobjDR.Read
+            items.Add(Trim(WSobjDR("Kname")))
+            System.Math.Min(System.Threading.Interlocked.Increment(i), i - 1)
+        Loop
+
+        WSobjCon.Close()
+        
+        
+        Return items.ToArray
+    End Function
+    
+    '** 琩高絪腹 **
+    <WebMethod(EnableSession:=True)> _
+    Public Function GetPGMBuildKindNo(ByVal prefixText As String, ByVal count As Integer) As String()
+        If count = 0 Then
+            count = 10
+        End If
+        
+        'ň
+        If prefixText.Equals("%#)*)*)*DDD") Then
+            Return New String(0) {}
+        End If
+                
+        Dim i As Integer = 0
+        Dim items As List(Of String) = New List(Of String)(count)
+        
+        
+        '秨币琩高
+        WSobjCon = New SqlConnection(DNS_PGM)
+        WSobjCon.Open()
+        
+        If Trim(prefixText) = "" Then
+            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as KName  FROM PPTName where substring(KindNo,1,1)='3' "
+        Else
+            WSstrSQL = "SELECT *,rtrim(left(KindNo+space(10),10)+Name) as Kname  FROM PPTName where substring(KindNo,1,1)='3' and rtrim(left(KindNo+space(10),10)+Name) LIKE '%" & prefixText & "%'"
         End If
 
         WSobjCmd = New SqlCommand(WSstrSQL, WSobjCon)

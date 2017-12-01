@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="08/01/2017 10:41:18" ReportInfo.CreatorVersion="1.4.42.0">
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="09/06/2017 16:48:07" ReportInfo.CreatorVersion="1.4.42.0">
   <ScriptText>Imports System
 Imports System.Collections
 Imports System.Collections.Generic
@@ -181,7 +181,7 @@ End Namespace
         <Column Name="UNITNAME" DataType="System.String"/>
         <CommandParameter Name="userid" DataType="22" Expression="[UserId]"/>
       </TableDataSource>
-      <TableDataSource Name="Table2" Alias="D1" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.accname as name6, c.accname as name7, d.accname as name8,CASE WHEN a.MAT_QTY &lt;&gt; 0 THEN CAST(a.REMARK AS nvarchar) + ' ' + CAST(CAST(a.MAT_QTY AS Integer) AS nvarchar) + 'x' + Convert(Varchar(24),CONVERT(money,a.amt),1) ELSE a.REMARK END AS N_REMARK&#13;&#10;from acf020 a &#13;&#10;LEFT OUTER JOIN accname b ON Rtrim(SUBSTRING(a.ACCNO,1,9)) = b.ACCNO&#13;&#10;LEFT OUTER JOIN accname c ON Rtrim(SUBSTRING(a.ACCNO,1,16)) = c.ACCNO and len(a.accno)&gt;9 &#13;&#10;LEFT OUTER JOIN accname d ON a.ACCNO = d.ACCNO and len(a.accno)=17 &#13;&#10;where accyear= @accyear and kind='3'&#13;&#10; and no_1_no= @no_1_no and seq = @seq order by item">
+      <TableDataSource Name="Table2" Alias="D1" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.accname as name6, c.accname as name7, d.accname as name8,CASE WHEN a.MAT_QTY &lt;&gt; 0 THEN CAST(a.REMARK AS nvarchar) + ' ' + Convert(Varchar(24),CONVERT(float, a.MAT_QTY)) + 'x' + Convert(Varchar(24),CONVERT(float,a.MAT_PRIC))   ELSE a.REMARK END AS N_REMARK&#13;&#10;from acf020 a &#13;&#10;LEFT OUTER JOIN accname b ON Rtrim(SUBSTRING(a.ACCNO,1,9)) = b.ACCNO&#13;&#10;LEFT OUTER JOIN accname c ON Rtrim(SUBSTRING(a.ACCNO,1,16)) = c.ACCNO and len(a.accno)&gt;9 &#13;&#10;LEFT OUTER JOIN accname d ON a.ACCNO = d.ACCNO and len(a.accno)=17 &#13;&#10;where accyear= @accyear and kind='3'&#13;&#10; and no_1_no= @no_1_no and seq = @seq order by item">
         <Column Name="ACCYEAR" DataType="System.Int16"/>
         <Column Name="KIND" DataType="System.String"/>
         <Column Name="NO_1_NO" DataType="System.Int32"/>
@@ -231,7 +231,7 @@ End Namespace
         <CommandParameter Name="no_1_no " DataType="22" Expression="[No1]"/>
         <CommandParameter Name="accyear" DataType="22" Expression="[sYear]"/>
       </TableDataSource>
-      <TableDataSource Name="Table4" Alias="D2" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.accname as name6, c.accname as name7, d.accname as name8,&#13;&#10;CASE WHEN a.MAT_QTY &lt;&gt; 0 THEN CAST(a.REMARK AS nvarchar) + ' ' + CAST(CAST(a.MAT_QTY AS Integer) AS nvarchar) + 'x' + Convert(Varchar(24),CONVERT(money,a.amt),1) ELSE a.REMARK END AS N_REMARK&#13;&#10;from acf020 a &#13;&#10;LEFT OUTER JOIN accname b ON Rtrim(SUBSTRING(a.ACCNO,1,9)) = b.ACCNO&#13;&#10;LEFT OUTER JOIN accname c ON Rtrim(SUBSTRING(a.ACCNO,1,16)) = c.ACCNO and len(a.accno)&gt;9 &#13;&#10;LEFT OUTER JOIN accname d ON a.ACCNO = d.ACCNO and len(a.accno)=17 &#13;&#10;where accyear= @accyear and kind='4'&#13;&#10; and no_1_no= @no_1_no and seq = @seq order by item">
+      <TableDataSource Name="Table4" Alias="D2" DataType="System.Int32" Enabled="true" SelectCommand="SELECT a.*, b.accname as name6, c.accname as name7, d.accname as name8,&#13;&#10;CASE WHEN a.MAT_QTY &lt;&gt; 0 THEN CAST(a.REMARK AS nvarchar) + ' ' + Convert(Varchar(24),CONVERT(float, a.MAT_QTY)) + 'x' + Convert(Varchar(24),CONVERT(float,a.MAT_PRIC))  ELSE a.REMARK END AS N_REMARK&#13;&#10;from acf020 a &#13;&#10;LEFT OUTER JOIN accname b ON Rtrim(SUBSTRING(a.ACCNO,1,9)) = b.ACCNO&#13;&#10;LEFT OUTER JOIN accname c ON Rtrim(SUBSTRING(a.ACCNO,1,16)) = c.ACCNO and len(a.accno)&gt;9 &#13;&#10;LEFT OUTER JOIN accname d ON a.ACCNO = d.ACCNO and len(a.accno)=17 &#13;&#10;where accyear= @accyear and kind='4'&#13;&#10; and no_1_no= @no_1_no and seq = @seq order by item">
         <Column Name="ACCYEAR" DataType="System.Int16"/>
         <Column Name="KIND" DataType="System.String"/>
         <Column Name="NO_1_NO" DataType="System.Int32"/>

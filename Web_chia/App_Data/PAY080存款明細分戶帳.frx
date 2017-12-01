@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="01/17/2017 14:52:42" ReportInfo.CreatorVersion="1.4.42.0">
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="08/29/2017 16:06:09" ReportInfo.CreatorVersion="1.4.42.0">
   <ScriptText>Imports System
 Imports System.Collections
 Imports System.Collections.Generic
@@ -176,7 +176,7 @@ Namespace FastReport
 End Namespace
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHwzv0vfYr1zxK7bieAHWgfQ==" ConnectionStringExpression="[ConnStr]">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHW5ua6NXVgmieoKVcZy1K6g==" ConnectionStringExpression="[ConnStr]">
       <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="select * from chf020 where bank&gt;= @txtSbank&#13;&#10;and bank&lt;= @txtEbank &#13;&#10;and bank in (SELECT bank FROM chf010 where date_2&gt;= @dtpDateS&#13;&#10;and date_2&lt;= @dtpDateE group by bank)&#13;&#10;order by bank">
         <Column Name="BANK" DataType="System.String"/>
         <Column Name="DATE_2" DataType="System.DateTime"/>
@@ -283,8 +283,8 @@ End Namespace
       </TextObject>
       <TextObject Name="Text54" Left="90.72" Top="94.5" Width="45.36" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="種類" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text55" Left="136.08" Top="94.5" Width="77.49" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="起迄號數" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
-      <TextObject Name="Text50" Left="213.57" Top="66.15" Width="440.37" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="摘　　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
-      <TextObject Name="Text57" Left="653.94" Top="66.15" Width="75.6" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="支票號碼" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text50" Left="213.57" Top="66.15" Width="421.47" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="摘　　　　　　　　　　　要" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text57" Left="635.04" Top="66.15" Width="94.5" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="支票號碼" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text58" Left="892.08" Top="66.15" Width="115.29" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="存　　　入" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text61" Left="9.45" Top="66.15" Width="204.12" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="傳　票" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text64" Left="1007.37" Top="66.15" Width="115.29" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="支　　　出" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
@@ -315,10 +315,10 @@ End Namespace
       <TextObject Name="Text115" Left="9.45" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text116" Left="90.72" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text117" Left="136.08" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
-      <TextObject Name="Text118" Left="653.94" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text118" Left="635.04" Width="94.5" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text119" Left="729.54" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text120" Left="892.08" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
-      <TextObject Name="Text121" Left="213.57" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="上日結存" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text121" Left="213.57" Width="421.47" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="上日結存" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text123" Left="1122.66" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text124" Left="1228.5" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text122" Left="1007.37" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
@@ -330,10 +330,10 @@ End Namespace
           <TextObject Name="Text66" Left="9.45" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s1]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text67" Left="90.72" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s2]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text68" Left="136.08" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s3]" VertAlign="Center" Font="新細明體, 11pt"/>
-          <TextObject Name="Text69" Left="653.94" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s5]" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text69" Left="635.04" Width="94.5" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s5]" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text70" Left="729.54" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s6]" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text71" Left="892.08" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s7]" HideZeros="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
-          <TextObject Name="Text72" Left="213.57" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s4]" VertAlign="Center" Font="新細明體, 11pt"/>
+          <TextObject Name="Text72" Left="213.57" Width="421.47" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s4]" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text74" Left="1122.66" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s9]" HideZeros="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text114" Left="1228.5" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
           <TextObject Name="Text73" Left="1007.37" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" CanGrow="true" GrowToBottom="true" Text="[s8]" HideZeros="true" HorzAlign="Right" VertAlign="Center" Font="新細明體, 11pt"/>
@@ -347,29 +347,29 @@ End Namespace
           <TextObject Name="Text125" Left="9.45" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text126" Left="90.72" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text127" Left="136.08" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
-          <TextObject Name="Text128" Left="653.94" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text128" Left="635.04" Width="94.5" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text129" Left="729.54" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text130" Left="892.08" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[dayIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
-          <TextObject Name="Text131" Left="213.57" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本日合計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text131" Left="213.57" Width="421.47" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本日合計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text133" Left="1122.66" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text134" Left="1228.5" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text135" Left="9.45" Top="26.46" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text136" Left="90.72" Top="26.46" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text137" Left="136.08" Top="26.46" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
-          <TextObject Name="Text138" Left="653.94" Top="26.46" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text138" Left="635.04" Top="26.46" Width="94.5" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text139" Left="729.54" Top="26.46" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text140" Left="892.08" Top="26.46" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[monIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
-          <TextObject Name="Text141" Left="213.57" Top="26.46" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本月合計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text141" Left="213.57" Top="26.46" Width="421.47" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本月合計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text142" Left="1007.37" Top="26.46" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[monPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text143" Left="1122.66" Top="26.46" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text144" Left="1228.5" Top="26.46" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text145" Left="9.45" Top="52.92" Width="81.27" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text146" Left="90.72" Top="52.92" Width="45.36" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text147" Left="136.08" Top="52.92" Width="77.49" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
-          <TextObject Name="Text148" Left="653.94" Top="52.92" Width="75.6" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text148" Left="635.04" Top="52.92" Width="94.5" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text149" Left="729.54" Top="52.92" Width="162.54" Height="26.46" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text150" Left="892.08" Top="52.92" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuIncome]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
-          <TextObject Name="Text151" Left="213.57" Top="52.92" Width="440.37" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本月累計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
+          <TextObject Name="Text151" Left="213.57" Top="52.92" Width="421.47" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="本月累計" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text152" Left="1007.37" Top="52.92" Width="115.29" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[AcuPay]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text153" Left="1122.66" Top="52.92" Width="105.84" Height="26.46" Border.Lines="All" Border.Color="Highlight" Text="[[AcuIncome]-[AcuPay]]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>
           <TextObject Name="Text154" Left="1228.5" Top="52.92" Width="56.7" Height="26.46" Border.Lines="All" Border.Color="Highlight" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 11pt"/>

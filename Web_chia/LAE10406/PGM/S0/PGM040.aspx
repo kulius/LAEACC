@@ -127,12 +127,9 @@
                 <section id="widget-grid" style="width:98%;">
                     <div class="row">
                         <article class="col-sm-12 col-md-12 col-lg-12">
-                            <!--控制項-->
-                            <div style="margin:5px 0px 5px 0px;">
-                                <uc1:UCBase ID="UCBase1" runat="server" />
-                            </div>
-                            <div style="clear:both; height:5px;"></div> 
+                            <!--控制項
 
+                            -->
                             <!--詳細內容顯示區-->                           
                             <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="1">
                                 <AjaxToolkit:TabPanel ID="TabPanel1" runat="server">
@@ -145,33 +142,70 @@
                                             </div>
                                             &nbsp;&nbsp;
                                             <asp:Label ID="Label1" ForeColor="Red" Font-Size="14" Font-Bold="true" Text="0" runat="server" />
-                                            <asp:DataGrid ID="DataGridView" Width="2048px" AllowSorting="true" AllowPaging="false" PageSize="100" style="font-size:14px;" CssClass="table table-bordered table-condensed smart-form" runat="server" >
+                                            <asp:DataGrid ID="DataGridView"  AllowSorting="true" AllowPaging="false" PageSize="100" style="font-size:14px;" CssClass="table table-bordered table-condensed smart-form" runat="server" >
                                                 <columns>
                                                     <asp:TemplateColumn HeaderText="管理" HeaderStyle-Width="40" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate>                                                                                                            
                                                             <asp:ImageButton ID="Show" AlternateText="查閱" ImageUrl="~/active/images/icon/items/zoom.png" CommandName="btnShow" runat="server" />
-                                                            <asp:Label ID="id" Text='<%# Container.DataItem("KindNo").ToString%>' Visible="false" runat="server" />
+                                                            <asp:Label ID="id" Text='<%# Container.DataItem("ID").ToString%>' Visible="false" runat="server" />
                                                             <asp:UpdatePanel ID="DataGridView_UpdatePanel" runat="server">                                                                
                                                                 <Triggers><asp:AsyncPostBackTrigger ControlID="Show" EventName="Click" /></Triggers>
                                                             </asp:UpdatePanel>
                                                         </itemtemplate>                                                         
                                                     </asp:TemplateColumn>
                                                                             
-                                                    <asp:TemplateColumn HeaderText="財務編號" SortExpression="KindNo" HeaderStyle-Width="10" ItemStyle-HorizontalAlign="left">
-                                                        <itemtemplate><asp:Label ID="財務編號" Text='<%# Container.DataItem("KindNo").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="財務編號" SortExpression="prno" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="left">
+                                                        <itemtemplate><asp:Label ID="財務編號" Text='<%# Container.DataItem("prno").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>                                                   
-                                                    <asp:TemplateColumn HeaderText="財務名稱" SortExpression="Name" HeaderStyle-Width="20" ItemStyle-HorizontalAlign="left">
-                                                        <itemtemplate><asp:Label ID="財務名稱" Text='<%# Container.DataItem("Name").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="財務名稱" SortExpression="Name" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="left">
+                                                        <itemtemplate><asp:Label ID="財務名稱" Text='<%# Container.DataItem("name").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>                                                    
-                                                    <asp:TemplateColumn HeaderText="單位" SortExpression="Unit" HeaderStyle-Width="10" ItemStyle-HorizontalAlign="Center">
-                                                        <itemtemplate><asp:Label ID="單位" Text='<%# Container.DataItem("Unit").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="增減日期" SortExpression="pdate" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="增減日期" Text='<%# Container.DataItem("pdate").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="材質" SortExpression="Material" HeaderStyle-Width="20" ItemStyle-HorizontalAlign="Center">
-                                                        <itemtemplate><asp:Label ID="材質" Text='<%# Container.DataItem("Material").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="金額" SortExpression="amt" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="金額" Text='<%# Container.DataItem("amt").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="使用年限" SortExpression="UseYear" HeaderStyle-Width="10" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="會計科目" SortExpression="acno" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="會計科目" Text='<%# Container.DataItem("acno").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="購入日期" SortExpression="purchaseDate" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="購入日期" Text='<%# Container.DataItem("purchaseDate").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="使用年限" SortExpression="UseYear" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate><asp:Label ID="使用年限" Text='<%# Container.DataItem("UseYear").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="原值" SortExpression="originalAmt" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="原值" Text='<%# Container.DataItem("originalAmt").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="預估殘值" SortExpression="endamt" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="預估殘值" Text='<%# Container.DataItem("endamt").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="增減值" SortExpression="totalAddDel" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="增減值" Text='<%# Container.DataItem("totalAddDel").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="己提折舊" SortExpression="depreciation" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="己提折舊" Text='<%# Container.DataItem("depreciation").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="淨值" SortExpression="NetAmt" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="淨值" Text='<%# Container.DataItem("NetAmt").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="保管人" SortExpression="keepEmpName" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="保管人" Text='<%# Container.DataItem("keepEmpName").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="保管單位" SortExpression="keepUnitName" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="保管單位" Text='<%# Container.DataItem("keepUnitName").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="報廢日期" SortExpression="enddate" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="報廢日期" Text='<%# Container.DataItem("enddate").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="報廢原因" SortExpression="endremk" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="報廢原因" Text='<%# Container.DataItem("endremk").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+                                                    <asp:TemplateColumn HeaderText="備註" SortExpression="remark" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                                                        <itemtemplate><asp:Label ID="備註" Text='<%# Container.DataItem("remark").ToString%>' runat="server" /></itemtemplate>                                                       
+                                                    </asp:TemplateColumn>
+
                                                                                                                                                                                                                 
                                                 </columns>
                                             </asp:DataGrid>
@@ -184,27 +218,69 @@
                                     <ContentTemplate>
                                         <table id="table-data" rules="all">
                                             <tr>
-                                                <th>編號：</th>
+                                                <th>*財物編號：</th>
                                                 <td>
-                                                    <asp:TextBox ID="txtKindNo" CssClass="form-control" Width="100px" runat="server" />
+                                                    <asp:TextBox ID="txtPrNo" runat="server" />
                                                     <asp:Label ID="lblkey" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" Visible="False" runat="server" />
+                                                    <asp:Button ID="btnGetPrNo" Text="查詢財物" runat="server" />
                                                 </td>
+                                                <th>財物名稱：</th>
+                                                <td>
+                                                    <asp:Label ID="txtName" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" />
+                                                </td>
+                                                
                                             </tr>
                                             <tr>
-                                                <th>名稱：</th>
-                                                <td><asp:TextBox ID="txtName" CssClass="form-control" Width="200px" runat="server" /></td>
+                                                <th>保管者：</th>
+                                                <td><asp:Label ID="txtWhoKeep" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                                <th>購入日期：</th>
+                                                <td><asp:Label ID="txtPurchaseDate" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
                                             </tr>
                                             <tr>
-                                                <th>單位：</th>
-                                                <td><asp:DropDownList ID="cboUnit" runat="server" /></td>
+                                                <th>原值：</th>
+                                                <td><asp:Label ID="txtOriginalAmt" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                                <th>預估殘值：</th>
+                                                <td><asp:Label ID="txtEndAmt" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
                                             </tr>
                                             <tr>
-                                                <th>材質：</th>
-                                                <td><asp:DropDownList ID="cboMaterial" runat="server" /></td>
+                                                <th>增減值：</th>
+                                                <td><asp:Label ID="txtTotalAddDel" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                                <th>淨值：</th>
+                                                <td><asp:Label ID="txtNetAmt" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
                                             </tr>
                                             <tr>
+                                                <th>已提折舊：</th>
+                                                <td><asp:Label ID="txtDepreciation" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
                                                 <th>使用年限：</th>
-                                                <td><asp:DropDownList ID="cboUseYear" runat="server" /></td>
+                                                <td><asp:Label ID="txtUseYear" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th>報廢日期：</th>
+                                                <td><asp:Label ID="txtEndDate" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                                <th>報廢原因：</th>
+                                                <td><asp:Label ID="lblEndRemark" ForeColor="Blue" Font-Size="12pt" Font-Bold="True" runat="server" /></td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>*增減日期：</th>
+                                                <td><asp:TextBox ID="txtAddDelDate" Width="80px"  onClick="WdatePicker({dateFmt:'yyy-MM-dd',skin:'whyGreen'})" runat="server" /></td>
+
+                                                <th>*金額：</th>
+                                                <td><asp:TextBox ID="txtAmt" runat="server" /></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th>備註：</th>
+                                                <td colspan="3"><asp:TextBox ID="txtRemark" CssClass="form-control" Width="400px" TextMode="MultiLine" Height="60px"  runat="server" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <asp:Button ID="btnAddDelQuery" Text="查詢增減紀錄" runat="server" />
+                                                
+                                                    <asp:Button ID="btnAddReviseOK" Text="確定新增" runat="server" />
+                                                    <asp:Button ID="btnDeleteOK" Text="刪除" runat="server" />
+                                                    <asp:Button ID="btnAddReviseCancel" Text="放棄" runat="server" />
+                                                </td>
                                             </tr>
                                             
                                             

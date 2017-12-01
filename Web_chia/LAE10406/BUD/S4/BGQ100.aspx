@@ -9,7 +9,7 @@
 </asp:content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
+<asp:UpdatePanel ID="UpdatePanel1" runat="server" >
        <Triggers>
           <asp:PostBackTrigger ControlID="btnExcel" />
            <asp:PostBackTrigger ControlID="btnPrint1" />
@@ -296,20 +296,8 @@
                                             </tr>
                                             <tr>                                                
                                                 <td align="center" colspan="4">
-                                                    <asp:Button ID="btnEmptyDate2" Text="取消主計審核" CssClass="btn btn-primary" runat="server" />
-                                                    <asp:Button ID="btnEmptyDate3" Text="取消單位開支" CssClass="btn btn-primary" runat="server" />
-                                                    <asp:Button ID="btnEmptyDate4" Text="取消主計開支" CssClass="btn btn-primary" runat="server" />
-                                                    <asp:Button ID="btnEmptyDate" Text="快速取消開支" CssClass="btn btn-primary" runat="server" />
                                                     <asp:Button ID="btnBack" Text="回上頁" CssClass="btn btn-danger" runat="server" />
                                                 </td>                                                
-                                            </tr>
-                                            <tr>
-                                                <td align="center" colspan="4">
-                                                    <asp:Button ID="btnModAccno" Text="修改科目" CssClass="btn btn-info" runat="server" /> 
-                                                    <asp:Button ID="btnModOther" Text="修正摘要等" CssClass="btn btn-info" runat="server" />
-                                                    <asp:Button ID="btnModAmt" Text="修改金額" CssClass="btn btn-info" runat="server" />
-                                                    <asp:Button ID="btnDelete" Text="整筆刪除" CssClass="btn btn-danger" runat="server" />
-                                                </td>
                                             </tr>
                                         </table>
                                         <asp:Panel  id="gbxModAccno" Visible="false" runat="server">
@@ -324,19 +312,6 @@
                                             <asp:Button ID="btnSure" Text="確定" CssClass="btn btn-primary" runat="server" />
                                             <asp:Button ID="btnCancel" Text="取消" CssClass="btn btn-primary" runat="server" />                                         
                                         </asp:Panel>
-                                        <!--#伺服器驗證-->
-                                        <AjaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server"
-                                            TargetControlID="btnEmptyDate2" ConfirmText="此筆要取消主計審核 確定嗎?">
-                                        </AjaxToolkit:ConfirmButtonExtender>
-                                        <AjaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender3" runat="server"
-                                            TargetControlID="btnEmptyDate3" ConfirmText="此筆要取消單位開支 確定嗎?">
-                                        </AjaxToolkit:ConfirmButtonExtender> 
-                                        <AjaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server"
-                                            TargetControlID="btnEmptyDate4" ConfirmText="此筆要取消主計開支 確定嗎?">
-                                        </AjaxToolkit:ConfirmButtonExtender>                                            
-                                        <AjaxToolkit:ConfirmButtonExtender ID="ConfirmButtonExtender4" runat="server"
-                                            TargetControlID="btnDelete" ConfirmText="此筆要刪除 確定嗎?">
-                                        </AjaxToolkit:ConfirmButtonExtender>
                                     </ContentTemplate>
                                 </AjaxToolkit:TabPanel>
 
@@ -391,12 +366,6 @@
                                                 <td colspan="3">
                                                     <asp:TextBox ID="lblQRemark" CssClass="form-control" runat="server" />
                                                     <asp:Label ID="Label18" ForeColor="Blue" Visible="False" Font-Size="12pt" Font-Bold="True"  runat="server" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" colspan="4">                                                    
-                                                    <asp:Button ID="btnQEmptyDate" Text="快速取消開支" CssClass="btn btn-primary" runat="server" />
-                                                    <asp:Button ID="btnGoQuery" Text="回上頁" CssClass="btn btn-danger" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>

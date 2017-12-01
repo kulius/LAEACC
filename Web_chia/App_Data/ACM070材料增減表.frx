@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="09/19/2016 23:10:52" ReportInfo.CreatorVersion="1.4.42.0">
+<Report ScriptLanguage="Vb" ReportInfo.Created="05/15/2016 08:42:42" ReportInfo.Modified="09/06/2017 16:17:14" ReportInfo.CreatorVersion="1.4.42.0">
   <ScriptText>Imports System
 Imports System.Collections
 Imports System.Collections.Generic
@@ -91,7 +91,7 @@ Namespace FastReport
 End Namespace
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHleuNz0gDIUOqyVM4Er/AhQ==" ConnectionStringExpression="[ConnStr]">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqCZRqP4llR5F9yDpkAvdzEvMtJQtblCvcz3AxbsEOT5Cv8WohdomrN5lVbw3AFDoHYBUI7xD1GVP7p3ajM0GcapZqyGT5IUX+0TxK2Bv5Xl1ligZZcamlMwVKbEimCchfqUHRETSxhk16n7vK6001Smc0K73dbeSelNP8WKuhis1qYbD0+itE/2nnFfSuGzBHSCVqSnvKp2QHArk9mERYMQ==" ConnectionStringExpression="[ConnStr]">
       <TableDataSource Name="Table" Alias="M" DataType="System.Int32" Enabled="true" SelectCommand="SELECT  '1' as g,* FROM acm070 order by accno">
         <Column Name="accno" DataType="System.String"/>
         <Column Name="ACCNAME" DataType="System.String"/>
@@ -148,12 +148,12 @@ End Namespace
       <TextObject Name="Text100" Left="661.5" Top="103.95" Width="94.5" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="金　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text112" Left="510.3" Top="75.6" Width="56.7" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="單位" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text113" Left="756" Top="103.95" Width="94.5" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="數　　量" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
-      <TextObject Name="Text114" Left="756" Top="75.6" Width="189" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="本　　月　　增　　加" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
+      <TextObject Name="Text114" Left="756" Top="75.6" Width="189" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="本　　月　　減　　少" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text115" Left="850.5" Top="103.95" Width="94.5" Height="28.35" Border.Lines="All" Border.Color="Highlight" Text="金　　　額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
       <TextObject Name="Text116" Left="945" Top="75.6" Width="94.5" Height="56.7" Border.Lines="All" Border.Color="Highlight" Text="備註" HorzAlign="Center" VertAlign="Center" Font="新細明體, 11pt"/>
     </PageHeaderBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="136.38" Width="1047.06" Height="18.9" CanShrink="true" Condition="[M.g]">
-      <DataBand Name="Data1" Top="159.36" Width="1047.06" Height="47.25" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="Table">
+    <GroupHeaderBand Name="GroupHeader1" Top="136.3" Width="1047.06" Height="18.9" CanShrink="true" Condition="[M.g]">
+      <DataBand Name="Data1" Top="159.2" Width="1047.06" Height="47.25" CanShrink="true" BeforePrintEvent="Data1_BeforePrint" DataSource="Table">
         <TextObject Name="Text117" Left="245.7" Width="170.1" Height="47.25" Border.Lines="All" Border.Color="Highlight" Text="[M.kind]" VertAlign="Center" Font="新細明體, 10pt"/>
         <TextObject Name="Text118" Left="415.8" Width="94.5" Height="47.25" Border.Lines="All" Border.Color="Highlight" Text="[M.remark]" VertAlign="Center" Font="新細明體, 10pt"/>
         <TextObject Name="Text120" Left="56.7" Width="189" Height="47.25" Border.Lines="All" Border.Color="Highlight" Text="[accname]" VertAlign="Center" Font="新細明體, 10pt"/>
@@ -167,8 +167,8 @@ End Namespace
           <Sort Expression="[M.accno]"/>
         </Sort>
       </DataBand>
-      <GroupFooterBand Name="GroupFooter1" Top="262.03" Width="1047.06" Height="37.8" CanShrink="true">
-        <ChildBand Name="Child1" Top="210.69" Width="1047.06" Height="47.25" FillUnusedSpace="true">
+      <GroupFooterBand Name="GroupFooter1" Top="261.7" Width="1047.06" Height="37.8" CanShrink="true">
+        <ChildBand Name="Child1" Top="210.45" Width="1047.06" Height="47.25" FillUnusedSpace="true">
           <TextObject Name="Text126" Left="245.7" Width="170.1" Height="47.25" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 10pt"/>
           <TextObject Name="Text127" Left="415.8" Width="94.5" Height="47.25" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 10pt"/>
           <TextObject Name="Text128" Left="56.7" Width="189" Height="47.25" Border.Lines="All" Border.Color="Highlight" VertAlign="Center" Font="新細明體, 10pt"/>
@@ -181,7 +181,7 @@ End Namespace
         </ChildBand>
       </GroupFooterBand>
     </GroupHeaderBand>
-    <PageFooterBand Name="PageFooter1" Top="303.91" Width="1047.06" Height="18.9"/>
+    <PageFooterBand Name="PageFooter1" Top="303.5" Width="1047.06" Height="18.9"/>
   </ReportPage>
   <ReportPage Name="Page2" Visible="false">
     <ReportTitleBand Name="ReportTitle2" Width="718.2" Height="151.2" Visible="false">

@@ -440,6 +440,15 @@
                                                             CompletionSetCount="12" DelimiterCharacters="" BehaviorID="_content_AutoCompleteExtender6" />
 
                                                     <AjaxToolkit:AutoCompleteExtender 
+                                                            ID="AutoCompleteExtender11"                             
+                                                            runat="server"                
+                                                            TargetControlID="txtRemark1"
+                                                            ServicePath="~/active/WebService.asmx"
+                                                            ServiceMethod="GetAC010Remark"
+                                                            MinimumPrefixLength="0" 
+                                                            CompletionInterval="100"
+                                                            CompletionSetCount="12" DelimiterCharacters="" BehaviorID="_content_AutoCompleteExtender0" />
+                                                    <AjaxToolkit:AutoCompleteExtender 
                                                             ID="AutoCompleteExtender1"                             
                                                             runat="server"                
                                                             TargetControlID="txtRemark2"

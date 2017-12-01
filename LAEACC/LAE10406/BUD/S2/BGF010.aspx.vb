@@ -64,7 +64,7 @@ Public Class BGF010
         Else
             sqlstr = "SELECT accno,accno+accname as accnamet from accname where staff_no='" & Session("USERID") & "' and outyear=0"
         End If
-
+        Label1.Text = sqlstr
         Master.Controller.objDropDownListOptionEX(cboAccno, DNS_ACC, sqlstr, "accno", "accnamet", 0)
 
         nudYear.Text = Session("sYear")

@@ -482,42 +482,6 @@ Partial Public Class BGQ100
     Protected WithEvents lblNo_1_no As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnEmptyDate2 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnEmptyDate2 As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnEmptyDate3 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnEmptyDate3 As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnEmptyDate4 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnEmptyDate4 As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnEmptyDate 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnEmptyDate As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''btnBack 控制項。
     '''</summary>
     '''<remarks>
@@ -525,42 +489,6 @@ Partial Public Class BGQ100
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnModAccno 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnModAccno As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnModOther 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnModOther As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnModAmt 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnModAmt As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnDelete 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnDelete As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''gbxModAccno 控制項。
@@ -633,42 +561,6 @@ Partial Public Class BGQ100
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''ConfirmButtonExtender1 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents ConfirmButtonExtender1 As Global.AjaxControlToolkit.ConfirmButtonExtender
-
-    '''<summary>
-    '''ConfirmButtonExtender3 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents ConfirmButtonExtender3 As Global.AjaxControlToolkit.ConfirmButtonExtender
-
-    '''<summary>
-    '''ConfirmButtonExtender2 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents ConfirmButtonExtender2 As Global.AjaxControlToolkit.ConfirmButtonExtender
-
-    '''<summary>
-    '''ConfirmButtonExtender4 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents ConfirmButtonExtender4 As Global.AjaxControlToolkit.ConfirmButtonExtender
 
     '''<summary>
     '''TabPanel4 控制項。
@@ -840,24 +732,6 @@ Partial Public Class BGQ100
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents Label18 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''btnQEmptyDate 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnQEmptyDate As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnGoQuery 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents btnGoQuery As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''TabPanel5 控制項。

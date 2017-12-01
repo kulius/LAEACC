@@ -252,7 +252,7 @@
                             <div style="clear:both; height:5px;"></div> 
 
                             <!--詳細內容顯示區-->                           
-                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="3">
+                            <AjaxToolkit:TabContainer ID="TabContainer1" Width="100%" CssClass="Tab" runat="server" ActiveTabIndex="2">
                                 <AjaxToolkit:TabPanel ID="TabPanel1" runat="server">
                                     <HeaderTemplate>多筆瀏灠</HeaderTemplate>
                                     <ContentTemplate>
@@ -440,7 +440,7 @@
 
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="3">
                                                     <asp:Button ID="btnTransferQuery" Text="查詢交接紀錄" runat="server" />
                                                 
                                                     <asp:Button ID="btnTransfer" Text="執行交接作業" runat="server" />

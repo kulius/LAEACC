@@ -137,7 +137,6 @@ Public Class BGQ100
 
         txtQbgno.Text = txtID.Text
         TabContainer1.ActiveTabIndex = 3
-        btnGoQuery.Visible = True
         Call btnQbgno_Click(New System.Object, New System.EventArgs)
 
 
@@ -169,7 +168,7 @@ Public Class BGQ100
              "a.unit, a.bg1+a.bg2+a.bg3+a.bg4+a.bg5+a.up1+a.up2+a.up3+a.up4 as bgamt, a.totper, a.totUSE, a.ctrl, a.flow  " & _
              "FROM bgf010 a INNER JOIN ACCNAME b ON a.ACCNO = b.ACCNO INNER JOIN ACCNAME c ON LEFT(a.ACCNO, 16) = c.ACCNO " & _
              "INNER JOIN ACCNAME d ON LEFT(a.ACCNO, 9) = d.ACCNO " & _
-             "WHERE a.accyear=" & nudYear.Text & " and b.STAFF_NO = '" & Trim(ViewState("UserId")) & "' and a.accno = '" & Trim(txtID.Text) & "'"
+             "WHERE a.accyear=" & nudYear.Text & " and b.unit LIKE '" & Mid(Session("UserUnit"), 1, 3) & "%' and a.accno = '" & Trim(txtID.Text) & "'"
 
         mydataset = Master.ADO.openmember(DNS_ACC, "BGF010", sqlstr)
 
@@ -244,27 +243,6 @@ Public Class BGQ100
             lblDate3.Text = Master.Models.strDateADToChiness(objDR99("date3").ToString)
             lblDate4.Text = Master.Models.strDateADToChiness(objDR99("date4").ToString)
             lblautono.Text = Trim(objDR99("autono").ToString)
-            'for account officer
-            If lblDate4.Text <> "" Then
-                btnEmptyDate4.Enabled = True    '允許取消開支
-                btnDelete.Enabled = True        '允許刪除
-                btnEmptyDate2.Enabled = False
-            Else
-                btnEmptyDate4.Enabled = False
-                btnDelete.Enabled = False       '不允許刪除
-                If lblDate2.Text <> "" And lblDate3.Text = "" Then
-                    btnEmptyDate2.Enabled = True   '允許取消審核
-                Else
-                    btnEmptyDate2.Enabled = False
-                End If
-            End If
-            'for user 
-            If lblDate3.Text <> "" And lblDate4.Text = "" Then
-                btnEmptyDate3.Enabled = True
-                btnDelete.Enabled = True        '允許刪除
-            Else
-                btnEmptyDate3.Enabled = False
-            End If
             If Trim(objDR99("kind").ToString) = "1" Then
                 rdbKind1.Checked = True
             Else
@@ -324,7 +302,7 @@ Public Class BGQ100
          "a.unit, a.bg1+a.bg2+a.bg3+a.bg4+a.bg5+a.up1+a.up2+a.up3+a.up4 as bgamt, a.totper, a.totUSE, a.ctrl, a.flow  " & _
          "FROM bgf010 a INNER JOIN ACCNAME b ON a.ACCNO = b.ACCNO INNER JOIN ACCNAME c ON LEFT(a.ACCNO, 16) = c.ACCNO " & _
          "INNER JOIN ACCNAME d ON LEFT(a.ACCNO, 9) = d.ACCNO " & _
-         "WHERE a.accyear=" & nudYear.Text & " and left(b.unit," & ViewState("intUnitLen") & ") = '" & Trim(ViewState("UserUnit")) & "' order by a.accno"
+         "WHERE a.accyear=" & nudYear.Text & " and b.unit LIKE '" & Mid(Trim(ViewState("UserUnit")), 1, 3) & "%' order by a.accno"
 
         mydataset = Master.ADO.openmember(DNS_ACC, "BGF010", sqlstr)
         DataGrid1.DataSource = mydataset.Tables("BGF010")
@@ -349,128 +327,8 @@ Public Class BGQ100
         DataGrid2.DataBind()
     End Sub
 
-    Protected Sub btnEmptyDate2_Click(sender As Object, e As EventArgs) Handles btnEmptyDate2.Click
-        Dim retstr As String
-        sqlstr = "update BGF020 set date2 = null where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消主計審核" & lblkey.Text)
-        Else
-            MessageBx("取消主計審核,更新bgf020失敗" & sqlstr)
-        End If
-        TabContainer1.ActiveTabIndex = 0
-    End Sub
-
-    Protected Sub btnEmptyDate4_Click(sender As Object, e As EventArgs) Handles btnEmptyDate4.Click
-        Dim retstr As String
-        sqlstr = "update BGF030 set date4 = null where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消主計開支" & lblkey.Text)
-        Else
-            MessageBx("取消主計開支更新bgf030失敗" & sqlstr)
-        End If
-        TabContainer1.ActiveTabIndex = 0
-    End Sub
-
-    Protected Sub btnModAmt_Click(sender As Object, e As EventArgs) Handles btnModAmt.Click
-        If Master.Models.ValComa(lblUseAmt.Text) = 0 Then
-            MessageBx("未開支資料,不開放修改")
-            Exit Sub
-        End If
-        gbxModAmt.Visible = True
-        txtUseAmt.Text = FormatNumber(Master.Models.ValComa(lblUseAmt.Text), 0)
-    End Sub
-
     Protected Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         TabContainer1.ActiveTabIndex = 1
-    End Sub
-
-    Protected Sub btnEmptyDate3_Click(sender As Object, e As EventArgs) Handles btnEmptyDate3.Click
-        Dim retstr As String
-        sqlstr = "update BGF020 set closemark = '' where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then
-            MessageBx("取消單位開支更新bgf020失敗" & sqlstr)
-            Exit Sub
-        End If
-
-        sqlstr = "update BGF010 set totuse = totuse - " & Master.Models.ValComa(lblUseAmt.Text) & ", totper=totper + " & Master.Models.ValComa(lblAmt1.Text) & _
-                 " where accyear=" & lblYear.Text & " and accno='" & lblAccno.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then
-            MessageBx("取消單位開支更新bgf010失敗" & sqlstr)
-            Exit Sub
-        End If
-
-        sqlstr = "delete from BGF030 where autono=" & lblautono.Text
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消單位開支" & lblkey.Text)
-        Else
-            MessageBx("取消單位開支更新bgf030失敗" & sqlstr)
-        End If
-        TabContainer1.ActiveTabIndex = 0
-    End Sub
-
-    Protected Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim retstr As String
-        sqlstr = "update BGF010 set totuse = totuse - " & Master.Models.ValComa(lblUseAmt.Text) & _
-                 " where accyear=" & lblYear.Text & " and accno='" & lblAccno.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then MessageBx("取消單位開支更新bgf010失敗" & sqlstr)
-        sqlstr = "select count(*) as cnt from bgf030 where bgno='" & lblkey.Text & "'"  '計算開支有幾筆
-        TempDataSet = Master.ADO.openmember(DNS_ACC, "BGF030", sqlstr)
-        If TempDataSet.Tables("bgf030").Rows(0).Item(0) > 1 Then   '多筆開支
-            sqlstr = "update BGF020 set closemark = '', useableamt = useableamt + " & Master.Models.ValComa(lblUseAmt.Text) & _
-                     " where bgno='" & lblkey.Text & "'"
-            retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-            If retstr <> "sqlok" Then MessageBx("更新bgf020失敗" & sqlstr)
-        Else
-            sqlstr = "delete from BGF020 where bgno='" & lblkey.Text & "'"
-            retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-            If retstr <> "sqlok" Then MessageBx("刪除bgf020 失敗" & sqlstr)
-        End If
-        sqlstr = "delete from BGF030 where autono=" & lblautono.Text
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已刪除完成 " & lblkey.Text)
-        Else
-            MessageBx("刪除bgf030失敗 " & sqlstr)
-        End If
-        TabContainer1.ActiveTabIndex = 0
-    End Sub
-
-    Protected Sub btnModAccno_Click(sender As Object, e As EventArgs) Handles btnModAccno.Click
-        If Master.Models.ValComa(lblUseAmt.Text) = 0 Then
-            MessageBx("未開支資料,不開放修改")
-            Exit Sub
-        End If
-        gbxModAccno.Visible = True
-        txtAccno.Text = lblAccno.Text
-    End Sub
-
-    Protected Sub btnModOther_Click(sender As Object, e As EventArgs) Handles btnModOther.Click
-        Dim retstr As String = ""
-        If Trim(lblRemark.Text) <> Trim(txtRemark.Text) Or Trim(lblSubject.Text) <> Trim(txtSubject.Text) Then
-            If Trim(lblRemark.Text) <> Trim(txtRemark.Text) Then Master.ADO.GenUpdsql("remark", txtRemark.Text, "U")
-            If Trim(lblSubject.Text) <> Trim(txtSubject.Text) Then Master.ADO.GenUpdsql("subject", txtSubject.Text, "U")
-            sqlstr = "update BGF020 set " & Master.ADO.genupdfunc & " where bgno='" & lblkey.Text & "'"
-            retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-            If retstr = "sqlok" Then
-                MessageBx("更新完成")
-            End If
-        End If
-        If Trim(lblRemark3.Text) <> Trim(txtRemark3.Text) Or Master.Models.ValComa(lblNo_1_no.Text) <> Master.Models.ValComa(txtNo_1_no.Text) Then
-            If Master.Models.ValComa(lblautono.Text) <> 0 Then  '已開支
-                If Trim(lblRemark3.Text) <> Trim(txtRemark3.Text) Then Master.ADO.GenUpdsql("remark", txtRemark3.Text, "U")
-                'If Trim(lblSubject.Text) <> Trim(txtSubject.Text) Then GenUpdsql("subject", txtSubject.Text, "U")
-                If Master.Models.ValComa(lblNo_1_no.Text) <> Master.Models.ValComa(txtNo_1_no.Text) Then Master.ADO.GenUpdsql("NO_1_NO", txtNo_1_no.Text, "N")
-                sqlstr = "update BGF030 set " & Master.ADO.genupdfunc & " where autono=" & lblautono.Text
-                retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-            End If
-        End If
-        TabContainer1.ActiveTabIndex = 0
     End Sub
 
     Protected Sub btnSureAccno_Click(sender As Object, e As EventArgs) Handles btnSureAccno.Click
@@ -573,10 +431,6 @@ Public Class BGQ100
         End If
     End Sub
 
-    Protected Sub btnGoQuery_Click(sender As Object, e As EventArgs) Handles btnGoQuery.Click
-        TabContainer1.ActiveTabIndex = 4
-    End Sub
-
     Protected Sub btnQsearch_Click(sender As Object, e As EventArgs) Handles btnQsearch.Click
         'If Trim(txtQremark.Text) = "" And Master.Models.ValComa(txtQamt.Text) = 0 Then Exit Sub
         sqlstr = "SELECT bgf020.bgno, bgf020.accyear, BGF020.accno, bgf020.date1, bgf020.date2, bgf020.amt1, bgf020.remark, " & _
@@ -602,108 +456,6 @@ Public Class BGQ100
     Protected Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
 
         btnPrint1_Click(Nothing, Nothing)
-    End Sub
-
-    Protected Sub btnEmptyDate_Click(sender As Object, e As EventArgs) Handles btnEmptyDate.Click
-        '4
-        Dim retstr As String
-        sqlstr = "update BGF030 set date4 = null where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消主計開支" & lblkey.Text)
-        Else
-            MessageBx("取消主計開支更新bgf030失敗" & sqlstr)
-        End If
-
-        '3
-
-        sqlstr = "update BGF020 set closemark = '' where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then
-            MessageBx("取消單位開支更新bgf020失敗" & sqlstr)
-            Exit Sub
-        End If
-
-        sqlstr = "update BGF010 set totuse = totuse - " & Master.Models.ValComa(lblUseAmt.Text) & ", totper=totper + " & Master.Models.ValComa(lblAmt1.Text) & _
-                 " where accyear=" & lblYear.Text & " and accno='" & lblAccno.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then
-            MessageBx("取消單位開支更新bgf010失敗" & sqlstr)
-            Exit Sub
-        End If
-
-        sqlstr = "delete from BGF030 where autono=" & lblautono.Text
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消單位開支" & lblkey.Text)
-        Else
-            MessageBx("取消單位開支更新bgf030失敗" & sqlstr)
-        End If
-
-        '2
-        sqlstr = "update BGF020 set date2 = null where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消主計審核" & lblkey.Text)
-        Else
-            MessageBx("取消主計審核,更新bgf020失敗" & sqlstr)
-        End If
-
-        Call LoadGridFunc()
-
-        TabContainer1.ActiveTabIndex = 0
-    End Sub
-
-    Protected Sub btnQEmptyDate_Click(sender As Object, e As EventArgs) Handles btnQEmptyDate.Click
-        '4
-        Dim retstr As String
-        sqlstr = "update BGF030 set date4 = null where bgno='" & lblkey.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消主計開支" & lblkey.Text)
-        Else
-            MessageBx("取消主計開支更新bgf030失敗" & sqlstr)
-        End If
-
-        '3
-
-        sqlstr = "update BGF020 set closemark = '' where bgno='" & txtQbgno.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then
-            MessageBx("取消單位開支更新bgf020失敗" & sqlstr)
-            Exit Sub
-        End If
-
-        sqlstr = "update BGF010 set totuse = totuse - " & Master.Models.ValComa(lblQUseAmt.Text) & ", totper=totper + " & Master.Models.ValComa(lblQAmt1.Text) & _
-                 " where accyear=" & lblQyear.Text & " and accno='" & lblQAccno.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr <> "sqlok" Then
-            MessageBx("取消單位開支更新bgf010失敗" & sqlstr)
-            Exit Sub
-        End If
-
-        sqlstr = "delete from BGF030 where autono=" & lblQautono.Text
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消單位開支" & lblQautono.Text)
-        Else
-            MessageBx("取消單位開支更新bgf030失敗" & sqlstr)
-        End If
-
-        '2
-        sqlstr = "update BGF020 set date2 = null where bgno='" & txtQbgno.Text & "'"
-        retstr = Master.ADO.runsql(DNS_ACC, sqlstr)
-        If retstr = "sqlok" Then
-            MessageBx("已取消主計審核" & txtQbgno.Text)
-        Else
-            MessageBx("取消主計審核,更新bgf020失敗" & sqlstr)
-        End If
-
-        Call LoadGridFunc()
-
-        Call btnQbgno_Click(sender, e)
-
-        TabContainer1.ActiveTabIndex = 4
     End Sub
 
     Protected Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click

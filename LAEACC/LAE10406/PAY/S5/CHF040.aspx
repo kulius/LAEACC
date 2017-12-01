@@ -74,7 +74,7 @@
                                                     <asp:TemplateColumn HeaderText="事由" HeaderStyle-Width="220" >
                                                         <itemtemplate><asp:Label ID="事由" Text='<%# Container.DataItem("because").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn> 
-                                                    <asp:TemplateColumn HeaderText="金額" HeaderStyle-Width="90" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="金額" HeaderStyle-Width="90" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="金額" Text='<%# FormatNumber(Container.DataItem("amt").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>   
                                                     <asp:TemplateColumn HeaderText="備註" HeaderStyle-Width="250" >
@@ -94,7 +94,6 @@
                                     <ContentTemplate>
                                         <table id="table-data" rules="all">
                                             <caption>
-                                                &gt;
                                                 <tr>
                                                     <th>日期：</th>
                                                     <td>
@@ -105,48 +104,40 @@
                                                 <tr>
                                                     <th>繳款人：</th>
                                                     <td>
-                                                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="txtName" Width="200px" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>事由：</th>
                                                     <td>
-                                                        <asp:TextBox ID="txtBecause" runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="txtBecause" TextMode="MultiLine" Width="100%" Rows="5" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>備註欄：</th>
                                                     <td>
-                                                        <asp:TextBox ID="txtRemark" runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="txtRemark" TextMode="MultiLine" Width="100%" Rows="5" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>金額：</th>
                                                     <td>
-                                                        <asp:TextBox ID="txtAmt" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:TextBox ID="txtAmt" Width="120px" runat="server"></asp:TextBox>元
                                                     </td>
-                                                    <ajaxToolkit:MaskedEditExtender ID="Amt1_Mask" runat="server" BehaviorID="_content_Amt1_Mask" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" InputDirection="RightToLeft" Mask="9,999,999,999" MaskType="Number" TargetControlID="txtAmt" />
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="存檔" />
-                                                        
-                                                    </td>
-                                                    <td>
+                                                    <td colspan="2">
                                                         <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-info" Text="重印" />
-                                                        </td>
+                                                    </td>
                                                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                                         <ContentTemplate>
                                                         </ContentTemplate>
                                                         <Triggers>
-                                                            <asp:PostBackTrigger ControlID="btnSave" />
                                                             <asp:PostBackTrigger ControlID="btnPrint" />
                                                         </Triggers>
                                                     </asp:UpdatePanel>
                                                 </tr>
                                             </caption>
-                                            
-                                            
                                         </table>                                        
                                     </ContentTemplate>
                                 </AjaxToolkit:TabPanel>                                

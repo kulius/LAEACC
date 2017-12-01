@@ -46,12 +46,8 @@ Public Class SYSUSER
 
         UCBase1.SetButtons_Visible()                         '初始化控制鍵
 
-
-        sqlstr = "SELECT * from unit order by unit_id "
-
-        Master.Controller.objDropDownListOptionEX(cbounit_id, DNS_SYS, sqlstr, "unit_id", "unit_name", 0)
-        Master.Controller.objDropDownListOptionEX(txtunit_id, DNS_SYS, sqlstr, "unit_id", "unit_name", 0)
-
+        Master.Controller.objDropDownListOptionDB(cbounit_id, Master.DNS_SYS, "unit", "unit_id", "unit_name")
+        Master.Controller.objDropDownListOptionDB(txtunit_id, Master.DNS_SYS, "unit", "unit_id", "unit_name")
 
         'Focus*****
         TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
@@ -78,6 +74,9 @@ Public Class SYSUSER
     End Sub
     'UserControl控制項
     Protected Sub UCBase1_Click(ByVal sender As Object, ByVal e As UCBase.ClickEventArgs) Handles UCBase1.Click
+
+
+
         'ViewState("MyStatus")：目前按鍵狀態
         Select Case e.CommandName
             Case "First"      '第一筆
@@ -137,15 +136,6 @@ Public Class SYSUSER
     End Sub
 
 #End Region
-#Region "按鍵選項"
-    '查詢
-
-
-    '清除條件
-
-#End Region
-
-
 
 #Region "@共用底層副程式@"
     '載入資料
@@ -211,9 +201,6 @@ Public Class SYSUSER
         '-- 不可重複(只有新增才需判斷) --
         Dim strRow As String = ""
         If PrevTableStatus = "1" Then
-            'lblNo.Text = Master.Controller.AutoNumber(Mid(Session("DATE"), 1, 3), 5, DNS_ACC, "BGF020", "BGNO", "BGNO LIKE '" & Mid(Session("DATE"), 1, 3) & "%'") '請購編號                
-            'strRow = Master.ADO.dbGetRow(DNS_ACC, "BGF020", "BGNO", "BGNO = '" & lblNo.Text & "'")
-            'blnCheck = IIf(strRow <> "", True, False) : If blnCheck = True Then MsgBox("【請購編號】，已存在!!") : Exit Sub
             txtKey1.Text = lblkey.Text
         End If
         Dim loadkey As String = lblkey.Text
@@ -407,7 +394,12 @@ Public Class SYSUSER
             'lblYear.Text = Trim(objDR99("ACCYEAR").ToString)
             'lblDatec.Text = Master.Models.strStrToDate(Trim(objDR99("DATEC").ToString))
 
-            Master.Controller.objDropDownListOptionCK(txtunit_id, Trim(objDR99("unit_id").ToString))
+
+            If Master.ADO.dbGetRow(DNS_SYS, " unit ", " unit_name ", " unit_id='" & Trim(objDR99("unit_id").ToString) & "' ") <> "" Then
+                Master.Controller.objDropDownListOptionCK(txtunit_id, Trim(objDR99("unit_id").ToString))
+            Else
+                txtunit_id.SelectedIndex = -1
+            End If
         End If
 
         objDR99.Close()    '關閉連結
@@ -455,14 +447,17 @@ Public Class SYSUSER
 
                 Master.ADO.dbInsert(DNS_SYS, "users", strIRow, strIValue)
             Else
-                strUValue = "name = '" & Trim(objDR99("user_name").ToString) & "',"
-                strUValue &= "employee_id = '" & Trim(objDR99("employee_id").ToString) & "',"
-                strUValue &= "unit_id = '" & Trim(objDR99("unit_id").ToString) & "',"
-                strUValue &= "password = '" & Trim(objDR99("user_password").ToString) & "'"
+                If objDR99("quit_kind") = "0" Then
+                    strUValue = "name = '" & Trim(objDR99("user_name").ToString) & "',"
+                    strUValue &= "employee_id = '" & Trim(objDR99("employee_id").ToString) & "',"
+                    strUValue &= "unit_id = '" & Trim(objDR99("unit_id").ToString) & "',"
 
-                strWValue = "user_id = '" & Trim(objDR99("user_id").ToString) & "'"
+                    strWValue = "user_id = '" & Trim(objDR99("user_id").ToString) & "'"
 
-                Master.ADO.dbEdit(DNS_SYS, "users", strUValue, strWValue)
+                    Master.ADO.dbEdit(DNS_SYS, "users", strUValue, strWValue)
+                Else
+                    Master.ADO.dbDelete(DNS_SYS, "users", "user_id = '" & Trim(objDR99("user_id").ToString) & "'") '將離職人員刪除
+                End If
             End If
         Loop
 

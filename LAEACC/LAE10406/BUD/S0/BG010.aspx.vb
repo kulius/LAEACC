@@ -43,6 +43,7 @@ Public Class BG010
         'Focus*****
         TabContainer1.ActiveTabIndex = 0 '指定Tab頁籤
 
+
         If Session("ORG") = "chian" Then
             ViewState("isArea") = True
             'gbxArea.Visible = True
@@ -202,15 +203,14 @@ Public Class BG010
         strSSQL &= " WHERE a.CLOSEMARK <> 'Y' and a.date2 is null"
         strSSQL &= strSearch
         strSSQL &= IIf(Session("USERID") = "admin", "", " and b.STAFF_NO = '" & Session("USERID") & "'")
-        strSSQL &= " ORDER BY a.bgno desc "
-        'strSSQL &= " ORDER BY " & strOrder & " " & strSortType
+        strSSQL &= " ORDER BY a.bgno DESC"
 
         lbl_sort.Text = Master.Controller.objSort(IIf(strSortType = "", "ASC", strSortType))
         Master.Controller.objDataGrid(DataGridView, lbl_GrdCount, DNS_ACC, strSSQL, "查詢資料檔")
 
         strSSQL = "select a.*, b.accname from pay000 a left outer join accname b " & _
                         "on a.accno=b.accno where a.bgno is null and left(a.unit,3)='" & Mid(Session("UserUnit"), 1, 3) & _
-                        "'  order by a.accyear desc, a.batno desc"
+                        "'  order by a.accyear desc,a.batno asc"
         Master.Controller.objDataGrid(dtgPay000, lbl_dtgPay000GrdCount, DNS_ACC, strSSQL, "查詢資料檔")
 
 
@@ -220,6 +220,8 @@ Public Class BG010
             Dim txtID As Label = DataGridView.Items(0).FindControl("id")
             txtKey1.Text = txtID.Text
             FindData(txtID.Text)
+            FlagMoveSeat(0, 0)
+            'FlagMoveSeat(0, DataGridView.Items.Count - 1)
         End If
     End Sub
     '移動DataGridView指標
@@ -272,10 +274,10 @@ Public Class BG010
         If strMessage <> "" Then ScriptManager.RegisterStartupScript(Page, GetType(Page), "訊息", "alert('【" & strMessage & "】未輸入!!');", True) : Exit Sub
 
         ''DropDownList
-        'Dim objDropDownList() As DropDownList = {cboAccno}
-        'Dim strDropDownList As String = "請購科目"
-        'strMessage = Master.Controller.DropDownList_Input(objDropDownList, strDropDownList)
-        'If strMessage <> "" Then ScriptManager.RegisterStartupScript(Page, GetType(Page), "訊息", "alert('【" & strMessage & "】未選擇!!');", True) : Exit Sub
+        Dim objDropDownList() As DropDownList = {cboAccno}
+        Dim strDropDownList As String = "請購科目"
+        strMessage = Master.Controller.DropDownList_Input(objDropDownList, strDropDownList)
+        If strMessage <> "" Then ScriptManager.RegisterStartupScript(Page, GetType(Page), "訊息", "alert('【" & strMessage & "】未選擇!!');", True) : Exit Sub
 
         '--必數字--
         'TextBox
@@ -691,6 +693,11 @@ Public Class BG010
             '顯示值
             '預算科目
             'Master.Controller.objDropDownListOptionCK(ACCNO, Trim(objDR99("ACCNO").ToString))
+
+
+            If Trim(objDR99("DATE1").ToString) <> "" And Trim(objDR99("DATE2").ToString) <> "" Then
+                UCBase1.FindControl("btnDelete").Visible = False
+            End If
         End If
 
         objDR99.Close()    '關閉連結
@@ -870,9 +877,9 @@ Public Class BG010
 
     '複製至事由
     Private Sub cboAccno_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAccno.SelectedIndexChanged
-        '台東會不用
         Select Case Session("ORG")
-            Case "ttia" : Exit Sub
+            Case "ttia" : Exit Sub '台東會不用
+            Case "ptia" : Exit Sub '屏東會不用
         End Select
 
         '防呆

@@ -1225,51 +1225,56 @@ Public Class AC010
 
 
         TempDataSet = Master.ADO.openmember(DNS_ACC, "accname", sqlstr)
-        If TempDataSet.Tables("accname").Rows.Count > 0 Then
 
-            Dim bgno As String = TempDataSet.Tables("accname").Rows(0).Item("bgno")
-            Dim accno As String = TempDataSet.Tables("accname").Rows(0).Item("accno")
-            Dim remark As String = TempDataSet.Tables("accname").Rows(0).Item("remark")
-            Dim useamt As String = TempDataSet.Tables("accname").Rows(0).Item("useamt")
-            Dim subject As String = TempDataSet.Tables("accname").Rows(0).Item("subject")
-            Dim kind As String = TempDataSet.Tables("accname").Rows(0).Item("kind")
-            Dim autono As String = TempDataSet.Tables("accname").Rows(0).Item("autono")
+        Dim Y As Integer = TempDataSet.Tables("accname").Rows.Count
+        If Y > 0 Then
+            For X As Integer = 0 To Y - 1 Step 1
+                Dim bgno As String = TempDataSet.Tables("accname").Rows(X).Item("bgno")
+                Dim accno As String = TempDataSet.Tables("accname").Rows(X).Item("accno")
+                Dim remark As String = TempDataSet.Tables("accname").Rows(X).Item("remark")
+                Dim useamt As String = TempDataSet.Tables("accname").Rows(X).Item("useamt")
+                Dim subject As String = TempDataSet.Tables("accname").Rows(X).Item("subject")
+                Dim kind As String = TempDataSet.Tables("accname").Rows(X).Item("kind")
+                Dim autono As String = TempDataSet.Tables("accname").Rows(X).Item("autono")
 
-            If ViewState("dtgTarget") IsNot Nothing Then
-                'get datatable from view state   
-                Dim dtCurrentTable As DataTable = DirectCast(ViewState("dtgTarget"), DataTable)
-                Dim drCurrentRow As DataRow = Nothing
+                If ViewState("dtgTarget") IsNot Nothing Then
+                    'get datatable from view state   
+                    Dim dtCurrentTable As DataTable = DirectCast(ViewState("dtgTarget"), DataTable)
+                    Dim drCurrentRow As DataRow = Nothing
 
 
-                If accno = "" Then Exit Sub
-                If dtCurrentTable.Rows.Count < 5 Then    '只置五筆記錄
-                    If dtCurrentTable.Rows.Count = 0 Then    '記錄第一筆會計科目以便控制四級科目相同
-                        ViewState("strAccno4") = accno.Substring(0, 5)
-                    Else
-                        If accno.Substring(0, 5) <> ViewState("strAccno4") Then
-                            MessageBx("四級科目不相同")
-                            Exit Sub
+                    If accno = "" Then Exit Sub
+                    If dtCurrentTable.Rows.Count < 5 Then    '只置五筆記錄
+                        If dtCurrentTable.Rows.Count = 0 Then    '記錄第一筆會計科目以便控制四級科目相同
+                            ViewState("strAccno4") = accno.Substring(0, 5)
+                        Else
+                            If accno.Substring(0, 5) <> ViewState("strAccno4") Then
+                                MessageBx("四級科目不相同")
+                                Exit Sub
+                            End If
+                        End If
+
+                        drCurrentRow = dtCurrentTable.NewRow()
+
+                        If InStr(drCurrentRow.Item(0).ToString, bgno) = 0 Then
+                            drCurrentRow("bgno") = bgno
+                            drCurrentRow("accno") = accno
+                            drCurrentRow("remark") = remark
+                            drCurrentRow("subject") = subject
+                            drCurrentRow("useamt") = useamt
+                            drCurrentRow("kind") = kind
+                            drCurrentRow("autono") = autono
+
+                            dtCurrentTable.Rows.Add(drCurrentRow)
                         End If
                     End If
 
-                    drCurrentRow = dtCurrentTable.NewRow()
-
-                    drCurrentRow("bgno") = bgno
-                    drCurrentRow("accno") = accno
-                    drCurrentRow("remark") = remark
-                    drCurrentRow("subject") = subject
-                    drCurrentRow("useamt") = useamt
-                    drCurrentRow("kind") = kind
-                    drCurrentRow("autono") = autono
-
-                    dtCurrentTable.Rows.Add(drCurrentRow)
-
+                    ViewState("dtgTarget") = dtCurrentTable
+                    'Bind Gridview with latest Row  
+                    dtgTarget.DataSource = dtCurrentTable
+                    dtgTarget.DataBind()
                 End If
-                ViewState("dtgTarget") = dtCurrentTable
-                'Bind Gridview with latest Row  
-                dtgTarget.DataSource = dtCurrentTable
-                dtgTarget.DataBind()
-            End If
+            Next
         End If
 
         txtNo.Text = ""

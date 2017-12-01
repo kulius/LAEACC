@@ -77,6 +77,15 @@ Partial Public Class UCBase
     Protected WithEvents btnDelete As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''UpdatePanel1 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''Navigation 控制項。
     '''</summary>
     '''<remarks>

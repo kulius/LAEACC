@@ -318,7 +318,7 @@ Public Class SiteMaster
         Session("ReportTitle") = ReportName
 
         Dim path As String = "/LAE10406/FRPrint.aspx"
-        Me.Page.Controls.Add(New LiteralControl("<script>var w = window.open('" + path + "','_blank','menubar=no,status=no,scrollbars=no,top=0,left=0,toolbar=no,width=800,height=600'); w.focus();</script>"))
+        Me.Page.Controls.Add(New LiteralControl("<script>var w = window.open('" + path + "','_blank','menubar=no,status=no,scrollbars=no,top=0,left=0,toolbar=no,width=' + document.body.scrollWidth + ',height=' + document.body.scrollHeight); w.focus();</script>"))
 
         'Dim JavaScript As String = ""
         'JavaScript += "var mount = (screen.availHeight-600)/2;"
@@ -568,15 +568,9 @@ Public Class SiteMaster
             Response.Write("<TR>")
             k = 0
             For k = 0 To tColumnCount - 1 Step k + 1
-                If IsNumeric(s_DataTable.Rows(j)(k).ToString()) = True Then
-                    Response.Write("<TD style='mso-number-format:\\@;'>")
-                    Response.Write(s_DataTable.Rows(j)(k).ToString())
-                    Response.Write("</TD>")
-                Else
-                    Response.Write("<TD>")
-                    Response.Write(s_DataTable.Rows(j)(k).ToString())
-                    Response.Write("</TD>")
-                End If
+                Response.Write("<TD style='mso-number-format:\\@;'>")
+                Response.Write(s_DataTable.Rows(j)(k).ToString())
+                Response.Write("</TD>")
             Next
             Response.Write("</TR>")
         Next
