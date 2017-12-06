@@ -418,13 +418,13 @@ Public Class CHF020
             txtPrt_code.Text = Master.ADO.nz(objDR99("Prt_code"), " ")
             txtChkno.Text = Master.ADO.nz(objDR99("chkno"), " ")
             txtRemark.Text = Master.ADO.nz(objDR99("remark"), " ")
-            txtBalance.Text = Format(objDR99("balance"), "##0")
-            txtDay_income.Text = Format(objDR99("day_income"), "##0")
-            txtDay_pay.Text = Format(objDR99("day_pay"), "##0")
-            txtCredit.Text = Format(objDR99("credit"), "##0")
-            txtUnpay.Text = Format(objDR99("unpay"), "##0")
-            lblBalance.Text = Format(objDR99("balance") + objDR99("day_income") - objDR99("day_pay"), "##0")
-            txtChkForm.Text = Format(Master.ADO.nz(objDR99("chkform"), 0), "##0")
+            txtBalance.Text = Format(objDR99("balance"), "")
+            txtDay_income.Text = Format(objDR99("day_income"), "")
+            txtDay_pay.Text = Format(objDR99("day_pay"), "")
+            txtCredit.Text = Format(objDR99("credit"), "")
+            txtUnpay.Text = Format(objDR99("unpay"), "")
+            lblBalance.Text = Format(objDR99("balance") + objDR99("day_income") - objDR99("day_pay"), "")
+            txtChkForm.Text = Format(Master.ADO.nz(objDR99("chkform"), 0), "")
 
 
 

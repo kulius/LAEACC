@@ -194,15 +194,6 @@ Partial Public Class CHF020
     Protected WithEvents txtBalance As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Amt1_Mask 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents Amt1_Mask As Global.AjaxControlToolkit.MaskedEditExtender
-
-    '''<summary>
     '''txtDay_income 控制項。
     '''</summary>
     '''<remarks>
@@ -212,15 +203,6 @@ Partial Public Class CHF020
     Protected WithEvents txtDay_income As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''MaskedEditExtender1 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender1 As Global.AjaxControlToolkit.MaskedEditExtender
-
-    '''<summary>
     '''txtDay_pay 控制項。
     '''</summary>
     '''<remarks>
@@ -228,15 +210,6 @@ Partial Public Class CHF020
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents txtDay_pay As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''MaskedEditExtender2 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender2 As Global.AjaxControlToolkit.MaskedEditExtender
 
     '''<summary>
     '''lblBalance 控制項。
@@ -255,15 +228,6 @@ Partial Public Class CHF020
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents txtUnpay As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''MaskedEditExtender4 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender4 As Global.AjaxControlToolkit.MaskedEditExtender
 
     '''<summary>
     '''txtChkno 控制項。

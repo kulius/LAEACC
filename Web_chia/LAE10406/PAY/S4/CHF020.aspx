@@ -68,24 +68,24 @@
                                                     <asp:TemplateColumn HeaderText="帳戶名稱" HeaderStyle-Width="150" ItemStyle-HorizontalAlign="Center">
                                                         <itemtemplate><asp:Label ID="帳戶名稱" Text='<%# Container.DataItem("BANKNAME").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="昨日結存" HeaderStyle-Width="90" ItemStyle-HorizontalAlign="Center">
-                                                        <itemtemplate><asp:Label ID="昨日結存" Text='<%# FormatNumber(Container.DataItem("BALANCE").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="昨日結存" HeaderStyle-Width="90" ItemStyle-HorizontalAlign="right">
+                                                        <itemtemplate><asp:Label ID="昨日結存" Text='<%# FormatNumber(Container.DataItem("BALANCE").ToString, 2)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="本日共收" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="Center">
-                                                        <itemtemplate><asp:Label ID="本日共收" Text='<%# FormatNumber(Container.DataItem("DAY_INCOME").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="本日共收" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="right">
+                                                        <itemtemplate><asp:Label ID="本日共收" Text='<%# FormatNumber(Container.DataItem("DAY_INCOME").ToString, 2)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
-                                                    <asp:TemplateColumn HeaderText="本日共支" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="Center">
-                                                        <itemtemplate><asp:Label ID="本日共支" Text='<%# FormatNumber(Container.DataItem("DAY_PAY").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
+                                                    <asp:TemplateColumn HeaderText="本日共支" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="right">
+                                                        <itemtemplate><asp:Label ID="本日共支" Text='<%# FormatNumber(Container.DataItem("DAY_PAY").ToString, 2)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
                                                     
-                                                    <asp:TemplateColumn HeaderText="收付日" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="Center">
+                                                    <asp:TemplateColumn HeaderText="收付日" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="right">
                                                         <itemtemplate><asp:Label ID="收付日" Text='<%# Container.DataItem("DATE_2").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
                                                     <asp:TemplateColumn HeaderText="列印否" HeaderStyle-Width="35" ItemStyle-HorizontalAlign="left">
                                                         <itemtemplate><asp:Label ID="列印否" Text='<%# Container.DataItem("PRT_CODE").ToString%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>
                                                     <asp:TemplateColumn HeaderText="已開未領支票" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="Center">
-                                                        <itemtemplate><asp:Label ID="已開未領支票" Text='<%# FormatNumber(Container.DataItem("UNPAY").ToString, 0)%>' runat="server" /></itemtemplate>                                                       
+                                                        <itemtemplate><asp:Label ID="已開未領支票" Text='<%# FormatNumber(Container.DataItem("UNPAY").ToString, 2)%>' runat="server" /></itemtemplate>                                                       
                                                     </asp:TemplateColumn>   
                                                     <asp:TemplateColumn HeaderText="目前支票號" HeaderStyle-Width="75" ItemStyle-HorizontalAlign="left">
                                                         <itemtemplate><asp:Label ID="目前支票號" Text='<%# Container.DataItem("CHKNO").ToString%>' runat="server" /></itemtemplate>                                                       
@@ -146,23 +146,14 @@
                                             <tr>
                                                 <th>昨日結存：</th>
                                                 <td><asp:TextBox ID="txtBalance" CssClass="form-control" runat="server" /></td>
-                                                <AjaxToolkit:MaskedEditExtender    ID="Amt1_Mask" runat="server"
-                                                        TargetControlID="txtBalance"   Mask="9,999,999,999"    MaskType="Number" 
-                                                        InputDirection="RightToLeft" BehaviorID="_content_Amt1_Mask" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
                                             </tr>
                                             <tr>
                                                 <th>本日共收：</th>
                                                 <td><asp:TextBox ID="txtDay_income" CssClass="form-control" runat="server" /></td>
-                                                <AjaxToolkit:MaskedEditExtender    ID="MaskedEditExtender1" runat="server"
-                                                        TargetControlID="txtDay_income"   Mask="9,999,999,999"    MaskType="Number" 
-                                                        InputDirection="RightToLeft" BehaviorID="_content_Amt1_Mask" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
                                             </tr>
                                             <tr>
                                                 <th>本日共支：</th>
                                                 <td><asp:TextBox ID="txtDay_pay" CssClass="form-control" runat="server" /></td>
-                                                <AjaxToolkit:MaskedEditExtender    ID="MaskedEditExtender2" runat="server"
-                                                        TargetControlID="txtDay_pay"   Mask="9,999,999,999"    MaskType="Number" 
-                                                        InputDirection="RightToLeft" BehaviorID="_content_Amt1_Mask" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
                                             </tr>
                                             <tr>
                                                 <th>結存數：</th>
@@ -171,9 +162,6 @@
                                             <tr>
                                                 <th>已開未領支票額：</th>
                                                 <td><asp:TextBox ID="txtUnpay" CssClass="form-control" runat="server" /></td>
-                                                <AjaxToolkit:MaskedEditExtender    ID="MaskedEditExtender4" runat="server"
-                                                        TargetControlID="txtUnpay"   Mask="9,999,999,999"    MaskType="Number" 
-                                                        InputDirection="RightToLeft" BehaviorID="_content_Amt1_Mask" Century="2000" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder="" />
                                             </tr>
 
                                             <tr>
