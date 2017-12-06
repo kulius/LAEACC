@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AjaxControlToolkit.16.1.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="CHIA.Utility, Version=1.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App_Data\CHIA.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="EPPlus">
       <HintPath>..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
     </Reference>
@@ -51,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FastReport.Net\FastReport.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="JBC.FitPrint, Version=1.0.2198.32551, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App_Data\JBC.FitPrint.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -1112,6 +1120,8 @@
     <Content Include="App_Data\AC030轉帳傳票.frx">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\CHIA.Utility.dll" />
+    <Content Include="App_Data\JBC.FitPrint.dll" />
     <Content Include="App_Data\Z03PGMTable.txt" />
     <Content Include="App_Data\Z02SYSTable.txt" />
     <Content Include="App_Data\Z01ACCTable.txt" />
@@ -1240,6 +1250,7 @@
     <Content Include="LAE10406\PGM\S1\PGMB050.aspx" />
     <Content Include="LAE10406\PGM\S1\PGMB040.aspx" />
     <Content Include="LAE10406\PGM\S1\PGMB010.aspx" />
+    <Content Include="LAE10406\PGM\S2\PGMC040.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPMENU.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPUNIT.aspx" />
     <Content Include="LAE10406\SYS\01\SYSGROUPUSER.aspx" />
@@ -2184,6 +2195,13 @@
       <DependentUpon>PGMB010.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LAE10406\PGM\S2\PGMC040.aspx.designer.vb">
+      <DependentUpon>PGMC040.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LAE10406\PGM\S2\PGMC040.aspx.vb">
+      <DependentUpon>PGMC040.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="LAE10406\PGM\SqlHelper.vb" />
     <Compile Include="LAE10406\PGM\SqlHelperParameterCache.vb" />
     <Compile Include="LAE10406\SYS\01\SYSGROUPMENU.aspx.designer.vb">
@@ -2312,7 +2330,6 @@
     <Folder Include="LAE10406\BAI\" />
     <Folder Include="LAE10406\CHR\" />
     <Folder Include="LAE10406\INC\01\" />
-    <Folder Include="LAE10406\PGM\S2\" />
     <Folder Include="LAE10406\REC\" />
   </ItemGroup>
   <PropertyGroup>
